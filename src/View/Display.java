@@ -5,6 +5,8 @@ import Controller.InputData;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferStrategy;
 
 public class Display {
@@ -16,7 +18,6 @@ public class Display {
     private final JPanel myJPanel;
     private final ImageLibrary myImageLibrary;
     private final InputManager myInputManager;
-
     private final AudioPlayer myAudioPlayer;
 
     public Display() {
@@ -56,7 +57,7 @@ public class Display {
             return;
         }
 
-        Graphics g = bs.getDrawGraphics();
+        Graphics2D g = (Graphics2D) bs.getDrawGraphics();
 
         g.setColor(Color.white);
         g.fillRect(0, 0, myWidth, myHeight);
@@ -69,14 +70,20 @@ public class Display {
         bs.show();
     }
 
-    private void draw(Graphics theGraphics, DrawData theData) {
+    private void draw(final Graphics2D theGraphics, final DrawData theData) {
 
         if (theData.getAngle() == 0) {
             theGraphics.drawImage(myImageLibrary.get(theData.getImage()),
-                    theData.getX(), theData.getY(), theData.getWidth(), theData.getHeight(), null);
+                    theData.getX() - theData.getWidth()/2, theData.getY() - theData.getHeight()/2,
+                    theData.getWidth(), theData.getHeight(), null);
         }
         else {
-            //TD
+            AffineTransform backup = theGraphics.getTransform();
+            theGraphics.rotate(theData.getAngle(), theData.getX(), theData.getY());
+            theGraphics.drawImage(myImageLibrary.get(theData.getImage()),
+                    theData.getX() - theData.getWidth()/2, theData.getY() - theData.getHeight()/2,
+                    theData.getWidth(), theData.getHeight(), null);
+            theGraphics.setTransform(backup);
         }
 
         if (theData.getSounds() != null) {
