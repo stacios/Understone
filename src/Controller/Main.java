@@ -17,7 +17,6 @@ public class Main {
 
         boolean running = true;
 
-
         while (running) {
 
             running = myGameLoop.update(myDisplay.getInputData());

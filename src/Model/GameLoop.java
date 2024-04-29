@@ -7,6 +7,8 @@ public class GameLoop {
 
     private DrawData temp = new DrawData("test", null, 100, 100, 100, 100);
     private double temp2 = 0;
+    private int testclicks;
+    SQLTesting dbTest = new SQLTesting();;
 
     public boolean update(final InputData theInput) {
 
@@ -18,6 +20,7 @@ public class GameLoop {
                 temp = new DrawData("test", new String[]{"boing"}, 600, 600, 1500, 800);
             }
 
+            dbTest.insertNumber(testclicks++);
         }
         else {
             temp = new DrawData("test", null, theInput.getMouseX(), theInput.getMouseY(), 100, 100, temp2);
