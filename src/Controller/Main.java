@@ -1,7 +1,11 @@
 package Controller;
 
+import Model.DB.DwarfDB;
+import Model.DB.SQLiteConnection;
 import Model.GameLoop;
 import View.Display;
+
+import java.sql.SQLException;
 
 public class Main {
 
@@ -16,6 +20,8 @@ public class Main {
         myDisplay = new Display();
 
         boolean running = true;
+        SQLiteConnection.getDataSource();
+        DwarfDB.intitializeDwarfDB();
 
         while (running) {
 
