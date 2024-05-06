@@ -2,7 +2,6 @@ package Model;
 
 import Controller.DrawData;
 import Controller.InputData;
-import Model.DB.SQLTesting;
 
 public class GameLoop {
 
