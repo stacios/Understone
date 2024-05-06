@@ -53,4 +53,8 @@ public class DrawData {
     public String[] getSounds() {
         return mySounds;
     }
+    @Override
+    public String toString() {
+        return myImage + ": ( Pos: " + myX + ", " + myY + " | Dim: " + myWidth + ", " + myHeight + " )";
+    }
 }

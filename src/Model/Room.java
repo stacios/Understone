@@ -1,9 +1,12 @@
 package Model;
 
+import Controller.DrawData;
+import Controller.Drawable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Room {
+public class Room implements Drawable {
     private List<Glyphid> myGlyphids;
     private List<Attack> myAttacks;
     private boolean myHasDropPod;
@@ -34,5 +37,10 @@ public class Room {
 
     public void addPlayer(Dwarf thePlayer){
         myPlayer = thePlayer;
+    }
+
+    @Override
+    public DrawData getDrawData() {
+        return new DrawData("Room", null, 1920/2, 1080/2, 1920, 1080);
     }
 }

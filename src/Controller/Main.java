@@ -5,23 +5,19 @@ import View.Display;
 
 public class Main {
 
-    private static GameLoop myGameLoop;
-
-    private static Display myDisplay;
-
 
     public static void main(String[] args) {
 
-        myGameLoop = new GameLoop();
-        myDisplay = new Display();
+        GameLoop gameLoop = GameLoop.getInstance();
+        Display display = Display.getInstance();
 
         boolean running = true;
 
         while (running) {
 
-            running = myGameLoop.update(myDisplay.getInputData());
+            running = gameLoop.update(display.getInputData());
 
-            myDisplay.render(myGameLoop.getDrawData());
+            display.render(gameLoop.getDrawData());
 
             try {
                 Thread.sleep((long)((1.0 / 60.0) * 1000));
@@ -30,7 +26,7 @@ public class Main {
             }
         }
 
-        myDisplay.dispose();
+        display.dispose();
 
     }
 }

@@ -23,8 +23,8 @@ public class Attack {
     // Update later for game logic!!!
     public void update() {
         // move attack position by the knockback force's components
-        myX += myKnockBack.getXStrength();
-        myY += myKnockBack.getYStrength();
+        //myX += myKnockBack.getXStrength();
+        //myY += myKnockBack.getYStrength();
         // update position of HitBox
         myHitBox = new HitBox(myX, myY, myHitBox.getWidth(), myHitBox.getHeight());
     }
