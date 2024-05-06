@@ -1,8 +1,11 @@
-package Model;
+package Model.Dwarves;
+
+import Model.Character;
+import Model.Weapon;
 
 import java.util.ArrayList;
 
-public class Dwarf extends Character{
+public class Dwarf extends Character {
     protected ArrayList<Weapon> myWeapons;
 
     public Dwarf(String theName, double theX, double theY, int theHealth, double theWidth, double theHeight, double theMoveSpeed, Weapon theWeapon) {

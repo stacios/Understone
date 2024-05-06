@@ -1,4 +1,4 @@
-package Model;
+package Model.DB;
 
 import org.sqlite.SQLiteDataSource;
 

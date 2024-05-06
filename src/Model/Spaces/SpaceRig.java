@@ -1,6 +1,6 @@
-package Model;
+package Model.Spaces;
 
-public class SpaceRig extends Room{
+public class SpaceRig extends Room {
     public SpaceRig(boolean theHasDropPod, boolean theHasRock) {
         super(theHasDropPod, theHasRock);
     }

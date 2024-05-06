@@ -1,4 +1,9 @@
-package Model;
+package Model.Spaces;
+
+import Model.Attack;
+import Model.Dwarves.Dwarf;
+import Model.Glyphids.Glyphid;
+import Model.Rock;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Glyphids.Glyphid;
+
 public class Rock extends Glyphid {
     public Rock(String theName, double theX, double theY, int theHealth,
                 double theWidth, double theHeight, double theMoveSpeed,
