@@ -1,5 +1,6 @@
 package Model;
 
+import Model.DB.DwarfDB;
 import Model.Dwarves.Dwarf;
 import Model.Glyphids.Glyphid;
 import Model.Glyphids.Grunt;
@@ -10,10 +11,13 @@ public class CharacterFactory {
         double x = 0; // Default X
         double y = 0; // Default Y
         int health = 100; // Default health
+        int maxhealth = 130; // Default max health
         double width = 1.0; // Default width
         double height = 1.0; // Default height
         double moveSpeed = 2.0; // Default speed
         Weapon defaultWeapon = new Weapon(new Attack("Basic Attack", 10, x, y, width, height, new Force(new Angle(0), 1.0), new Angle(0)), 0, 10);
+        //name, health, maxhealth, width. height, movespeed
+        DwarfDB.updateDwarf(theName, health, maxhealth, width, height, moveSpeed);
         return new Dwarf(theName, x, y, health, width, height, moveSpeed, defaultWeapon);
     }
 
