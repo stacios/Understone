@@ -47,7 +47,7 @@ public class SQLTesting {
              PreparedStatement pstmt = conn.prepareStatement(insertNumberQuery)) {
             pstmt.setInt(1, theNum);
             int rv = pstmt.executeUpdate();
-            System.out.println("Inserted number " + theNum + " into the database, executeUpdate() returned " + rv);
+            System.out.println("Detected mouse button pressed from View, incrementing number " + theNum + " into the database, executeUpdate() returned " + rv);
         } catch (SQLException e) {
             System.err.println("Error inserting number into the database.");
             e.printStackTrace();
