@@ -11,6 +11,8 @@ public class Angle {
         double deltaY = y2 - y1;
         double deltaX = x2 - x1;
         this.myRadians = Math.atan2(deltaY, deltaX); //  calculates the angle in radians between the positive x-axis of a plane and the point given by the coordinates (x, y)
+        if (myRadians < 0)
+            myRadians = 2 * Math.PI + myRadians;
     }
 
     public double getRadians() {

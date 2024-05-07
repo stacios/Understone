@@ -24,13 +24,13 @@ public class InputData {
         return myKeys.get(1);
     }
 
-    public boolean getForward() {
+    public boolean getUp() {
         return myKeys.get(2);
     }
     public boolean getLeft() {
         return myKeys.get(3);
     }
-    public boolean getBackward() {
+    public boolean getDown() {
         return myKeys.get(4);
     }
     public boolean getRight() {

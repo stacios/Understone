@@ -5,10 +5,16 @@ public class Force {
     private Angle myAngle;
     private double myDecayRate;
 
+    public Force(Angle theAngle, double theStrength, double theDecayRate) {
+        this.myAngle = theAngle;
+        this.myStrength = theStrength;
+        this.myDecayRate = theDecayRate;
+    }
+
     public Force(Angle theAngle, double theStrength) {
         this.myAngle = theAngle;
         this.myStrength = theStrength;
-        this.myDecayRate = 0.1;  // Default (?)
+        this.myDecayRate = 1;
     }
 
     public double getStrength() {

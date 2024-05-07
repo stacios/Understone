@@ -2,6 +2,7 @@ package View;
 
 import Controller.DrawData;
 import Controller.InputData;
+import Model.GameLoop;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +12,7 @@ import java.awt.image.BufferStrategy;
 
 public class Display {
 
+    private static final Display myInstance = new Display();
     private int temp;
     private final int myWidth;
     private final int myHeight;
@@ -44,6 +46,10 @@ public class Display {
         myJPanel.addMouseListener(myInputManager);
         myJPanel.addMouseMotionListener(myInputManager);
 
+    }
+
+    public static Display getInstance() {
+        return myInstance;
     }
 
     public void dispose() {
