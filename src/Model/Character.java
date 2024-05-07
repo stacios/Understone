@@ -24,7 +24,7 @@ public abstract class Character implements Drawable, Collidable {
         this.myX = theX;
         this.myY = theY;
         this.myHealth = theHealth;
-        this.myMaxHealth = theHealth;
+        this.myMaxHealth = theHealth; //what would be the max?
         this.myMoveSpeed = theMoveSpeed;
         this.myWeapon = theWeapon;
         this.myWidth = theWidth;
@@ -59,7 +59,7 @@ public abstract class Character implements Drawable, Collidable {
 
     public boolean receiveAttack(Attack attack) {
         if (this.colliding(attack)) {
-            this.myHealth -= attack.getDamage();
+            this.myHealth -= attack.getDamage(); //how to restore health?
             this.addForce(attack.getKnockBack());
             return true;
         }

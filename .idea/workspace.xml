@@ -6,14 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="855153de-680e-45a5-9637-a6556e8d3f65" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/AcidSpitter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/AcidSpitter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Attack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Attack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Driller.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Dwarf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Dwarf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Engineer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Gunner.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Scout.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Weapon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Character.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +89,7 @@
       <workItem from="1714281610787" duration="300000" />
       <workItem from="1714796066531" duration="714000" />
       <workItem from="1715017569990" duration="6056000" />
-      <workItem from="1715060198898" duration="7475000" />
+      <workItem from="1715060198898" duration="9112000" />
     </task>
     <servers />
   </component>
