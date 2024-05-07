@@ -1,6 +1,5 @@
 package Model;
 
-import Controller.DrawData;
 import Controller.InputData;
 
 import java.util.ArrayList;
