@@ -1,7 +1,4 @@
-package Model.Glyphids;
-
-import Model.Character;
-import Model.Weapon;
+package Model;
 
 public abstract class Glyphid extends Character {
     protected int myFireTimer;

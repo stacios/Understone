@@ -1,6 +1,4 @@
-package Model.Glyphids;
-
-import Model.Weapon;
+package Model;
 
 public class AcidSpitter extends Glyphid {
     public AcidSpitter(String theName, double theX, double theY, int theHealth,

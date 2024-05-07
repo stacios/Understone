@@ -1,6 +1,4 @@
-package Model.Glyphids;
-
-import Model.Weapon;
+package Model;
 
 public class Grunt extends Glyphid {
     public Grunt(String theName, double theX, double theY, int theHealth,

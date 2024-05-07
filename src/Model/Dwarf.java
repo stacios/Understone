@@ -1,7 +1,4 @@
-package Model.Dwarves;
-
-import Model.Character;
-import Model.Weapon;
+package Model;
 
 import java.util.ArrayList;
 

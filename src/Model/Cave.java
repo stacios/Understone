@@ -1,4 +1,4 @@
-package Model.Spaces;
+package Model;
 
 public class Cave {
     private Room[][] myRooms;

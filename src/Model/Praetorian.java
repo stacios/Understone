@@ -1,6 +1,4 @@
-package Model.Glyphids;
-
-import Model.Weapon;
+package Model;
 
 public class Praetorian extends Grunt{
     public Praetorian(String theName, double theX, double theY, int theHealth, double theWidth, double theHeight, double theMoveSpeed, Weapon theWeapon, int fireTimer) {

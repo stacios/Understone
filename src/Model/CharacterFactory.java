@@ -1,9 +1,6 @@
 package Model;
 
 import Model.DB.DwarfDB;
-import Model.Dwarves.Dwarf;
-import Model.Glyphids.Glyphid;
-import Model.Glyphids.Grunt;
 
 public class CharacterFactory {
 
