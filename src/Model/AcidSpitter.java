@@ -1,6 +1,7 @@
 package Model;
 
-public class AcidSpitter extends Glyphid {
+public class
+AcidSpitter extends Glyphid {
     public AcidSpitter(String theName, double theX, double theY, int theHealth,
                         int theWidth, int theHeight, double theMoveSpeed,
                         Weapon theWeapon, int fireTimer) {

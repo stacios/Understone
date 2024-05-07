@@ -32,11 +32,12 @@ public class Attack implements Collidable{
         return Collidable.super.colliding(other);
     }
 
-    // Update later for game logic!!!
+    // Update later!!!
     public void update() {
+        //movement or effect
     }
 
-    // perform the attack
+   /* // perform the attack
     public void execute(Character origin, Angle attackAngle) {
         this.myX = origin.getX() + Math.cos(attackAngle.getRadians()) * 10; // Example distance
         this.myY = origin.getY() + Math.sin(attackAngle.getRadians()) * 10;
@@ -44,12 +45,7 @@ public class Attack implements Collidable{
 
         //check for collision with targets in range and apply damage and effects(?)
         System.out.println("Executing attack: " + myName + " at position (" + myX + ", " + myY + ")");
-    }
-
-    // Check for collision
-    public boolean collide(Character other) {
-        return this.colliding(other);
-    }
+    }*/
 
     public Angle getAngle() {
         return this.myAngle;

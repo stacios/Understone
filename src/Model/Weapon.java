@@ -13,13 +13,27 @@ public class Weapon {
     }
 
     public boolean attemptAttack(Character origin, Angle angle) {
+        // Check if the weapon is off cooldown
         if (myCooldown == 0) {
-            myAttack.execute(origin, angle);
+
+            double attackRange = 10; //default attack range
+            double attackX = origin.getX() + Math.cos(angle.getRadians()) * attackRange;
+            double attackY = origin.getY() + Math.sin(angle.getRadians()) * attackRange;
+
+            myAttack.setPosition(attackX, attackY);
+
+            myAttack.setAngle(angle);
+
+            System.out.println("Attack performed at position: (" + attackX + ", " + attackY + ") with angle " + angle.getDegrees());
+
+            // Reset the cooldown
             myCooldown = myMaxCooldown;
-            return true; // Attack was successful
+
+            return true;
         }
-        return false; // Attack was not possible, cooldown
+        return false;
     }
+
 
     //for managing cooldown
     public void update() {

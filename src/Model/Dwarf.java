@@ -21,6 +21,11 @@ public class Dwarf extends Character {
         }
     }
 
+    public void attack() {
+        System.out.println("Dwarf performing a special attack!");
+        // attack logic
+    }
+
     public void setInputData(InputData theInputData) {
         myInputData = theInputData;
     }
