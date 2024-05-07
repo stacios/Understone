@@ -1,11 +1,12 @@
 package Model;
 
-public class Attack {
+public class Attack implements Collidable{
     private String myName;
     private int myDamage;
     protected double myX;
     protected double myY;
-    private HitBox myHitBox;
+    private double myWidth;
+    private double myHeight;
     private Force myKnockBack;
     protected Angle myAngle;
 
@@ -15,18 +16,24 @@ public class Attack {
         this.myDamage = theDamage;
         this.myX = theX;
         this.myY = theY;
-        this.myHitBox = new HitBox(theX, theY, theWidth, theHeight);
+        this.myWidth = theWidth;
+        this.myHeight = theHeight;
         this.myKnockBack = theKnockBack;
         this.myAngle = theAngle;
     }
 
+    @Override
+    public int[] getHitbox() {
+        return new int[]{(int) myX, (int) myY, (int) myWidth, (int) myHeight};
+    }
+
+    @Override
+    public boolean colliding(Collidable other) {
+        return Collidable.super.colliding(other);
+    }
+
     // Update later for game logic!!!
     public void update() {
-        // move attack position by the knockback force's components
-        //myX += myKnockBack.getXStrength();
-        //myY += myKnockBack.getYStrength();
-        // update position of HitBox
-        myHitBox = new HitBox(myX, myY, myHitBox.getWidth(), myHitBox.getHeight());
     }
 
     // perform the attack
@@ -35,24 +42,17 @@ public class Attack {
         this.myY = origin.getY() + Math.sin(attackAngle.getRadians()) * 10;
         this.myAngle = attackAngle;
 
-        this.myHitBox = new HitBox(myX, myY, myHitBox.getWidth(), myHitBox.getHeight());
-
         //check for collision with targets in range and apply damage and effects(?)
         System.out.println("Executing attack: " + myName + " at position (" + myX + ", " + myY + ")");
     }
 
-    // Check if hit boxes intersect
+    // Check for collision
     public boolean collide(Character other) {
-        return myHitBox.colliding(other.getHitBox());
+        return this.colliding(other);
     }
 
-    //
     public Angle getAngle() {
         return this.myAngle;
-    }
-
-    public HitBox getHitBox() {
-        return this.myHitBox;
     }
 
     public int getDamage(){
@@ -78,7 +78,6 @@ public class Attack {
     protected void setPosition(double x, double y) {
         this.myX = x;
         this.myY = y;
-        this.getHitBox().setPosition(x, y);
     }
 }
 

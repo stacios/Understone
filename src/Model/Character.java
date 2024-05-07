@@ -5,7 +5,7 @@ import Controller.Drawable;
 
 import java.util.ArrayList;
 
-public abstract class Character implements Drawable {
+public abstract class Character implements Drawable, Collidable {
     private String myName;
     private int myHealth;
     private int myMaxHealth;
@@ -14,7 +14,6 @@ public abstract class Character implements Drawable {
     private int myWidth;
     private int myHeight;
     private ArrayList<Force> myForces;
-    private HitBox myHitbox;
     private double myMoveSpeed;
     private Weapon myWeapon;
 
@@ -30,16 +29,11 @@ public abstract class Character implements Drawable {
         this.myWeapon = theWeapon;
         this.myWidth = theWidth;
         this.myHeight = theHeight;
-        this.myHitbox = new HitBox(theX, theY, theWidth, theHeight);
         this.myForces = new ArrayList<>();
     }
 
-    public boolean colliding(Character other) {
-        return this.myHitbox.colliding(other.myHitbox);
-    }
-
-    public boolean colliding(HitBox other) {
-        return this.myHitbox.colliding(other);
+    public boolean colliding(Collidable other) {
+        return Collidable.super.colliding(other);
     }
 
     public void update() {
@@ -64,7 +58,7 @@ public abstract class Character implements Drawable {
     }
 
     public boolean receiveAttack(Attack attack) {
-        if (this.colliding(attack.getHitBox())) {
+        if (this.colliding(attack)) {
             this.myHealth -= attack.getDamage();
             this.addForce(attack.getKnockBack());
             return true;
@@ -80,9 +74,6 @@ public abstract class Character implements Drawable {
                 myForces.remove(force);
             }
         }
-    }
-    public HitBox getHitBox(){
-        return this.myHitbox;
     }
 
     public double getX(){
@@ -100,5 +91,10 @@ public abstract class Character implements Drawable {
     @Override
     public DrawData getDrawData() {
         return new DrawData(myName, null, myX, myY, myWidth, myHeight);
+    }
+
+    @Override
+    public int[] getHitbox() {
+        return new int[]{(int) myX, (int) myY, myWidth, myHeight};
     }
 }
