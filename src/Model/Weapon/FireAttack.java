@@ -1,4 +1,8 @@
-package Model;
+package Model.Weapon;
+
+import Model.Angle;
+import Model.Force;
+import Model.Weapon.ProjectileAttack;
 
 public class FireAttack extends ProjectileAttack {
     private int myFireTime;

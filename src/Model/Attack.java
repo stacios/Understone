@@ -71,7 +71,7 @@ public class Attack implements Collidable{
         return this.myY;
     }
 
-    protected void setPosition(double x, double y) {
+    public void setPosition(double x, double y) {
         this.myX = x;
         this.myY = y;
     }

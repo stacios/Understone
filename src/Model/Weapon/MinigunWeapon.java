@@ -1,6 +1,11 @@
-package Model;
+package Model.Weapon;
 
-public class MinigunWeapon extends Weapon{
+import Model.Angle;
+import Model.Attack;
+import Model.Character;
+import Model.Weapon.Weapon;
+
+public class MinigunWeapon extends Weapon {
     private int mySpinup;
     private int myMaxSpinup;
     private int myDecayRate;

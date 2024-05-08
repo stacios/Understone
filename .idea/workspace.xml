@@ -6,14 +6,26 @@
   <component name="ChangeListManager">
     <list default="true" id="855153de-680e-45a5-9637-a6556e8d3f65" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/AcidSpitter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/AcidSpitter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/AcidSpitter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Glyphid/AcidSpitter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Attack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Attack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Driller.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Cave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Spaces/Cave.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Character.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/CharacterFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/CharacterFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Dwarf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Dwarf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Engineer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Gunner.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Scout.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Weapon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/ExplosiveAttack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/ExplosiveAttack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/FireAttack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Weapon/FireAttack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/GameLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/GameLoop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Glyphid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Glyphid/Glyphid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Grunt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Glyphid/Grunt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Mactera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Glyphid/Mactera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/MinigunWeapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Weapon/MinigunWeapon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Praetorian.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Glyphid/Praetorian.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/ProjectileAttack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Weapon/ProjectileAttack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Rock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Glyphid/Rock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Spaces/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/SpaceRig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Spaces/SpaceRig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Swarmer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Glyphid/Swarmer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Weapon/Weapon.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +62,13 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="Model.Weapon" />
+      <recent name="Model.Glyphid" />
+      <recent name="Model.Spaces" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controller.Main" />
@@ -97,6 +116,7 @@
       <workItem from="1714796066531" duration="714000" />
       <workItem from="1715017569990" duration="6056000" />
       <workItem from="1715060198898" duration="7475000" />
+      <workItem from="1715134489609" duration="926000" />
     </task>
     <servers />
   </component>

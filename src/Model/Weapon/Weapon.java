@@ -1,4 +1,8 @@
-package Model;
+package Model.Weapon;
+
+import Model.Angle;
+import Model.Attack;
+import Model.Character;
 
 public class Weapon {
     private Attack myAttack;
@@ -33,7 +37,6 @@ public class Weapon {
         }
         return false;
     }
-
 
     //for managing cooldown
     public void update() {

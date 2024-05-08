@@ -1,4 +1,6 @@
-package Model;
+package Model.Spaces;
+
+import Model.Spaces.Room;
 
 public class Cave {
     private Room[][] myRooms;

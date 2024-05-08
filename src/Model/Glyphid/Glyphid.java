@@ -1,4 +1,4 @@
-package Model;
+package Model.Glyphid;
 
 public abstract class Glyphid extends Character {
     protected int myFireTimer;

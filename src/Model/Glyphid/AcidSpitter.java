@@ -1,4 +1,6 @@
-package Model;
+package Model.Glyphid;
+
+import Model.Glyphid.Glyphid;
 
 public class
 AcidSpitter extends Glyphid {

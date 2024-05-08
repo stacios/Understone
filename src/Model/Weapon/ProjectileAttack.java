@@ -1,6 +1,10 @@
-package Model;
+package Model.Weapon;
 
-public class ProjectileAttack extends Attack{
+import Model.Angle;
+import Model.Attack;
+import Model.Force;
+
+public class ProjectileAttack extends Attack {
     private double myVelocity;
 
     public ProjectileAttack(String theName, int theDamage, double theX, double theY,

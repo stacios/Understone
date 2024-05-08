@@ -1,5 +1,9 @@
 package Model;
 
+import Model.Glyphid.Glyphid;
+import Model.Glyphid.Grunt;
+import Model.Weapon.Weapon;
+
 public class CharacterFactory {
 
     public static Dwarf createDwarf(String theName) {

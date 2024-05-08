@@ -1,4 +1,6 @@
-package Model;
+package Model.Glyphid;
+
+import Model.Glyphid.Glyphid;
 
 public class Grunt extends Glyphid {
     public Grunt(String theName, double theX, double theY, int theHealth,

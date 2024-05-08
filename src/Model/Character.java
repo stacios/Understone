@@ -2,6 +2,7 @@ package Model;
 
 import Controller.DrawData;
 import Controller.Drawable;
+import Model.Weapon.Weapon;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,8 @@
 package Model;
 
-public class ExplosiveAttack extends ProjectileAttack{
+import Model.Weapon.ProjectileAttack;
+
+public class ExplosiveAttack extends ProjectileAttack {
     private double myRadius; // Radius of the explosion effect
 
     public ExplosiveAttack(String theName, int theDamage, double theX, double theY,

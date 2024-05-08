@@ -2,6 +2,8 @@ package Model;
 
 import Controller.DrawData;
 import Controller.InputData;
+import Model.Spaces.Cave;
+import Model.Spaces.Room;
 
 import java.util.ArrayList;
 
