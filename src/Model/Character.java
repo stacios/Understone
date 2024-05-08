@@ -9,13 +9,13 @@ public abstract class Character implements Drawable, Collidable {
     private String myName;
     private int myHealth;
     private int myMaxHealth;
-    private double myX;
-    private double myY;
+    double myX;
+     double myY;
     private int myWidth;
     private int myHeight;
     private ArrayList<Force> myForces;
     private double myMoveSpeed;
-    private Weapon myWeapon;
+    Weapon myWeapon;
 
     public Character(String theName, double theX, double theY,
                      int theHealth, int theWidth, int theHeight,
@@ -49,13 +49,13 @@ public abstract class Character implements Drawable, Collidable {
         this.myWeapon = weapon;
     }
 
-    public boolean attemptAttack(double targetX, double targetY) {
+    /*public boolean attemptAttack(double targetX, double targetY) {
         if (this.myWeapon != null) {
             Angle attackAngle = new Angle(myX, myY, targetX, targetY);
             return this.myWeapon.attemptAttack(this, attackAngle);
         }
         return false;
-    }
+    }*/
 
     public boolean receiveAttack(Attack attack) {
         if (this.colliding(attack)) {

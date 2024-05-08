@@ -37,16 +37,6 @@ public class Attack implements Collidable{
         //movement or effect
     }
 
-   /* // perform the attack
-    public void execute(Character origin, Angle attackAngle) {
-        this.myX = origin.getX() + Math.cos(attackAngle.getRadians()) * 10; // Example distance
-        this.myY = origin.getY() + Math.sin(attackAngle.getRadians()) * 10;
-        this.myAngle = attackAngle;
-
-        //check for collision with targets in range and apply damage and effects(?)
-        System.out.println("Executing attack: " + myName + " at position (" + myX + ", " + myY + ")");
-    }*/
-
     public Angle getAngle() {
         return this.myAngle;
     }

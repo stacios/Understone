@@ -4,6 +4,7 @@ public class Weapon {
     private Attack myAttack;
     protected int myCooldown;
     protected int myMaxCooldown;
+    double myAttackRange = 10; //default attack range, to be assigned later
 
     // Constructor to initialize the Weapon object
     public Weapon(Attack theAttack, int theCooldown, int theMaxCooldown) {
@@ -16,9 +17,8 @@ public class Weapon {
         // Check if the weapon is off cooldown
         if (myCooldown == 0) {
 
-            double attackRange = 10; //default attack range
-            double attackX = origin.getX() + Math.cos(angle.getRadians()) * attackRange;
-            double attackY = origin.getY() + Math.sin(angle.getRadians()) * attackRange;
+            double attackX = origin.getX() + Math.cos(angle.getRadians()) * myAttackRange;
+            double attackY = origin.getY() + Math.sin(angle.getRadians()) * myAttackRange;
 
             myAttack.setPosition(attackX, attackY);
 

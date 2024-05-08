@@ -21,10 +21,16 @@ public class Dwarf extends Character {
         }
     }
 
-    public void attack() {
-        System.out.println("Dwarf performing a special attack!");
-        // attack logic
+    public void attack(double targetX, double targetY) {
+        Angle attackAngle = new Angle(myX, myY, targetX, targetY);
+        boolean attackSuccess = myWeapon.attemptAttack(this, attackAngle);
+        if (attackSuccess) {
+            System.out.println("Attack launched towards coordinates: " + targetX + ", " + targetY);
+        } else {
+            System.out.println("Attack failed or is on cooldown.");
+        }
     }
+
 
     public void setInputData(InputData theInputData) {
         myInputData = theInputData;
