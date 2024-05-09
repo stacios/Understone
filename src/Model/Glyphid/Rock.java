@@ -1,6 +1,7 @@
 package Model.Glyphid;
 
 import Model.Glyphid.Glyphid;
+import Model.Weapon.Weapon;
 
 public class Rock extends Glyphid {
     public Rock(String theName, double theX, double theY, int theHealth,

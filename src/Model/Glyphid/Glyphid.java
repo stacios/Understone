@@ -1,5 +1,8 @@
 package Model.Glyphid;
 
+import Model.Character;
+import Model.Weapon.Weapon;
+
 public abstract class Glyphid extends Character {
     protected int myFireTimer;
 

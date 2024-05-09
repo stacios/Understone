@@ -2,6 +2,10 @@ package Model.Spaces;
 
 import Controller.DrawData;
 import Controller.Drawable;
+import Model.Attack;
+import Model.Dwarf;
+import Model.Glyphid.Glyphid;
+import Model.Glyphid.Rock;
 
 import java.util.ArrayList;
 import java.util.List;

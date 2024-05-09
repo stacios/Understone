@@ -1,6 +1,7 @@
 package Model.Glyphid;
 
 import Model.Glyphid.Grunt;
+import Model.Weapon.Weapon;
 
 public class Praetorian extends Grunt {
     public Praetorian(String theName, double theX, double theY, int theHealth, int theWidth, int theHeight, double theMoveSpeed, Weapon theWeapon, int fireTimer) {

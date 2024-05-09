@@ -5,27 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="855153de-680e-45a5-9637-a6556e8d3f65" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/AcidSpitter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Glyphid/AcidSpitter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Attack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Attack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Cave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Spaces/Cave.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Character.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/CharacterFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/CharacterFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Dwarf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Dwarf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/ExplosiveAttack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/ExplosiveAttack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/FireAttack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Weapon/FireAttack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/GameLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/GameLoop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Glyphid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Glyphid/Glyphid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Grunt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Glyphid/Grunt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Mactera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Glyphid/Mactera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/MinigunWeapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Weapon/MinigunWeapon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Praetorian.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Glyphid/Praetorian.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/ProjectileAttack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Weapon/ProjectileAttack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Rock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Glyphid/Rock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Spaces/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/SpaceRig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Spaces/SpaceRig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Swarmer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Glyphid/Swarmer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Weapon/Weapon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Glyphid/Glyphid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Glyphid/Glyphid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Spaces/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Spaces/Room.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,18 +32,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="Model.Weapon" />
