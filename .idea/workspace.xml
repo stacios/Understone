@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="855153de-680e-45a5-9637-a6556e8d3f65" name="Changes" comment="" />
+    <list default="true" id="855153de-680e-45a5-9637-a6556e8d3f65" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Character.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Dwarf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Dwarf.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -75,7 +79,7 @@
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
+    <task id="Default" summary="Default task">
       <changelist id="855153de-680e-45a5-9637-a6556e8d3f65" name="Changes" comment="" />
       <created>1714149399389</created>
       <option name="number" value="Default" />
@@ -90,7 +94,7 @@
       <workItem from="1715119617508" duration="5235000" />
       <workItem from="1715135586777" duration="66000" />
       <workItem from="1715135910850" duration="750000" />
-      <workItem from="1715189695043" duration="598000" />
+      <workItem from="1715186260940" duration="2906000" />
     </task>
     <servers />
   </component>

@@ -49,17 +49,17 @@ public abstract class Character implements Drawable, Collidable {
         this.myWeapon = weapon;
     }
 
-    /*public boolean attemptAttack(double targetX, double targetY) {
+    public boolean attemptAttack(double targetX, double targetY) {
         if (this.myWeapon != null) {
             Angle attackAngle = new Angle(myX, myY, targetX, targetY);
             return this.myWeapon.attemptAttack(this, attackAngle);
         }
         return false;
-    }*/
+    }
 
     public boolean receiveAttack(Attack attack) {
         if (this.colliding(attack)) {
-            this.myHealth -= attack.getDamage(); //how to restore health?
+            this.myHealth -= attack.getDamage();
             this.addForce(attack.getKnockBack());
             return true;
         }

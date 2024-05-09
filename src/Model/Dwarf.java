@@ -21,6 +21,7 @@ public class Dwarf extends Character {
         }
     }
 
+    //
     public void attack(double targetX, double targetY) {
         Angle attackAngle = new Angle(myX, myY, targetX, targetY);
         boolean attackSuccess = myWeapon.attemptAttack(this, attackAngle);
@@ -30,7 +31,6 @@ public class Dwarf extends Character {
             System.out.println("Attack failed or is on cooldown.");
         }
     }
-
 
     public void setInputData(InputData theInputData) {
         myInputData = theInputData;
@@ -86,8 +86,5 @@ public class Dwarf extends Character {
         if (angle != null) {
             addForce(new Force(angle, getMoveSpeed(), .4));
         }
-
     }
-
-
 }
