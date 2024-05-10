@@ -81,7 +81,6 @@ public class Dwarf extends Character {
             addForce(new Force(angle, getMoveSpeed(), .4));
         }
 
+
     }
-
-
 }

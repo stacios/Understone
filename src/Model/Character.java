@@ -98,4 +98,18 @@ public abstract class Character implements Drawable, Collidable {
     public int[] getHitbox() {
         return new int[]{(int) myX, (int) myY, myWidth, myHeight};
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "Name: '" + myName + '\'' +
+                ", X: " + myX +
+                ", Y: " + myY +
+                ", Health: " + myHealth +
+                "/ MaxHealth: " + myMaxHealth +
+                ", MoveSpeed: " + myMoveSpeed +
+                ", Width: " + myWidth +
+                ", Height: " + myHeight +
+                '}';
+    }
 }

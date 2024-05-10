@@ -2,6 +2,8 @@ package Model;
 
 import Controller.DrawData;
 import Controller.InputData;
+import Model.DB.DwarfDB;
+import Model.DB.SQLiteConnection;
 import Model.Spaces.Cave;
 import Model.Spaces.Room;
 
@@ -26,6 +28,7 @@ public class GameLoop {
         //temp
         myActiveRoom = new Room(false, false);
         myPlayer = new Dwarf("Driller", 800, 800, 100, 100, 100, 5, null);
+        testCharacterFactoryAndDB();
     }
 
     public static GameLoop getInstance() {
@@ -70,5 +73,12 @@ public class GameLoop {
 
     public DrawData[] getDrawData() {
         return myDrawDataList.toArray(new DrawData[0]);
+    }
+
+    public void testCharacterFactoryAndDB() {
+        SQLiteConnection.getDataSource();
+        DwarfDB.intitializeDwarfDB();
+        Dwarf test = CharacterFactory.createDwarf("test");
+        System.out.println(test.toString());
     }
 }

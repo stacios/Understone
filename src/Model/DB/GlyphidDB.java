@@ -2,11 +2,10 @@ package Model.DB;
 
 import java.sql.*;
 
-public class DwarfDB {
+public class GlyphidDB {
 
     public static void intitializeDwarfDB() {
-        initializeDefaults();
-        insertDefaults();
+
     }
 
     public static void initializeDefaults() {
@@ -26,11 +25,11 @@ public class DwarfDB {
     public static void insertDefaults() {
         String insertDefaults = "INSERT OR REPLACE INTO DwarfDefaults (setting, value) VALUES " +
                 "('health', 100), " +
-                "('maxhealth', 130), " +
+                "('maxhealth', 130)" +
                 "('width', 1), " +
                 "('height', 1), " +
                 "('moveSpeed', 2.0), " +
-                "('damage', 10);";
+                "('damage', 10)";
 
         try (Connection conn = SQLiteConnection.getDataSource().getConnection();
              Statement stmt = conn.createStatement()) {
@@ -41,21 +40,6 @@ public class DwarfDB {
         }
     }
 
-    public static int getDefaultValue(String theQuery) {
-        String query = "SELECT value FROM DwarfDefaults WHERE setting = ?";
 
-        try (Connection conn = SQLiteConnection.getDataSource().getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(1, theQuery);
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                return rs.getInt("value");
-            }
-        } catch (SQLException e) {
-            System.err.println("Error getting value for " + theQuery + ": " + e.getMessage());
-        }
-
-        return 0;
-    }
 
 }
