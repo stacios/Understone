@@ -2,7 +2,10 @@ package Model.Spaces;
 
 import Model.Spaces.Room;
 
-public class Cave {
+import java.io.Serializable;
+
+public class Cave implements Serializable {
+    private static final long serialVersionUID = 2L;
     private Room[][] myRooms;
 
     public Cave(int width, int height) {

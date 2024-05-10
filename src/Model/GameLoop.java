@@ -5,10 +5,11 @@ import Controller.InputData;
 import Model.Spaces.Cave;
 import Model.Spaces.Room;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GameLoop {
-
+public class GameLoop implements Serializable {
+    private static final long serialVersionUID = 8L;
     private static final GameLoop myInstance = new GameLoop();
 
     private Dwarf myPlayer;
@@ -17,7 +18,7 @@ public class GameLoop {
     private Room myActiveRoom;
 
     private ArrayList<DrawData> myDrawDataList;
-    private DrawData temp = new DrawData("test", null, 100, 100, 100, 100);
+    private transient DrawData temp = new DrawData("test", null, 100, 100, 100, 100);
     private double temp2 = 0;
 
     private GameLoop() {

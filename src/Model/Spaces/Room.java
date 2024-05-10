@@ -7,10 +7,12 @@ import Model.Dwarf;
 import Model.Glyphid.Glyphid;
 import Model.Glyphid.Rock;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Room implements Drawable {
+public class Room implements Drawable, Serializable {
+    private static final long serialVersionUID = 3L;
     private List<Glyphid> myGlyphids;
     private List<Attack> myAttacks;
     private boolean myHasDropPod;

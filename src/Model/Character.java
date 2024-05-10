@@ -4,9 +4,11 @@ import Controller.DrawData;
 import Controller.Drawable;
 import Model.Weapon.Weapon;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Character implements Drawable, Collidable {
+public abstract class Character implements Drawable, Collidable, Serializable {
+    private static final long serialVersionUID = 1L;
     private String myName;
     private int myHealth;
     private int myMaxHealth;

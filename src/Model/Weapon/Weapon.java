@@ -4,7 +4,10 @@ import Model.Angle;
 import Model.Attack;
 import Model.Character;
 
-public class Weapon {
+import java.io.Serializable;
+
+public class Weapon implements Serializable {
+    private static final long serialVersionUID = 4L;
     private Attack myAttack;
     protected int myCooldown;
     protected int myMaxCooldown;

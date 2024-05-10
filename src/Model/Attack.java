@@ -1,6 +1,9 @@
 package Model;
 
-public class Attack implements Collidable{
+import java.io.Serializable;
+
+public class Attack implements Collidable, Serializable {
+    private static final long serialVersionUID = 6L;
     private String myName;
     private int myDamage;
     protected double myX;

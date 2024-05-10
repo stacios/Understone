@@ -1,6 +1,9 @@
 package Model;
 
-public class Force {
+import java.io.Serializable;
+
+public class Force implements Serializable {
+    private static final long serialVersionUID = 7L;
     private double myStrength;
     private Angle myAngle;
     private double myDecayRate;
