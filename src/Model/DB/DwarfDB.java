@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class DwarfDB {
 
-    public static void intitializeDwarfDB() {
+    public static void initializeDB() {
         initializeDefaults();
         insertDefaults();
     }
@@ -54,6 +54,8 @@ public class DwarfDB {
         } catch (SQLException e) {
             System.err.println("Error getting value for " + theQuery + ": " + e.getMessage());
         }
+
+        System.err.println("Warning! Default value not found for query: " + theQuery + ". Inserting default value of 0.");
 
         return 0;
     }

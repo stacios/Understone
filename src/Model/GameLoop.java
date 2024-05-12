@@ -3,7 +3,9 @@ package Model;
 import Controller.DrawData;
 import Controller.InputData;
 import Model.DB.DwarfDB;
+import Model.DB.GlyphidDB;
 import Model.DB.SQLiteConnection;
+import Model.Glyphid.Glyphid;
 import Model.Spaces.Cave;
 import Model.Spaces.Room;
 
@@ -75,10 +77,23 @@ public class GameLoop {
         return myDrawDataList.toArray(new DrawData[0]);
     }
 
+    /**
+     * Temporary method for testing and printing values from database.
+     */
     public void testCharacterFactoryAndDB() {
+        // Initializes Database
         SQLiteConnection.getDataSource();
-        DwarfDB.intitializeDwarfDB();
-        Dwarf test = CharacterFactory.createDwarf("test");
-        System.out.println(test.toString());
+
+        // Initializes tables and data insertion for Dwarf and Glyphid.
+        DwarfDB.initializeDB();
+        GlyphidDB.initializeDB();
+
+        // Creates test Dwarf object
+        Dwarf testDwarf = CharacterFactory.createDwarf("testDwarf");
+        System.out.println(testDwarf.toString());
+
+        // Creates test Dwarf object
+        Glyphid testGlyphid = CharacterFactory.createGlyphid("testGlyphid");
+        System.out.println(testGlyphid.toString());
     }
 }

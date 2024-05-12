@@ -77,11 +77,11 @@ public abstract class Character implements Drawable, Collidable {
         }
     }
 
-    public double getX(){
+    public double getX() {
         return this.myX;
     }
 
-    public double getY(){
+    public double getY() {
         return this.myY;
     }
 
@@ -101,12 +101,11 @@ public abstract class Character implements Drawable, Collidable {
 
     @Override
     public String toString() {
-        return "{" +
-                "Name: '" + myName + '\'' +
-                ", X: " + myX +
+        return "Printing " + myName + " {" +
+                "X: " + myX +
                 ", Y: " + myY +
                 ", Health: " + myHealth +
-                "/ MaxHealth: " + myMaxHealth +
+                ", MaxHealth: " + myMaxHealth +
                 ", MoveSpeed: " + myMoveSpeed +
                 ", Width: " + myWidth +
                 ", Height: " + myHeight +
