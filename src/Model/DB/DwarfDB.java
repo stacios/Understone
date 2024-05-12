@@ -4,6 +4,7 @@ import java.sql.*;
 
 public class DwarfDB {
 
+    // TODO: Create values/methods for all 4 dwarves, as well as ways to access each table.
     public static void initializeDB() {
         initializeDefaults();
         insertDefaults();
@@ -22,6 +23,7 @@ public class DwarfDB {
             System.err.println("Error creating DwarfDefaults table: " + e.getMessage());
         }
     }
+
 
     public static void insertDefaults() {
         String insertDefaults = "INSERT OR REPLACE INTO DwarfDefaults (setting, value) VALUES " +
