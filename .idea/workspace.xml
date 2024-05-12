@@ -5,18 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="855153de-680e-45a5-9637-a6556e8d3f65" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Model/SerializationManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/DrawData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DrawData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Angle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Angle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Attack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Attack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Character.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Force.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Force.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/GameLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/GameLoop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Spaces/Cave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Spaces/Cave.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Spaces/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Spaces/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Weapon/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Weapon/Weapon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/SerializationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/DataManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +105,9 @@
       <workItem from="1715060198898" duration="7475000" />
       <workItem from="1715134489609" duration="926000" />
       <workItem from="1715326175899" duration="359000" />
-      <workItem from="1715326723841" duration="6440000" />
+      <workItem from="1715326723841" duration="8825000" />
+      <workItem from="1715483039908" duration="5513000" />
+      <workItem from="1715492444438" duration="2189000" />
     </task>
     <servers />
   </component>

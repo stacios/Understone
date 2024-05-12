@@ -2,15 +2,17 @@ package Controller;
 
 import java.io.Serializable;
 
-public class DrawData {
+public class DrawData implements Serializable{
+
+    private static final long serialVersionUID = 9L;
 
     private final int myX;
     private final int myY;
     private final double myAngle;
     private final int myWidth;
     private final int myHeight;
-    private final String myImage;
-    private final String[] mySounds;
+    private transient final String myImage;
+    private transient final String[] mySounds;
 
     public DrawData(final String theImage, final String[] theSounds,
                     final double theX, final double theY, final int theWidth, final int theHeight, final double theAngle) {

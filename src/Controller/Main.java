@@ -23,7 +23,6 @@ public class Main {
         while (running) {
 
             running = gameLoop.update(display.getInputData());
-
             display.render(gameLoop.getDrawData());
 
             try {

@@ -18,7 +18,7 @@ public class GameLoop implements Serializable {
     private Room myActiveRoom;
 
     private ArrayList<DrawData> myDrawDataList;
-    private transient DrawData temp = new DrawData("test", null, 100, 100, 100, 100);
+    private DrawData temp = new DrawData("test", null, 100, 100, 100, 100);
     private double temp2 = 0;
 
     private GameLoop() {
