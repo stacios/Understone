@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="855153de-680e-45a5-9637-a6556e8d3f65" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/DrawData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DrawData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/GameLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/GameLoop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/SerializationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/DataManager.java" afterDir="false" />
-    </list>
+    <list default="true" id="855153de-680e-45a5-9637-a6556e8d3f65" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +14,6 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
       </list>
     </option>
   </component>
@@ -104,10 +97,8 @@
       <workItem from="1715017569990" duration="6056000" />
       <workItem from="1715060198898" duration="7475000" />
       <workItem from="1715134489609" duration="926000" />
-      <workItem from="1715326175899" duration="359000" />
-      <workItem from="1715326723841" duration="8825000" />
-      <workItem from="1715483039908" duration="5513000" />
-      <workItem from="1715492444438" duration="2189000" />
+      <workItem from="1715495074249" duration="16284000" />
+      <workItem from="1715555264099" duration="2753000" />
     </task>
     <servers />
   </component>
