@@ -59,12 +59,12 @@ public class DwarfDB {
      * Inserts default values for Engineer.
      */
     public static void insertEngineerDefaults() {
-        String sql = "INSERT OR REPLACE INTO EngineerDefaults (setting, value) VALUES " +
+        String sql = "REPLACE INTO EngineerDefaults (setting, value) VALUES " +
                 "('health', 90), " +
                 "('maxhealth', 130), " +
                 "('width', 1), " +
                 "('height', 1), " +
-                "('movespeed', 2.0), " +
+                "('movespeed', 2.25), " +
                 "('damage', 8);";
 
         makeSQLConnection(sql, ENGINEER);

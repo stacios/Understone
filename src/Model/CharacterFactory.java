@@ -10,9 +10,9 @@ import static Model.CharacterTypes.*;
 
 public class CharacterFactory {
 
-    public static Dwarf createDwarf(String theName) {
-        if (!DRILLER.equals(theName) && !ENGINEER.equals(theName) &&
-                !SCOUT.equals(theName) && !GUNNER.equals(theName)) {
+    public static Dwarf createDwarf(String theDwarfType) {
+        if (!DRILLER.equals(theDwarfType) && !ENGINEER.equals(theDwarfType) &&
+                !SCOUT.equals(theDwarfType) && !GUNNER.equals(theDwarfType)) {
             throw new Error("Passed dwarf type must be of defined dwarf type(Driller, Engineer, Gunner, Scout)");
         }
 
@@ -24,13 +24,13 @@ public class CharacterFactory {
 //        double moveSpeed = 2.0; // Default speed
 
         // Getting values from DwarfDB
-        int health = DwarfDB.getDefaultValue(theName, "health"); // Default health
-        int width = DwarfDB.getDefaultValue(theName, "width"); // Default width
-        int height = DwarfDB.getDefaultValue(theName, "height"); // Default height
-        double moveSpeed = DwarfDB.getDefaultValue(theName, "movespeed"); // Default speed
-        int damage = DwarfDB.getDefaultValue(theName, "damage");
+        int health = DwarfDB.getDefaultValue(theDwarfType, "health"); // Default health
+        int width = DwarfDB.getDefaultValue(theDwarfType, "width"); // Default width
+        int height = DwarfDB.getDefaultValue(theDwarfType, "height"); // Default height
+        double moveSpeed = DwarfDB.getDefaultValue(theDwarfType, "movespeed"); // Default speed
+        int damage = DwarfDB.getDefaultValue(theDwarfType, "damage");
         Weapon defaultWeapon = new Weapon(new Attack("Basic Attack", damage, x, y, width, height, new Force(new Angle(0), 1.0), new Angle(0)), 0, 10);
-        return new Dwarf(theName, x, y, health, width, height, moveSpeed, defaultWeapon);
+        return new Dwarf(theDwarfType, x, y, health, width, height, moveSpeed, defaultWeapon);
     }
 
 

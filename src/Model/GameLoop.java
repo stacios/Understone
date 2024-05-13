@@ -11,6 +11,8 @@ import Model.Spaces.Room;
 
 import java.util.ArrayList;
 
+import static Model.CharacterTypes.*;
+
 public class GameLoop {
 
     private static final GameLoop myInstance = new GameLoop();
@@ -30,7 +32,7 @@ public class GameLoop {
         //temp
         myActiveRoom = new Room(false, false);
         myPlayer = new Dwarf("Driller", 800, 800, 100, 100, 100, 5, null);
-        //testCharacterFactoryAndDB();
+        testCharacterFactoryAndDB();
     }
 
     public static GameLoop getInstance() {
@@ -89,7 +91,7 @@ public class GameLoop {
         GlyphidDB.initializeDB();
 
         // Creates test Dwarf object
-        Dwarf testDwarf = CharacterFactory.createDwarf("testDwarf");
+        Dwarf testDwarf = CharacterFactory.createDwarf(DRILLER);
         System.out.println(testDwarf.toString());
 
         // Creates test Dwarf object
