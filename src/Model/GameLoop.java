@@ -30,7 +30,7 @@ public class GameLoop {
         //temp
         myActiveRoom = new Room(false, false);
         myPlayer = new Dwarf("Driller", 800, 800, 100, 100, 100, 5, null);
-        testCharacterFactoryAndDB();
+        //testCharacterFactoryAndDB();
     }
 
     public static GameLoop getInstance() {

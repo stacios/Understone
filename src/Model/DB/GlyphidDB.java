@@ -28,7 +28,7 @@ public class GlyphidDB {
                 "('health', 50), " +
                 "('width', 1), " +
                 "('height', 1), " +
-                "('moveSpeed', 1.5), " +
+                "('movespeed', 1.5), " +
                 "('firetimer', 5), " +
                 "('damage', 5);";
 
@@ -55,7 +55,7 @@ public class GlyphidDB {
             System.err.println("Error getting value for " + theQuery + ": " + e.getMessage());
         }
 
-        System.err.println("Warning! Default value not found for query: " + theQuery + ". Inserting default value of 0.");
+        System.err.println("Warning! Default value not found for Glyphid query: " + theQuery + ". Inserting default value of 0.");
 
         return 0;
     }
