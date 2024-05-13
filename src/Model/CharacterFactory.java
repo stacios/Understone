@@ -18,10 +18,6 @@ public class CharacterFactory {
 
         double x = 0; // Default X
         double y = 0; // Default Y
-//        int health = 100; // Default health
-//        int width = 1; // Default width
-//        int height = 1; // Default height
-//        double moveSpeed = 2.0; // Default speed
 
         // Getting values from DwarfDB
         int health = DwarfDB.getDefaultValue(theDwarfType, "health"); // Default health
@@ -34,24 +30,27 @@ public class CharacterFactory {
     }
 
 
-    public static Glyphid createGlyphid(String theName) {
+    public static Glyphid createGlyphid(String theGlyphidType) {
+        if (!ACID_SPIITER.equals(theGlyphidType) && !GLYPHID.equals(theGlyphidType) &&
+                !GRUNT.equals(theGlyphidType) && !MACTERA.equals(theGlyphidType) &&
+                !PRAETORIAN.equals(theGlyphidType) && !ROCK.equals(theGlyphidType) &&
+                !SWARMER.equals(theGlyphidType)) {
+            throw new Error("Passed glyphid type must be of defined glyphid type: " +
+                    "(Acid Spitter, Glyphid, Grunt, Mactera, Praetorian, Rock, Swarmer)");
+        }
+
         double x = 5; // Default X
         double y = 5; // Default Y
-//        int health = 50; // Default health
-//        int width = 1; // Default width
-//        int height = 1; // Default height
-//        double moveSpeed = 1.5; // Default speed
-//        int fireTimer = 5; // Default cooldown timer
 
         // Getting values from GlyphidDB
-        int health = GlyphidDB.getDefaultValue("health"); // Default health
-        int width = GlyphidDB.getDefaultValue("width"); // Default width
-        int height = GlyphidDB.getDefaultValue("height"); // Default height
-        double moveSpeed = GlyphidDB.getDefaultValue("movespeed"); // Default speed
-        int fireTimer = GlyphidDB.getDefaultValue("firetimer"); // Default cooldown timer
-        int damage = GlyphidDB.getDefaultValue("damage"); // Default damage
+        int health = GlyphidDB.getDefaultValue(theGlyphidType, "health"); // Default health
+        int width = GlyphidDB.getDefaultValue(theGlyphidType, "width"); // Default width
+        int height = GlyphidDB.getDefaultValue(theGlyphidType, "height"); // Default height
+        double moveSpeed = GlyphidDB.getDefaultValue(theGlyphidType, "movespeed"); // Default speed
+        int fireTimer = GlyphidDB.getDefaultValue(theGlyphidType, "firetimer"); // Default cooldown timer
+        int damage = GlyphidDB.getDefaultValue(theGlyphidType, "damage"); // Default damage
         Weapon defaultWeapon = new Weapon(new Attack("Acid Spit", damage, x, y, width, height, new Force(new Angle(0), 1.0), new Angle(0)), 2, 20);
-        return new Grunt(theName, x, y, health, width, height, moveSpeed, defaultWeapon, fireTimer);
+        return new Grunt(theGlyphidType, x, y, health, width, height, moveSpeed, defaultWeapon, fireTimer);
     }
 }
 

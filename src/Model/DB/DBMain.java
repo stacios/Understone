@@ -13,11 +13,11 @@ public class DBMain {
     public static void main(String[] theArgs) {
 
         // Initializes Database
-        //SQLiteConnection.getDataSource();
+        SQLiteConnection.getDataSource();
 
         // Initializes tables and data insertion for Dwarf and Glyphid.
         DwarfDB.initializeDB();
-        //GlyphidDB.initializeDB();
+        GlyphidDB.initializeDB();
 
         // Creates test Dwarf object
         Dwarf testDriller = CharacterFactory.createDwarf(DRILLER);
@@ -27,7 +27,7 @@ public class DBMain {
         System.out.println(testEngineer.toString());
 
         // Creates test Dwarf object
-        Glyphid testGlyphid = CharacterFactory.createGlyphid("testGlyphid");
+        Glyphid testGlyphid = CharacterFactory.createGlyphid(GRUNT);
         System.out.println(testGlyphid.toString());
     }
 }
