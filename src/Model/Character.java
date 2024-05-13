@@ -101,7 +101,7 @@ public abstract class Character implements Drawable, Collidable {
 
     @Override
     public String toString() {
-        return "Printing " + myName + " {" +
+        return "Printing " + myName + ": {" +
                 "X: " + myX +
                 ", Y: " + myY +
                 ", Health: " + myHealth +
