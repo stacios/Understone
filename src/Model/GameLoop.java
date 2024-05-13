@@ -33,6 +33,10 @@ public class GameLoop implements Serializable {
         return myInstance;
     }
 
+    public Dwarf getMyPlayer() {
+        return myPlayer;
+    }
+
     public boolean update(final InputData theInput) {
 
         myDrawDataList.clear();

@@ -35,6 +35,18 @@ public abstract class Character implements Drawable, Collidable, Serializable {
         this.myForces = new ArrayList<>();
     }
 
+    public String getMyName() {
+        return myName;
+    }
+
+    public int getMyHealth() {
+        return myHealth;
+    }
+
+    public Weapon getMyWeapon() {
+        return myWeapon;
+    }
+
     public boolean colliding(Collidable other) {
         return Collidable.super.colliding(other);
     }
