@@ -2,14 +2,21 @@ package Model;
 
 import Controller.DrawData;
 import Controller.InputData;
+import Model.DB.DwarfDB;
+import Model.DB.GlyphidDB;
+import Model.DB.SQLiteConnection;
+import Model.Glyphid.Glyphid;
 import Model.Spaces.Cave;
 import Model.Spaces.Room;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import static Model.CharacterTypes.*;
+
 public class GameLoop implements Serializable {
     private static final long serialVersionUID = 8L;
+
     private static final GameLoop myInstance = new GameLoop();
 
     private Dwarf myPlayer;
@@ -27,6 +34,7 @@ public class GameLoop implements Serializable {
         //temp
         myActiveRoom = new Room(false, false);
         myPlayer = new Dwarf("Driller", 800, 800, 100, 100, 100, 5, null);
+        testCharacterFactoryAndDB();
     }
 
     public static GameLoop getInstance() {
@@ -92,12 +100,23 @@ public class GameLoop implements Serializable {
         return myDrawDataList.toArray(new DrawData[0]);
     }
 
-    @Override
-    public String toString() {
-        return "GameLoop{" +
-                "myPlayer=" + myPlayer +
-                ", myCave=" + myCave +
-                ", myActiveRoom=" + myActiveRoom +
-                '}';
+    /**
+     * Temporary method for testing and printing values from database.
+     */
+    public void testCharacterFactoryAndDB() {
+        // Initializes Database
+        SQLiteConnection.getDataSource();
+
+        // Initializes tables and data insertion for Dwarf and Glyphid.
+        DwarfDB.initializeDB();
+        GlyphidDB.initializeDB();
+
+        // Creates test Dwarf object
+        Dwarf testDwarf = CharacterFactory.createDwarf(DRILLER);
+        System.out.println(testDwarf.toString());
+
+        // Creates test Dwarf object
+        Glyphid testGlyphid = CharacterFactory.createGlyphid("testGlyphid");
+        System.out.println(testGlyphid.toString());
     }
 }

@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.CharacterFactory;
 import Model.DB.DwarfDB;
 import Model.DB.SQLiteConnection;
 import Model.GameLoop;
@@ -16,8 +17,6 @@ public class Main {
         Display display = Display.getInstance();
 
         boolean running = true;
-        SQLiteConnection.getDataSource();
-        DwarfDB.intitializeDwarfDB();
 
         while (running) {
 

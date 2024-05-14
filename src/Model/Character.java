@@ -79,11 +79,11 @@ public abstract class Character implements Drawable, Collidable, Serializable {
         }
     }
 
-    public double getX(){
+    public double getX() {
         return this.myX;
     }
 
-    public double getY(){
+    public double getY() {
         return this.myY;
     }
 
@@ -103,16 +103,14 @@ public abstract class Character implements Drawable, Collidable, Serializable {
 
     @Override
     public String toString() {
-        return
-                "myName='" + myName + '\'' +
-                ", myHealth=" + myHealth +
-                ", myMaxHealth=" + myMaxHealth +
-                ", myX=" + myX +
-                ", myY=" + myY +
-                ", myWidth=" + myWidth +
-                ", myHeight=" + myHeight +
-                ", myForces=" + myForces +
-                ", myMoveSpeed=" + myMoveSpeed +
-                ", myWeapon=" + myWeapon;
+        return "Printing " + myName + ": {" +
+                "X: " + myX +
+                ", Y: " + myY +
+                ", Health: " + myHealth +
+                ", MaxHealth: " + myMaxHealth +
+                ", MoveSpeed: " + myMoveSpeed +
+                ", Width: " + myWidth +
+                ", Height: " + myHeight +
+                '}';
     }
 }
