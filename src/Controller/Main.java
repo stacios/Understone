@@ -10,7 +10,6 @@ import java.sql.SQLException;
 
 public class Main {
 
-
     public static void main(String[] args) {
 
         GameLoop gameLoop = GameLoop.getInstance();
@@ -31,8 +30,6 @@ public class Main {
                 throw new RuntimeException(e);
             }
         }
-
-        display.dispose();
-
+        //display.dispose();
     }
 }

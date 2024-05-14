@@ -35,18 +35,6 @@ public abstract class Character implements Drawable, Collidable, Serializable {
         this.myForces = new ArrayList<>();
     }
 
-    public String getMyName() {
-        return myName;
-    }
-
-    public int getMyHealth() {
-        return myHealth;
-    }
-
-    public Weapon getMyWeapon() {
-        return myWeapon;
-    }
-
     public boolean colliding(Collidable other) {
         return Collidable.super.colliding(other);
     }
@@ -111,5 +99,20 @@ public abstract class Character implements Drawable, Collidable, Serializable {
     @Override
     public int[] getHitbox() {
         return new int[]{(int) myX, (int) myY, myWidth, myHeight};
+    }
+
+    @Override
+    public String toString() {
+        return
+                "myName='" + myName + '\'' +
+                ", myHealth=" + myHealth +
+                ", myMaxHealth=" + myMaxHealth +
+                ", myX=" + myX +
+                ", myY=" + myY +
+                ", myWidth=" + myWidth +
+                ", myHeight=" + myHeight +
+                ", myForces=" + myForces +
+                ", myMoveSpeed=" + myMoveSpeed +
+                ", myWeapon=" + myWeapon;
     }
 }

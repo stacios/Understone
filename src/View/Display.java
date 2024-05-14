@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -26,37 +27,24 @@ public class Display {
     private final ImageLibrary myImageLibrary;
     private final InputManager myInputManager;
     private final AudioPlayer myAudioPlayer;
-    private HUD myHud;
-    private JMenuBar myMenuBar;
-    private JMenu myGameMenu;
-    private JMenuItem myNewGameMenuItem;
-    private JMenuItem mySaveMenuItem;
-    private JMenuItem myResumeMenuItem;
-    private JMenuItem myQuitMenuItem;
-    private JMenu myHelpMenu;
-    private JMenuItem myAboutMenuItem;
-    private JMenuItem myRulesMenuItem;
-    private JMenuItem myShortcutsMenuItem;
+    private JDialog myMenuDialog;
 
     public Display() {
-        //myWidth = 1920;
-        //myHeight = 1080;
-        myWidth = 920;
-        myHeight = 600;
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        myWidth = (int) screenSize.getWidth();
+        myHeight = (int) screenSize.getHeight();
+        System.out.println(myWidth + " " + myHeight);
+
         myJFrame = new JFrame("Understone");
         myJFrame.setLocation(0,0);
         myJFrame.setUndecorated(true);
         myJFrame.setVisible(true);
         myJFrame.setFocusable(true);
-        myJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        myJFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         myJPanel = new JPanel();
         myJPanel.setPreferredSize(new Dimension(myWidth, myHeight));
         myJPanel.setLayout(null);
-        myHud = new HUD();
-        myHud.setBounds(0, myHeight - 100, 300, 100);
-        myJPanel.add(myHud);
-
 
         myJFrame.add(myJPanel);
         myJFrame.pack();
@@ -67,142 +55,75 @@ public class Display {
         myInputManager = new InputManager();
         myAudioPlayer = new AudioPlayer();
 
+        myInputManager.setEscapeKeyListener(new InputManager.EscapeKeyListener() {
+            @Override
+            public void onEscapePressed() {
+                showMenuDialog();
+            }
+        });
+
         myJFrame.addKeyListener(myInputManager);
         myJPanel.addMouseListener(myInputManager);
         myJPanel.addMouseMotionListener(myInputManager);
 
-        setMenu();
-        addListeners();
+        createMenuDialog();
     }
+    private void createMenuDialog() {
+        myMenuDialog = new JDialog(myJFrame, "Menu", true);
+        myMenuDialog.setSize(300, 200);
+        myMenuDialog.setLocationRelativeTo(myJFrame);
+        myMenuDialog.setLayout(new GridLayout(4, 1));
 
-    private void setMenu() {
-        // Create menu components and set mnemonics and accelerators.
-        myMenuBar = new JMenuBar();
-        myGameMenu = new JMenu("Game");
-        myNewGameMenuItem = new JMenuItem("New Game");
-        mySaveMenuItem = new JMenuItem("Save");
-        myResumeMenuItem = new JMenuItem("Resume");
-        myQuitMenuItem = new JMenuItem("Exit");
-        myHelpMenu = new JMenu("Help");
-        myAboutMenuItem = new JMenuItem("About");
-        myRulesMenuItem = new JMenuItem("Rules");
-        myShortcutsMenuItem = new JMenuItem("Shortcuts");
+        JButton newGameButton = new JButton("New Game");
+        JButton saveButton = new JButton("Save");
+        JButton resumeButton = new JButton("Resume");
+        JButton quitButton = new JButton("Quit");
 
-
-        setMenuMnemonicsAndAccelerators();
-
-        // Add menu items to the menu.
-        myGameMenu.add(myNewGameMenuItem);
-        myGameMenu.add(mySaveMenuItem);
-        myGameMenu.add(myResumeMenuItem);
-        myGameMenu.addSeparator();
-        myGameMenu.add(myQuitMenuItem);
-        myHelpMenu.add(myAboutMenuItem);
-        myHelpMenu.add(myRulesMenuItem);
-        myHelpMenu.add(myShortcutsMenuItem);
-
-        // Add menus to the menu bar.
-        myMenuBar.add(myGameMenu);
-        myMenuBar.add(myHelpMenu);
-    }
-
-    private void setMenuMnemonicsAndAccelerators() {
-        //mnemonics
-        myGameMenu.setMnemonic(KeyEvent.VK_G);
-        myHelpMenu.setMnemonic(KeyEvent.VK_H);
-        //accelerators for menu items
-        myNewGameMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
-                ActionEvent.CTRL_MASK));
-        mySaveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
-                ActionEvent.CTRL_MASK));
-        myResumeMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,
-                ActionEvent.CTRL_MASK));
-        myQuitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
-                ActionEvent.CTRL_MASK));
-        myAboutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,
-                ActionEvent.CTRL_MASK));
-        myRulesMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L,
-                ActionEvent.CTRL_MASK));
-        myShortcutsMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,
-                ActionEvent.CTRL_MASK));
-    }
-
-    private void addListeners() {
-        myNewGameMenuItem.addActionListener(new ActionListener() {
+        newGameButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(final ActionEvent theE) {
-                JOptionPane.showMessageDialog(null,
-                        "NEW GAME!");
-
+            public void actionPerformed(ActionEvent e) {
+                myMenuDialog.setVisible(false);
+                JOptionPane.showMessageDialog(null, "NEW GAME!");
             }
         });
-        mySaveMenuItem.addActionListener(new ActionListener() {
+
+        saveButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(final ActionEvent theE) {
-                JOptionPane.showMessageDialog(null,
-                        "SAVED!");
+            public void actionPerformed(ActionEvent e) {
+                myMenuDialog.setVisible(false);
+                JOptionPane.showMessageDialog(null, "SAVED!");
                 DataManager.saveGame(GameLoop.getInstance());
             }
         });
-        myResumeMenuItem.addActionListener(new ActionListener() {
+
+        resumeButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(final ActionEvent theE) {
-                JOptionPane.showMessageDialog(null,
-                        "CONTINUE!");
-                DataManager.loadGame();
+            public void actionPerformed(ActionEvent e) {
+                myMenuDialog.setVisible(false);
+                JOptionPane.showMessageDialog(null, "RESUME!");
+                System.out.println("Loaded Game: " + DataManager.loadGame());
+                GameLoop.getInstance().setDataLoading(DataManager.loadGame());
             }
         });
-        myQuitMenuItem.addActionListener(new ActionListener() {
+
+        quitButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(final ActionEvent theE) {
-                final int choice = JOptionPane.showConfirmDialog(null,
-                        "Are you sure you want to exit?",
-                        "Exit", JOptionPane.YES_NO_OPTION);
+            public void actionPerformed(ActionEvent e) {
+                final int choice = JOptionPane.showConfirmDialog(null, "QUIT!", "QUIT", JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
                     dispose();
                 }
+                myMenuDialog.setVisible(false);
             }
         });
 
-        myAboutMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent theE) {
-                JOptionPane.showMessageDialog(myMenuBar,
-                        "Author: Ares, Owen, Staci \nVersion: 1.0\nJava Version: "
-                                + System.getProperty("java.version")
-                                + "\nEnjoy the game!", "About",
-                        JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
-
-        myRulesMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent theE) {
-                final String gameRules = "Rules:\n"
-                        + "JUST WIN!\n";
-
-                JOptionPane.showMessageDialog(null, gameRules,
-                        "Rules", JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
-
-        myShortcutsMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent theE) {
-                final String shortcutList = "List of Shortcuts:\n"
-                        + "Game Menu: Alt + G\n"
-                        + "Help Menu: Alt + H\n"
-                        + "New Game: Ctrl + N\n"
-                        + "Save Game: Ctrl + S\n"
-                        + "Resume Session: Ctrl + R\n"
-                        + "Quit: Ctrl + E\n"
-                        + "About: Ctrl + A\n"
-                        + "Rules: Ctrl + L\n"
-                        + "Shortcuts: Ctrl + T\n";
-                JOptionPane.showMessageDialog(null, shortcutList,
-                        "Shortcuts", JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
+        myMenuDialog.add(newGameButton);
+        myMenuDialog.add(saveButton);
+        myMenuDialog.add(resumeButton);
+        myMenuDialog.add(quitButton);
+    }
+    public void showMenuDialog() {
+        myMenuDialog.setVisible(true);
     }
 
     public static Display getInstance() {
@@ -255,7 +176,6 @@ public class Display {
             }
         }
     }
-
     public InputData getInputData() {
         return myInputManager.getInputData();
     }

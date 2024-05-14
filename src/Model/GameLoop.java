@@ -17,9 +17,9 @@ public class GameLoop implements Serializable {
 
     private Room myActiveRoom;
 
-    private ArrayList<DrawData> myDrawDataList;
-    private DrawData temp = new DrawData("test", null, 100, 100, 100, 100);
-    private double temp2 = 0;
+    private transient ArrayList<DrawData> myDrawDataList;
+    private transient DrawData temp = new DrawData("test", null, 100, 100, 100, 100);
+    private transient double temp2 = 0;
 
     private GameLoop() {
         myDrawDataList = new ArrayList<>();
@@ -35,6 +35,20 @@ public class GameLoop implements Serializable {
 
     public Dwarf getMyPlayer() {
         return myPlayer;
+    }
+
+    public Cave getMyCave() {
+        return myCave;
+    }
+
+    public Room getMyActiveRoom() {
+        return myActiveRoom;
+    }
+
+    public void setDataLoading(GameLoop theSavedGame){
+        myPlayer = theSavedGame.getMyPlayer();
+        myCave = theSavedGame.getMyCave();
+        myActiveRoom = theSavedGame.getMyActiveRoom();
     }
 
     public boolean update(final InputData theInput) {
@@ -67,13 +81,23 @@ public class GameLoop implements Serializable {
 
         //System.out.println(myPlayer.getDrawData());
 
-
         myDrawDataList.add(new DrawData("Driller", null, 100, 100, 100, 100));
 
+
+       // myDrawDataList.add(new HUD());
         return !theInput.getEscape();
     }
 
     public DrawData[] getDrawData() {
         return myDrawDataList.toArray(new DrawData[0]);
+    }
+
+    @Override
+    public String toString() {
+        return "GameLoop{" +
+                "myPlayer=" + myPlayer +
+                ", myCave=" + myCave +
+                ", myActiveRoom=" + myActiveRoom +
+                '}';
     }
 }

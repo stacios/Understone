@@ -12,7 +12,6 @@ public class Weapon implements Serializable {
     protected int myCooldown;
     protected int myMaxCooldown;
 
-    // Constructor to initialize the Weapon object
     public Weapon(Attack theAttack, int theCooldown, int theMaxCooldown) {
         this.myAttack = theAttack;
         this.myCooldown = theCooldown;
@@ -46,5 +45,13 @@ public class Weapon implements Serializable {
         if (myCooldown > 0) {
             myCooldown--; // Reduce the cooldown by 1 each update call until it reaches 0
         }
+    }
+    @Override
+    public String toString() {
+        return "Weapon{" +
+                "myAttack=" + myAttack +
+                ", myCooldown=" + myCooldown +
+                ", myMaxCooldown=" + myMaxCooldown +
+                '}';
     }
 }

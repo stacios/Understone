@@ -1,5 +1,6 @@
 package Controller;
 
+import java.io.Serializable;
 import java.util.BitSet;
 
 public class InputData {
@@ -15,15 +16,12 @@ public class InputData {
         myKeys = (BitSet) theKeys.clone();
 
     }
-
     public boolean getM1() {
         return myKeys.get(0);
     }
-
     public boolean getM2() {
         return myKeys.get(1);
     }
-
     public boolean getUp() {
         return myKeys.get(2);
     }
@@ -57,11 +55,9 @@ public class InputData {
     public boolean getEscape() {
         return myKeys.get(12);
     }
-
     public int getMouseX() {
         return myMouseX;
     }
-
     public int getMouseY() {
         return myMouseY;
     }

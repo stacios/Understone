@@ -32,8 +32,6 @@ public class Cave implements Serializable {
         }
     }
 
-    /*private Dwarf getCharacter() {
-        // Placeholder for actual player retrieval logic
-        return new Dwarf();
-    }*/
+    @Override public String toString() { StringBuilder sb = new StringBuilder(); for (Room[] row : myRooms) { for (Room room : row) { sb.append(room.toString()); } } return sb.toString(); }
+
 }
