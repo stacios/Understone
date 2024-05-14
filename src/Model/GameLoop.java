@@ -9,11 +9,13 @@ import Model.Glyphid.Glyphid;
 import Model.Spaces.Cave;
 import Model.Spaces.Room;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import static Model.CharacterTypes.*;
 
-public class GameLoop {
+public class GameLoop implements Serializable {
+    private static final long serialVersionUID = 8L;
 
     private static final GameLoop myInstance = new GameLoop();
 
@@ -22,9 +24,9 @@ public class GameLoop {
 
     private Room myActiveRoom;
 
-    private ArrayList<DrawData> myDrawDataList;
-    private DrawData temp = new DrawData("test", null, 100, 100, 100, 100);
-    private double temp2 = 0;
+    private transient ArrayList<DrawData> myDrawDataList;
+    private transient DrawData temp = new DrawData("test", null, 100, 100, 100, 100);
+    private transient double temp2 = 0;
 
     private GameLoop() {
         myDrawDataList = new ArrayList<>();
@@ -37,6 +39,24 @@ public class GameLoop {
 
     public static GameLoop getInstance() {
         return myInstance;
+    }
+
+    public Dwarf getMyPlayer() {
+        return myPlayer;
+    }
+
+    public Cave getMyCave() {
+        return myCave;
+    }
+
+    public Room getMyActiveRoom() {
+        return myActiveRoom;
+    }
+
+    public void setDataLoading(GameLoop theSavedGame){
+        myPlayer = theSavedGame.getMyPlayer();
+        myCave = theSavedGame.getMyCave();
+        myActiveRoom = theSavedGame.getMyActiveRoom();
     }
 
     public boolean update(final InputData theInput) {
@@ -69,9 +89,10 @@ public class GameLoop {
 
         //System.out.println(myPlayer.getDrawData());
 
-
         myDrawDataList.add(new DrawData("Driller", null, 100, 100, 100, 100));
 
+
+       // myDrawDataList.add(new HUD());
         return !theInput.getEscape();
     }
 

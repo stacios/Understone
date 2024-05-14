@@ -1,6 +1,9 @@
 package Model;
 
-public class Angle {
+import java.io.Serializable;
+
+public class Angle implements Serializable {
+    private static final long serialVersionUID = 5L;
     private double myRadians;
 
     public Angle(double theRadians) {
