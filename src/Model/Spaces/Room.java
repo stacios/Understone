@@ -44,7 +44,7 @@ public class Room implements Drawable {
     }
 
     @Override
-    public DrawData getDrawData() {
-        return new DrawData("Room", null, 1920/2, 1080/2, 1920, 1080);
+    public String[] getDrawData() {
+        return new String[]{"image:Room:" + 1920/2 + ":" + 1080/2 + ":1920:1080"};
     }
 }

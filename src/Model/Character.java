@@ -90,8 +90,8 @@ public abstract class Character implements Drawable, Collidable {
     }
 
     @Override
-    public DrawData getDrawData() {
-        return new DrawData(myName, null, myX, myY, myWidth, myHeight);
+    public String[] getDrawData() {
+        return new String[]{"image:" + myName + ":" + myX + ":" + myY + ":" + myWidth + ":" + myHeight};
     }
 
     @Override

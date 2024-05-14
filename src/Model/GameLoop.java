@@ -1,13 +1,16 @@
 package Model;
 
 import Controller.DrawData;
+import Controller.Drawable;
 import Controller.InputData;
 import Model.Spaces.Cave;
 import Model.Spaces.Room;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
-public class GameLoop {
+public class GameLoop implements Drawable {
 
     private static final GameLoop myInstance = new GameLoop();
 
@@ -16,7 +19,7 @@ public class GameLoop {
 
     private Room myActiveRoom;
 
-    private ArrayList<DrawData> myDrawDataList;
+    private ArrayList<String> myDrawDataList;
     private DrawData temp = new DrawData("test", null, 100, 100, 100, 100);
     private double temp2 = 0;
 
@@ -36,39 +39,24 @@ public class GameLoop {
 
         myDrawDataList.clear();
 
-        /*
-        if (theInput.getUp() || theInput.getM1()) {
-            if (temp.getWidth() != 100) {
-                temp = new DrawData("test", null, 600, 600, 1500, 800);
-            }
-            else {
-                temp = new DrawData("test", new String[]{"boing"}, 600, 600, 1500, 800);
-            }
-
-        }
-        else {
-            temp = new DrawData("test", null, theInput.getMouseX(), theInput.getMouseY(), 100, 100, temp2);
-        }
-
-        temp2 = (temp2 + .1) % (2 * Math.PI);
-
-         */
-
 
         myPlayer.setInputData(theInput);
         myPlayer.update();
-        myDrawDataList.add(myActiveRoom.getDrawData());
-        myDrawDataList.add(myPlayer.getDrawData());
+        myDrawDataList.addAll(Arrays.asList(myActiveRoom.getDrawData()));
+        myDrawDataList.addAll(Arrays.asList(myPlayer.getDrawData()));
+
 
         //System.out.println(myPlayer.getDrawData());
 
 
-        myDrawDataList.add(new DrawData("Driller", null, 100, 100, 100, 100));
+
+        myDrawDataList.add("text:hello:100:100:40");
 
         return !theInput.getEscape();
     }
 
-    public DrawData[] getDrawData() {
-        return myDrawDataList.toArray(new DrawData[0]);
+    public String[] getDrawData() {
+        return myDrawDataList.toArray(new String[0]);
     }
+
 }
