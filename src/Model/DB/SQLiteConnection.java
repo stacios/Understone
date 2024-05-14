@@ -2,24 +2,38 @@ package Model.DB;
 
 import org.sqlite.SQLiteDataSource;
 
+/**
+ * Singleton class for managing connections to SQLite database.
+ * Ensures that only one SQLiteDataSource is created and utilized.
+ */
 public class SQLiteConnection {
 
-    private static SQLiteDataSource myDataSource = null;
+    /**
+     * Singleton instance of SQLiteDataSource.
+     */
+    private static SQLiteDataSource myDataSourceInstance = null;
 
+    /**
+     * Gets single instance of SQLITEDataSource.
+     * Initializes database(UD.db) if it has not been created yet, and accesses
+     * through one static instance.
+     *
+     * @return SQLiteDataSource instance.
+     * @throws RuntimeException if data setup fails.
+     */
     public static SQLiteDataSource getDataSource() {
 
-        if (myDataSource == null) {
+        if (myDataSourceInstance == null) {
             try {
-                myDataSource = new SQLiteDataSource();
-                myDataSource.setUrl("jdbc:sqlite:UDB.db");
-                System.out.println("Successfully set up data source.");
+                myDataSourceInstance = new SQLiteDataSource();
+                myDataSourceInstance.setUrl("jdbc:sqlite:UDB.db");
+                System.out.println("Successfully set up SQLite Data Source.");
             } catch (Exception e) {
-                System.err.println("Failed to set up the data source.");
                 e.printStackTrace();
-                System.exit(0);
+                throw new RuntimeException("Failed to set up the data source instance.");
             }
         }
 
-        return myDataSource;
+        return myDataSourceInstance;
     }
 }

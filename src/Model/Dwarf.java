@@ -80,8 +80,15 @@ public class Dwarf extends Character {
         if (angle != null) {
             addForce(new Force(angle, getMoveSpeed(), .4));
         }
-
     }
 
-
+    /**
+     * Todo Dwarf toString.
+     *
+     * @return String representation of Dwarf.
+     */
+    @Override
+    public String toString() {
+        return super.toString() + " " + myWeapons;
+    }
 }

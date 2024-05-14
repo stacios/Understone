@@ -1,33 +1,67 @@
 package Model;
 
+import Model.DB.DwarfDB;
+import Model.DB.GlyphidDB;
 import Model.Glyphid.Glyphid;
 import Model.Glyphid.Grunt;
 import Model.Weapon.Weapon;
 
+import static Model.CharacterTypes.*;
+
 public class CharacterFactory {
 
-    public static Dwarf createDwarf(String theName) {
+    /**
+     * Creates Dwarf based on specified Dwarf Type.
+     *
+     * @param theDwarfType is the Dwarf to be created.
+     * @return new Dwarf.
+     */
+    public static Dwarf createDwarf(String theDwarfType) {
+        if (!DRILLER.equals(theDwarfType) && !ENGINEER.equals(theDwarfType) &&
+                !SCOUT.equals(theDwarfType) && !GUNNER.equals(theDwarfType)) {
+            throw new Error("Passed dwarf type must be of defined dwarf type(Driller, Engineer, Gunner, Scout)");
+        }
+
         double x = 0; // Default X
         double y = 0; // Default Y
-        int health = 100; // Default health
-        int width = 1; // Default width
-        int height = 1; // Default height
-        double moveSpeed = 2.0; // Default speed
-        Weapon defaultWeapon = new Weapon(new Attack("Basic Attack", 10, x, y, width, height, new Force(new Angle(0), 1.0), new Angle(0)), 0, 10);
-        return new Dwarf(theName, x, y, health, width, height, moveSpeed, defaultWeapon);
+
+        // Getting values from DwarfDB
+        int health = DwarfDB.getDefaultValue(theDwarfType, "health"); // Default health
+        int width = DwarfDB.getDefaultValue(theDwarfType, "width"); // Default width
+        int height = DwarfDB.getDefaultValue(theDwarfType, "height"); // Default height
+        double moveSpeed = DwarfDB.getDefaultValue(theDwarfType, "movespeed"); // Default speed
+        int damage = DwarfDB.getDefaultValue(theDwarfType, "damage");
+        Weapon defaultWeapon = new Weapon(new Attack("Basic Attack", damage, x, y, width, height, new Force(new Angle(0), 1.0), new Angle(0)), 0, 10);
+        return new Dwarf(theDwarfType, x, y, health, width, height, moveSpeed, defaultWeapon);
     }
 
+    /**
+     * Creates Glyphid based on specified Glyphid Type.
+     *
+     * @param theGlyphidType is the Glyphid to be created.
+     * @return new Glyphid.
+     */
+    public static Glyphid createGlyphid(String theGlyphidType) {
+        if (!ACID_SPIITER.equals(theGlyphidType) && !GLYPHID.equals(theGlyphidType) &&
+                !GRUNT.equals(theGlyphidType) && !MACTERA.equals(theGlyphidType) &&
+                !PRAETORIAN.equals(theGlyphidType) && !ROCK.equals(theGlyphidType) &&
+                !SWARMER.equals(theGlyphidType)) {
+            throw new Error("Passed glyphid type must be of defined glyphid type: " +
+                    "(Acid Spitter, Glyphid, Grunt, Mactera, Praetorian, Rock, Swarmer)");
+        }
 
-    public static Glyphid createGlyphid(String theName) {
         double x = 5; // Default X
         double y = 5; // Default Y
-        int health = 50; // Default health
-        int width = 1; // Default width
-        int height = 1; // Default height
-        double moveSpeed = 1.5; // Default speed
-        Weapon defaultWeapon = new Weapon(new Attack("Acid Spit", 5, x, y, width, height, new Force(new Angle(0), 1.0), new Angle(0)), 2, 20);
-        int fireTimer = 5; // Default cooldown timer
-        return new Grunt(theName, x, y, health, width, height, moveSpeed, defaultWeapon, fireTimer);
+
+        // Getting values from GlyphidDB
+        int health = GlyphidDB.getDefaultValue(theGlyphidType, "health"); // Default health
+        int width = GlyphidDB.getDefaultValue(theGlyphidType, "width"); // Default width
+        int height = GlyphidDB.getDefaultValue(theGlyphidType, "height"); // Default height
+        double moveSpeed = GlyphidDB.getDefaultValue(theGlyphidType, "movespeed"); // Default speed
+        int fireTimer = GlyphidDB.getDefaultValue(theGlyphidType, "firetimer"); // Default cooldown timer
+        int damage = GlyphidDB.getDefaultValue(theGlyphidType, "damage"); // Default damage
+        Weapon defaultWeapon = new Weapon(new Attack("Acid Spit", damage, x, y, width, height, new Force(new Angle(0), 1.0), new Angle(0)), 2, 20);
+        return new Grunt(theGlyphidType, x, y, health, width, height, moveSpeed, defaultWeapon, fireTimer);
     }
 }
 
