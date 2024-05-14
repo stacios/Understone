@@ -23,5 +23,10 @@ public abstract class Glyphid extends Character {
             myFireTimer--;
         }
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " firetimer: " + myFireTimer;
+    }
 }
 

@@ -77,11 +77,11 @@ public abstract class Character implements Drawable, Collidable {
         }
     }
 
-    public double getX(){
+    public double getX() {
         return this.myX;
     }
 
-    public double getY(){
+    public double getY() {
         return this.myY;
     }
 
@@ -97,5 +97,18 @@ public abstract class Character implements Drawable, Collidable {
     @Override
     public int[] getHitbox() {
         return new int[]{(int) myX, (int) myY, myWidth, myHeight};
+    }
+
+    @Override
+    public String toString() {
+        return "Printing " + myName + ": {" +
+                "X: " + myX +
+                ", Y: " + myY +
+                ", Health: " + myHealth +
+                ", MaxHealth: " + myMaxHealth +
+                ", MoveSpeed: " + myMoveSpeed +
+                ", Width: " + myWidth +
+                ", Height: " + myHeight +
+                '}';
     }
 }

@@ -2,10 +2,16 @@ package Model;
 
 import Controller.DrawData;
 import Controller.InputData;
+import Model.DB.DwarfDB;
+import Model.DB.GlyphidDB;
+import Model.DB.SQLiteConnection;
+import Model.Glyphid.Glyphid;
 import Model.Spaces.Cave;
 import Model.Spaces.Room;
 
 import java.util.ArrayList;
+
+import static Model.CharacterTypes.*;
 
 public class GameLoop {
 
@@ -26,6 +32,7 @@ public class GameLoop {
         //temp
         myActiveRoom = new Room(false, false);
         myPlayer = new Dwarf("Driller", 800, 800, 100, 100, 100, 5, null);
+        testCharacterFactoryAndDB();
     }
 
     public static GameLoop getInstance() {
@@ -70,5 +77,25 @@ public class GameLoop {
 
     public DrawData[] getDrawData() {
         return myDrawDataList.toArray(new DrawData[0]);
+    }
+
+    /**
+     * Temporary method for testing and printing values from database.
+     */
+    public void testCharacterFactoryAndDB() {
+        // Initializes Database
+        SQLiteConnection.getDataSource();
+
+        // Initializes tables and data insertion for Dwarf and Glyphid.
+        DwarfDB.initializeDB();
+        GlyphidDB.initializeDB();
+
+        // Creates test Dwarf object
+        Dwarf testDwarf = CharacterFactory.createDwarf(DRILLER);
+        System.out.println(testDwarf.toString());
+
+        // Creates test Dwarf object
+        Glyphid testGlyphid = CharacterFactory.createGlyphid("testGlyphid");
+        System.out.println(testGlyphid.toString());
     }
 }
