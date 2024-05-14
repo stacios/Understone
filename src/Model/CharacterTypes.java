@@ -1,7 +1,8 @@
 package Model;
 
 /**
- * Static class DwarfTypes defining String Representations of Dwarf Types.
+ * Static class CharacterTypes defining String Representations of Character Types.
+ * Includes types of Dwarf and Glyphid.
  */
 public class CharacterTypes {
     public static String DRILLER = "Driller";

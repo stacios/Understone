@@ -70,6 +70,9 @@ public class DwarfDB {
         makeSQLConnection(sql, ENGINEER);
     }
 
+    /**
+     * Inserts default values for Gunner.
+     */
     public static void insertGunnerDefaults() {
         String sql = "INSERT OR REPLACE INTO GunnerDefaults (setting, value) VALUES " +
                 "('health', 110), " +
@@ -82,6 +85,9 @@ public class DwarfDB {
         makeSQLConnection(sql, GUNNER);
     }
 
+    /**
+     * Inserts default values for Scout.
+     */
     public static void insertScoutDefaults() {
         String sql = "INSERT OR REPLACE INTO ScoutDefaults (setting, value) VALUES " +
                 "('health', 100), " +
@@ -94,6 +100,12 @@ public class DwarfDB {
         makeSQLConnection(sql, SCOUT);
     }
 
+    /**
+     * Makes SQL Connection and executes SQl statement to Database.
+     *
+     * @param theSQL is the passed SQL statement.
+     * @param theDwarfType is the specified Dwarf type to be inserted.
+     */
     private static void makeSQLConnection(String theSQL, String theDwarfType) {
         try (Connection conn = SQLiteConnection.getDataSource().getConnection();
              Statement stmt = conn.createStatement()) {
@@ -104,25 +116,34 @@ public class DwarfDB {
         }
     }
 
-    public static int getDefaultValue(String dwarfType, String setting) {
+    /**
+     * Gets default value from specified Dwarf Type from specified setting in the table.
+     *
+     * @param theDwarfType is the specified Dwarf Type.
+     * @param theSetting is the value from the table.
+     * @return value of selected column.
+     */
+    public static int getDefaultValue(String theDwarfType, String theSetting) {
         String query = String.format(
-                "SELECT value FROM %sDefaults WHERE setting = ?", dwarfType);
+                "SELECT value FROM %sDefaults WHERE setting = ?", theDwarfType);
 
         try (Connection conn = SQLiteConnection.getDataSource().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(1, setting);
+            pstmt.setString(1, theSetting);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
+                // TODO return value as double since we're using double values, then possibly cast to int in CharacterFactory
                 int value = rs.getInt("value");
                 //System.out.println(value);
                 return rs.getInt("value");
             }
         } catch (SQLException e) {
-            System.err.println("Error getting value for column " + setting + " in " + dwarfType + "Defaults: " + e.getMessage());
+            System.err.println("Error getting value for column " +
+                    theSetting + " in " + theDwarfType + "Defaults: " + e.getMessage());
         }
 
         System.err.println("Warning! Default value not found for "
-                + setting + " in " + dwarfType + "Defaults. Returning default value of 0.");
+                + theSetting + " in " + theDwarfType + "Defaults. Returning default value of 0.");
         return 0;
     }
 }

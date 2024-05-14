@@ -27,7 +27,7 @@ public class DBMain {
         System.out.println(testEngineer.toString());
 
         // Creates test Dwarf object
-        Glyphid testGlyphid = CharacterFactory.createGlyphid(GRUNT);
+        Glyphid testGlyphid = CharacterFactory.createGlyphid(PRAETORIAN);
         System.out.println(testGlyphid.toString());
     }
 }

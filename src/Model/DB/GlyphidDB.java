@@ -95,7 +95,7 @@ public class GlyphidDB {
     }
 
     /**
-     * Inserts default value for
+     * Inserts default values for Mactera.
      */
     public static void insertMacteraDefaults() {
         String sql = "INSERT OR REPLACE INTO MacteraDefaults (setting, value) VALUES " +
@@ -110,6 +110,9 @@ public class GlyphidDB {
         makeSQLConnection(sql, MACTERA);
     }
 
+    /**
+     * Inserts default values for Praetorian.
+     */
     public static void insertPraetorianDefaults() {
         String sql = "INSERT OR REPLACE INTO PraetorianDefaults (setting, value) VALUES " +
                 "('health', 150), " +
@@ -123,6 +126,9 @@ public class GlyphidDB {
         makeSQLConnection(sql, PRAETORIAN);
     }
 
+    /**
+     * Inserts default values for Rock.
+     */
     public static void insertRockDefaults() {
         String sql = "INSERT OR REPLACE INTO RockDefaults (setting, value) VALUES " +
                 "('health', 200), " +
@@ -136,6 +142,9 @@ public class GlyphidDB {
         makeSQLConnection(sql, ROCK);
     }
 
+    /**
+     * Inserts default values for Swarmer.
+     */
     public static void insertSwarmerDefaults() {
         String sql = "INSERT OR REPLACE INTO SwarmerDefaults (setting, value) VALUES " +
                 "('health', 50), " +
@@ -149,6 +158,12 @@ public class GlyphidDB {
         makeSQLConnection(sql, SWARMER);
     }
 
+    /**
+     * Makes SQL Connection and executes SQl statement to Database.
+     *
+     * @param theSQL is the passed SQL statement.
+     * @param theGlyphidType is the specified Glyphid type to be inserted.
+     */
     private static void makeSQLConnection(String theSQL, String theGlyphidType) {
         try (Connection conn = SQLiteConnection.getDataSource().getConnection();
              Statement stmt = conn.createStatement()) {
@@ -159,25 +174,34 @@ public class GlyphidDB {
         }
     }
 
-    public static int getDefaultValue(String glyphidType, String setting) {
+    /**
+     * Gets default value from specified Glyphid Type from specified setting in the table.
+     *
+     * @param theGlyphidType is the specified Glyphid Type.
+     * @param theSetting is the value from the table.
+     * @return value of selected column.
+     */
+    public static int getDefaultValue(String theGlyphidType, String theSetting) {
         String query = String.format(
-                "SELECT value FROM %sDefaults WHERE setting = ?", glyphidType);
+                "SELECT value FROM %sDefaults WHERE setting = ?", theGlyphidType);
 
         try (Connection conn = SQLiteConnection.getDataSource().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(1, setting);
+            pstmt.setString(1, theSetting);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
+                // TODO return value as double since we're using double values, then possibly cast to int in CharacterFactory
                 int value = rs.getInt("value");
-                //System.out.println(value);
+                //System.out.println("Retrieved value for " + setting + " in " + glyphidType + ": " + test);
                 return rs.getInt("value");
             }
         } catch (SQLException e) {
-            System.err.println("Error getting value for column " + setting + " in " + glyphidType + "Defaults: " + e.getMessage());
+            System.err.println("Error getting value for column " +
+                    theSetting + " in " + theGlyphidType + "Defaults: " + e.getMessage());
         }
 
         System.err.println("Warning! Default value not found for column: "
-                + setting + " in " + glyphidType + "Defaults. Returning default value of 0.");
+                + theSetting + " in " + theGlyphidType + "Defaults. Returning default value of 0.");
         return 0;
     }
 }
