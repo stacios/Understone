@@ -10,6 +10,12 @@ import static Model.CharacterTypes.*;
 
 public class CharacterFactory {
 
+    /**
+     * Creates Dwarf based on specified Dwarf Type.
+     *
+     * @param theDwarfType is the Dwarf to be created.
+     * @return new Dwarf
+     */
     public static Dwarf createDwarf(String theDwarfType) {
         if (!DRILLER.equals(theDwarfType) && !ENGINEER.equals(theDwarfType) &&
                 !SCOUT.equals(theDwarfType) && !GUNNER.equals(theDwarfType)) {
@@ -29,7 +35,12 @@ public class CharacterFactory {
         return new Dwarf(theDwarfType, x, y, health, width, height, moveSpeed, defaultWeapon);
     }
 
-
+    /**
+     * Creates Glyphid based on specified Glyphid Type.
+     *
+     * @param theGlyphidType is the Glyphid to be created.
+     * @return new Glyphid
+     */
     public static Glyphid createGlyphid(String theGlyphidType) {
         if (!ACID_SPIITER.equals(theGlyphidType) && !GLYPHID.equals(theGlyphidType) &&
                 !GRUNT.equals(theGlyphidType) && !MACTERA.equals(theGlyphidType) &&
