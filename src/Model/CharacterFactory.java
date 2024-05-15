@@ -62,6 +62,7 @@ public class CharacterFactory {
         int damage = GlyphidDB.getDefaultValue(theGlyphidType, "damage"); // Default damage
         Weapon defaultWeapon = new Weapon(new Attack("Acid Spit", damage, x, y, width, height, new Force(new Angle(0), 1.0), new Angle(0)), 2, 20);
         return new Grunt(theGlyphidType, x, y, health, width, height, moveSpeed, defaultWeapon, fireTimer);
+        //return null;
     }
 }
 
