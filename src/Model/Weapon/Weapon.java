@@ -1,34 +1,33 @@
 package Model.Weapon;
 
 import Model.Angle;
-import Model.Attack;
 import Model.Character;
+import Model.GameLoop;
 
 public class Weapon {
-    private Attack myAttack;
-    protected int myCooldown;
-    protected int myMaxCooldown;
+    private final Attack myAttack;
+    private int myCooldown;
+    private final int myMaxCooldown;
+
 
     // Constructor to initialize the Weapon object
-    public Weapon(Attack theAttack, int theCooldown, int theMaxCooldown) {
+    public Weapon(int theMaxCooldown, Attack theAttack) {
         this.myAttack = theAttack;
-        this.myCooldown = theCooldown;
+        this.myCooldown = 0;
         this.myMaxCooldown = theMaxCooldown;
     }
 
     public boolean attemptAttack(Character origin, Angle angle) {
         // Check if the weapon is off cooldown
+        //System.out.println(myCooldown);
         if (myCooldown == 0) {
 
-            double attackRange = 10; //default attack range
-            double attackX = origin.getX() + Math.cos(angle.getRadians()) * attackRange;
-            double attackY = origin.getY() + Math.sin(angle.getRadians()) * attackRange;
+            Attack attack = myAttack.clone();
+            attack.setPosition(origin.getX(), origin.getY(), angle);
 
-            myAttack.setPosition(attackX, attackY);
+            GameLoop.getInstance().getActiveRoom().addAttack(attack);
 
-            myAttack.setAngle(angle);
-
-            System.out.println("Attack performed at position: (" + attackX + ", " + attackY + ") with angle " + angle.getDegrees());
+            //System.out.println("Attack performed at position: (" + attackX + ", " + attackY + ") with angle " + angle.getDegrees());
 
             // Reset the cooldown
             myCooldown = myMaxCooldown;

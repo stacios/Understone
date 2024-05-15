@@ -9,6 +9,7 @@ import Model.DB.SQLiteConnection;
 import Model.Glyphid.Glyphid;
 import Model.Spaces.Cave;
 import Model.Spaces.Room;
+import Model.Weapon.Attack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,15 +25,12 @@ public class GameLoop implements Drawable {
     private Room myActiveRoom;
 
     private ArrayList<String> myDrawDataList;
-    private DrawData temp = new DrawData("test", null, 100, 100, 100, 100);
-    private double temp2 = 0;
 
     private GameLoop() {
         myDrawDataList = new ArrayList<>();
 
-        //temp
         myActiveRoom = new Room(false, false);
-        myPlayer = new Dwarf("Driller", 800, 800, 100, 100, 100, 5, null);
+        myPlayer = CharacterFactory.createDwarf("Driller");
         testCharacterFactoryAndDB();
     }
 
@@ -46,18 +44,17 @@ public class GameLoop implements Drawable {
 
 
         myPlayer.setInputData(theInput);
-        myPlayer.update();
+
+        myActiveRoom.update();
         myDrawDataList.addAll(Arrays.asList(myActiveRoom.getDrawData()));
-        myDrawDataList.addAll(Arrays.asList(myPlayer.getDrawData()));
-
-
-        //System.out.println(myPlayer.getDrawData());
-
-
 
         myDrawDataList.add("text:hello:100:100:40");
 
         return !theInput.getEscape();
+    }
+
+    public Dwarf getPlayer() {
+        return myPlayer;
     }
 
     public String[] getDrawData() {
@@ -80,7 +77,11 @@ public class GameLoop implements Drawable {
         System.out.println(testDwarf.toString());
 
         // Creates test Dwarf object
-        Glyphid testGlyphid = CharacterFactory.createGlyphid("testGlyphid");
-        System.out.println(testGlyphid.toString());
+        //Glyphid testGlyphid = CharacterFactory.createGlyphid("testGlyphid");
+        //System.out.println(testGlyphid.toString());
+    }
+
+    public Room getActiveRoom() {
+        return myActiveRoom;
     }
 }

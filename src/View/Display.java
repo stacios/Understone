@@ -119,7 +119,7 @@ public class Display {
 
                 AffineTransform backup = theGraphics.getTransform();
                 theGraphics.rotate(angle, x, y);
-                theGraphics.drawImage(myImageLibrary.get(theData[0]),
+                theGraphics.drawImage(myImageLibrary.get(theData[1]),
                         x - width/2, y - height/2,
                         width, height, null);
                 theGraphics.setTransform(backup);

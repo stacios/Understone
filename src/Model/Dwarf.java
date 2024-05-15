@@ -30,11 +30,15 @@ public class Dwarf extends Character {
         myInputData = theInputData;
     }
     @Override
-    public void update() {
+    public boolean update() {
         super.update();
         // specific logic for Dwarf?
 
         walk();
+        if (myInputData.getM1())
+            attemptAttack(myInputData.getMouseX(), myInputData.getMouseY());
+
+        return false;
 
     }
 

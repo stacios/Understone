@@ -4,13 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="855153de-680e-45a5-9637-a6556e8d3f65" name="Changes" comment="">
+    <list default="true" id="f76e3353-d4a9-4d46-8bca-e2f726e920f3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Model/Weapon/MeleeAttack.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/UDB.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/CharacterTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/CharacterTypes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/DB/DBMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/DB/DBMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/DB/DwarfDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/DB/DwarfDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/DB/GlyphidDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/DB/GlyphidDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Attack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Weapon/Attack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Character.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/CharacterFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/CharacterFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Dwarf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Dwarf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/ExplosiveAttack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Weapon/ExplosiveAttack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/GameLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/GameLoop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Glyphid/AcidSpitter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Glyphid/AcidSpitter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Glyphid/Glyphid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Glyphid/Glyphid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Glyphid/Grunt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Glyphid/Grunt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Glyphid/Rock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Glyphid/Rock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Spaces/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Spaces/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Weapon/FireAttack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Weapon/FireAttack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Weapon/MinigunWeapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Weapon/MinigunWeapon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Weapon/ProjectileAttack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Weapon/ProjectileAttack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Weapon/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Weapon/Weapon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Display.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,90 +33,16 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;arescrimson&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "git-widget-placeholder": "owen"
   }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/zabauka/Understone.git&quot;,
-    &quot;accountId&quot;: &quot;ab4d6fa4-16d5-4047-90a8-4e42d36985de&quot;
-  }
-}</component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 2
-}</component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 0
-}</component>
-  <component name="ProjectId" id="2fe6s6urG8zM1FY8s2douZJ1gHb" />
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;owen&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.DBMain.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  }
-}</component>
-  <component name="RecentsManager">
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="Model.Weapon" />
-      <recent name="Model.Glyphid" />
-      <recent name="Model.Spaces" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Application.DBMain">
-    <configuration name="DBMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Model.DB.DBMain" />
-      <module name="Understone" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Model.DB.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+}]]></component>
+  <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controller.Main" />
       <module name="Understone" />
@@ -117,56 +56,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="360_class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="360_class" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.DBMain" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="855153de-680e-45a5-9637-a6556e8d3f65" name="Changes" comment="" />
-      <created>1714149399389</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1714149399389</updated>
-      <workItem from="1714149400822" duration="60000" />
-      <workItem from="1714271861165" duration="9157000" />
-      <workItem from="1714281610787" duration="300000" />
-      <workItem from="1714796066531" duration="714000" />
-      <workItem from="1715017569990" duration="6056000" />
-      <workItem from="1715060198898" duration="7475000" />
-      <workItem from="1715134489609" duration="926000" />
-    </task>
     <servers />
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
+  <component name="VcsManagerConfiguration">
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
 </project>

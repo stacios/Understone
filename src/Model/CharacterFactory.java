@@ -4,6 +4,8 @@ import Model.DB.DwarfDB;
 import Model.DB.GlyphidDB;
 import Model.Glyphid.Glyphid;
 import Model.Glyphid.Grunt;
+import Model.Weapon.Attack;
+import Model.Weapon.MeleeAttack;
 import Model.Weapon.Weapon;
 
 import static Model.CharacterTypes.*;
@@ -31,8 +33,8 @@ public class CharacterFactory {
         int height = DwarfDB.getDefaultValue(theDwarfType, "height"); // Default height
         double moveSpeed = DwarfDB.getDefaultValue(theDwarfType, "movespeed"); // Default speed
         int damage = DwarfDB.getDefaultValue(theDwarfType, "damage");
-        Weapon defaultWeapon = new Weapon(new Attack("Basic Attack", damage, x, y, width, height, new Force(new Angle(0), 1.0), new Angle(0)), 0, 10);
-        return new Dwarf(theDwarfType, x, y, health, width, height, moveSpeed, defaultWeapon);
+        Weapon defaultWeapon = new Weapon(60, new MeleeAttack(10, 200, 200, 10.0, 70));
+        return new Dwarf(theDwarfType, 400, 400, 100, 100, 100, 5, defaultWeapon);
     }
 
     /**
@@ -60,7 +62,7 @@ public class CharacterFactory {
         double moveSpeed = GlyphidDB.getDefaultValue(theGlyphidType, "movespeed"); // Default speed
         int fireTimer = GlyphidDB.getDefaultValue(theGlyphidType, "firetimer"); // Default cooldown timer
         int damage = GlyphidDB.getDefaultValue(theGlyphidType, "damage"); // Default damage
-        Weapon defaultWeapon = new Weapon(new Attack("Acid Spit", damage, x, y, width, height, new Force(new Angle(0), 1.0), new Angle(0)), 2, 20);
+        Weapon defaultWeapon = new Weapon(60, new MeleeAttack(10, 100, 100, 10.0, 100));
         return new Grunt(theGlyphidType, x, y, health, width, height, moveSpeed, defaultWeapon, fireTimer);
     }
 }

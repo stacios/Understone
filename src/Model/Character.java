@@ -1,7 +1,7 @@
 package Model;
 
-import Controller.DrawData;
 import Controller.Drawable;
+import Model.Weapon.Attack;
 import Model.Weapon.Weapon;
 
 import java.util.ArrayList;
@@ -37,9 +37,11 @@ public abstract class Character implements Drawable, Collidable {
         return Collidable.super.colliding(other);
     }
 
-    public void update() {
+    public boolean update() {
         this.receiveForces();
+        myWeapon.update();
         //Additional update logic TBA
+        return false;
     }
 
     public void addForce(Force force) {
