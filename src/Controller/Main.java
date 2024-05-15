@@ -6,10 +6,10 @@ import Model.DB.SQLiteConnection;
 import Model.GameLoop;
 import View.Display;
 
+import java.io.*;
 import java.sql.SQLException;
 
 public class Main {
-
 
     public static void main(String[] args) {
 
@@ -21,7 +21,6 @@ public class Main {
         while (running) {
 
             running = gameLoop.update(display.getInputData());
-
             display.render(gameLoop.getDrawData());
 
             try {
@@ -30,8 +29,6 @@ public class Main {
                 throw new RuntimeException(e);
             }
         }
-
-        display.dispose();
-
+        //display.dispose();
     }
 }

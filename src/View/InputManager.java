@@ -10,6 +10,7 @@ public class InputManager implements MouseListener, KeyListener, MouseMotionList
     private final BitSet myKeysPressed;
     private int myMouseX;
     private int myMouseY;
+    private EscapeKeyListener myEscapeKeyListener;
 
     public InputManager() {
         myKeysPressed = new BitSet(13);
@@ -57,9 +58,17 @@ public class InputManager implements MouseListener, KeyListener, MouseMotionList
                 break;
             case KeyEvent.VK_ESCAPE:
                 myKeysPressed.set(12, theValue);
+                if (theValue && myEscapeKeyListener != null) {
+                    myEscapeKeyListener.onEscapePressed();
+                }
                 break;
         }
     }
+
+    public void setEscapeKeyListener(EscapeKeyListener listener) {
+        this.myEscapeKeyListener = listener;
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
         //nothing
@@ -111,4 +120,9 @@ public class InputManager implements MouseListener, KeyListener, MouseMotionList
         myMouseX = e.getX();
         myMouseY = e.getY();
     }
+
+    public interface EscapeKeyListener {
+        void onEscapePressed();
+    }
+
 }
