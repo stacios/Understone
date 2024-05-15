@@ -1,29 +1,22 @@
 package Model.Spaces;
 
-import Controller.DrawData;
 import Controller.Drawable;
-import Model.Attack;
+import Model.GameLoop;
+import Model.Weapon.Attack;
 import Model.Dwarf;
 import Model.Glyphid.Glyphid;
 import Model.Glyphid.Rock;
 
-import java.awt.*;
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
-public class Room implements Drawable, Serializable {
-    private static final long serialVersionUID = 3L;
+public class Room implements Drawable {
     private List<Glyphid> myGlyphids;
     private List<Attack> myAttacks;
     private boolean myHasDropPod;
     private Rock myRock;
-    private Dwarf myPlayer;
-
-    //delete!!!!
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    int w = (int) screenSize.getWidth();
-    int h = (int) screenSize.getHeight();
 
     public Room(boolean theHasDropPod, boolean theHasRock) {
         myGlyphids = new ArrayList<>();
@@ -32,7 +25,7 @@ public class Room implements Drawable, Serializable {
         if (theHasRock) {
             myRock = new Rock("Rock", 1,1,1,1,1,0,null,0);
         }
-        myPlayer = null;
+
     }
     public boolean hasRock() {
         return myRock != null;
@@ -47,15 +40,39 @@ public class Room implements Drawable, Serializable {
         return false;
     }
 
-    public void addPlayer(Dwarf thePlayer){
-        myPlayer = thePlayer;
-    }
 
     @Override
-    public DrawData getDrawData() {
-        return new DrawData("Room", null, w/2, h/2, w, h);
+    public String[] getDrawData() {
+
+        List<String> result = new ArrayList<>();
+        result.add("image:Room:" + 1920/2 + ":" + 1080/2 + ":1920:1080");
+        for (Glyphid e : myGlyphids) {
+            result.addAll(Arrays.asList(e.getDrawData()));
+        }
+        result.addAll(Arrays.asList(GameLoop.getInstance().getPlayer().getDrawData()));
+        for (Attack e : myAttacks) {
+            result.addAll(Arrays.asList(e.getDrawData()));
+        }
+
+
+        return result.toArray(new String[0]);
     }
 
-    @Override public String toString() { return "Room{" + "Glyphids: " + myGlyphids + ", Attacks: " + myAttacks + ", Has Drop Pod: " + myHasDropPod + ", Rock: " + myRock + ", Player: " + myPlayer + "}"; }
+    public void update() {
+        GameLoop.getInstance().getPlayer().update();
+        for (int i = myGlyphids.size() - 1; i >= 0; i--) {
+            if (myGlyphids.get(i).update()) {
+                myGlyphids.remove(i);
+            }
+        }
+        for (int i = myAttacks.size() - 1; i >= 0; i--) {
+            if (myAttacks.get(i).update()) {
+                myAttacks.remove(i);
+            }
+        }
+    }
 
+    public void addAttack(Attack theAttack) {
+        myAttacks.add(theAttack);
+    }
 }

@@ -15,8 +15,6 @@ public abstract class Glyphid extends Character {
 
     public abstract void attack();
 
-    @Override
-    public abstract void update();
 
     protected void updateFireTimer() {
         if (myFireTimer > 0) {

@@ -2,5 +2,5 @@ package Controller;
 
 public interface Drawable {
 
-    DrawData getDrawData();
+    String[] getDrawData();
 }

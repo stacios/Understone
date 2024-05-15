@@ -15,10 +15,6 @@ public class Rock extends Glyphid {
         System.out.println("Rocks can't attack.");
     }
 
-    @Override
-    public void update() {
-        // update for rock
-        updateFireTimer();
-    }
+
 }
 

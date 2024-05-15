@@ -1,7 +1,7 @@
 package Model;
 
-import Controller.DrawData;
 import Controller.Drawable;
+import Model.Weapon.Attack;
 import Model.Weapon.Weapon;
 
 import java.io.Serializable;
@@ -39,9 +39,11 @@ public abstract class Character implements Drawable, Collidable, Serializable {
         return Collidable.super.colliding(other);
     }
 
-    public void update() {
+    public boolean update() {
         this.receiveForces();
+        myWeapon.update();
         //Additional update logic TBA
+        return false;
     }
 
     public void addForce(Force force) {
@@ -92,8 +94,8 @@ public abstract class Character implements Drawable, Collidable, Serializable {
     }
 
     @Override
-    public DrawData getDrawData() {
-        return new DrawData(myName, null, myX, myY, myWidth, myHeight);
+    public String[] getDrawData() {
+        return new String[]{"image:" + myName + ":" + myX + ":" + myY + ":" + myWidth + ":" + myHeight};
     }
 
     @Override

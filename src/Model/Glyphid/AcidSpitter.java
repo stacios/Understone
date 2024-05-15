@@ -18,9 +18,10 @@ AcidSpitter extends Glyphid {
     }
 
     @Override
-    public void update() {
+    public boolean update() {
         // update logic for Acid Spitter
         updateFireTimer();
+        return false;
     }
 }
 

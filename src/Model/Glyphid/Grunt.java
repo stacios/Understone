@@ -17,10 +17,11 @@ public class Grunt extends Glyphid {
     }
 
     @Override
-    public void update() {
+    public boolean update() {
         // update logic for Grunt
         updateFireTimer();
 
+        return false;
     }
 }
 
