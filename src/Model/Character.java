@@ -5,7 +5,9 @@ import Model.Weapon.Attack;
 import Model.Weapon.Weapon;
 
 import java.util.ArrayList;
-
+/**
+ * Represents a character in the game. Parent class for Dwarf and Glyphids.
+ */
 public abstract class Character implements Drawable, Collidable {
     private String myName;
     private int myHealth;
@@ -37,6 +39,11 @@ public abstract class Character implements Drawable, Collidable {
         return Collidable.super.colliding(other);
     }
 
+    /**
+     * Update the character every game tick.
+     * Includes character AI and recieving forces.
+     * Returns true if the character should be deleted.
+     */
     public boolean update() {
         this.receiveForces();
         myWeapon.update();

@@ -1,5 +1,7 @@
 package Model.Weapon;
-
+/**
+ * Basic melee swipe attack. Goes through 5 stages for each sprite animation before being deleted.
+ */
 public class MeleeAttack extends Attack {
 
     private int myStage;

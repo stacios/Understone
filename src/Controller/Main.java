@@ -7,7 +7,9 @@ import Model.GameLoop;
 import View.Display;
 
 import java.sql.SQLException;
-
+/**
+ * Main class for the game. Controls the game loop and the display. Contains the main loop that keeps the game running.
+ */
 public class Main {
 
 

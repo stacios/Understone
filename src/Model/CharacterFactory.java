@@ -9,7 +9,9 @@ import Model.Weapon.MeleeAttack;
 import Model.Weapon.Weapon;
 
 import static Model.CharacterTypes.*;
-
+/**
+ * Contains methods for creating dwarves and glyphids correctly.
+ */
 public class CharacterFactory {
 
     /**

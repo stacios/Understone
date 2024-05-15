@@ -2,7 +2,9 @@ package Model.Weapon;
 
 import Model.Angle;
 import Model.Force;
-
+/**
+ * Represents a basic bullet attack. It travels in a straight line, and has a constant velocity.
+ */
 public class ProjectileAttack extends Attack {
     private double myVelocity;
 

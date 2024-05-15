@@ -2,6 +2,9 @@ package Controller;
 
 import java.util.BitSet;
 
+/**
+ * Represents the input data for the game, key presses, mouse presses, and mouse position.
+ */
 public class InputData {
 
     private int myMouseX;

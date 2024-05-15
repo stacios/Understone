@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import static Model.CharacterTypes.*;
+/**
+ * The main game loop. Controls the player, cave, and active room.
+ */
 public class GameLoop implements Drawable {
 
     private static final GameLoop myInstance = new GameLoop();

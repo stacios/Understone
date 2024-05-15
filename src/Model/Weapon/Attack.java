@@ -4,7 +4,11 @@ import Controller.Drawable;
 import Model.Angle;
 import Model.Collidable;
 import Model.Force;
-
+/**
+ * Representation of an attack. Attacks are bullets flying through the air, or the swings of melee weapons.
+ * A template of an attack is contained within each weapon to be copied and added to the active room.
+ * Has damage, position, width, height, knockback strength, and initial distance (static distance initially added to the set position).
+ */
 public abstract class Attack implements Collidable, Cloneable, Drawable {
 
     private final int myDamage;
@@ -70,10 +74,15 @@ public abstract class Attack implements Collidable, Cloneable, Drawable {
         return myHeight;
     }
 
-
+    /**
+     * Sets the position and angle of the attack. Inacts the jump of intiialDistance.
+     */
     public void setPosition(double theX, double theY) {
         setPosition(theX, theY, null);
     }
+    /**
+     * Sets the position and angle of the attack. Inacts the jump of intiialDistance.
+     */
     public void setPosition(double theX, double theY, Angle theAngle) {
 
         if (myAngle == null && theAngle != null) {
@@ -88,11 +97,16 @@ public abstract class Attack implements Collidable, Cloneable, Drawable {
         }
 
     }
-
+    /**
+     * Makes it so that the attack can no longer collide with characters.
+     */
     public void deactivate() {
         myActive = false;
     }
-
+    /**
+     * Creates a clone of the attack to be added to the active room.
+     * Remember to set the position of the clone, as this should not be set for the attack template being cloned.
+     */
     @Override
     public Attack clone() {
         try {

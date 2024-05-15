@@ -1,8 +1,16 @@
 package Model;
-
+/**
+ * Interface Collidable representing a collidable object.
+ * Collidables must have x, y, width, and height, returned in the getHitbox method.
+ */
 public interface Collidable {
+    /**
+     * Override to return {x, y, width, height}.
+     */
     int [] getHitbox(); //[x,y,width,height]
-
+    /**
+     * Returns true if the collidable is colliding with the other collidable.
+     */
     default boolean colliding(Collidable other){
         int[] hitbox1 = this.getHitbox();
         int[] hitbox2 = other.getHitbox();

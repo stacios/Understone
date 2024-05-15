@@ -4,7 +4,10 @@ import Controller.InputData;
 import Model.Weapon.Weapon;
 
 import java.util.ArrayList;
-
+/**
+ * The player of the game. There are 4 types of dwarves: Driller, Engineer, Gunner, and Scout.
+ * Each dwarf has a different set of weapons.
+ */
 public class Dwarf extends Character {
 
     private InputData myInputData;

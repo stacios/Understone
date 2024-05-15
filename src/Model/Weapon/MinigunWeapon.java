@@ -2,7 +2,9 @@ package Model.Weapon;
 
 import Model.Angle;
 import Model.Character;
-
+/**
+ * Modified weapon for the minigun. Has an extra cooldown timer before being able to fire.
+ */
 public class MinigunWeapon extends Weapon {
     private int mySpinup;
     private int myMaxSpinup;

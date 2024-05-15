@@ -1,5 +1,10 @@
 package Model;
-
+/**
+ * Represents a force applied to a character. Each force has an angle, strength, and decay rate.
+ * The strength and angle are used to calculate the force applied to the character every tick.
+ * The strength is multiplied my (1 - decayRate) every tick.
+ * Not having a decay rate means that the force will be applied instantaniously and be deleted after.
+ */
 public class Force {
     private double myStrength;
     private Angle myAngle;

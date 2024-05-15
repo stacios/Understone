@@ -1,5 +1,7 @@
 package Model;
-
+/**
+ * Container class representing an angle, used in model
+ */
 public class Angle {
     private double myRadians;
 
@@ -23,7 +25,9 @@ public class Angle {
         return Math.toDegrees(myRadians);
     }
 
-    //get cos and sin of the angle as a double array
+    /**
+     * Get cos and sin of the angle as a double array
+     */
     public double[] getComp() {
         return new double[]{Math.cos(myRadians), Math.sin(myRadians)};
     }

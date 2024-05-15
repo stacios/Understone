@@ -10,13 +10,36 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferStrategy;
 
+/**
+ * Used to display the game. Uses formatted strings as draw data. Should be formatted as follows:
+ * "image:filename:x:y:width:height"
+ * "rotatedimage:filename:x:y:width:height:angle"
+ * "rectangle:x:y:width:height"
+ * "text:yourText:x:y:fontSize"
+ * "sound:soundname"
+ */
 public class Display {
 
     private static final Display myInstance = new Display();
+    /**
+     * The multiplier that converts from game coordinates to real coordinates.
+     */
     private final double myScaleMult;
+    /**
+     * The in-game width of the display (1920).
+     */
     private final int myWidth;
+    /**
+     * The in-game height of the display (1080).
+     */
     private final int myHeight;
+    /**
+     * The actual width of the display on the user's screen
+     */
     private final int myRealWidth;
+    /**
+     * The actual height of the display on the user's screen
+     */
     private final int myRealHeight;
     private final JFrame myJFrame;
     private final JPanel myJPanel;
@@ -63,7 +86,9 @@ public class Display {
     public void dispose() {
         myJFrame.dispose();
     }
-
+    /**
+     * Renders the draw data to the display. Make sure each draw data string is in the correct format, look to Display documentation.
+     */
     public void render(final String[] theDrawList) {
         BufferStrategy bs = myJFrame.getBufferStrategy();
         if (bs == null){
