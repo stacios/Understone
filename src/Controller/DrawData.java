@@ -1,5 +1,7 @@
 package Controller;
 
+import java.io.Serializable;
+
 public class DrawData {
 
     private final int myX;

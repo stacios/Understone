@@ -1,11 +1,14 @@
 package Model;
+
+import java.io.Serializable;
 /**
  * Represents a force applied to a character. Each force has an angle, strength, and decay rate.
  * The strength and angle are used to calculate the force applied to the character every tick.
  * The strength is multiplied my (1 - decayRate) every tick.
  * Not having a decay rate means that the force will be applied instantaniously and be deleted after.
  */
-public class Force {
+public class Force implements Serializable {
+    private static final long serialVersionUID = 7L;
     private double myStrength;
     private Angle myAngle;
     private double myDecayRate;

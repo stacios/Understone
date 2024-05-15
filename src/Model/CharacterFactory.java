@@ -66,6 +66,7 @@ public class CharacterFactory {
         int damage = GlyphidDB.getDefaultValue(theGlyphidType, "damage"); // Default damage
         Weapon defaultWeapon = new Weapon(60, new MeleeAttack(10, 100, 100, 10.0, 100));
         return new Grunt(theGlyphidType, x, y, health, width, height, moveSpeed, defaultWeapon, fireTimer);
+        //return null;
     }
 }
 

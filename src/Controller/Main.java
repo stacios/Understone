@@ -6,12 +6,12 @@ import Model.DB.SQLiteConnection;
 import Model.GameLoop;
 import View.Display;
 
+import java.io.*;
 import java.sql.SQLException;
 /**
  * Main class for the game. Controls the game loop and the display. Contains the main loop that keeps the game running.
  */
 public class Main {
-
 
     public static void main(String[] args) {
 
@@ -23,7 +23,6 @@ public class Main {
         while (running) {
 
             running = gameLoop.update(display.getInputData());
-
             display.render(gameLoop.getDrawData());
 
             try {
@@ -32,8 +31,6 @@ public class Main {
                 throw new RuntimeException(e);
             }
         }
-
-        display.dispose();
-
+        //display.dispose();
     }
 }

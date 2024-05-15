@@ -3,6 +3,7 @@ package Model;
 import Controller.InputData;
 import Model.Weapon.Weapon;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 /**
  * The player of the game. There are 4 types of dwarves: Driller, Engineer, Gunner, and Scout.
@@ -10,7 +11,7 @@ import java.util.ArrayList;
  */
 public class Dwarf extends Character {
 
-    private InputData myInputData;
+    private transient InputData myInputData;
     private ArrayList<Weapon> myWeapons;
 
     public Dwarf(String theName, double theX, double theY, int theHealth, int theWidth, int theHeight, double theMoveSpeed, Weapon theWeapon) {
@@ -87,6 +88,7 @@ public class Dwarf extends Character {
         if (angle != null) {
             addForce(new Force(angle, getMoveSpeed(), .4));
         }
+
     }
 
     /**

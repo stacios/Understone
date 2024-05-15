@@ -1,8 +1,12 @@
 package Model;
+
+import java.io.Serializable;
+
 /**
  * Container class representing an angle, used in model
  */
-public class Angle {
+public class Angle implements Serializable {
+    private static final long serialVersionUID = 5L;
     private double myRadians;
 
     public Angle(double theRadians) {
