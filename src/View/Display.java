@@ -75,15 +75,14 @@ public class Display {
         myMenuDialog.setLayout(new GridLayout(4, 1));
 
         JButton newGameButton = new JButton("New Game");
-        JButton saveButton = new JButton("Save");
-        JButton resumeButton = new JButton("Resume");
+        JButton saveButton = new JButton("Save Game");
+        JButton loadGame = new JButton("Load Game");
         JButton quitButton = new JButton("Quit");
 
         newGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 myMenuDialog.setVisible(false);
-                JOptionPane.showMessageDialog(null, "NEW GAME!");
             }
         });
 
@@ -96,11 +95,10 @@ public class Display {
             }
         });
 
-        resumeButton.addActionListener(new ActionListener() {
+        loadGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 myMenuDialog.setVisible(false);
-                JOptionPane.showMessageDialog(null, "RESUME!");
                 System.out.println("Loaded Game: " + DataManager.loadGame());
                 GameLoop.getInstance().setDataLoading(DataManager.loadGame());
             }
@@ -119,7 +117,7 @@ public class Display {
 
         myMenuDialog.add(newGameButton);
         myMenuDialog.add(saveButton);
-        myMenuDialog.add(resumeButton);
+        myMenuDialog.add(loadGame);
         myMenuDialog.add(quitButton);
     }
     public void showMenuDialog() {
