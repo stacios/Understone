@@ -36,6 +36,7 @@ public class CharacterFactory {
         double moveSpeed = DwarfDB.getDefaultValue(theDwarfType, "movespeed"); // Default speed
         int damage = DwarfDB.getDefaultValue(theDwarfType, "damage");
         Weapon defaultWeapon = new Weapon(60, new MeleeAttack(10, 200, 200, 10.0, 70));
+        //return new Dwarf(theDwarfType, x, y, health, width, height, moveSpeed, defaultWeapon);
         return new Dwarf(theDwarfType, 400, 400, 100, 100, 100, 5, defaultWeapon);
     }
 

@@ -24,7 +24,7 @@ public class ImageLibrary {
                 }
             }
         }
-        System.out.println(myImages);
+        //System.out.println(myImages);
 
     }
 

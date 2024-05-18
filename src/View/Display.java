@@ -76,6 +76,7 @@ public class Display {
         myJFrame.addKeyListener(myInputManager);
         myJPanel.addMouseListener(myInputManager);
         myJPanel.addMouseMotionListener(myInputManager);
+        System.out.println(myAudioPlayer.mySounds);
 
     }
 

@@ -5,24 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f76e3353-d4a9-4d46-8bca-e2f726e920f3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/sounds/AlienEggGrabRoars.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/DoubleBarrelShot.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/FlamethrowerShot.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/GlyphidDeathSound.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/GrenadeExplosion.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/GrenadeLauncherShot.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/GruntDeathRoar.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/GruntRoar1.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/GruntRoar2.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/M1000Shot.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/MiniNukeExplosion.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/MinigunShot.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/PickaxeStoneImpact.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/PraetorianDeathRoar.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/PraetorianRoar1.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/PraetorianRoar2.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/RevolverShot.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/RockBroken.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/SpitterDeathRoar.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/SpitterRoar1.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/SpitterRoar2.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/SubtataShot.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/WarthogShot.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/UDB.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Drawable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Drawable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/InputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/InputData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Angle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Angle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Character.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/CharacterFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/CharacterFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Collidable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Collidable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Dwarf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Dwarf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Force.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Force.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/GameLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/GameLoop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Weapon/Attack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Weapon/Attack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Weapon/MeleeAttack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Weapon/MeleeAttack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Weapon/MinigunWeapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Weapon/MinigunWeapon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Weapon/ProjectileAttack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Weapon/ProjectileAttack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Weapon/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Weapon/Weapon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/DB/DBMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/DB/DBMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/AudioPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Display.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/ImageLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/ImageLibrary.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,12 +52,24 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "arescrimson"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/zabauka/Understone.git",
+    "accountId": "ab4d6fa4-16d5-4047-90a8-4e42d36985de"
+  }
+}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2gWMKOMBlszC2erAgzcc9eNWnuh" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -52,12 +77,33 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.DBMain.executor": "Run",
+    "Application.Main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main"
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\aresz\Understone\sounds" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="DBMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Model.DB.DBMain" />
+      <module name="Understone" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.DB.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controller.Main" />
       <module name="Understone" />
@@ -74,6 +120,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.DBMain" />
       </list>
     </recent_temporary>
   </component>
