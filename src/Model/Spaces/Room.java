@@ -13,14 +13,17 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Room implements Drawable {
+
     private List<Glyphid> myGlyphids;
-    private List<Attack> myAttacks;
+    private List<Attack> myDwarfAttacks;
+    private List<Attack> myGlyphidAttacks;
     private boolean myHasDropPod;
     private Rock myRock;
 
     public Room(boolean theHasDropPod, boolean theHasRock) {
         myGlyphids = new ArrayList<>();
-        myAttacks = new ArrayList<>();
+        myDwarfAttacks = new ArrayList<>();
+        myGlyphidAttacks = new ArrayList<>();
         myHasDropPod = theHasDropPod;
         if (theHasRock) {
             myRock = new Rock("Rock", 1,1,1,1,1,0,null,0);
@@ -50,7 +53,10 @@ public class Room implements Drawable {
             result.addAll(Arrays.asList(e.getDrawData()));
         }
         result.addAll(Arrays.asList(GameLoop.getInstance().getPlayer().getDrawData()));
-        for (Attack e : myAttacks) {
+        for (Attack e : myGlyphidAttacks) {
+            result.addAll(Arrays.asList(e.getDrawData()));
+        }
+        for (Attack e : myDwarfAttacks) {
             result.addAll(Arrays.asList(e.getDrawData()));
         }
 
@@ -60,19 +66,23 @@ public class Room implements Drawable {
 
     public void update() {
         GameLoop.getInstance().getPlayer().update();
+        myDwarfAttacks.addAll(List.of(GameLoop.getInstance().getPlayer().getPendingAttacks()));
         for (int i = myGlyphids.size() - 1; i >= 0; i--) {
             if (myGlyphids.get(i).update()) {
                 myGlyphids.remove(i);
             }
+            myGlyphidAttacks.addAll(List.of(myGlyphids.get(i).getPendingAttacks()));
         }
-        for (int i = myAttacks.size() - 1; i >= 0; i--) {
-            if (myAttacks.get(i).update()) {
-                myAttacks.remove(i);
+        for (int i = myDwarfAttacks.size() - 1; i >= 0; i--) {
+            if (myDwarfAttacks.get(i).update()) {
+                myDwarfAttacks.remove(i);
+            }
+        }
+        for (int i = myGlyphidAttacks.size() - 1; i >= 0; i--) {
+            if (myGlyphidAttacks.get(i).update()) {
+                myGlyphidAttacks.remove(i);
             }
         }
     }
 
-    public void addAttack(Attack theAttack) {
-        myAttacks.add(theAttack);
-    }
 }

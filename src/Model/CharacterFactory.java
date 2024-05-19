@@ -4,9 +4,7 @@ import Model.DB.DwarfDB;
 import Model.DB.GlyphidDB;
 import Model.Glyphid.Glyphid;
 import Model.Glyphid.Grunt;
-import Model.Weapon.Attack;
-import Model.Weapon.MeleeAttack;
-import Model.Weapon.Weapon;
+import Model.Weapon.*;
 
 import static Model.CharacterTypes.*;
 /**
@@ -35,7 +33,7 @@ public class CharacterFactory {
         int height = DwarfDB.getDefaultValue(theDwarfType, "height"); // Default height
         double moveSpeed = DwarfDB.getDefaultValue(theDwarfType, "movespeed"); // Default speed
         int damage = DwarfDB.getDefaultValue(theDwarfType, "damage");
-        Weapon defaultWeapon = new Weapon(60, new MeleeAttack(10, 200, 200, 10.0, 70));
+        Weapon defaultWeapon = new ShotgunWeapon(60, new ProjectileAttack(10, 20, 20, 10.0, 70, 20), 10, new Angle(Math.toRadians(45)));
         //return new Dwarf(theDwarfType, x, y, health, width, height, moveSpeed, defaultWeapon);
         return new Dwarf(theDwarfType, 400, 400, 100, 100, 100, 5, defaultWeapon);
     }

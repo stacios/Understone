@@ -110,6 +110,10 @@ public abstract class Character implements Drawable, Collidable, Serializable {
         return new int[]{(int) myX, (int) myY, myWidth, myHeight};
     }
 
+    public Attack[] getPendingAttacks() {
+        return myWeapon.getPendingAttacks();
+    }
+
     @Override
     public String toString() {
         return "Printing " + myName + ": {" +

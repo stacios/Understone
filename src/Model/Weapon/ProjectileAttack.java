@@ -2,6 +2,8 @@ package Model.Weapon;
 
 import Model.Angle;
 import Model.Force;
+import View.Display;
+
 /**
  * Represents a basic bullet attack. It travels in a straight line, and has a constant velocity.
  */
@@ -27,11 +29,13 @@ public class ProjectileAttack extends Attack {
         double deltaY = myVelocity * temp[1];
         // Update the position by adding the calculated deltas
         setPosition(getX() + deltaX, getY() + deltaY);
-        return false;
+        return getX() < 0 || getY() < 0 ||
+                getX() > Display.getInstance().getWidth() || getY() > Display.getInstance().getHeight();
     }
 
     @Override
     public String[] getDrawData() {
-        return new String[0];
+        return new String[]{"rotatedImage:Bullet:" + getX() + ":" + getY() + ":"
+                + getWidth() + ":" + getHeight() +":"+ getAngle().getRadians()};
     }
 }

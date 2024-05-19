@@ -25,6 +25,7 @@ public class Display {
      * The multiplier that converts from game coordinates to real coordinates.
      */
     private final double myScaleMult;
+
     /**
      * The in-game width of the display (1920).
      */
@@ -183,5 +184,13 @@ public class Display {
 
     public InputData getInputData() {
         return myInputManager.getInputData();
+    }
+
+    public int getWidth() {
+        return myWidth;
+    }
+
+    public int getHeight() {
+        return myHeight;
     }
 }

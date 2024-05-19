@@ -97,6 +97,10 @@ public abstract class Attack implements Collidable, Cloneable, Drawable {
         }
 
     }
+
+    public void setAngle(Angle theAngle) {
+        myAngle = theAngle;
+    }
     /**
      * Makes it so that the attack can no longer collide with characters.
      */
