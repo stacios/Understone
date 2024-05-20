@@ -3,11 +3,15 @@ package Model.Weapon;
 import Model.Angle;
 import Model.Character;
 import Model.GameLoop;
+
+import java.io.Serializable;
+
 /**
  * Represents a weapon. Each character has a weapon. Has a cooldown between being able to fire.
  * Has an attack template, which is copied and added to the active room on a successful fire.
  */
-public class Weapon {
+public class Weapon implements Serializable {
+    private static final long serialVersionUID = 4L;
     private final Attack myAttack;
     private int myCooldown;
     private final int myMaxCooldown;

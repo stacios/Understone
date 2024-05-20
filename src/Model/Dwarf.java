@@ -98,6 +98,6 @@ public class Dwarf extends Character {
      */
     @Override
     public String toString() {
-        return super.toString() + " " + myWeapons;
+        return super.toString() + ", Weapons: " + myWeapons;
     }
 }

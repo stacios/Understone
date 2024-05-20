@@ -4,13 +4,16 @@ import Controller.Drawable;
 import Model.Angle;
 import Model.Collidable;
 import Model.Force;
+
+import java.io.Serializable;
+
 /**
  * Representation of an attack. Attacks are bullets flying through the air, or the swings of melee weapons.
  * A template of an attack is contained within each weapon to be copied and added to the active room.
  * Has damage, position, width, height, knockback strength, and initial distance (static distance initially added to the set position).
  */
-public abstract class Attack implements Collidable, Cloneable, Drawable {
-
+public abstract class Attack implements Collidable, Cloneable, Drawable, Serializable {
+    private static final long serialVersionUID = 6L;
     private final int myDamage;
     private double myX;
     private double myY;
