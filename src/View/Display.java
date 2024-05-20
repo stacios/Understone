@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferStrategy;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Used to display the game. Uses formatted strings as draw data. Should be formatted as follows:
@@ -99,7 +101,7 @@ public class Display {
 
         JButton newGameButton = new JButton("New Game");
         JButton saveButton = new JButton("Save Game");
-        JButton loadGame = new JButton("Load Game");
+        JButton loadGameButton = new JButton("Load Game");
         JButton quitButton = new JButton("Quit");
 
         newGameButton.addActionListener(new ActionListener() {
@@ -118,12 +120,11 @@ public class Display {
             }
         });
 
-        loadGame.addActionListener(new ActionListener() {
+        loadGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 myMenuDialog.setVisible(false);
-                System.out.println("Loaded Game: " + DataManager.loadGame());
-                GameLoop.getInstance().setDataLoading(DataManager.loadGame());
+                showLoadGameDialog();
             }
         });
 
@@ -140,8 +141,42 @@ public class Display {
 
         myMenuDialog.add(newGameButton);
         myMenuDialog.add(saveButton);
-        myMenuDialog.add(loadGame);
+        myMenuDialog.add(loadGameButton);
         myMenuDialog.add(quitButton);
+    }
+
+    private void showLoadGameDialog() {
+        JDialog loadGameDialog = new JDialog(myJFrame, "Load Game", true);
+        loadGameDialog.setSize(300, 400);
+        loadGameDialog.setLocationRelativeTo(myJFrame);
+        loadGameDialog.setLayout(new BorderLayout());
+
+        List<String> savedGames = DataManager.listSavedGames();
+        List<String> displayNames = savedGames.stream()
+                .map(DataManager::getDisplayName)
+                .collect(Collectors.toList());
+        JList<String> savedGamesList = new JList<>(displayNames.toArray(new String[0]));
+        savedGamesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        JButton loadButton = new JButton("Load");
+        loadButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedIndex = savedGamesList.getSelectedIndex();
+                if (selectedIndex != -1) {
+                    String selectedGame = savedGames.get(selectedIndex);
+                    GameLoop loadedGame = DataManager.loadGame(selectedGame);
+                    GameLoop.getInstance().setDataLoading(loadedGame);
+                    loadGameDialog.setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(loadGameDialog, "Please select a game to load.");
+                }
+            }
+        });
+
+        loadGameDialog.add(new JScrollPane(savedGamesList), BorderLayout.CENTER);
+        loadGameDialog.add(loadButton, BorderLayout.SOUTH);
+        loadGameDialog.setVisible(true);
     }
     public void showMenuDialog() {
         myMenuDialog.setVisible(true);
