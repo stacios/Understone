@@ -19,31 +19,31 @@ public class Force implements Serializable {
         setDecayRate(theDecayRate);
     }
 
-    public void setStrength(double strength) {
-        if (strength < 0) {
+    public void setStrength(double theStrength) {
+        if (theStrength < 0) {
             throw new IllegalArgumentException("Strength cannot be negative");
         }
-        this.myStrength = strength;
+        myStrength = theStrength;
     }
 
-    public void setAngle(Angle angle) {
-        if (angle == null) {
+    public void setAngle(Angle theAngle) {
+        if (theAngle == null) {
             throw new IllegalArgumentException("Angle cannot be null");
         }
-        this.myAngle = angle;
+        myAngle = theAngle;
     }
 
-    public void setDecayRate(double decayRate) {
-        if (decayRate < 0 || decayRate > 1) {
+    public void setDecayRate(double theDecayRate) {
+        if (theDecayRate < 0 || theDecayRate > 1) {
             throw new IllegalArgumentException("Decay rate must be between 0 and 1");
         }
-        this.myDecayRate = decayRate;
+        myDecayRate = theDecayRate;
     }
 
     public Force(Angle theAngle, double theStrength) {
-        this.myAngle = theAngle;
-        this.myStrength = theStrength;
-        this.myDecayRate = 1;
+        myAngle = theAngle;
+        myStrength = theStrength;
+        myDecayRate = 1;
     }
 
     public double getStrength() {

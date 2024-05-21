@@ -22,12 +22,9 @@ import static Model.CharacterTypes.*;
 public class GameLoop implements Drawable, Serializable {
     private static final long serialVersionUID = 8L;
     private static final GameLoop myInstance = new GameLoop();
-
     private Dwarf myPlayer;
     private Cave myCave;
-
     private Room myActiveRoom;
-
     private transient ArrayList<String> myDrawDataList;
 
     private GameLoop() {

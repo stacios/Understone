@@ -34,71 +34,71 @@ public abstract class Character implements Drawable, Collidable, Serializable {
         setHeight(theHeight);
         setMoveSpeed(theMoveSpeed);
         setWeapon(theWeapon);
-        this.myForces = new ArrayList<>();
+        myForces = new ArrayList<>();
     }
 
-    public void setX(double x) {
-        if (x < 0) {
+    public void setX(double theX) {
+        if (theX < 0) {
             throw new IllegalArgumentException("X coordinate cannot be negative");
         }
-        this.myX = x;
+        myX = theX;
     }
 
-    public void setY(double y) {
-        if (y < 0) {
+    public void setY(double theY) {
+        if (theY < 0) {
             throw new IllegalArgumentException("Y coordinate cannot be negative");
         }
-        this.myY = y;
+        myY = theY;
     }
 
-    public void setHealth(int health) {
-        if (health < 0) {
+    public void setHealth(int theHealth) {
+        if (theHealth < 0) {
             throw new IllegalArgumentException("Health cannot be negative");
         }
-        this.myHealth = health;
+        myHealth = theHealth;
     }
 
-    public void setMaxHealth(int maxHealth) {
-        if (maxHealth < 0) {
+    public void setMaxHealth(int theMaxHealth) {
+        if (theMaxHealth < 0) {
             throw new IllegalArgumentException("Max health cannot be negative");
         }
-        this.myMaxHealth = maxHealth;
+        myMaxHealth = theMaxHealth;
     }
 
-    public void setWidth(int width) {
-        if (width <= 0) {
+    public void setWidth(int theWidth) {
+        if (theWidth <= 0) {
             throw new IllegalArgumentException("Width must be positive");
         }
-        this.myWidth = width;
+        myWidth = theWidth;
     }
 
-    public void setHeight(int height) {
-        if (height <= 0) {
+    public void setHeight(int theHeight) {
+        if (theHeight <= 0) {
             throw new IllegalArgumentException("Height must be positive");
         }
-        this.myHeight = height;
+        myHeight = theHeight;
     }
 
-    public void setMoveSpeed(double moveSpeed) {
-        if (moveSpeed < 0) {
+    public void setMoveSpeed(double theMoveSpeed) {
+        if (theMoveSpeed < 0) {
             throw new IllegalArgumentException("Move speed cannot be negative");
         }
-        this.myMoveSpeed = moveSpeed;
+        myMoveSpeed = theMoveSpeed;
     }
 
-    public void setName(String name) {
-        if (name == null || name.isEmpty()) {
+    public void setName(String theName) {
+        if (theName == null || theName.isEmpty()) {
             throw new IllegalArgumentException("Name cannot be null or empty");
         }
-        this.myName = name;
+        myName = theName;
     }
 
-    public void setWeapon(Weapon weapon) {
-        this.myWeapon = weapon;
+    public void setWeapon(Weapon theWeapon) {
+        myWeapon = theWeapon;
     }
 
-    public boolean colliding(Collidable other) {
-        return Collidable.super.colliding(other);
+    public boolean colliding(Collidable theOther) {
+        return Collidable.super.colliding(theOther);
     }
 
     /**
@@ -113,22 +113,22 @@ public abstract class Character implements Drawable, Collidable, Serializable {
         return false;
     }
 
-    public void addForce(Force force) {
-        this.myForces.add(force);
+    public void addForce(Force theForce) {
+        myForces.add(theForce);
     }
 
-    public boolean attemptAttack(double targetX, double targetY) {
-        if (this.myWeapon != null) {
-            Angle attackAngle = new Angle(myX, myY, targetX, targetY);
-            return this.myWeapon.attemptAttack(this, attackAngle);
+    public boolean attemptAttack(double theTargetX, double theTargetY) {
+        if (myWeapon != null) {
+            Angle attackAngle = new Angle(myX, myY, theTargetX, theTargetY);
+            return myWeapon.attemptAttack(this, attackAngle);
         }
         return false;
     }
 
-    public boolean receiveAttack(Attack attack) {
-        if (this.colliding(attack)) {
-            this.myHealth -= attack.getDamage();
-            this.addForce(attack.getKnockBack());
+    public boolean receiveAttack(Attack theAttack) {
+        if (this.colliding(theAttack)) {
+            myHealth -= theAttack.getDamage();
+            this.addForce(theAttack.getKnockBack());
             return true;
         }
         return false;
@@ -145,11 +145,11 @@ public abstract class Character implements Drawable, Collidable, Serializable {
     }
 
     public double getX() {
-        return this.myX;
+        return myX;
     }
 
     public double getY() {
-        return this.myY;
+        return myY;
     }
 
     public double getMoveSpeed() {

@@ -13,11 +13,11 @@ public abstract class Glyphid extends Character {
         setFireTimer(fireTimer);
     }
 
-    public void setFireTimer(int fireTimer) {
-        if (fireTimer < 0) {
+    public void setFireTimer(int theFireTimer) {
+        if (theFireTimer < 0) {
             throw new IllegalArgumentException("Fire timer cannot be negative");
         }
-        this.myFireTimer = fireTimer;
+        myFireTimer = theFireTimer;
     }
 
     public abstract void attack();
