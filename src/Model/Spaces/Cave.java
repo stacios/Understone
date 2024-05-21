@@ -9,6 +9,9 @@ public class Cave implements Serializable {
     private Room[][] myRooms;
 
     public Cave(int width, int height) {
+        if (width <= 0 || height <= 0) {
+            throw new IllegalArgumentException("Width and height must be positive");
+        }
         myRooms = new Room[width][height];
         generateCave();
     }

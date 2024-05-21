@@ -10,7 +10,14 @@ public class ProjectileAttack extends Attack {
 
     public ProjectileAttack(int theDamage, int theWidth, int theHeight, double theKnockBackStrength, double theInitialDistance, double theVelocity) {
         super(theDamage, theWidth, theHeight, theKnockBackStrength, theInitialDistance);
-        myVelocity = theVelocity;
+        setVelocity(theVelocity);
+    }
+
+    public void setVelocity(double velocity) {
+        if (velocity < 0) {
+            throw new IllegalArgumentException("Velocity cannot be negative");
+        }
+        this.myVelocity = velocity;
     }
 
     public double getVelocity() {

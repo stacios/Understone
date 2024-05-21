@@ -14,6 +14,18 @@ public class DrawData {
 
     public DrawData(final String theImage, final String[] theSounds,
                     final double theX, final double theY, final int theWidth, final int theHeight, final double theAngle) {
+        if (theImage == null || theImage.isEmpty()) {
+            throw new IllegalArgumentException("Image cannot be null or empty");
+        }
+        if (theSounds == null) {
+            throw new IllegalArgumentException("Sounds array cannot be null");
+        }
+        if (theWidth <= 0) {
+            throw new IllegalArgumentException("Width must be positive");
+        }
+        if (theHeight <= 0) {
+            throw new IllegalArgumentException("Height must be positive");
+        }
         myX = (int)theX;
         myY = (int)theY;
         myWidth = theWidth;

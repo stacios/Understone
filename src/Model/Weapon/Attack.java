@@ -26,12 +26,25 @@ public abstract class Attack implements Collidable, Cloneable, Drawable, Seriali
     private boolean myActive;
 
     public Attack(int theDamage, int theWidth, int theHeight, double theKnockBackStrength, double theInitialDistance) {
+        if (theDamage < 0) {
+            throw new IllegalArgumentException("Damage cannot be negative");
+        }
+        if (theWidth <= 0) {
+            throw new IllegalArgumentException("Width must be positive");
+        }
+        if (theHeight <= 0) {
+            throw new IllegalArgumentException("Height must be positive");
+        }
+        if (theKnockBackStrength < 0) {
+            throw new IllegalArgumentException("KnockBack strength cannot be negative");
+        }
+
         this.myDamage = theDamage;
         this.myWidth = theWidth;
         this.myHeight = theHeight;
         this.myKnockBackStrength = theKnockBackStrength;
-        this.myActive = true;
         this.myInitialDistance = theInitialDistance;
+        this.myActive = true;
     }
 
     @Override

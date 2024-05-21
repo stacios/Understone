@@ -16,13 +16,18 @@ public class Weapon implements Serializable {
     private int myCooldown;
     private final int myMaxCooldown;
 
-
-    // Constructor to initialize the Weapon object
     public Weapon(int theMaxCooldown, Attack theAttack) {
+        if (theMaxCooldown < 0) {
+            throw new IllegalArgumentException("Max cooldown cannot be negative");
+        }
+        if (theAttack == null) {
+            throw new IllegalArgumentException("Attack cannot be null");
+        }
         this.myAttack = theAttack;
         this.myCooldown = 0;
         this.myMaxCooldown = theMaxCooldown;
     }
+
     /**
      * Attempt to fire the weapon. Will only fire if the cooldown is 0.
      */

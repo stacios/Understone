@@ -25,16 +25,76 @@ public abstract class Character implements Drawable, Collidable, Serializable {
     public Character(String theName, double theX, double theY,
                      int theHealth, int theWidth, int theHeight,
                      double theMoveSpeed, Weapon theWeapon) {
-        this.myName = theName;
-        this.myX = theX;
-        this.myY = theY;
-        this.myHealth = theHealth;
-        this.myMaxHealth = theHealth;
-        this.myMoveSpeed = theMoveSpeed;
-        this.myWeapon = theWeapon;
-        this.myWidth = theWidth;
-        this.myHeight = theHeight;
+        setName(theName);
+        setX(theX);
+        setY(theY);
+        setHealth(theHealth);
+        setMaxHealth(theHealth);
+        setWidth(theWidth);
+        setHeight(theHeight);
+        setMoveSpeed(theMoveSpeed);
+        setWeapon(theWeapon);
         this.myForces = new ArrayList<>();
+    }
+
+    public void setX(double x) {
+        if (x < 0) {
+            throw new IllegalArgumentException("X coordinate cannot be negative");
+        }
+        this.myX = x;
+    }
+
+    public void setY(double y) {
+        if (y < 0) {
+            throw new IllegalArgumentException("Y coordinate cannot be negative");
+        }
+        this.myY = y;
+    }
+
+    public void setHealth(int health) {
+        if (health < 0) {
+            throw new IllegalArgumentException("Health cannot be negative");
+        }
+        this.myHealth = health;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        if (maxHealth < 0) {
+            throw new IllegalArgumentException("Max health cannot be negative");
+        }
+        this.myMaxHealth = maxHealth;
+    }
+
+    public void setWidth(int width) {
+        if (width <= 0) {
+            throw new IllegalArgumentException("Width must be positive");
+        }
+        this.myWidth = width;
+    }
+
+    public void setHeight(int height) {
+        if (height <= 0) {
+            throw new IllegalArgumentException("Height must be positive");
+        }
+        this.myHeight = height;
+    }
+
+    public void setMoveSpeed(double moveSpeed) {
+        if (moveSpeed < 0) {
+            throw new IllegalArgumentException("Move speed cannot be negative");
+        }
+        this.myMoveSpeed = moveSpeed;
+    }
+
+    public void setName(String name) {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Name cannot be null or empty");
+        }
+        this.myName = name;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.myWeapon = weapon;
     }
 
     public boolean colliding(Collidable other) {
@@ -55,10 +115,6 @@ public abstract class Character implements Drawable, Collidable, Serializable {
 
     public void addForce(Force force) {
         this.myForces.add(force);
-    }
-
-    public void setWeapon(Weapon weapon) {
-        this.myWeapon = weapon;
     }
 
     public boolean attemptAttack(double targetX, double targetY) {

@@ -17,6 +17,7 @@ public class DataManager {
 
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName))) {
             out.writeObject(theGameLoop);
+            System.out.println("saved game: " + theGameLoop);
         } catch (IOException ex) {
             System.out.println("IOException is caught while saving " + ex.getMessage());
         }
@@ -24,7 +25,10 @@ public class DataManager {
 
     public static GameLoop loadGame(String fileName) {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))) {
-            return (GameLoop) in.readObject();
+            GameLoop gl = (GameLoop) in.readObject();
+            System.out.println("loaded game: " + gl);
+            return gl;
+            //return (GameLoop) in.readObject();
         } catch (IOException ex) {
             System.out.println("IOException is caught while loading " + ex.getMessage());
             return null;
