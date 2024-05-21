@@ -152,7 +152,7 @@ public class Display {
         loadGameDialog.setLocationRelativeTo(myJFrame);
         loadGameDialog.setLayout(new BorderLayout());
 
-        List<String> savedGames = DataManager.listSavedGames();
+        List<String> savedGames = DataManager.getSavedGames();
         List<String> displayNames = savedGames.stream()
                 .map(DataManager::getDisplayName)
                 .collect(Collectors.toList());
