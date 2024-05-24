@@ -6,7 +6,7 @@ import org.junit.jupiter.api.*;
 import static Model.CharacterTypes.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DwarfDBTest {
+public class DwarfDBTests {
 
     @BeforeEach
     public void setUp() {

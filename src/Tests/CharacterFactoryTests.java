@@ -1,4 +1,4 @@
-package Model.Tests;
+package Tests;
 
 import Model.CharacterFactory;
 import Model.Dwarf;
