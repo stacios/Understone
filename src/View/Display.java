@@ -115,6 +115,8 @@ public class Display {
                 myMenuDialog.setVisible(false);
                 myInputManager.resetKeyStates();
                 myJFrame.requestFocus();
+
+                GameLoop.getInstance().resetGame();
             }
         });
 
