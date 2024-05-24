@@ -91,6 +91,13 @@ public class GameLoop implements Drawable, Serializable {
         return myActiveRoom;
     }
 
+    public void resetGame() {
+        myDrawDataList = new ArrayList<>();
+
+        myActiveRoom = new Room(false, false);
+        myPlayer = CharacterFactory.createDwarf("Driller");
+    }
+
     @Override
     public String toString() {
         return "GameLoop{" +
