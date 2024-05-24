@@ -30,9 +30,9 @@ public class GameLoop implements Drawable, Serializable {
     private GameLoop() {
         myDrawDataList = new ArrayList<>();
 
+        startDB();
         myActiveRoom = new Room(false, false);
         myPlayer = CharacterFactory.createDwarf("Driller");
-        testCharacterFactoryAndDB();
     }
 
     public static GameLoop getInstance() {
@@ -48,7 +48,6 @@ public class GameLoop implements Drawable, Serializable {
     public boolean update(final InputData theInput) {
 
         myDrawDataList.clear();
-
 
         myPlayer.setInputData(theInput);
 
@@ -71,7 +70,7 @@ public class GameLoop implements Drawable, Serializable {
     /**
      * Temporary method for testing and printing values from database.
      */
-    public void testCharacterFactoryAndDB() {
+    public void startDB() {
         // Initializes Database
         SQLiteConnection.getDataSource();
 
@@ -80,8 +79,8 @@ public class GameLoop implements Drawable, Serializable {
         GlyphidDB.initializeDB();
 
         // Creates test Dwarf object
-        Dwarf testDwarf = CharacterFactory.createDwarf(DRILLER);
-        System.out.println(testDwarf.toString());
+//        Dwarf testDwarf = CharacterFactory.createDwarf(DRILLER);
+//        System.out.println(testDwarf.toString());
 
         // Creates test Dwarf object
         //Glyphid testGlyphid = CharacterFactory.createGlyphid("testGlyphid");
