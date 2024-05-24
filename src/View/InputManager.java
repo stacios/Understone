@@ -125,4 +125,8 @@ public class InputManager implements MouseListener, KeyListener, MouseMotionList
         void onEscapePressed();
     }
 
+    public void resetKeyStates() {
+        myKeysPressed.clear();
+    }
+
 }

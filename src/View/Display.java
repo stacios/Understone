@@ -52,6 +52,7 @@ public class Display {
     private final InputManager myInputManager;
     private final AudioPlayer myAudioPlayer;
     private JDialog myMenuDialog;
+    private boolean isRunning;
 
     public Display() {
 
@@ -65,9 +66,12 @@ public class Display {
         myJFrame = new JFrame("Understone");
         myJFrame.setLocation(0,0);
         myJFrame.setUndecorated(true);
+        isRunning = true;
         myJFrame.setVisible(true);
         myJFrame.setFocusable(true);
+        myJFrame.requestFocus();
         myJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        myJFrame.createBufferStrategy(2);
 
         myJPanel = new JPanel();
         myJPanel.setPreferredSize(new Dimension(myRealWidth, myRealHeight));
@@ -109,6 +113,8 @@ public class Display {
             @Override
             public void actionPerformed(ActionEvent e) {
                 myMenuDialog.setVisible(false);
+                myInputManager.resetKeyStates();
+                myJFrame.requestFocus();
             }
         });
 
@@ -118,6 +124,8 @@ public class Display {
                 myMenuDialog.setVisible(false);
                 JOptionPane.showMessageDialog(null, "SAVED!");
                 DataManager.saveGame(GameLoop.getInstance());
+                myInputManager.resetKeyStates();
+                myJFrame.requestFocus();
             }
         });
 
@@ -126,6 +134,8 @@ public class Display {
             public void actionPerformed(ActionEvent e) {
                 myMenuDialog.setVisible(false);
                 showLoadGameDialog();
+                myInputManager.resetKeyStates();
+                myJFrame.requestFocus();
             }
         });
 
@@ -134,9 +144,12 @@ public class Display {
             public void actionPerformed(ActionEvent e) {
                 final int choice = JOptionPane.showConfirmDialog(null, "QUIT!", "QUIT", JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
+                    isRunning = false;
                     dispose();
                 }
                 myMenuDialog.setVisible(false);
+                //myInputManager.resetKeyStates();
+                myJFrame.requestFocus();
             }
         });
 
@@ -180,6 +193,7 @@ public class Display {
         loadGameDialog.setVisible(true);
     }
     public void showMenuDialog() {
+        myInputManager.resetKeyStates();
         myMenuDialog.setVisible(true);
     }
 
@@ -188,12 +202,16 @@ public class Display {
     }
 
     public void dispose() {
+        isRunning = false;
         myJFrame.dispose();
     }
     /**
      * Renders the draw data to the display. Make sure each draw data string is in the correct format, look to Display documentation.
      */
     public void render(final String[] theDrawList) {
+        if (!isRunning) {
+            return;
+        }
         BufferStrategy bs = myJFrame.getBufferStrategy();
         if (bs == null){
             myJFrame.createBufferStrategy(2);
@@ -282,6 +300,10 @@ public class Display {
                 throw new IllegalArgumentException(theData[0] + " not valid input");
         }
 
+    }
+
+    public boolean isRunning() {
+        return isRunning;
     }
 
     public InputData getInputData() {
