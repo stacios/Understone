@@ -5,6 +5,7 @@ import Model.Weapon.Weapon;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
 /**
  * The player of the game. There are 4 types of dwarves: Driller, Engineer, Gunner, and Scout.
  * Each dwarf has a different set of weapons.
@@ -30,9 +31,10 @@ public class Dwarf extends Character {
         // attack logic
     }
 
-    public void setInputData(InputData theInputData) {
+    public void setInputData(final InputData theInputData) {
         myInputData = theInputData;
     }
+
     @Override
     public boolean update() {
         super.update();
@@ -61,12 +63,12 @@ public class Dwarf extends Character {
         if (myInputData.getUp() && myInputData.getDown() && myInputData.getRight() && myInputData.getLeft())
             angle = null;
 
-        // cases where 1 or 3 keys are pressed
+            // cases where 1 or 3 keys are pressed
         else if (myInputData.getDown() && myInputData.getRight() == myInputData.getLeft())
-            angle = new Angle(Math.PI/2);
+            angle = new Angle(Math.PI / 2);
 
         else if (myInputData.getUp() && myInputData.getRight() == myInputData.getLeft())
-            angle = new Angle(3*Math.PI/2);
+            angle = new Angle(3 * Math.PI / 2);
 
         else if (myInputData.getRight() && myInputData.getDown() == myInputData.getUp())
             angle = new Angle(0);
@@ -74,14 +76,13 @@ public class Dwarf extends Character {
         else if (myInputData.getLeft() && myInputData.getDown() == myInputData.getUp())
             angle = new Angle(Math.PI);
 
-        // cases where 2 keys are pressed
+            // cases where 2 keys are pressed
         else if (myInputData.getDown() && !myInputData.getUp()) {
-            if (myInputData.getRight()) angle = new Angle(Math.PI/4);
-            else angle = new Angle(3*Math.PI/4);
-        }
-        else if (myInputData.getUp() && !myInputData.getDown()) {
-            if (myInputData.getRight()) angle = new Angle(7*Math.PI/4);
-            else angle = new Angle(5*Math.PI/4);
+            if (myInputData.getRight()) angle = new Angle(Math.PI / 4);
+            else angle = new Angle(3 * Math.PI / 4);
+        } else if (myInputData.getUp() && !myInputData.getDown()) {
+            if (myInputData.getRight()) angle = new Angle(7 * Math.PI / 4);
+            else angle = new Angle(5 * Math.PI / 4);
         }
 
 

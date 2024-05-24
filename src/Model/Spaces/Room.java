@@ -74,7 +74,7 @@ public class Room implements Drawable, Serializable {
         }
     }
 
-    public void addAttack(Attack theAttack) {
+    public void addAttack(final Attack theAttack) {
         myAttacks.add(theAttack);
     }
 
