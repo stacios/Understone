@@ -8,8 +8,11 @@ public class Cave implements Serializable {
     private static final long serialVersionUID = 2L;
     private Room[][] myRooms;
 
-    public Cave(int width, int height) {
-        myRooms = new Room[width][height];
+    public Cave(int theWidth, int theHeight) {
+        if (theWidth <= 0 || theHeight <= 0) {
+            throw new IllegalArgumentException("Width and height must be positive");
+        }
+        myRooms = new Room[theWidth][theHeight];
         generateCave();
     }
 
@@ -21,12 +24,12 @@ public class Cave implements Serializable {
         }
     }
 
-    public void movePlayer(int x, int y) {
-        if (x >= 0 && x < myRooms.length && y >= 0 && y < myRooms[x].length) {
+    public void movePlayer(int theX, int theY) {
+        if (theX >= 0 && theX < myRooms.length && theY >= 0 && theY < myRooms[theX].length) {
             //Dwarf player = getCharacter();
             // Room newRoom = myRooms[x][y];
             // newRoom.addPlayer(player);
-            System.out.println("Player moves to room at position (" + x + ", " + y + ")");
+            System.out.println("Player moves to room at position (" + theX + ", " + theY + ")");
         } else {
             System.out.println("Move invalid: out of the cave bounds.");
         }

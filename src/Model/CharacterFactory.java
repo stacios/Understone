@@ -18,7 +18,7 @@ public class CharacterFactory {
      * @param theDwarfType is the Dwarf to be created.
      * @return new Dwarf.
      */
-    public static Dwarf createDwarf(String theDwarfType) {
+    public static Dwarf createDwarf(final String theDwarfType) {
         if (!DRILLER.equals(theDwarfType) && !ENGINEER.equals(theDwarfType) &&
                 !SCOUT.equals(theDwarfType) && !GUNNER.equals(theDwarfType)) {
             throw new Error("Passed dwarf type must be of defined dwarf type(Driller, Engineer, Gunner, Scout)");
@@ -90,7 +90,7 @@ public class CharacterFactory {
      * @param theGlyphidType is the Glyphid to be created.
      * @return new Glyphid.
      */
-    public static Glyphid createGlyphid(String theGlyphidType) {
+    public static Glyphid createGlyphid(final String theGlyphidType) {
         if (!ACID_SPIITER.equals(theGlyphidType) && !GLYPHID.equals(theGlyphidType) &&
                 !GRUNT.equals(theGlyphidType) && !MACTERA.equals(theGlyphidType) &&
                 !PRAETORIAN.equals(theGlyphidType) && !ROCK.equals(theGlyphidType) &&

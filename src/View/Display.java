@@ -2,13 +2,18 @@ package View;
 
 import Controller.DrawData;
 import Controller.InputData;
+import Model.DataManager;
 import Model.GameLoop;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferStrategy;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Used to display the game. Uses formatted strings as draw data. Should be formatted as follows:
@@ -47,6 +52,8 @@ public class Display {
     private final ImageLibrary myImageLibrary;
     private final InputManager myInputManager;
     private final AudioPlayer myAudioPlayer;
+    private JDialog myMenuDialog;
+    private boolean isRunning;
 
     public Display() {
 
@@ -60,9 +67,12 @@ public class Display {
         myJFrame = new JFrame("Understone");
         myJFrame.setLocation(0,0);
         myJFrame.setUndecorated(true);
+        isRunning = true;
         myJFrame.setVisible(true);
         myJFrame.setFocusable(true);
+        myJFrame.requestFocus();
         myJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        myJFrame.createBufferStrategy(2);
 
         myJPanel = new JPanel();
         myJPanel.setPreferredSize(new Dimension(myRealWidth, myRealHeight));
@@ -74,11 +84,120 @@ public class Display {
         myInputManager = new InputManager();
         myAudioPlayer = new AudioPlayer();
 
+        myInputManager.setEscapeKeyListener(new InputManager.EscapeKeyListener() {
+            @Override
+            public void onEscapePressed() {
+                showMenuDialog();
+            }
+        });
+
         myJFrame.addKeyListener(myInputManager);
         myJPanel.addMouseListener(myInputManager);
         myJPanel.addMouseMotionListener(myInputManager);
         System.out.println(myAudioPlayer.mySounds);
 
+        createMenuDialog();
+    }
+
+    private void createMenuDialog() {
+        myMenuDialog = new JDialog(myJFrame, "Menu", true);
+        myMenuDialog.setSize(300, 200);
+        myMenuDialog.setLocationRelativeTo(myJFrame);
+        myMenuDialog.setLayout(new GridLayout(4, 1));
+
+        JButton newGameButton = new JButton("New Game");
+        JButton saveButton = new JButton("Save Game");
+        JButton loadGameButton = new JButton("Load Game");
+        JButton quitButton = new JButton("Quit");
+
+        newGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myMenuDialog.setVisible(false);
+                myInputManager.resetKeyStates();
+                myJFrame.requestFocus();
+
+                GameLoop.getInstance().resetGame();
+            }
+        });
+
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myMenuDialog.setVisible(false);
+                JOptionPane.showMessageDialog(null, "SAVED!");
+                DataManager.saveGame(GameLoop.getInstance());
+                myInputManager.resetKeyStates();
+                myJFrame.requestFocus();
+            }
+        });
+
+        loadGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myMenuDialog.setVisible(false);
+                showLoadGameDialog();
+                myInputManager.resetKeyStates();
+                myJFrame.requestFocus();
+            }
+        });
+
+        quitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                final int choice = JOptionPane.showConfirmDialog(null, "QUIT!", "QUIT", JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    isRunning = false;
+                    dispose();
+                }
+                myMenuDialog.setVisible(false);
+                //myInputManager.resetKeyStates();
+                myJFrame.requestFocus();
+            }
+        });
+
+        myMenuDialog.add(newGameButton);
+        myMenuDialog.add(saveButton);
+        myMenuDialog.add(loadGameButton);
+        myMenuDialog.add(quitButton);
+    }
+
+    private void showLoadGameDialog() {
+        JDialog loadGameDialog = new JDialog(myJFrame, "Load Game", true);
+        loadGameDialog.setSize(300, 400);
+        loadGameDialog.setLocationRelativeTo(myJFrame);
+        loadGameDialog.setLayout(new BorderLayout());
+
+        List<String> savedGames = DataManager.getSavedGames();
+        List<String> displayNames = savedGames.stream()
+                .map(DataManager::getDisplayName)
+                .collect(Collectors.toList());
+        JList<String> savedGamesList = new JList<>(displayNames.toArray(new String[0]));
+        savedGamesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        JButton loadButton = new JButton("Load");
+        loadButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedIndex = savedGamesList.getSelectedIndex();
+                if (selectedIndex != -1) {
+                    String selectedGame = savedGames.get(selectedIndex);
+                    GameLoop loadedGame = DataManager.loadGame(selectedGame);
+                    GameLoop.getInstance().setDataLoading(loadedGame);
+                    loadGameDialog.setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(loadGameDialog, "Please select a game to load.");
+                }
+            }
+        });
+
+        loadGameDialog.add(new JScrollPane(savedGamesList), BorderLayout.CENTER);
+        loadGameDialog.add(loadButton, BorderLayout.SOUTH);
+        loadGameDialog.setVisible(true);
+    }
+    public void showMenuDialog() {
+        myInputManager.resetKeyStates();
+        myMenuDialog.setVisible(true);
     }
 
     public static Display getInstance() {
@@ -86,12 +205,16 @@ public class Display {
     }
 
     public void dispose() {
+        isRunning = false;
         myJFrame.dispose();
     }
     /**
      * Renders the draw data to the display. Make sure each draw data string is in the correct format, look to Display documentation.
      */
     public void render(final String[] theDrawList) {
+        if (!isRunning) {
+            return;
+        }
         BufferStrategy bs = myJFrame.getBufferStrategy();
         if (bs == null){
             myJFrame.createBufferStrategy(2);
@@ -180,6 +303,10 @@ public class Display {
                 throw new IllegalArgumentException(theData[0] + " not valid input");
         }
 
+    }
+
+    public boolean isRunning() {
+        return isRunning;
     }
 
     public InputData getInputData() {

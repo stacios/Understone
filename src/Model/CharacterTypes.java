@@ -5,15 +5,15 @@ package Model;
  * Includes types of Dwarf and Glyphid.
  */
 public class CharacterTypes {
-    public static String DRILLER = "Driller";
-    public static String ENGINEER = "Engineer";
-    public static String GUNNER = "Gunner";
-    public static String SCOUT = "Scout";
-    public static String ACID_SPIITER = "AcidSpitter";
-    public static String GLYPHID = "Glyphid";
-    public static String GRUNT = "Grunt";
-    public static String MACTERA = "Mactera";
-    public static String PRAETORIAN = "Praetorian";
-    public static String ROCK = "Rock";
-    public static String SWARMER = "Swarmer";
+    public static final String DRILLER = "Driller";
+    public static final String ENGINEER = "Engineer";
+    public static final String GUNNER = "Gunner";
+    public static final String SCOUT = "Scout";
+    public static final String ACID_SPIITER = "AcidSpitter";
+    public static final String GLYPHID = "Glyphid";
+    public static final String GRUNT = "Grunt";
+    public static final String MACTERA = "Mactera";
+    public static final String PRAETORIAN = "Praetorian";
+    public static final String ROCK = "Rock";
+    public static final String SWARMER = "Swarmer";
 }

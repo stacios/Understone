@@ -11,9 +11,9 @@ public interface Collidable {
     /**
      * Returns true if the collidable is colliding with the other collidable.
      */
-    default boolean colliding(Collidable other){
+    default boolean colliding(final Collidable theOther){
         int[] hitbox1 = this.getHitbox();
-        int[] hitbox2 = other.getHitbox();
+        int[] hitbox2 = theOther.getHitbox();
 
         int centerX1 = hitbox1[0];
         int centerY1 = hitbox1[1];

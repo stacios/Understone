@@ -28,3 +28,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Save Games ###
+save_games
+Understone.iml

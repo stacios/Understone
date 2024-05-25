@@ -9,16 +9,18 @@ public class FireAttack extends ProjectileAttack {
 
     public FireAttack(int theDamage, int theWidth, int theHeight, double theKnockBackStrength, double theInitialDistance, double theVelocity, int theFireTime) {
         super(theDamage, theWidth, theHeight, theKnockBackStrength, theInitialDistance, theVelocity);
-        myFireTime = theFireTime;
-    }
-
-
-    public int getFireTime() {
-        return myFireTime;
+        setFireTime(theFireTime);
     }
 
     public void setFireTime(int fireTime) {
+        if (fireTime < 0) {
+            throw new IllegalArgumentException("Fire time cannot be negative");
+        }
         this.myFireTime = fireTime;
+    }
+
+    public int getFireTime() {
+        return myFireTime;
     }
 
     @Override

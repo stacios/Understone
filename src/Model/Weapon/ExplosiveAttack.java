@@ -9,9 +9,15 @@ public class ExplosiveAttack extends ProjectileAttack {
 
     public ExplosiveAttack(int theDamage, int theWidth, int theHeight, double theKnockBackStrength, double theInitialDistance, double theVelocity, double theRadius) {
         super(theDamage, theWidth, theHeight, theKnockBackStrength, theInitialDistance, theVelocity);
-        myRadius = theRadius;
+        setRadius(theRadius);
     }
 
+    public void setRadius(double radius) {
+        if (radius < 0) {
+            throw new IllegalArgumentException("Radius cannot be negative");
+        }
+        this.myRadius = radius;
+    }
 
     public double getRadius() {
         return myRadius;

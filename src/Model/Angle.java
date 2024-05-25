@@ -10,15 +10,18 @@ public class Angle implements Serializable {
     private double myRadians;
 
     public Angle(double theRadians) {
-        this.myRadians = theRadians;
+        myRadians = theRadians;
     }
 
-    public Angle(double x1, double y1, double x2, double y2) {
-        double deltaY = y2 - y1;
-        double deltaX = x2 - x1;
-        this.myRadians = Math.atan2(deltaY, deltaX); //  calculates the angle in radians between the positive x-axis of a plane and the point given by the coordinates (x, y)
-        if (myRadians < 0)
-            myRadians = 2 * Math.PI + myRadians;
+    public Angle(double theX1, double theY1, double theX2, double theY2) {
+        double deltaY = theY2 - theY1;
+        double deltaX = theX2 - theX1;
+        double radians = Math.atan2(deltaY, deltaX); //  calculates the angle in radians between the positive x-axis of a plane and the point given by the coordinates (x, y)
+        setRadians(radians);
+    }
+
+    public void setRadians(double theRadians) {
+        myRadians = theRadians < 0 ? 2 * Math.PI + theRadians : theRadians;
     }
 
     public double getRadians() {

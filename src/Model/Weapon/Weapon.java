@@ -6,12 +6,14 @@ import Model.GameLoop;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.io.Serializable;
 
 /**
  * Represents a weapon. Each character has a weapon. Has a cooldown between being able to fire.
  * Has an attack template, which is copied and added to the active room on a successful fire.
  */
-public class Weapon {
+public class Weapon implements Serializable {
+    private static final long serialVersionUID = 4L;
     private final Attack myAttack;
     private int myCooldown;
     private final int myMaxCooldown;
@@ -21,11 +23,18 @@ public class Weapon {
 
     // Constructor to initialize the Weapon object
     public Weapon(int theMaxCooldown, Attack theAttack) {
+        if (theMaxCooldown < 0) {
+            throw new IllegalArgumentException("Max cooldown cannot be negative");
+        }
+        if (theAttack == null) {
+            throw new IllegalArgumentException("Attack cannot be null");
+        }
         this.myAttack = theAttack;
         this.myCooldown = 0;
         this.myMaxCooldown = theMaxCooldown;
         this.myPendingAttacks = new LinkedList<>();
     }
+
     /**
      * Attempt to fire the weapon. Will only fire if the cooldown is 0.
      */

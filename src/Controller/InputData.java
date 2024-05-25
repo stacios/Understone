@@ -13,7 +13,9 @@ public class InputData {
     private BitSet myKeys;
 
     public InputData(final BitSet theKeys, final int theMouseX, final int theMouseY) {
-
+        if (theKeys == null) {
+            throw new IllegalArgumentException("Keys BitSet cannot be null");
+        }
         myMouseX = theMouseX;
         myMouseY = theMouseY;
         myKeys = (BitSet) theKeys.clone();

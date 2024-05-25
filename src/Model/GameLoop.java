@@ -11,6 +11,7 @@ import Model.Spaces.Cave;
 import Model.Spaces.Room;
 import Model.Weapon.Attack;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,33 +19,35 @@ import static Model.CharacterTypes.*;
 /**
  * The main game loop. Controls the player, cave, and active room.
  */
-public class GameLoop implements Drawable {
-
+public class GameLoop implements Drawable, Serializable {
+    private static final long serialVersionUID = 8L;
     private static final GameLoop myInstance = new GameLoop();
-
     private Dwarf myPlayer;
     private Cave myCave;
-
     private Room myActiveRoom;
-
-    private ArrayList<String> myDrawDataList;
+    private transient ArrayList<String> myDrawDataList;
 
     private GameLoop() {
         myDrawDataList = new ArrayList<>();
 
+        startDB();
         myActiveRoom = new Room(false, false);
         myPlayer = CharacterFactory.createDwarf("Gunner");
-        testCharacterFactoryAndDB();
     }
 
     public static GameLoop getInstance() {
         return myInstance;
     }
 
+    public void setDataLoading(GameLoop theSavedGame){
+        myPlayer = theSavedGame.myPlayer;
+        myCave = theSavedGame.myCave;
+        myActiveRoom = theSavedGame.myActiveRoom;
+    }
+
     public boolean update(final InputData theInput) {
 
         myDrawDataList.clear();
-
 
         myPlayer.setInputData(theInput);
 
@@ -67,7 +70,7 @@ public class GameLoop implements Drawable {
     /**
      * Temporary method for testing and printing values from database.
      */
-    public void testCharacterFactoryAndDB() {
+    public void startDB() {
         // Initializes Database
         SQLiteConnection.getDataSource();
 
@@ -76,8 +79,8 @@ public class GameLoop implements Drawable {
         GlyphidDB.initializeDB();
 
         // Creates test Dwarf object
-        Dwarf testDwarf = CharacterFactory.createDwarf(DRILLER);
-        System.out.println(testDwarf.toString());
+//        Dwarf testDwarf = CharacterFactory.createDwarf(DRILLER);
+//        System.out.println(testDwarf.toString());
 
         // Creates test Dwarf object
         //Glyphid testGlyphid = CharacterFactory.createGlyphid("testGlyphid");
@@ -86,5 +89,21 @@ public class GameLoop implements Drawable {
 
     public Room getActiveRoom() {
         return myActiveRoom;
+    }
+
+    public void resetGame() {
+        myDrawDataList = new ArrayList<>();
+
+        myActiveRoom = new Room(false, false);
+        myPlayer = CharacterFactory.createDwarf("Driller");
+    }
+
+    @Override
+    public String toString() {
+        return "GameLoop{" +
+                "myPlayer=" + myPlayer +
+                ", myCave=" + myCave +
+                ", myActiveRoom=" + myActiveRoom +
+                '}';
     }
 }

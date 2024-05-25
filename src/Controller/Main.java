@@ -20,7 +20,7 @@ public class Main {
 
         boolean running = true;
 
-        while (running) {
+        while (running && display.isRunning()) {
 
             running = gameLoop.update(display.getInputData());
             display.render(gameLoop.getDrawData());

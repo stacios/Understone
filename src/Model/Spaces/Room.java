@@ -8,13 +8,14 @@ import Model.Glyphid.Glyphid;
 import Model.Glyphid.Rock;
 import View.Display;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Room implements Drawable {
-
+public class Room implements Drawable, Serializable {
+    private static final long serialVersionUID = 3L;
     private List<Glyphid> myGlyphids;
     private List<Attack> myDwarfAttacks;
     private List<Attack> myGlyphidAttacks;
@@ -104,6 +105,5 @@ public class Room implements Drawable {
 
         return result.toArray(new String[0]);
     }
-
 
 }

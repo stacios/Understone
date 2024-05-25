@@ -14,10 +14,24 @@ public class MinigunWeapon extends Weapon {
     public MinigunWeapon(int theMaxCooldown, Attack theAttack,
                          int theMaxSpinup, int theDecayRate, Angle theSpread) {
         super(theMaxCooldown, theAttack);
-        this.myMaxSpinup = theMaxSpinup;
-        this.myDecayRate = theDecayRate;
+        setMaxSpinup(theMaxSpinup);
+        setDecayRate(theDecayRate);
         this.mySpinup = 0;  // 0 for start
         this.mySpread = theSpread;
+    }
+
+    public void setMaxSpinup(int maxSpinup) {
+        if (maxSpinup < 0) {
+            throw new IllegalArgumentException("Max spinup cannot be negative");
+        }
+        this.myMaxSpinup = maxSpinup;
+    }
+
+    public void setDecayRate(int decayRate) {
+        if (decayRate < 0) {
+            throw new IllegalArgumentException("Decay rate cannot be negative");
+        }
+        this.myDecayRate = decayRate;
     }
 
     @Override
