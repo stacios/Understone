@@ -32,10 +32,56 @@ public class CharacterFactory {
         int width = DwarfDB.getDefaultValue(theDwarfType, "width"); // Default width
         int height = DwarfDB.getDefaultValue(theDwarfType, "height"); // Default height
         double moveSpeed = DwarfDB.getDefaultValue(theDwarfType, "movespeed"); // Default speed
-        int damage = DwarfDB.getDefaultValue(theDwarfType, "damage");
-        Weapon defaultWeapon = new ShotgunWeapon(60, new ProjectileAttack(10, 20, 20, 10.0, 70, 20), 10, new Angle(Math.toRadians(45)));
+        //int damage = DwarfDB.getDefaultValue(theDwarfType, "damage");
+
+        Weapon[] weapons = new Weapon[3];
+        // pickaxe
+        weapons[2] = new Weapon(30, new MeleeAttack(10, 200, 200, 10, 100));
+
+        switch (theDwarfType) {
+
+            case "Driller":
+                // flamethrower
+                weapons[0] = new Weapon(6,
+                        new FireAttack(10, 100, 100, 0, 100, 15, 20));
+                // pistol
+                weapons[1] = new Weapon(30,
+                        new ProjectileAttack(10, 30, 30, 10, 70, 30));
+                break;
+
+            case "Scout":
+                // m1000
+                weapons[0] = new Weapon(25,
+                        new ProjectileAttack(20, 30, 30, 0, 70, 30));
+                // sawedoff
+                weapons[1] = new ShotgunWeapon(60,
+                        new ProjectileAttack(8, 30, 30, 10, 70, 30),
+                        10, new Angle(Math.toRadians(40)));
+                break;
+
+            case "Engineer":
+                // shotgun
+                weapons[0] = new ShotgunWeapon(40,
+                        new ProjectileAttack(8, 30, 30, 10, 70, 30),
+                        8, new Angle(Math.toRadians(20)));
+                // grenade launcher
+                weapons[1] = new Weapon(200,
+                        new ExplosiveAttack(100, 30, 30, 10, 70, 20, 200));
+                break;
+
+            case "Gunner":
+                // minigun
+                weapons[0] = new MinigunWeapon(6,
+                        new ProjectileAttack(5, 30, 30, 5, 70, 30),
+                        40, 2, new Angle(Math.toRadians(20)));
+                // revolver
+                weapons[1] = new Weapon(60,
+                        new ProjectileAttack(40, 30, 30, 30, 70, 30));
+                break;
+        }
+        //Weapon defaultWeapon = new ShotgunWeapon(60, new ProjectileAttack(10, 20, 20, 10.0, 70, 20), 10, new Angle(Math.toRadians(45)));
         //return new Dwarf(theDwarfType, x, y, health, width, height, moveSpeed, defaultWeapon);
-        return new Dwarf(theDwarfType, 400, 400, 100, 100, 100, 5, defaultWeapon);
+        return new Dwarf(theDwarfType, 400, 400, 100, 100, 100, 5, weapons);
     }
 
     /**

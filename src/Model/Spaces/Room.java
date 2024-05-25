@@ -1,11 +1,12 @@
 package Model.Spaces;
 
 import Controller.Drawable;
-import Model.GameLoop;
+import Model.*;
+import Model.Character;
 import Model.Weapon.Attack;
-import Model.Dwarf;
 import Model.Glyphid.Glyphid;
 import Model.Glyphid.Rock;
+import View.Display;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,27 +45,9 @@ public class Room implements Drawable {
     }
 
 
-    @Override
-    public String[] getDrawData() {
-
-        List<String> result = new ArrayList<>();
-        result.add("image:Room:" + 1920/2 + ":" + 1080/2 + ":1920:1080");
-        for (Glyphid e : myGlyphids) {
-            result.addAll(Arrays.asList(e.getDrawData()));
-        }
-        result.addAll(Arrays.asList(GameLoop.getInstance().getPlayer().getDrawData()));
-        for (Attack e : myGlyphidAttacks) {
-            result.addAll(Arrays.asList(e.getDrawData()));
-        }
-        for (Attack e : myDwarfAttacks) {
-            result.addAll(Arrays.asList(e.getDrawData()));
-        }
-
-
-        return result.toArray(new String[0]);
-    }
-
     public void update() {
+
+        // update, remove, receive attacks
         GameLoop.getInstance().getPlayer().update();
         myDwarfAttacks.addAll(List.of(GameLoop.getInstance().getPlayer().getPendingAttacks()));
         for (int i = myGlyphids.size() - 1; i >= 0; i--) {
@@ -83,6 +66,44 @@ public class Room implements Drawable {
                 myGlyphidAttacks.remove(i);
             }
         }
+
+        // character on character collisions
+        List<Character> characters = new ArrayList<>(myGlyphids);
+        characters.add(GameLoop.getInstance().getPlayer());
+        Character c1, c2;
+        for (int i = 0; i < characters.size(); i++) {
+            for (int j = i + 1; j < characters.size(); j++) {
+                c1 = characters.get(i);
+                c2 = characters.get(j);
+                if (c1.colliding(c2)) {
+                    c1.addForce(new Force(new Angle(c2.getX(), c2.getY(), c1.getX(), c1.getY()), .5, .5));
+                    c2.addForce(new Force(new Angle(c1.getX(), c1.getY(), c2.getX(), c2.getY()), .5, .5));
+                }
+            }
+        }
+
+        // attack on character collisions
     }
+
+    @Override
+    public String[] getDrawData() {
+
+        List<String> result = new ArrayList<>();
+        result.add("image:Room:" + Display.getInstance().getWidth() /2 + ":" + Display.getInstance().getHeight()/2 + ":1920:1080");
+        for (Glyphid e : myGlyphids) {
+            result.addAll(Arrays.asList(e.getDrawData()));
+        }
+        result.addAll(Arrays.asList(GameLoop.getInstance().getPlayer().getDrawData()));
+        for (Attack e : myGlyphidAttacks) {
+            result.addAll(Arrays.asList(e.getDrawData()));
+        }
+        for (Attack e : myDwarfAttacks) {
+            result.addAll(Arrays.asList(e.getDrawData()));
+        }
+
+
+        return result.toArray(new String[0]);
+    }
+
 
 }

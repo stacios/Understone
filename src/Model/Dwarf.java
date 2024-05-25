@@ -12,23 +12,19 @@ import java.util.ArrayList;
 public class Dwarf extends Character {
 
     private transient InputData myInputData;
-    private ArrayList<Weapon> myWeapons;
+    private Weapon[] myWeapons;
 
-    public Dwarf(String theName, double theX, double theY, int theHealth, int theWidth, int theHeight, double theMoveSpeed, Weapon theWeapon) {
-        super(theName, theX, theY, theHealth, theWidth, theHeight, theMoveSpeed, theWeapon);
-        myWeapons = new ArrayList<>();
+    public Dwarf(String theName, double theX, double theY, int theHealth, int theWidth, int theHeight, double theMoveSpeed, Weapon[] theWeapons) {
+        super(theName, theX, theY, theHealth, theWidth, theHeight, theMoveSpeed, theWeapons[0]);
+        myWeapons = theWeapons;
     }
 
-    public void switchWeapon(int index) {
-        if (index >= 0 && index < myWeapons.size()) {
-            setWeapon(myWeapons.get(index));
+    public void switchWeapon(int theIndex) {
+        if (theIndex >= 0 && theIndex < myWeapons.length) {
+            setWeapon(myWeapons[theIndex]);
         }
     }
 
-    public void attack() {
-        System.out.println("Dwarf performing a special attack!");
-        // attack logic
-    }
 
     public void setInputData(InputData theInputData) {
         myInputData = theInputData;
@@ -36,11 +32,17 @@ public class Dwarf extends Character {
     @Override
     public boolean update() {
         super.update();
-        // specific logic for Dwarf?
 
         walk();
         if (myInputData.getM1())
             attemptAttack(myInputData.getMouseX(), myInputData.getMouseY());
+        if (myInputData.getWeapon1())
+            switchWeapon(0);
+        if (myInputData.getWeapon2())
+            switchWeapon(1);
+        if (myInputData.getWeapon3())
+            switchWeapon(2);
+
 
         return false;
 

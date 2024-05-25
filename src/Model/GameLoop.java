@@ -33,7 +33,7 @@ public class GameLoop implements Drawable {
         myDrawDataList = new ArrayList<>();
 
         myActiveRoom = new Room(false, false);
-        myPlayer = CharacterFactory.createDwarf("Driller");
+        myPlayer = CharacterFactory.createDwarf("Gunner");
         testCharacterFactoryAndDB();
     }
 
