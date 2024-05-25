@@ -9,13 +9,15 @@ public class MinigunWeapon extends Weapon {
     private int mySpinup;
     private int myMaxSpinup;
     private int myDecayRate;
+    private Angle mySpread;
 
-    public MinigunWeapon(Attack theAttack, int theMaxCooldown,
-                         int theMaxSpinup, int theDecayRate) {
-        super(theMaxCooldown, theAttack);
+    public MinigunWeapon(int theMaxCooldown, Attack theAttack, String theSound,
+                         int theMaxSpinup, int theDecayRate, Angle theSpread) {
+        super(theMaxCooldown, theAttack, theSound);
         setMaxSpinup(theMaxSpinup);
         setDecayRate(theDecayRate);
         this.mySpinup = 0;  // 0 for start
+        this.mySpread = theSpread;
     }
 
     public void setMaxSpinup(int maxSpinup) {
@@ -36,7 +38,8 @@ public class MinigunWeapon extends Weapon {
     public boolean attemptAttack(Character origin, Angle angle) {
         mySpinup += myDecayRate;
         if (mySpinup >= myMaxSpinup) {
-            return super.attemptAttack(origin, angle);
+            double spread = mySpread.getRadians() * ((System.nanoTime() % 1000) / 1000.0) - mySpread.getRadians() / 2;
+            return super.attemptAttack(origin, new Angle(angle.getRadians() + spread));
         } else {
             // increase spinup, but do not attack
             mySpinup += 1;

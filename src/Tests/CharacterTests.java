@@ -18,7 +18,7 @@ public class CharacterTests {
 
     @Before
     public void setUp() {
-        weapon = new Weapon(60, new MeleeAttack(10, 200, 200, 10.0, 70));
+        weapon = new Weapon(60, new MeleeAttack(10, 200, 200, 10.0, 70), null);
         character = new Character("TestCharacter", 100, 100, 100, 50, 50, 10, weapon) {
 
         };

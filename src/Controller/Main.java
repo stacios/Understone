@@ -31,6 +31,6 @@ public class Main {
                 throw new RuntimeException(e);
             }
         }
-        //display.dispose();
+        display.dispose();
     }
 }
