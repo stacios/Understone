@@ -95,7 +95,7 @@ public class CharacterFactory {
         if (!ACID_SPIITER.equals(theGlyphidType) && !GLYPHID.equals(theGlyphidType) &&
                 !GRUNT.equals(theGlyphidType) && !MACTERA.equals(theGlyphidType) &&
                 !PRAETORIAN.equals(theGlyphidType) && !ROCK.equals(theGlyphidType) &&
-                !SWARMER.equals(theGlyphidType)) {
+                !SWARMER.equals(theGlyphidType) && !EGG.equals(theGlyphidType)) {
             throw new Error("Passed glyphid type must be of defined glyphid type: " +
                     "(Acid Spitter, Glyphid, Grunt, Mactera, Praetorian, Rock, Swarmer)");
         }
@@ -119,8 +119,12 @@ public class CharacterFactory {
             case ACID_SPIITER:
                 return new AcidSpitter(theGlyphidType, 600, 600, 80, 100, 100, 7, defaultWeapon, fireTimer);
             case GRUNT:
+            case ROCK:
+                return new Rock(theGlyphidType, 600, 500, 100, 200, 200, 0, defaultWeapon, 0);
+            case EGG:
+                return new Rock("Egg", 500, 500, 100, 100, 100, 0, defaultWeapon, 0);
             default:
-                return new Grunt(theGlyphidType, 800, 800, 100, 100, 100, 5, defaultWeapon, fireTimer);
+            return new Grunt(theGlyphidType, 800, 800, 100, 100, 100, 5, defaultWeapon, fireTimer);
         }        //return null;
     }
 }

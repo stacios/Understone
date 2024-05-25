@@ -18,7 +18,7 @@ public class Cave implements Serializable {
         myRooms = new Room[numberOfRooms];
 
         for (int i = 0; i < myRooms.length; i++) {
-            myRooms[i] = new Room(i, Math.random() > 0.8, Math.random() > 0.5); // Added room identifier
+            myRooms[i] = new Room(i, myRooms.length); // Added room identifier
         }
         myRooms[0].spawnEnemies();
         currentRoomIndex = 0; // Start in the first room

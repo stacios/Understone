@@ -7,6 +7,7 @@ import Model.Weapon.Attack;
 import Model.Glyphid.Glyphid;
 import Model.Glyphid.Rock;
 import View.Display;
+
 import static Model.CharacterTypes.*;
 
 import java.io.Serializable;
@@ -24,16 +25,14 @@ public class Room implements Drawable, Serializable {
     private boolean myHasDropPod;
     private Rock myRock;
     private int myIdentifier;
+    private int myTotalRooms;
 
-    public Room(int theIdentifier, boolean theHasDropPod, boolean theHasRock) {
+    public Room(int theIdentifier, int theTotalRooms) {
         myIdentifier = theIdentifier;
         myGlyphids = new ArrayList<>();
         myDwarfAttacks = new ArrayList<>();
         myGlyphidAttacks = new ArrayList<>();
-        myHasDropPod = theHasDropPod;
-        if (theHasRock) {
-            myRock = new Rock("Rock", 1,1,1,1,1,0,null,0);
-        }
+        myTotalRooms = theTotalRooms;
     }
 
     public boolean hasRock() {
@@ -71,6 +70,13 @@ public class Room implements Drawable, Serializable {
             grunt.setX(random.nextDouble() * 1920);
             grunt.setY(random.nextDouble() * 1080);
             myGlyphids.add(grunt);
+        }
+
+        if (myIdentifier >= myTotalRooms - 1) {
+            Glyphid rock = CharacterFactory.createGlyphid(ROCK);
+            Glyphid egg = CharacterFactory.createGlyphid(EGG);
+            myGlyphids.add(rock);
+            myGlyphids.add(egg);
         }
 
         System.out.println("Spawned " + (numberOfGrunts + 4 * difficultyFactor) + " enemies in the room.");
@@ -123,7 +129,7 @@ public class Room implements Drawable, Serializable {
     @Override
     public String[] getDrawData() {
         List<String> result = new ArrayList<>();
-        result.add("image:Room:" + Display.getInstance().getWidth() /2 + ":" + Display.getInstance().getHeight()/2 + ":1920:1080");
+        result.add("image:Room:" + Display.getInstance().getWidth() / 2 + ":" + Display.getInstance().getHeight() / 2 + ":1920:1080");
         for (Glyphid e : myGlyphids) {
             result.addAll(Arrays.asList(e.getDrawData()));
         }
