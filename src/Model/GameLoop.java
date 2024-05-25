@@ -60,7 +60,7 @@ public class GameLoop implements Drawable, Serializable {
     private void handleRoomTransition(final InputData theInput) {
         if (theInput.getInteract()) { // Space key is used for interaction
             if (!spacePressed) {
-                movePlayerToNextRoom();
+                moveToNextRoom();
                 spacePressed = true;
             }
         } else {
@@ -68,12 +68,28 @@ public class GameLoop implements Drawable, Serializable {
         }
     }
 
-    public void movePlayerToNextRoom() {
+    public void moveToNextRoom() {
+        Room currentRoom = myCave.getCurrentRoom();
+
         if (myCave.hasNextRoom()) {
-            myCave.moveToNextRoom();
-            myActiveRoom = myCave.getCurrentRoom();
+            // Todo add additional condition that all enemies must be dead
+            if (currentRoom.isDwarfInArea(myPlayer)) {
+                myCave.moveToNextRoom();
+                myActiveRoom = myCave.getCurrentRoom();
+                //System.out.println("Moved to room " + myActiveRoom.getIdentifier());
+            } else {
+                if (!currentRoom.isDwarfInArea(myPlayer)) {
+                    //System.out.println("Dwarf is not in the top area.");
+                }
+                if (!currentRoom.canExit()) {
+                    //System.out.println("Not all enemies are dead.");
+                }
+            }
+        } else {
+            System.out.println("You are in the last room. Cannot move to next room.");
         }
     }
+
 
     public void setActiveRoom(Room room) {
         myActiveRoom = room;

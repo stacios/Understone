@@ -73,8 +73,8 @@ public class Room implements Drawable, Serializable {
         }
 
         if (myIdentifier >= myTotalRooms - 1) {
-            Glyphid rock = CharacterFactory.createGlyphid(ROCK);
-            Glyphid egg = CharacterFactory.createGlyphid(EGG);
+            Rock rock = CharacterFactory.createRock(ROCK);
+            Rock egg = CharacterFactory.createRock(EGG);
             myGlyphids.add(rock);
             myGlyphids.add(egg);
         }
@@ -83,8 +83,11 @@ public class Room implements Drawable, Serializable {
     }
 
     public boolean canExit() {
-        // Return true only if (?)
-        return false;
+        return myGlyphids.isEmpty();
+    }
+
+    public boolean isDwarfInArea(Dwarf dwarf) {
+        return dwarf.getY() > 100 && dwarf.getX() > 850 && dwarf.getX() < 1100;
     }
 
     public void update() {
