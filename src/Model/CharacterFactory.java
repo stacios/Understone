@@ -5,8 +5,10 @@ import Model.DB.GlyphidDB;
 import Model.Glyphid.Glyphid;
 import Model.Glyphid.Grunt;
 import Model.Weapon.*;
+import Model.Glyphid.*;
 
 import static Model.CharacterTypes.*;
+
 /**
  * Contains methods for creating dwarves and glyphids correctly.
  */
@@ -93,8 +95,7 @@ public class CharacterFactory {
     public static Glyphid createGlyphid(final String theGlyphidType) {
         if (!ACID_SPIITER.equals(theGlyphidType) && !GLYPHID.equals(theGlyphidType) &&
                 !GRUNT.equals(theGlyphidType) && !MACTERA.equals(theGlyphidType) &&
-                !PRAETORIAN.equals(theGlyphidType) && !ROCK.equals(theGlyphidType) &&
-                !SWARMER.equals(theGlyphidType)) {
+                !PRAETORIAN.equals(theGlyphidType) && !SWARMER.equals(theGlyphidType)) {
             throw new Error("Passed glyphid type must be of defined glyphid type: " +
                     "(Acid Spitter, Glyphid, Grunt, Mactera, Praetorian, Rock, Swarmer)");
         }
@@ -110,8 +111,38 @@ public class CharacterFactory {
         int fireTimer = GlyphidDB.getDefaultValue(theGlyphidType, "firetimer"); // Default cooldown timer
         int damage = GlyphidDB.getDefaultValue(theGlyphidType, "damage"); // Default damage
         Weapon defaultWeapon = new Weapon(60, new MeleeAttack(10, 100, 100, 10.0, 100), null);
-        return new Grunt(theGlyphidType, x, y, health, width, height, moveSpeed, defaultWeapon, fireTimer);
-        //return null;
+
+        //return new Grunt(theGlyphidType, x, y, health, width, height, moveSpeed, defaultWeapon, fireTimer);
+        switch (theGlyphidType) {
+            case PRAETORIAN:
+                return new Praetorian(theGlyphidType, 800, 800, 200, 150, 150, 2, defaultWeapon, fireTimer);
+            case ACID_SPIITER:
+                return new AcidSpitter(theGlyphidType, 600, 600, 80, 100, 100, 7, defaultWeapon, fireTimer);
+            case GRUNT:
+                return new Grunt(theGlyphidType, 800, 800, 100, 100, 100, 5, defaultWeapon, fireTimer);
+            default:
+                
+        }
+
+        return null;
+    }
+
+    public static Rock createRock(final String theRockType) {
+        if (!theRockType.equals(ROCK) && !theRockType.equals(EGG)) {
+            throw new Error("Must be of type Egg or Rock");
+        }
+
+        Weapon defaultWeapon = new Weapon(60, new MeleeAttack(10, 100, 100, 10.0, 100), null);
+
+        switch (theRockType) {
+            case ROCK:
+                return new Rock(theRockType, 600, 500, 100, 200, 200, 0, defaultWeapon, 0);
+            case EGG:
+                return new Rock(theRockType, 500, 500, 100, 100, 100, 0, defaultWeapon, 0);
+            default:
+        }
+
+        return null;
     }
 }
 

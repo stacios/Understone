@@ -8,46 +8,89 @@ import Model.Glyphid.Glyphid;
 import Model.Glyphid.Rock;
 import View.Display;
 
+import static Model.CharacterTypes.*;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 public class Room implements Drawable, Serializable {
+    public static final double WALL_THICKNESS = 5;
     private static final long serialVersionUID = 3L;
     private List<Glyphid> myGlyphids;
     private List<Attack> myDwarfAttacks;
     private List<Attack> myGlyphidAttacks;
     private boolean myHasDropPod;
     private Rock myRock;
+    private int myIdentifier;
+    private int myTotalRooms;
 
-    public Room(boolean theHasDropPod, boolean theHasRock) {
+    public Room(int theIdentifier, int theTotalRooms) {
+        myIdentifier = theIdentifier;
         myGlyphids = new ArrayList<>();
         myDwarfAttacks = new ArrayList<>();
         myGlyphidAttacks = new ArrayList<>();
-        myHasDropPod = theHasDropPod;
-        if (theHasRock) {
-            myRock = new Rock("Rock", 1,1,1,1,1,0,null,0);
-        }
-
+        myTotalRooms = theTotalRooms;
     }
+
     public boolean hasRock() {
         return myRock != null;
     }
 
+    public int getIdentifier() {
+        return myIdentifier;
+    }
+
     public void spawnEnemies() {
-        System.out.println("Enemies spawned in the room.");
+        Random random = new Random();
+        int difficultyFactor = myIdentifier + 1; // Increase the difficulty factor based on room identifier
+
+        // Always add 2 Praetorians per difficulty factor
+        for (int i = 0; i < 2; i++) {
+            Glyphid praetorian = CharacterFactory.createGlyphid(PRAETORIAN);
+            praetorian.setX(random.nextDouble() * 1920);
+            praetorian.setY(random.nextDouble() * 1080);
+            myGlyphids.add(praetorian);
+        }
+
+        // Always add 2 Acid Spitters per difficulty factor
+        for (int i = 0; i < 2; i++) {
+            Glyphid acidSpitter = CharacterFactory.createGlyphid(ACID_SPIITER);
+            acidSpitter.setX(random.nextDouble() * 1920);
+            acidSpitter.setY(random.nextDouble() * 1080);
+            myGlyphids.add(acidSpitter);
+        }
+
+        // Add random number of Grunts, increased by difficulty factor
+        int numberOfGrunts = (random.nextInt(3) + 5) + difficultyFactor;
+        for (int i = 0; i < numberOfGrunts; i++) {
+            Glyphid grunt = CharacterFactory.createGlyphid(GRUNT);
+            grunt.setX(random.nextDouble() * 1920);
+            grunt.setY(random.nextDouble() * 1080);
+            myGlyphids.add(grunt);
+        }
+
+        if (myIdentifier >= myTotalRooms - 1) {
+            Rock rock = CharacterFactory.createRock(ROCK);
+            Rock egg = CharacterFactory.createRock(EGG);
+            myGlyphids.add(rock);
+            myGlyphids.add(egg);
+        }
+
+        System.out.println("Spawned " + (numberOfGrunts + 4 * difficultyFactor) + " enemies in the room.");
     }
 
     public boolean canExit() {
-        // Return true only if (?)
-        return false;
+        return myGlyphids.isEmpty();
     }
 
+    public boolean isDwarfInArea(Dwarf dwarf) {
+        return dwarf.getY() > 100 && dwarf.getX() > 850 && dwarf.getX() < 1100;
+    }
 
     public void update() {
-
         // update, remove, receive attacks
         GameLoop.getInstance().getPlayer().update();
         myDwarfAttacks.addAll(List.of(GameLoop.getInstance().getPlayer().getPendingAttacks()));
@@ -88,9 +131,8 @@ public class Room implements Drawable, Serializable {
 
     @Override
     public String[] getDrawData() {
-
         List<String> result = new ArrayList<>();
-        result.add("image:Room:" + Display.getInstance().getWidth() /2 + ":" + Display.getInstance().getHeight()/2 + ":1920:1080");
+        result.add("image:Room:" + Display.getInstance().getWidth() / 2 + ":" + Display.getInstance().getHeight() / 2 + ":1920:1080");
         for (Glyphid e : myGlyphids) {
             result.addAll(Arrays.asList(e.getDrawData()));
         }
@@ -101,9 +143,13 @@ public class Room implements Drawable, Serializable {
         for (Attack e : myDwarfAttacks) {
             result.addAll(Arrays.asList(e.getDrawData()));
         }
-
-
         return result.toArray(new String[0]);
     }
 
+    @Override
+    public String toString() {
+        return "Room{" +
+                "myIdentifier=" + myIdentifier +
+                '}';
+    }
 }
