@@ -32,3 +32,5 @@ bin/
 ### Save Games ###
 save_games
 Understone.iml
+*.db
+UDB.db
