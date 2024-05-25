@@ -6,6 +6,9 @@ import Model.Weapon.Weapon;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Represents a character in the game. Parent class for Dwarf and Glyphids.
  */
@@ -158,7 +161,10 @@ public abstract class Character implements Drawable, Collidable, Serializable {
 
     @Override
     public String[] getDrawData() {
-        return new String[]{"image:" + myName + ":" + myX + ":" + myY + ":" + myWidth + ":" + myHeight};
+        List<String> temp = new LinkedList<>();
+        temp.add("image:" + myName + ":" + myX + ":" + myY + ":" + myWidth + ":" + myHeight);
+        temp.addAll(List.of(myWeapon.getDrawData()));
+        return temp.toArray(new String[0]);
     }
 
     @Override

@@ -6,8 +6,8 @@ public class ShotgunWeapon extends Weapon {
 
     private final int myPelletCount;
     private final Angle mySpread;
-    public ShotgunWeapon(int theMaxCooldown, Attack theAttack, int thePelletCount, Angle theSpread) {
-        super(theMaxCooldown, theAttack);
+    public ShotgunWeapon(int theMaxCooldown, Attack theAttack, String theSound, int thePelletCount, Angle theSpread) {
+        super(theMaxCooldown, theAttack, theSound);
         myPelletCount = thePelletCount;
         mySpread = theSpread;
     }

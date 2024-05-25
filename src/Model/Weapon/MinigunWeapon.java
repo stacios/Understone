@@ -11,9 +11,9 @@ public class MinigunWeapon extends Weapon {
     private int myDecayRate;
     private Angle mySpread;
 
-    public MinigunWeapon(int theMaxCooldown, Attack theAttack,
+    public MinigunWeapon(int theMaxCooldown, Attack theAttack, String theSound,
                          int theMaxSpinup, int theDecayRate, Angle theSpread) {
-        super(theMaxCooldown, theAttack);
+        super(theMaxCooldown, theAttack, theSound);
         setMaxSpinup(theMaxSpinup);
         setDecayRate(theDecayRate);
         this.mySpinup = 0;  // 0 for start
