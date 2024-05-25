@@ -42,10 +42,11 @@ public class CharacterFactory {
 
             case "Driller":
                 // flamethrower
-                weapons[0] = new Weapon(6,
-                        new FireAttack(10, 100, 100, 0, 100, 15, 20), null);
+                weapons[0] = new MinigunWeapon(6,
+                        new ProjectileAttack(7, 100, 100, 0, 100, 7, "Fire"), "FlamethrowerShot",
+                0, 0, new Angle(Math.toRadians(10)));
                 // pistol
-                weapons[1] = new Weapon(30,
+                weapons[1] = new Weapon(15,
                         new ProjectileAttack(10, 30, 30, 10, 70, 30), "SubataShot");
                 break;
 
@@ -110,7 +111,7 @@ public class CharacterFactory {
         int fireTimer = GlyphidDB.getDefaultValue(theGlyphidType, "firetimer"); // Default cooldown timer
         int damage = GlyphidDB.getDefaultValue(theGlyphidType, "damage"); // Default damage
         Weapon defaultWeapon = new Weapon(60, new MeleeAttack(10, 100, 100, 10.0, 100), null);
-        return new Grunt(theGlyphidType, x, y, health, width, height, moveSpeed, defaultWeapon, fireTimer);
+        return new Grunt("Grunt", 800, 800, 100, 100, 100, 5, defaultWeapon);
         //return null;
     }
 }

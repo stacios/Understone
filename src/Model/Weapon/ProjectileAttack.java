@@ -9,10 +9,16 @@ import View.Display;
  */
 public class ProjectileAttack extends Attack {
     private double myVelocity;
+    private final String myImage;
 
     public ProjectileAttack(int theDamage, int theWidth, int theHeight, double theKnockBackStrength, double theInitialDistance, double theVelocity) {
+        this(theDamage, theWidth, theHeight, theKnockBackStrength, theInitialDistance, theVelocity, "Bullet");
+    }
+
+    public ProjectileAttack(int theDamage, int theWidth, int theHeight, double theKnockBackStrength, double theInitialDistance, double theVelocity, String theAltImage) {
         super(theDamage, theWidth, theHeight, theKnockBackStrength, theInitialDistance);
         setVelocity(theVelocity);
+        myImage = theAltImage;
     }
 
     public void setVelocity(double velocity) {
@@ -36,13 +42,12 @@ public class ProjectileAttack extends Attack {
         double deltaY = myVelocity * temp[1];
         // Update the position by adding the calculated deltas
         setPosition(getX() + deltaX, getY() + deltaY);
-        return getX() < 0 || getY() < 0 ||
-                getX() > Display.getInstance().getWidth() || getY() > Display.getInstance().getHeight();
+        return super.update();
     }
 
     @Override
     public String[] getDrawData() {
-        return new String[]{"rotatedImage:Bullet:" + getX() + ":" + getY() + ":"
+        return new String[]{"rotatedImage:" + myImage + ":" + getX() + ":" + getY() + ":"
                 + getWidth() + ":" + getHeight() +":"+ getAngle().getRadians()};
     }
 }

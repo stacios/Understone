@@ -4,34 +4,13 @@ import Model.Character;
 import Model.Weapon.Weapon;
 
 public abstract class Glyphid extends Character {
-    protected int myFireTimer;
-
     public Glyphid(String theName, double theX, double theY, int theHealth,
                    int theWidth, int theHeight, double theMoveSpeed,
-                   Weapon theWeapon, int fireTimer) {
+                   Weapon theWeapon) {
         super(theName, theX, theY, theHealth, theWidth, theHeight, theMoveSpeed, theWeapon);
-        setFireTimer(fireTimer);
     }
 
-    public void setFireTimer(int theFireTimer) {
-        if (theFireTimer < 0) {
-            throw new IllegalArgumentException("Fire timer cannot be negative");
-        }
-        myFireTimer = theFireTimer;
-    }
-
-    public abstract void attack();
 
 
-    protected void updateFireTimer() {
-        if (myFireTimer > 0) {
-            myFireTimer--;
-        }
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() + " firetimer: " + myFireTimer;
-    }
 }
 

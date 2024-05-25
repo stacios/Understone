@@ -33,7 +33,7 @@ public class Dwarf extends Character {
 
     @Override
     public boolean update() {
-        super.update();
+        boolean superCall = super.update();
 
         walk();
         if (myInputData.getM1())
@@ -45,8 +45,7 @@ public class Dwarf extends Character {
         if (myInputData.getWeapon3())
             switchWeapon(2);
 
-
-        return false;
+        return superCall;
 
     }
 

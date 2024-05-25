@@ -1,8 +1,10 @@
 package Model;
 
 import Controller.Drawable;
+import Model.Spaces.Room;
 import Model.Weapon.Attack;
 import Model.Weapon.Weapon;
+import View.Display;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -110,10 +112,9 @@ public abstract class Character implements Drawable, Collidable, Serializable {
      * Returns true if the character should be deleted.
      */
     public boolean update() {
-        this.receiveForces();
+        receiveForces();
         myWeapon.update();
-        //Additional update logic TBA
-        return false;
+        return myHealth <= 0;
     }
 
     public void addForce(Force theForce) {
@@ -128,19 +129,25 @@ public abstract class Character implements Drawable, Collidable, Serializable {
         return false;
     }
 
-    public boolean receiveAttack(Attack theAttack) {
-        if (this.colliding(theAttack)) {
-            myHealth -= theAttack.getDamage();
-            this.addForce(theAttack.getKnockBack());
-            return true;
-        }
-        return false;
+    public void receiveAttack(Attack theAttack) {
+        myHealth -= theAttack.getDamage();
+        addForce(theAttack.getKnockBack());
     }
 
     private void receiveForces() {
+        double newX;
+        double newY;
         for (Force force : new ArrayList<>(myForces)) {
-            myX += force.getXStrength();
-            myY += force.getYStrength();
+            newX = myX + force.getXStrength();
+            newY = myY + force.getYStrength();
+            if (newX + myWidth/2 < Display.getInstance().getWidth() - Room.WALL_THICKNESS
+                    && newX - myWidth/2 > Room.WALL_THICKNESS) {
+                myX = newX;
+            }
+            if (newY + myHeight/2 < Display.getInstance().getHeight() - Room.WALL_THICKNESS
+                    && newY - myHeight/2 > Room.WALL_THICKNESS) {
+                myY = newY;
+            }
             if (!force.update()) {
                 myForces.remove(force);
             }
