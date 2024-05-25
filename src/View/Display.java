@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferStrategy;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -236,7 +237,6 @@ public class Display {
     }
 
     private void draw(final Graphics2D theGraphics, final String[] theData) {
-
         for (int i = 0; i < theData.length; i++) {
             theData[0] = theData[0].strip();
         }

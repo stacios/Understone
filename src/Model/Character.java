@@ -3,11 +3,14 @@ package Model;
 import Controller.Drawable;
 import Model.Weapon.Attack;
 import Model.Weapon.Weapon;
+import Model.Spaces.*;
+import View.Display;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
 
 /**
  * Represents a character in the game. Parent class for Dwarf and Glyphids.
@@ -138,9 +141,19 @@ public abstract class Character implements Drawable, Collidable, Serializable {
     }
 
     private void receiveForces() {
+        double newX;
+        double newY;
         for (Force force : new ArrayList<>(myForces)) {
-            myX += force.getXStrength();
-            myY += force.getYStrength();
+            newX = myX + force.getXStrength();
+            newY = myY + force.getYStrength();
+            if (newX + myWidth/2 < Display.getInstance().getWidth() - Room.WALL_THICKNESS
+                    && newX - myWidth/2 > Room.WALL_THICKNESS) {
+                myX = newX;
+            }
+            if (newY + myHeight/2 < Display.getInstance().getHeight() - Room.WALL_THICKNESS
+                    && newY - myHeight/2 > Room.WALL_THICKNESS) {
+                myY = newY;
+            }
             if (!force.update()) {
                 myForces.remove(force);
             }

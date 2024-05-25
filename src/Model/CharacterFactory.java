@@ -5,6 +5,7 @@ import Model.DB.GlyphidDB;
 import Model.Glyphid.Glyphid;
 import Model.Glyphid.Grunt;
 import Model.Weapon.*;
+import Model.Glyphid.*;
 
 import static Model.CharacterTypes.*;
 /**
@@ -110,8 +111,17 @@ public class CharacterFactory {
         int fireTimer = GlyphidDB.getDefaultValue(theGlyphidType, "firetimer"); // Default cooldown timer
         int damage = GlyphidDB.getDefaultValue(theGlyphidType, "damage"); // Default damage
         Weapon defaultWeapon = new Weapon(60, new MeleeAttack(10, 100, 100, 10.0, 100), null);
-        return new Grunt(theGlyphidType, x, y, health, width, height, moveSpeed, defaultWeapon, fireTimer);
-        //return null;
+
+        //return new Grunt(theGlyphidType, x, y, health, width, height, moveSpeed, defaultWeapon, fireTimer);
+        switch (theGlyphidType) {
+            case PRAETORIAN:
+                return new Praetorian(theGlyphidType, 800, 800, 200, 150, 150, 2, defaultWeapon, fireTimer);
+            case ACID_SPIITER:
+                return new AcidSpitter(theGlyphidType, 600, 600, 80, 100, 100, 7, defaultWeapon, fireTimer);
+            case GRUNT:
+            default:
+                return new Grunt(theGlyphidType, 800, 800, 100, 100, 100, 5, defaultWeapon, fireTimer);
+        }        //return null;
     }
 }
 

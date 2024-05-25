@@ -14,11 +14,7 @@ import Model.Weapon.Attack;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import static Model.CharacterTypes.*;
-/**
- * The main game loop. Controls the player, cave, and active room.
- */
+
 public class GameLoop implements Drawable, Serializable {
     private static final long serialVersionUID = 8L;
     private static final GameLoop myInstance = new GameLoop();
@@ -26,12 +22,15 @@ public class GameLoop implements Drawable, Serializable {
     private Cave myCave;
     private Room myActiveRoom;
     private transient ArrayList<String> myDrawDataList;
+    private boolean spacePressed;
 
     private GameLoop() {
         myDrawDataList = new ArrayList<>();
+        spacePressed = false;
 
         startDB();
-        myActiveRoom = new Room(false, false);
+        myCave = new Cave();
+        myActiveRoom = myCave.getCurrentRoom();
         myPlayer = CharacterFactory.createDwarf("Scout");
     }
 
@@ -39,24 +38,45 @@ public class GameLoop implements Drawable, Serializable {
         return myInstance;
     }
 
-    public void setDataLoading(GameLoop theSavedGame){
+    public void setDataLoading(GameLoop theSavedGame) {
         myPlayer = theSavedGame.myPlayer;
         myCave = theSavedGame.myCave;
-        myActiveRoom = theSavedGame.myActiveRoom;
+        myActiveRoom = myCave.getCurrentRoom();
     }
 
     public boolean update(final InputData theInput) {
-
         myDrawDataList.clear();
-
         myPlayer.setInputData(theInput);
+
+        handleRoomTransition(theInput);
 
         myActiveRoom.update();
         myDrawDataList.addAll(Arrays.asList(myActiveRoom.getDrawData()));
-
-        myDrawDataList.add("text:hello:100:100:40");
+        myDrawDataList.add("text:Room ID " + myActiveRoom.getIdentifier() + ": 0" + ":100:100:40");
 
         return !theInput.getEscape();
+    }
+
+    private void handleRoomTransition(final InputData theInput) {
+        if (theInput.getInteract()) { // Space key is used for interaction
+            if (!spacePressed) {
+                movePlayerToNextRoom();
+                spacePressed = true;
+            }
+        } else {
+            spacePressed = false;
+        }
+    }
+
+    public void movePlayerToNextRoom() {
+        if (myCave.hasNextRoom()) {
+            myCave.moveToNextRoom();
+            myActiveRoom = myCave.getCurrentRoom();
+        }
+    }
+
+    public void setActiveRoom(Room room) {
+        myActiveRoom = room;
     }
 
     public Dwarf getPlayer() {
@@ -67,24 +87,10 @@ public class GameLoop implements Drawable, Serializable {
         return myDrawDataList.toArray(new String[0]);
     }
 
-    /**
-     * Temporary method for testing and printing values from database.
-     */
     public void startDB() {
-        // Initializes Database
         SQLiteConnection.getDataSource();
-
-        // Initializes tables and data insertion for Dwarf and Glyphid.
         DwarfDB.initializeDB();
         GlyphidDB.initializeDB();
-
-        // Creates test Dwarf object
-//        Dwarf testDwarf = CharacterFactory.createDwarf(DRILLER);
-//        System.out.println(testDwarf.toString());
-
-        // Creates test Dwarf object
-        //Glyphid testGlyphid = CharacterFactory.createGlyphid("testGlyphid");
-        //System.out.println(testGlyphid.toString());
     }
 
     public Room getActiveRoom() {
@@ -93,8 +99,8 @@ public class GameLoop implements Drawable, Serializable {
 
     public void resetGame() {
         myDrawDataList = new ArrayList<>();
-
-        myActiveRoom = new Room(false, false);
+        myCave = new Cave();
+        myActiveRoom = myCave.getCurrentRoom();
         myPlayer = CharacterFactory.createDwarf("Driller");
     }
 
