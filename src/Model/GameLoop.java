@@ -41,7 +41,7 @@ public class GameLoop implements Drawable, Serializable {
 
     public void setDwarf(String theDwarfType) {
         myPlayer = CharacterFactory.createDwarf(theDwarfType);
-        myPlayer = CharacterFactory.createDwarf("Scout");
+        //myPlayer = CharacterFactory.createDwarf("Scout");
         myHUD = new HUD(myPlayer);
     }
 
