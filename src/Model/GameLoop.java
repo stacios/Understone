@@ -25,8 +25,9 @@ public class GameLoop implements Drawable, Serializable {
     private Dwarf myPlayer;
     private Cave myCave;
     private Room myActiveRoom;
+    private HUD myHUD;
     private transient ArrayList<String> myDrawDataList;
-    private boolean spacePressed;
+    private transient boolean spacePressed;
 
     private GameLoop() {
         myDrawDataList = new ArrayList<>();
@@ -40,6 +41,8 @@ public class GameLoop implements Drawable, Serializable {
 
     public void setDwarf(String theDwarfType) {
         myPlayer = CharacterFactory.createDwarf(theDwarfType);
+        myPlayer = CharacterFactory.createDwarf("Scout");
+        myHUD = new HUD(myPlayer);
     }
 
     public static GameLoop getInstance() {
@@ -50,6 +53,7 @@ public class GameLoop implements Drawable, Serializable {
         myPlayer = theSavedGame.myPlayer;
         myCave = theSavedGame.myCave;
         myActiveRoom = myCave.getCurrentRoom();
+        myHUD = new HUD(myPlayer);
     }
 
     public boolean update(final InputData theInput) {
@@ -61,6 +65,8 @@ public class GameLoop implements Drawable, Serializable {
         myActiveRoom.update();
         myDrawDataList.addAll(Arrays.asList(myActiveRoom.getDrawData()));
         myDrawDataList.add("text:Room ID " + myActiveRoom.getIdentifier() + ": 0" + ":100:100:40");
+
+        myDrawDataList.addAll(Arrays.asList(myHUD.getDrawData()));
 
         return !theInput.getEscape();
     }
@@ -126,6 +132,7 @@ public class GameLoop implements Drawable, Serializable {
         myCave = new Cave();
         myActiveRoom = myCave.getCurrentRoom();
         myPlayer = CharacterFactory.createDwarf("Driller");
+        myHUD = new HUD(myPlayer);
     }
 
     @Override

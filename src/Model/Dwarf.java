@@ -15,6 +15,8 @@ public class Dwarf extends Character {
     private transient InputData myInputData;
     private Weapon[] myWeapons;
 
+    private int myWeaponIndex = 0;
+
     public Dwarf(String theName, double theX, double theY, int theHealth, int theWidth, int theHeight, double theMoveSpeed, Weapon[] theWeapons) {
         super(theName, theX, theY, theHealth, theWidth, theHeight, theMoveSpeed, theWeapons[0]);
         myWeapons = theWeapons;
@@ -23,9 +25,13 @@ public class Dwarf extends Character {
     public void switchWeapon(int theIndex) {
         if (theIndex >= 0 && theIndex < myWeapons.length) {
             setWeapon(myWeapons[theIndex]);
+            myWeaponIndex = theIndex;
         }
     }
 
+    public int getWeaponIndex() {
+        return myWeaponIndex;
+    }
 
     public void setInputData(final InputData theInputData) {
         myInputData = theInputData;
