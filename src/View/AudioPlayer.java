@@ -36,6 +36,7 @@ public class AudioPlayer {
             Clip clip = AudioSystem.getClip();
             clip.open(stream);
             clip.start();
+            //System.out.println("playing sound " +theSound);
         } catch (UnsupportedAudioFileException | LineUnavailableException
                  | IOException | NullPointerException e) {
             System.err.println("Unable to play audio");

@@ -14,7 +14,11 @@ import Model.Weapon.Attack;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.util.Collections;
+import static Model.CharacterTypes.*;
+/**
+ * The main game loop. Controls the player, cave, and active room.
+ */
 public class GameLoop implements Drawable, Serializable {
     private static final long serialVersionUID = 8L;
     private static final GameLoop myInstance = new GameLoop();
@@ -31,7 +35,11 @@ public class GameLoop implements Drawable, Serializable {
         startDB();
         myCave = new Cave();
         myActiveRoom = myCave.getCurrentRoom();
-        myPlayer = CharacterFactory.createDwarf("Scout");
+        //myPlayer = CharacterFactory.createDwarf("Engineer");
+    }
+
+    public void setDwarf(String theDwarfType) {
+        myPlayer = CharacterFactory.createDwarf(theDwarfType);
     }
 
     public static GameLoop getInstance() {

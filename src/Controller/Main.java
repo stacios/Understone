@@ -17,10 +17,11 @@ public class Main {
 
         GameLoop gameLoop = GameLoop.getInstance();
         Display display = Display.getInstance();
+        gameLoop.setDwarf(display.getDwarfSelection());
 
         boolean running = true;
 
-        while (running && display.isRunning()) {
+        while (display.isRunning()) {
 
             running = gameLoop.update(display.getInputData());
             display.render(gameLoop.getDrawData());

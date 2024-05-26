@@ -17,8 +17,9 @@ import java.util.List;
 import java.util.Random;
 
 public class Room implements Drawable, Serializable {
-    public static final double WALL_THICKNESS = 5;
     private static final long serialVersionUID = 3L;
+
+    public static final int WALL_THICKNESS = 100;
     private List<Glyphid> myGlyphids;
     private List<Attack> myDwarfAttacks;
     private List<Attack> myGlyphidAttacks;
@@ -50,16 +51,16 @@ public class Room implements Drawable, Serializable {
         // Always add 2 Praetorians per difficulty factor
         for (int i = 0; i < 2; i++) {
             Glyphid praetorian = CharacterFactory.createGlyphid(PRAETORIAN);
-            praetorian.setX(random.nextDouble() * 1920);
-            praetorian.setY(random.nextDouble() * 1080);
+            praetorian.setX(random.nextDouble() * 1920 * (2.0/3) + 1920/6.0);
+            praetorian.setY(random.nextDouble() * 1080 * (2.0/3) + 1080/6.0);
             myGlyphids.add(praetorian);
         }
 
         // Always add 2 Acid Spitters per difficulty factor
         for (int i = 0; i < 2; i++) {
             Glyphid acidSpitter = CharacterFactory.createGlyphid(ACID_SPIITER);
-            acidSpitter.setX(random.nextDouble() * 1920);
-            acidSpitter.setY(random.nextDouble() * 1080);
+            acidSpitter.setX(random.nextDouble() * 1920 * (2.0/3) + 1920/6.0);
+            acidSpitter.setY(random.nextDouble() * 1080 * (2.0/3) + 1080/6.0);
             myGlyphids.add(acidSpitter);
         }
 
@@ -67,8 +68,8 @@ public class Room implements Drawable, Serializable {
         int numberOfGrunts = (random.nextInt(3) + 5) + difficultyFactor;
         for (int i = 0; i < numberOfGrunts; i++) {
             Glyphid grunt = CharacterFactory.createGlyphid(GRUNT);
-            grunt.setX(random.nextDouble() * 1920);
-            grunt.setY(random.nextDouble() * 1080);
+            grunt.setX(random.nextDouble() * 1920 * (2.0/3) + 1920/6.0);
+            grunt.setY(random.nextDouble() * 1080 * (2.0/3) + 1080/6.0);
             myGlyphids.add(grunt);
         }
 
@@ -95,10 +96,10 @@ public class Room implements Drawable, Serializable {
         GameLoop.getInstance().getPlayer().update();
         myDwarfAttacks.addAll(List.of(GameLoop.getInstance().getPlayer().getPendingAttacks()));
         for (int i = myGlyphids.size() - 1; i >= 0; i--) {
-            if (myGlyphids.get(i).update()) {
-                myGlyphids.remove(i);
-            }
+            boolean flag = myGlyphids.get(i).update();
             myGlyphidAttacks.addAll(List.of(myGlyphids.get(i).getPendingAttacks()));
+            if (flag)
+                myGlyphids.remove(i);
         }
         for (int i = myDwarfAttacks.size() - 1; i >= 0; i--) {
             if (myDwarfAttacks.get(i).update()) {
@@ -120,13 +121,33 @@ public class Room implements Drawable, Serializable {
                 c1 = characters.get(i);
                 c2 = characters.get(j);
                 if (c1.colliding(c2)) {
-                    c1.addForce(new Force(new Angle(c2.getX(), c2.getY(), c1.getX(), c1.getY()), .5, .5));
-                    c2.addForce(new Force(new Angle(c1.getX(), c1.getY(), c2.getX(), c2.getY()), .5, .5));
+                    c1.addForce(new Force(new Angle(c2.getX(), c2.getY(), c1.getX(), c1.getY()), 2, .5));
+                    c2.addForce(new Force(new Angle(c1.getX(), c1.getY(), c2.getX(), c2.getY()), 2, .5));
                 }
             }
         }
 
         // attack on character collisions
+
+        for (Attack a : myGlyphidAttacks) {
+            if (GameLoop.getInstance().getPlayer().colliding(a)) {
+                GameLoop.getInstance().getPlayer().receiveAttack(a);
+                a.collided();
+            }
+        }
+
+        for (Attack a : myDwarfAttacks) {
+            boolean flag = false;
+            for (Glyphid g : myGlyphids) {
+                if (g.colliding(a)) {
+                    g.receiveAttack(a);
+                    flag = true;
+                }
+            }
+            if (flag) {
+                a.collided();
+            }
+        }
     }
 
     @Override
@@ -143,6 +164,8 @@ public class Room implements Drawable, Serializable {
         for (Attack e : myDwarfAttacks) {
             result.addAll(Arrays.asList(e.getDrawData()));
         }
+
+
         return result.toArray(new String[0]);
     }
 

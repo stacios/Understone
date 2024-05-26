@@ -7,21 +7,16 @@ public class
 AcidSpitter extends Glyphid {
     public AcidSpitter(String theName, double theX, double theY, int theHealth,
                        int theWidth, int theHeight, double theMoveSpeed,
-                       Weapon theWeapon, int fireTimer) {
-        super(theName, theX, theY, theHealth, theWidth, theHeight, theMoveSpeed, theWeapon, fireTimer);
+                       Weapon theWeapon) {
+        super(theName, theX, theY, theHealth, theWidth, theHeight, theMoveSpeed, theWeapon);
     }
 
-    @Override
-    public void attack() {
-        // projectile attack logic
-        System.out.println("Acid Spitter attacks.");
-    }
 
     @Override
     public boolean update() {
         // update logic for Acid Spitter
-        updateFireTimer();
-        return false;
+
+        return super.update();
     }
 }
 

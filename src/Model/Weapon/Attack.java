@@ -4,6 +4,7 @@ import Controller.Drawable;
 import Model.Angle;
 import Model.Collidable;
 import Model.Force;
+import View.Display;
 
 import java.io.Serializable;
 
@@ -23,7 +24,7 @@ public abstract class Attack implements Collidable, Cloneable, Drawable, Seriali
     private final double myKnockBackStrength;
     private Angle myAngle;
     private final double myInitialDistance;
-    private boolean myActive;
+    private boolean myCollided;
 
     public Attack(int theDamage, int theWidth, int theHeight, double theKnockBackStrength, double theInitialDistance) {
         if (theDamage < 0) {
@@ -39,12 +40,12 @@ public abstract class Attack implements Collidable, Cloneable, Drawable, Seriali
             throw new IllegalArgumentException("KnockBack strength cannot be negative");
         }
 
-        this.myDamage = theDamage;
-        this.myWidth = theWidth;
-        this.myHeight = theHeight;
-        this.myKnockBackStrength = theKnockBackStrength;
-        this.myInitialDistance = theInitialDistance;
-        this.myActive = true;
+        myDamage = theDamage;
+        myWidth = theWidth;
+        myHeight = theHeight;
+        myKnockBackStrength = theKnockBackStrength;
+        myInitialDistance = theInitialDistance;
+        myCollided = false;
     }
 
     @Override
@@ -54,32 +55,35 @@ public abstract class Attack implements Collidable, Cloneable, Drawable, Seriali
 
     @Override
     public boolean colliding(Collidable other) {
-        return myActive && colliding(other);
+        return colliding(other);
     }
 
-    // Update later!!!
-    public abstract boolean update();
+    public boolean update() {
+        return myCollided ||
+                myX > Display.getInstance().getWidth() || myX < 0 ||
+                myY > Display.getInstance().getHeight() || myY < 0;
+    }
 
 
     public Angle getAngle() {
-        return this.myAngle;
+        return myAngle;
     }
 
     public int getDamage(){
-        return this.myDamage;
+        return myDamage;
     }
 
     public Force getKnockBack(){
-        return new Force(myAngle, myKnockBackStrength);
+        return new Force(myAngle, myKnockBackStrength, .4);
     }
 
 
     public double getX() {
-        return this.myX;
+        return myX;
     }
 
     public double getY() {
-        return this.myY;
+        return myY;
     }
 
     public int getWidth() {
@@ -102,14 +106,14 @@ public abstract class Attack implements Collidable, Cloneable, Drawable, Seriali
     public void setPosition(double theX, double theY, Angle theAngle) {
 
         if (myAngle == null && theAngle != null) {
-            this.myAngle = theAngle;
+            myAngle = theAngle;
             double[] temp = theAngle.getComp();
-            this.myX = theX + temp[0] * myInitialDistance;
-            this.myY = theY + temp[1] * myInitialDistance;
+            myX = theX + temp[0] * myInitialDistance;
+            myY = theY + temp[1] * myInitialDistance;
         }
         else {
-            this.myX = theX;
-            this.myY = theY;
+            myX = theX;
+            myY = theY;
         }
 
     }
@@ -117,12 +121,7 @@ public abstract class Attack implements Collidable, Cloneable, Drawable, Seriali
     public void setAngle(Angle theAngle) {
         myAngle = theAngle;
     }
-    /**
-     * Makes it so that the attack can no longer collide with characters.
-     */
-    public void deactivate() {
-        myActive = false;
-    }
+
     /**
      * Creates a clone of the attack to be added to the active room.
      * Remember to set the position of the clone, as this should not be set for the attack template being cloned.
@@ -135,6 +134,10 @@ public abstract class Attack implements Collidable, Cloneable, Drawable, Seriali
         } catch (CloneNotSupportedException e) {
             throw new AssertionError();
         }
+    }
+
+    public void collided() {
+        myCollided = true;
     }
 }
 

@@ -6,22 +6,16 @@ import Model.Weapon.Weapon;
 public class Grunt extends Glyphid {
     public Grunt(String theName, double theX, double theY, int theHealth,
                  int theWidth, int theHeight, double theMoveSpeed,
-                 Weapon theWeapon, int fireTimer) {
-        super(theName, theX, theY, theHealth, theWidth, theHeight, theMoveSpeed, theWeapon, fireTimer);
+                 Weapon theWeapon) {
+        super(theName, theX, theY, theHealth, theWidth, theHeight, theMoveSpeed, theWeapon);
     }
 
-    @Override
-    public void attack() {
-        // attack logic
-        System.out.println("Grunt attacks.");
-    }
 
     @Override
     public boolean update() {
         // update logic for Grunt
-        updateFireTimer();
 
-        return false;
+        return super.update();
     }
 }
 

@@ -12,14 +12,18 @@ public class MeleeAttack extends Attack {
 
     @Override
     public boolean update() {
-
-        if (myStage == 1) {
-            deactivate();
-        } else if (myStage == 4 * 2) {
-            return true;
-        }
         myStage++;
-        return false;
+        return myStage == 4 * 2;
+    }
+
+    @Override
+    public int[] getHitbox() {
+        if (myStage == 1) {
+            return super.getHitbox();
+        }
+        else {
+            return new int[]{0,0,0,0};
+        }
     }
 
     @Override

@@ -8,7 +8,6 @@ import Model.Weapon.*;
 import Model.Glyphid.*;
 
 import static Model.CharacterTypes.*;
-
 /**
  * Contains methods for creating dwarves and glyphids correctly.
  */
@@ -38,27 +37,28 @@ public class CharacterFactory {
 
         Weapon[] weapons = new Weapon[3];
         // pickaxe
-        weapons[2] = new Weapon(30, new MeleeAttack(10, 200, 200, 10, 100), null);
+        weapons[2] = new Weapon(30, new MeleeAttack(10, 200, 200, 10, 100), "Swing");
 
         switch (theDwarfType) {
 
             case "Driller":
                 // flamethrower
-                weapons[0] = new Weapon(6,
-                        new FireAttack(10, 100, 100, 0, 100, 15, 20), null);
+                weapons[0] = new MinigunWeapon(6,
+                        new ProjectileAttack(7, 100, 100, 15, 100, 7, "Fire"), "FlamethrowerShot",
+                0, 0, new Angle(Math.toRadians(10)));
                 // pistol
-                weapons[1] = new Weapon(30,
-                        new ProjectileAttack(10, 30, 30, 10, 70, 30), "SubataShot");
+                weapons[1] = new Weapon(15,
+                        new ProjectileAttack(30, 30, 30, 10, 70, 30), "SubataShot");
                 break;
 
             case "Scout":
                 // m1000
-                weapons[0] = new Weapon(25,
-                        new ProjectileAttack(20, 30, 30, 0, 70, 30), "M1000Shot");
+                weapons[0] = new Weapon(20,
+                        new ProjectileAttack(35, 30, 30, 15, 70, 30), "M1000Shot");
                 // sawedoff
                 weapons[1] = new ShotgunWeapon(60,
                         new ProjectileAttack(8, 30, 30, 10, 70, 30), "DoubleBarrelShot",
-                        10, new Angle(Math.toRadians(40)));
+                        16, new Angle(Math.toRadians(45)));
                 break;
 
             case "Engineer":
@@ -68,17 +68,17 @@ public class CharacterFactory {
                         8, new Angle(Math.toRadians(20)));
                 // grenade launcher
                 weapons[1] = new Weapon(200,
-                        new ExplosiveAttack(100, 30, 30, 10, 70, 20, 200), null);
+                        new ExplosiveAttack(100, 30, 30, 100, 70, 20, 400), "GrenadeLauncherShot");
                 break;
 
             case "Gunner":
                 // minigun
                 weapons[0] = new MinigunWeapon(6,
-                        new ProjectileAttack(5, 30, 30, 5, 70, 30), "MinigunShot",
+                        new ProjectileAttack(7, 30, 30, 5, 70, 30), "MinigunShot",
                         40, 2, new Angle(Math.toRadians(20)));
                 // revolver
                 weapons[1] = new Weapon(60,
-                        new ProjectileAttack(40, 30, 30, 30, 70, 30), "RevolverShot");
+                        new ProjectileAttack(50, 30, 30, 30, 70, 30), "RevolverShot");
                 break;
         }
         //Weapon defaultWeapon = new ShotgunWeapon(60, new ProjectileAttack(10, 20, 20, 10.0, 70, 20), 10, new Angle(Math.toRadians(45)));
@@ -110,18 +110,18 @@ public class CharacterFactory {
         double moveSpeed = GlyphidDB.getDefaultValue(theGlyphidType, "movespeed"); // Default speed
         int fireTimer = GlyphidDB.getDefaultValue(theGlyphidType, "firetimer"); // Default cooldown timer
         int damage = GlyphidDB.getDefaultValue(theGlyphidType, "damage"); // Default damage
-        Weapon defaultWeapon = new Weapon(60, new MeleeAttack(10, 100, 100, 10.0, 100), null);
+        Weapon defaultWeapon = new Weapon(60, new MeleeAttack(10, 100, 100, 10.0, 100), "Swing");
 
         //return new Grunt(theGlyphidType, x, y, health, width, height, moveSpeed, defaultWeapon, fireTimer);
         switch (theGlyphidType) {
             case PRAETORIAN:
-                return new Praetorian(theGlyphidType, 800, 800, 200, 150, 150, 2, defaultWeapon, fireTimer);
+                return new Praetorian(theGlyphidType, 800, 800, 200, 150, 150, 2, defaultWeapon);
             case ACID_SPIITER:
-                return new AcidSpitter(theGlyphidType, 600, 600, 80, 100, 100, 7, defaultWeapon, fireTimer);
+                return new AcidSpitter(theGlyphidType, 600, 600, 80, 100, 100, 7, defaultWeapon);
             case GRUNT:
-                return new Grunt(theGlyphidType, 800, 800, 100, 100, 100, 5, defaultWeapon, fireTimer);
+                return new Grunt(theGlyphidType, 800, 800, 100, 100, 100, 5, defaultWeapon);
             default:
-                
+
         }
 
         return null;
@@ -136,9 +136,9 @@ public class CharacterFactory {
 
         switch (theRockType) {
             case ROCK:
-                return new Rock(theRockType, 600, 500, 100, 200, 200, 0, defaultWeapon, 0);
+                return new Rock(theRockType, 600, 500, 100, 200, 200, 0, defaultWeapon);
             case EGG:
-                return new Rock(theRockType, 500, 500, 100, 100, 100, 0, defaultWeapon, 0);
+                return new Rock(theRockType, 500, 500, 100, 100, 100, 0, defaultWeapon);
             default:
         }
 

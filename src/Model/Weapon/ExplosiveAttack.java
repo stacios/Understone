@@ -1,32 +1,68 @@
 package Model.Weapon;
 
-import Model.Angle;
-import Model.Force;
-import Model.Weapon.ProjectileAttack;
-
 public class ExplosiveAttack extends ProjectileAttack {
-    private double myRadius; // Radius of the explosion effect
+    private int myArea; // Radius of the explosion effect
+    private int myTriggeredTimer;
 
-    public ExplosiveAttack(int theDamage, int theWidth, int theHeight, double theKnockBackStrength, double theInitialDistance, double theVelocity, double theRadius) {
+    public ExplosiveAttack(int theDamage, int theWidth, int theHeight, double theKnockBackStrength, double theInitialDistance, double theVelocity, int theArea) {
         super(theDamage, theWidth, theHeight, theKnockBackStrength, theInitialDistance, theVelocity);
-        setRadius(theRadius);
+        setArea(theArea);
+        myTriggeredTimer = 0;
     }
 
-    public void setRadius(double radius) {
-        if (radius < 0) {
-            throw new IllegalArgumentException("Radius cannot be negative");
+    public void setArea(int area) {
+        if (area < 0) {
+            throw new IllegalArgumentException("Area cannot be negative");
         }
-        this.myRadius = radius;
+        myArea = area;
     }
 
-    public double getRadius() {
-        return myRadius;
+    public double getArea() {
+        return myArea;
     }
 
 
     @Override
     public boolean update() {
-        return super.update();
-        // handle explosion effect
+        if (myTriggeredTimer != 0) {
+            myTriggeredTimer++;
+            return myTriggeredTimer == 10;
+        }
+        else {
+            return super.update();
+        }
+    }
+
+    @Override
+    public void collided() {
+        if (myTriggeredTimer == 0)
+            myTriggeredTimer = 1;
+    }
+
+    @Override
+    public int[] getHitbox() {
+        if (myTriggeredTimer == 0) {
+            return super.getHitbox();
+        }
+        else if (myTriggeredTimer == 2) {
+            return new int[]{(int)getX(), (int)getY(), myArea, myArea};
+        }
+        else {
+            return new int[]{0,0,0,0};
+        }
+    }
+
+    @Override
+    public String[] getDrawData() {
+        if (myTriggeredTimer == 1) {
+            return new String[]{"image:Explosion:" + getX() + ":" + getY() +":" + myArea + ":" + myArea,
+            "sound:GrenadeExplosion"};
+        }
+        else if (myTriggeredTimer > 1) {
+            return new String[]{"image:Explosion:" + getX() + ":" + getY() +":" + myArea + ":" + myArea};
+        }
+        else {
+            return super.getDrawData();
+        }
     }
 }

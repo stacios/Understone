@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-
 /**
  * Represents a character in the game. Parent class for Dwarf and Glyphids.
  */
@@ -113,10 +112,9 @@ public abstract class Character implements Drawable, Collidable, Serializable {
      * Returns true if the character should be deleted.
      */
     public boolean update() {
-        this.receiveForces();
+        receiveForces();
         myWeapon.update();
-        //Additional update logic TBA
-        return false;
+        return myHealth <= 0;
     }
 
     public void addForce(Force theForce) {
@@ -131,13 +129,9 @@ public abstract class Character implements Drawable, Collidable, Serializable {
         return false;
     }
 
-    public boolean receiveAttack(Attack theAttack) {
-        if (this.colliding(theAttack)) {
-            myHealth -= theAttack.getDamage();
-            this.addForce(theAttack.getKnockBack());
-            return true;
-        }
-        return false;
+    public void receiveAttack(Attack theAttack) {
+        myHealth -= theAttack.getDamage();
+        addForce(theAttack.getKnockBack());
     }
 
     private void receiveForces() {

@@ -10,6 +10,7 @@ public class MinigunWeapon extends Weapon {
     private int myMaxSpinup;
     private int myDecayRate;
     private Angle mySpread;
+    private int mySoundCooldown;
 
     public MinigunWeapon(int theMaxCooldown, Attack theAttack, String theSound,
                          int theMaxSpinup, int theDecayRate, Angle theSpread) {
@@ -39,7 +40,14 @@ public class MinigunWeapon extends Weapon {
         mySpinup += myDecayRate;
         if (mySpinup >= myMaxSpinup) {
             double spread = mySpread.getRadians() * ((System.nanoTime() % 1000) / 1000.0) - mySpread.getRadians() / 2;
-            return super.attemptAttack(origin, new Angle(angle.getRadians() + spread));
+            if (super.attemptAttack(origin, new Angle(angle.getRadians() + spread))) {
+                if (mySoundCooldown == 0) {
+                    mySoundCooldown = 30;
+                }
+                return true;
+            }
+            return false;
+
         } else {
             // increase spinup, but do not attack
             mySpinup += 1;
@@ -52,6 +60,19 @@ public class MinigunWeapon extends Weapon {
         super.update();
         if (mySpinup > 0) {
             mySpinup = Math.max(0, mySpinup - myDecayRate);  // decrease spinup by the decay rate
+        }
+        if (mySoundCooldown > 0) {
+            mySoundCooldown--;
+        }
+    }
+
+    @Override
+    public String[] getDrawData() {
+        if (mySoundCooldown == 30) {
+            return super.getDrawData();
+        }
+        else {
+            return new String[0];
         }
     }
 }
