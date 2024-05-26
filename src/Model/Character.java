@@ -1,9 +1,9 @@
 package Model;
 
 import Controller.Drawable;
-import Model.Spaces.Room;
 import Model.Weapon.Attack;
 import Model.Weapon.Weapon;
+import Model.Spaces.*;
 import View.Display;
 
 import java.io.Serializable;

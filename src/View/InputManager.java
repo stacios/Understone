@@ -15,9 +15,11 @@ public class InputManager implements MouseListener, KeyListener, MouseMotionList
     public InputManager() {
         myKeysPressed = new BitSet(13);
     }
+
     public InputData getInputData() {
         return new InputData(myKeysPressed, myMouseX, myMouseY);
     }
+
     private void setKeyCode(final int theCode, final boolean theValue) {
         switch (theCode) {
             case 1:
@@ -128,5 +130,4 @@ public class InputManager implements MouseListener, KeyListener, MouseMotionList
     public void resetKeyStates() {
         myKeysPressed.clear();
     }
-
 }
