@@ -201,4 +201,20 @@ public abstract class Character implements Drawable, Collidable, Serializable {
                 ", Height: " + myHeight +
                 '}';
     }
+
+    public int getHealth() {
+        return myHealth;
+    }
+
+    public int getMaxHealth() {
+        return myMaxHealth;
+    }
+
+    public Weapon getWeapon() {
+        return myWeapon;
+    }
+
+    public String getName() {
+        return myName;
+    }
 }

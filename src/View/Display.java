@@ -149,7 +149,7 @@ public class Display {
                 final int choice = JOptionPane.showConfirmDialog(null, "QUIT!", "QUIT", JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
                     isRunning = false;
-                    dispose();
+                    //dispose();
                 }
                 myMenuDialog.setVisible(false);
                 //myInputManager.resetKeyStates();
