@@ -55,8 +55,11 @@ public class Display {
     private final AudioPlayer myAudioPlayer;
     private JDialog myMenuDialog;
     private boolean isRunning;
+    private String myDwarfType;
 
     public Display() {
+
+        myDwarfType = askDwarfType();
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         myWidth = 1920;
@@ -98,6 +101,14 @@ public class Display {
         System.out.println(myAudioPlayer.mySounds);
 
         createMenuDialog();
+    }
+
+    private String askDwarfType() {
+        return (String) JOptionPane.showInputDialog(null, "Choose your Dwarf:", "Understone",
+                JOptionPane.QUESTION_MESSAGE, null, new String[]{"Driller", "Engineer", "Gunner", "Scout"}, "Driller");
+    }
+    public String getDwarfSelection() {
+        return myDwarfType;
     }
 
     private void createMenuDialog() {

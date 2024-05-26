@@ -14,7 +14,7 @@ public class ExplosiveAttack extends ProjectileAttack {
         if (area < 0) {
             throw new IllegalArgumentException("Area cannot be negative");
         }
-        this.myArea = area;
+        myArea = area;
     }
 
     public double getArea() {
@@ -35,7 +35,8 @@ public class ExplosiveAttack extends ProjectileAttack {
 
     @Override
     public void collided() {
-        myTriggeredTimer = 1;
+        if (myTriggeredTimer == 0)
+            myTriggeredTimer = 1;
     }
 
     @Override
@@ -43,7 +44,7 @@ public class ExplosiveAttack extends ProjectileAttack {
         if (myTriggeredTimer == 0) {
             return super.getHitbox();
         }
-        else if (myTriggeredTimer == 1) {
+        else if (myTriggeredTimer == 2) {
             return new int[]{(int)getX(), (int)getY(), myArea, myArea};
         }
         else {

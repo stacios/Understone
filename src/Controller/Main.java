@@ -17,6 +17,7 @@ public class Main {
 
         GameLoop gameLoop = GameLoop.getInstance();
         Display display = Display.getInstance();
+        gameLoop.setDwarf(display.getDwarfSelection());
 
         boolean running = true;
 

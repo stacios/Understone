@@ -44,21 +44,21 @@ public class CharacterFactory {
             case "Driller":
                 // flamethrower
                 weapons[0] = new MinigunWeapon(6,
-                        new ProjectileAttack(7, 100, 100, 0, 100, 7, "Fire"), "FlamethrowerShot",
+                        new ProjectileAttack(7, 100, 100, 15, 100, 7, "Fire"), "FlamethrowerShot",
                 0, 0, new Angle(Math.toRadians(10)));
                 // pistol
                 weapons[1] = new Weapon(15,
-                        new ProjectileAttack(10, 30, 30, 10, 70, 30), "SubataShot");
+                        new ProjectileAttack(30, 30, 30, 10, 70, 30), "SubataShot");
                 break;
 
             case "Scout":
                 // m1000
-                weapons[0] = new Weapon(25,
-                        new ProjectileAttack(20, 30, 30, 0, 70, 30), "M1000Shot");
+                weapons[0] = new Weapon(20,
+                        new ProjectileAttack(35, 30, 30, 15, 70, 30), "M1000Shot");
                 // sawedoff
                 weapons[1] = new ShotgunWeapon(60,
                         new ProjectileAttack(8, 30, 30, 10, 70, 30), "DoubleBarrelShot",
-                        10, new Angle(Math.toRadians(40)));
+                        16, new Angle(Math.toRadians(45)));
                 break;
 
             case "Engineer":
@@ -74,11 +74,11 @@ public class CharacterFactory {
             case "Gunner":
                 // minigun
                 weapons[0] = new MinigunWeapon(6,
-                        new ProjectileAttack(5, 30, 30, 5, 70, 30), "MinigunShot",
+                        new ProjectileAttack(7, 30, 30, 5, 70, 30), "MinigunShot",
                         40, 2, new Angle(Math.toRadians(20)));
                 // revolver
                 weapons[1] = new Weapon(60,
-                        new ProjectileAttack(40, 30, 30, 30, 70, 30), "RevolverShot");
+                        new ProjectileAttack(50, 30, 30, 30, 70, 30), "RevolverShot");
                 break;
         }
         //Weapon defaultWeapon = new ShotgunWeapon(60, new ProjectileAttack(10, 20, 20, 10.0, 70, 20), 10, new Angle(Math.toRadians(45)));

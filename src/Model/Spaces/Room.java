@@ -51,16 +51,16 @@ public class Room implements Drawable, Serializable {
         // Always add 2 Praetorians per difficulty factor
         for (int i = 0; i < 2; i++) {
             Glyphid praetorian = CharacterFactory.createGlyphid(PRAETORIAN);
-            praetorian.setX(random.nextDouble() * 1920);
-            praetorian.setY(random.nextDouble() * 1080);
+            praetorian.setX(random.nextDouble() * 1920 * (2.0/3) + 1920/6.0);
+            praetorian.setY(random.nextDouble() * 1080 * (2.0/3) + 1080/6.0);
             myGlyphids.add(praetorian);
         }
 
         // Always add 2 Acid Spitters per difficulty factor
         for (int i = 0; i < 2; i++) {
             Glyphid acidSpitter = CharacterFactory.createGlyphid(ACID_SPIITER);
-            acidSpitter.setX(random.nextDouble() * 1920);
-            acidSpitter.setY(random.nextDouble() * 1080);
+            acidSpitter.setX(random.nextDouble() * 1920 * (2.0/3) + 1920/6.0);
+            acidSpitter.setY(random.nextDouble() * 1080 * (2.0/3) + 1080/6.0);
             myGlyphids.add(acidSpitter);
         }
 
@@ -68,8 +68,8 @@ public class Room implements Drawable, Serializable {
         int numberOfGrunts = (random.nextInt(3) + 5) + difficultyFactor;
         for (int i = 0; i < numberOfGrunts; i++) {
             Glyphid grunt = CharacterFactory.createGlyphid(GRUNT);
-            grunt.setX(random.nextDouble() * 1920);
-            grunt.setY(random.nextDouble() * 1080);
+            grunt.setX(random.nextDouble() * 1920 * (2.0/3) + 1920/6.0);
+            grunt.setY(random.nextDouble() * 1080 * (2.0/3) + 1080/6.0);
             myGlyphids.add(grunt);
         }
 
