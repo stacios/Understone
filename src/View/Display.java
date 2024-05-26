@@ -101,6 +101,7 @@ public class Display {
 
     private void createMenuDialog() {
         myMenuDialog = new JDialog(myJFrame, "Menu", true);
+        myMenuDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         myMenuDialog.setSize(300, 200);
         myMenuDialog.setLocationRelativeTo(myJFrame);
         myMenuDialog.setLayout(new GridLayout(4, 1));
@@ -148,7 +149,7 @@ public class Display {
                 final int choice = JOptionPane.showConfirmDialog(null, "QUIT!", "QUIT", JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
                     isRunning = false;
-                    dispose();
+                    //dispose();
                 }
                 myMenuDialog.setVisible(false);
                 //myInputManager.resetKeyStates();
@@ -164,6 +165,7 @@ public class Display {
 
     private void showLoadGameDialog() {
         JDialog loadGameDialog = new JDialog(myJFrame, "Load Game", true);
+        loadGameDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         loadGameDialog.setSize(300, 400);
         loadGameDialog.setLocationRelativeTo(myJFrame);
         loadGameDialog.setLayout(new BorderLayout());

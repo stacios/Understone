@@ -36,7 +36,7 @@ public class CharacterFactory {
 
         Weapon[] weapons = new Weapon[3];
         // pickaxe
-        weapons[2] = new Weapon(30, new MeleeAttack(10, 200, 200, 10, 100), null);
+        weapons[2] = new Weapon(30, new MeleeAttack(10, 200, 200, 10, 100), "Swing");
 
         switch (theDwarfType) {
 
@@ -67,7 +67,7 @@ public class CharacterFactory {
                         8, new Angle(Math.toRadians(20)));
                 // grenade launcher
                 weapons[1] = new Weapon(200,
-                        new ExplosiveAttack(100, 30, 30, 10, 70, 20, 200), null);
+                        new ExplosiveAttack(100, 30, 30, 100, 70, 20, 400), "GrenadeLauncherShot");
                 break;
 
             case "Gunner":
@@ -110,7 +110,7 @@ public class CharacterFactory {
         double moveSpeed = GlyphidDB.getDefaultValue(theGlyphidType, "movespeed"); // Default speed
         int fireTimer = GlyphidDB.getDefaultValue(theGlyphidType, "firetimer"); // Default cooldown timer
         int damage = GlyphidDB.getDefaultValue(theGlyphidType, "damage"); // Default damage
-        Weapon defaultWeapon = new Weapon(60, new MeleeAttack(10, 100, 100, 10.0, 100), null);
+        Weapon defaultWeapon = new Weapon(60, new MeleeAttack(10, 100, 100, 10.0, 100), "Swing");
         return new Grunt("Grunt", 800, 800, 100, 100, 100, 5, defaultWeapon);
         //return null;
     }

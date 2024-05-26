@@ -24,7 +24,6 @@ public abstract class Attack implements Collidable, Cloneable, Drawable, Seriali
     private final double myKnockBackStrength;
     private Angle myAngle;
     private final double myInitialDistance;
-    private boolean myActive;
     private boolean myCollided;
 
     public Attack(int theDamage, int theWidth, int theHeight, double theKnockBackStrength, double theInitialDistance) {
@@ -46,7 +45,6 @@ public abstract class Attack implements Collidable, Cloneable, Drawable, Seriali
         myHeight = theHeight;
         myKnockBackStrength = theKnockBackStrength;
         myInitialDistance = theInitialDistance;
-        myActive = true;
         myCollided = false;
     }
 
@@ -57,7 +55,7 @@ public abstract class Attack implements Collidable, Cloneable, Drawable, Seriali
 
     @Override
     public boolean colliding(Collidable other) {
-        return myActive && colliding(other);
+        return colliding(other);
     }
 
     public boolean update() {
@@ -76,7 +74,7 @@ public abstract class Attack implements Collidable, Cloneable, Drawable, Seriali
     }
 
     public Force getKnockBack(){
-        return new Force(myAngle, myKnockBackStrength);
+        return new Force(myAngle, myKnockBackStrength, .4);
     }
 
 
@@ -123,12 +121,7 @@ public abstract class Attack implements Collidable, Cloneable, Drawable, Seriali
     public void setAngle(Angle theAngle) {
         myAngle = theAngle;
     }
-    /**
-     * Makes it so that the attack can no longer collide with characters.
-     */
-    public void deactivate() {
-        myActive = false;
-    }
+
     /**
      * Creates a clone of the attack to be added to the active room.
      * Remember to set the position of the clone, as this should not be set for the attack template being cloned.

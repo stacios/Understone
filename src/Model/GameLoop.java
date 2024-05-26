@@ -32,7 +32,7 @@ public class GameLoop implements Drawable, Serializable {
 
         startDB();
         myActiveRoom = new Room(false, false);
-        myPlayer = CharacterFactory.createDwarf("Driller");
+        myPlayer = CharacterFactory.createDwarf("Engineer");
     }
 
     public static GameLoop getInstance() {
