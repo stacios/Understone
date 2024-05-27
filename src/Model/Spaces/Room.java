@@ -48,43 +48,58 @@ public class Room implements Drawable, Serializable {
         Random random = new Random();
         int difficultyFactor = myIdentifier + 1; // Increase the difficulty factor based on room identifier
 
-        // Always add 2 Praetorians per difficulty factor
-        for (int i = 0; i < 2; i++) {
+        int numberOfP = 0;
+        for (int i = 0; i < numberOfP; i++) {
             Glyphid praetorian = CharacterFactory.createGlyphid(PRAETORIAN);
-            praetorian.setX(random.nextDouble() * 1920 * (2.0/3) + 1920/6.0);
-            praetorian.setY(random.nextDouble() * 1080 * (2.0/3) + 1080/6.0);
+            praetorian.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
+            praetorian.setY(random.nextDouble() * 1080 * (2.0 / 3) + 1080 / 6.0);
             myGlyphids.add(praetorian);
         }
 
-        // Always add 2 Acid Spitters per difficulty factor
-        for (int i = 0; i < 2; i++) {
+        int numberOfAS = 1;
+        for (int i = 0; i < numberOfAS; i++) {
             Glyphid acidSpitter = CharacterFactory.createGlyphid(ACID_SPIITER);
-            acidSpitter.setX(random.nextDouble() * 1920 * (2.0/3) + 1920/6.0);
-            acidSpitter.setY(random.nextDouble() * 1080 * (2.0/3) + 1080/6.0);
+            acidSpitter.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
+            acidSpitter.setY(random.nextDouble() * 1080 * (2.0 / 3) + 1080 / 6.0);
             myGlyphids.add(acidSpitter);
         }
 
         // Add random number of Grunts, increased by difficulty factor
-        int numberOfGrunts = (random.nextInt(3) + 5) + difficultyFactor;
+        //int numberOfGrunts = (random.nextInt(3) + 5) + difficultyFactor;
+        // Temp number of grunts to reduce nuymber of grunts spawned, use for dev testing
+        int numberOfGrunts = 0;
         for (int i = 0; i < numberOfGrunts; i++) {
             Glyphid grunt = CharacterFactory.createGlyphid(GRUNT);
-            grunt.setX(random.nextDouble() * 1920 * (2.0/3) + 1920/6.0);
-            grunt.setY(random.nextDouble() * 1080 * (2.0/3) + 1080/6.0);
+            grunt.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
+            grunt.setY(random.nextDouble() * 1080 * (2.0 / 3) + 1080 / 6.0);
             myGlyphids.add(grunt);
         }
 
         if (myIdentifier >= myTotalRooms - 1) {
-            Rock rock = CharacterFactory.createRock(ROCK);
-            Rock egg = CharacterFactory.createRock(EGG);
-            myGlyphids.add(rock);
-            myGlyphids.add(egg);
+            spawnRock();
         }
 
-        System.out.println("Spawned " + (numberOfGrunts + 4 * difficultyFactor) + " enemies in the room.");
+        System.out.println("Spawned " + (numberOfGrunts + numberOfP + numberOfAS) + " enemies in the room.");
+    }
+
+    public void spawnRock() {
+        myRock = CharacterFactory.createObject(ROCK);
+        myRock.setX(960);
+        myRock.setY(540);
+        myGlyphids.add(myRock);
+        System.out.println("Spawned rock in the last room.");
+    }
+
+    private void spawnEgg() {
+        Glyphid egg = CharacterFactory.createObject(EGG);
+        egg.setX(960);
+        egg.setY(540);
+        myGlyphids.add(egg);
+        System.out.println("Spawned egg after the rock was broken.");
     }
 
     public boolean canExit() {
-        return myGlyphids.isEmpty();
+        return myGlyphids.isEmpty() && !hasRock();
     }
 
     public boolean isDwarfInArea(Dwarf dwarf) {
@@ -96,10 +111,15 @@ public class Room implements Drawable, Serializable {
         GameLoop.getInstance().getPlayer().update();
         myDwarfAttacks.addAll(List.of(GameLoop.getInstance().getPlayer().getPendingAttacks()));
         for (int i = myGlyphids.size() - 1; i >= 0; i--) {
-            boolean flag = myGlyphids.get(i).update();
-            myGlyphidAttacks.addAll(List.of(myGlyphids.get(i).getPendingAttacks()));
-            if (flag)
+            Glyphid glyphid = myGlyphids.get(i);
+            boolean flag = glyphid.update();
+            myGlyphidAttacks.addAll(List.of(glyphid.getPendingAttacks()));
+            if (flag) {
                 myGlyphids.remove(i);
+                if (glyphid == myRock) {
+                    spawnEgg();
+                }
+            }
         }
         for (int i = myDwarfAttacks.size() - 1; i >= 0; i--) {
             if (myDwarfAttacks.get(i).update()) {
@@ -164,7 +184,6 @@ public class Room implements Drawable, Serializable {
         for (Attack e : myDwarfAttacks) {
             result.addAll(Arrays.asList(e.getDrawData()));
         }
-
 
         return result.toArray(new String[0]);
     }
