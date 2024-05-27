@@ -115,11 +115,11 @@ public class CharacterFactory {
         //return new Grunt(theGlyphidType, x, y, health, width, height, moveSpeed, defaultWeapon, fireTimer);
         switch (theGlyphidType) {
             case PRAETORIAN:
-                return new Praetorian(theGlyphidType, 800, 800, 200, 150, 150, 2, defaultWeapon);
+                return new Praetorian(theGlyphidType, 800, 800, 200, 150, 150, 1, defaultWeapon, 700);
             case ACID_SPIITER:
-                return new AcidSpitter(theGlyphidType, 600, 600, 80, 100, 100, 7, defaultWeapon);
+                return new AcidSpitter(theGlyphidType, 600, 600, 80, 100, 100, 1, defaultWeapon, 550);
             case GRUNT:
-                return new Grunt(theGlyphidType, 800, 800, 100, 100, 100, 5, defaultWeapon);
+                return new Grunt(theGlyphidType, 800, 800, 100, 100, 100, 1, defaultWeapon, 450);
             default:
 
         }
@@ -136,9 +136,9 @@ public class CharacterFactory {
 
         switch (theRockType) {
             case ROCK:
-                return new Rock(theRockType, 600, 500, 100, 200, 200, 0, defaultWeapon);
+                return new Rock(theRockType, 600, 500, 100, 200, 200, 0, defaultWeapon, 0);
             case EGG:
-                return new Rock(theRockType, 500, 500, 100, 100, 100, 0, defaultWeapon);
+                return new Rock(theRockType, 500, 500, 100, 100, 100, 0, defaultWeapon, 0);
             default:
         }
 
