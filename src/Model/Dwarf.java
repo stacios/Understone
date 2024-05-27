@@ -3,6 +3,8 @@ package Model;
 import Controller.InputData;
 import Model.Weapon.Weapon;
 
+import java.util.List;
+
 /**
  * The player of the game. There are 4 types of dwarves: Driller, Engineer, Gunner, and Scout.
  * Each dwarf has a different set of weapons.
@@ -120,6 +122,18 @@ public class Dwarf extends Character {
         }
         if (myDashClock >= 0 && myDashAngle != null) {
             addForce(new Force(myDashAngle, myDashSpeed));
+        }
+    }
+
+    @Override
+    public String[] getDrawData() {
+        if (myDashClock == myDashTime) {
+            List<String> temp = new java.util.ArrayList<>(List.of(super.getDrawData()));
+            temp.add("sound:Dash");
+            return temp.toArray(new String[0]);
+        }
+        else {
+            return super.getDrawData();
         }
     }
 

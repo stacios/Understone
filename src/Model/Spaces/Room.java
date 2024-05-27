@@ -121,8 +121,8 @@ public class Room implements Drawable, Serializable {
                 c1 = characters.get(i);
                 c2 = characters.get(j);
                 if (c1.colliding(c2)) {
-                    c1.addForce(new Force(new Angle(c2.getX(), c2.getY(), c1.getX(), c1.getY()), 2, .5));
-                    c2.addForce(new Force(new Angle(c1.getX(), c1.getY(), c2.getX(), c2.getY()), 2, .5));
+                    c1.addForce(new Force(new Angle(c2.getX(), c2.getY(), c1.getX(), c1.getY()), 1, .5));
+                    c2.addForce(new Force(new Angle(c1.getX(), c1.getY(), c2.getX(), c2.getY()), 1, .5));
                 }
             }
         }
