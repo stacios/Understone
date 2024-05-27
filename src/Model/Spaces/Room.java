@@ -148,6 +148,10 @@ public class Room implements Drawable, Serializable {
                 a.collided();
             }
         }
+
+        for (Glyphid glyphid : myGlyphids) {
+            glyphid.update();
+        }
     }
 
     @Override
