@@ -25,6 +25,7 @@ public class Room implements Drawable, Serializable {
     private List<Attack> myGlyphidAttacks;
     private boolean myHasDropPod;
     private Rock myRock;
+    private Rock myEgg;
     private int myIdentifier;
     private int myTotalRooms;
 
@@ -91,10 +92,10 @@ public class Room implements Drawable, Serializable {
     }
 
     private void spawnEgg() {
-        Glyphid egg = CharacterFactory.createObject(EGG);
-        egg.setX(960);
-        egg.setY(540);
-        myGlyphids.add(egg);
+        myEgg = CharacterFactory.createObject(EGG);
+        myEgg.setX(960);
+        myEgg.setY(540);
+        myGlyphids.add(myEgg);
         System.out.println("Spawned egg after the rock was broken.");
     }
 
@@ -120,6 +121,8 @@ public class Room implements Drawable, Serializable {
                     spawnEgg();
                     // TODO refactor this later, just a temp way to play sound
                     GameLoop.getInstance().addDrawData("sound:RockBroken");
+                } else if (glyphid == myEgg) {
+                    GameLoop.getInstance().addDrawData("sound:AlienEggGrabRoars");
                 }
             }
         }
