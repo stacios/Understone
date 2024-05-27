@@ -118,6 +118,8 @@ public class Room implements Drawable, Serializable {
                 myGlyphids.remove(i);
                 if (glyphid == myRock) {
                     spawnEgg();
+                    // TODO refactor this later, just a temp way to play sound
+                    GameLoop.getInstance().addDrawData("sound:RockBroken");
                 }
             }
         }

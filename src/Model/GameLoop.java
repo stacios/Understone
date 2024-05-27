@@ -104,6 +104,9 @@ public class GameLoop implements Drawable, Serializable {
         }
     }
 
+    public void addDrawData(String drawData) {
+        myDrawDataList.add(drawData);
+    }
 
     public void setActiveRoom(Room room) {
         myActiveRoom = room;
