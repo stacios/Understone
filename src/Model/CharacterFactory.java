@@ -127,7 +127,7 @@ public class CharacterFactory {
         return null;
     }
 
-    public static Rock createRock(final String theRockType) {
+    public static Rock createObject(final String theRockType) {
         if (!theRockType.equals(ROCK) && !theRockType.equals(EGG)) {
             throw new Error("Must be of type Egg or Rock");
         }
