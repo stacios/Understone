@@ -14,6 +14,7 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferStrategy;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -56,8 +57,13 @@ public class Display {
     private JDialog myMenuDialog;
     private boolean isRunning;
     private String myDwarfType;
+    private boolean myIsShaking;
+    private int myShakeDuration;
+    private int myShakeMagnitude;
+    private Random myRandom;
 
     public Display() {
+        myRandom = new Random();
 
         myDwarfType = askDwarfType();
 
@@ -158,7 +164,7 @@ public class Display {
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                final int choice = JOptionPane.showConfirmDialog(null, "QUIT!", "QUIT", JOptionPane.YES_NO_OPTION);
+                final int choice = JOptionPane.showConfirmDialog(null, "Quit?", "Quit", JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
                     isRunning = false;
                     //dispose();
@@ -209,6 +215,7 @@ public class Display {
         loadGameDialog.add(loadButton, BorderLayout.SOUTH);
         loadGameDialog.setVisible(true);
     }
+
     public void showMenuDialog() {
         myInputManager.resetKeyStates();
         myMenuDialog.setVisible(true);
@@ -216,6 +223,17 @@ public class Display {
 
     public static Display getInstance() {
         return myInstance;
+    }
+
+    /**
+     * Method for shaking screen.
+     * @param theDuration is the duration.
+     * @param theMagnitude is how much the screen should shake.
+     */
+    public void shakeScreen(int theDuration, int theMagnitude) {
+        myIsShaking = true;
+        myShakeDuration = theDuration;
+        myShakeMagnitude = theMagnitude;
     }
 
     public void dispose() {
@@ -230,7 +248,7 @@ public class Display {
             return;
         }
         BufferStrategy bs = myJFrame.getBufferStrategy();
-        if (bs == null){
+        if (bs == null) {
             myJFrame.createBufferStrategy(2);
             return;
         }
@@ -240,6 +258,16 @@ public class Display {
         g.setColor(Color.white);
         g.fillRect(0, 0, myRealWidth, myRealHeight);
 
+        // Apply screen shake if shaking is toggled
+        if (myIsShaking) {
+            int shakeX = myRandom.nextInt(myShakeMagnitude * 2) - myShakeMagnitude;
+            int shakeY = myRandom.nextInt(myShakeMagnitude * 2) - myShakeMagnitude;
+            g.translate(shakeX, shakeY);
+            myShakeDuration--;
+            if (myShakeDuration <= 0) {
+                myIsShaking = false;
+            }
+        }
 
         for (String data : theDrawList) {
             draw(g, data.split(":"));
@@ -248,6 +276,7 @@ public class Display {
         g.dispose();
         bs.show();
     }
+
 
     private void draw(final Graphics2D theGraphics, final String[] theData) {
         for (int i = 0; i < theData.length; i++) {

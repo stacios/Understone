@@ -107,6 +107,7 @@ public class Room implements Drawable, Serializable {
         System.out.println("Spawned egg after the rock was broken.");
     }
 
+    // Returns if all glyphids are dead, and if there is no rock as rock must not be present for Dwarf to leave rooms
     public boolean canExit() {
         return myGlyphids.isEmpty() && !hasRock();
     }
@@ -135,9 +136,9 @@ public class Room implements Drawable, Serializable {
             myGlyphidAttacks.addAll(List.of(glyphid.getPendingAttacks()));
             if (flag) {
                 myGlyphids.remove(i);
+                // TODO might refactor later, just a temp way to detect Rock/Egg break, and play sound
                 if (glyphid == myRock) {
                     spawnEgg();
-                    // TODO might refactor later, just a temp way to play sound
                     GameLoop.getInstance().addDrawData("sound:RockBroken");
                 } else if (glyphid == myEgg) {
                     GameLoop.getInstance().addDrawData("sound:AlienEggGrabRoars");
@@ -171,7 +172,6 @@ public class Room implements Drawable, Serializable {
         }
 
         // attack on character collisions
-
         for (Attack a : myGlyphidAttacks) {
             if (GameLoop.getInstance().getPlayer().colliding(a)) {
                 GameLoop.getInstance().getPlayer().receiveAttack(a);
@@ -192,12 +192,14 @@ public class Room implements Drawable, Serializable {
             }
         }
 
-        // Todo Way to detect if player is colliding with egg, and then collect it;
+        // Todo Way to detect if player is colliding with egg, and then collect it with space;
         Dwarf player = GameLoop.getInstance().getPlayer();
         if (myEgg != null && player.colliding(myEgg) && GameLoop.getInstance().isDwarfInteracting()) {
             myGlyphids.remove(myEgg);
-            // Todo temporary sound for egg
+            // Todo temporary sound for egg and roars 
             GameLoop.getInstance().addDrawData("sound:PickupEgg");
+            GameLoop.getInstance().addDrawData("sound:EggGrabRoars");
+            Display.getInstance().shakeScreen(200, 9);
             System.out.println("Egg picked up by the dwarf.");
         }
     }
