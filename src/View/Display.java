@@ -61,6 +61,10 @@ public class Display {
     private int myShakeDuration;
     private int myShakeMagnitude;
     private Random myRandom;
+    private boolean myIsFading;
+    private int myFadeDuration;
+    private int myFadeProgress;
+    private boolean myFadeIn;
 
     public Display() {
         myRandom = new Random();
@@ -225,6 +229,40 @@ public class Display {
         return myInstance;
     }
 
+    public void startFadeAnimation(int theDuration) {
+        myIsFading = true;
+        myFadeDuration = theDuration;
+        myFadeProgress = 0;
+        myFadeIn = false;
+    }
+
+    /**
+     * Method for toggling fade animation between rooms 
+     * TODO Possible make a better way to display moving. Possibly a slideshow kind of thing where the Room swipes down?
+     * @param theG is the Graphics Object. 
+     */
+    private void updateFade(Graphics2D theG) {
+        if (myIsFading) {
+            float alpha = (myFadeIn ? (myFadeDuration - myFadeProgress) : myFadeProgress) / (float) myFadeDuration;
+            
+            Composite originalComposite = theG.getComposite();
+            theG.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+            theG.setColor(Color.black);
+            theG.fillRect(0, 0, myRealWidth, myRealHeight);
+            theG.setComposite(originalComposite);
+            myFadeProgress++;
+            
+            if (myFadeProgress >= myFadeDuration) {
+                if (myFadeIn) {
+                    myIsFading = false;
+                } else {
+                    myFadeIn = true;
+                    myFadeProgress = 0;
+                }
+            }
+        }
+    }
+
     /**
      * Method for shaking screen.
      * @param theDuration is the duration.
@@ -272,6 +310,9 @@ public class Display {
         for (String data : theDrawList) {
             draw(g, data.split(":"));
         }
+        
+        // Update fade variables/durations 
+        updateFade(g);
 
         g.dispose();
         bs.show();

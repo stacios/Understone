@@ -196,7 +196,7 @@ public class Room implements Drawable, Serializable {
         Dwarf player = GameLoop.getInstance().getPlayer();
         if (myEgg != null && player.colliding(myEgg) && GameLoop.getInstance().isDwarfInteracting()) {
             myGlyphids.remove(myEgg);
-            // Todo temporary sound for egg and roars 
+            // Todo temporary sound for egg and roars
             GameLoop.getInstance().addDrawData("sound:PickupEgg");
             GameLoop.getInstance().addDrawData("sound:EggGrabRoars");
             Display.getInstance().shakeScreen(200, 9);

@@ -10,6 +10,7 @@ import Model.Glyphid.Glyphid;
 import Model.Spaces.Cave;
 import Model.Spaces.Room;
 import Model.Weapon.Attack;
+import View.Display;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -100,6 +101,8 @@ public class GameLoop implements Drawable, Serializable {
             // Todo add additional condition that all enemies must be dead
             if (currentRoom.isDwarfInArea(myPlayer)) {
                 myCave.moveToNextRoom();
+                // Initiate fade animation in Display
+                Display.getInstance().startFadeAnimation(35);
                 myActiveRoom = myCave.getCurrentRoom();
                 //System.out.println("Moved to room " + myActiveRoom.getIdentifier());
             } else {
