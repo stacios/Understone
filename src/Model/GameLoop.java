@@ -27,11 +27,11 @@ public class GameLoop implements Drawable, Serializable {
     private Room myActiveRoom;
     private HUD myHUD;
     private transient ArrayList<String> myDrawDataList;
-    private transient boolean spacePressed;
+    private transient boolean myDwarfInteracting;
 
     private GameLoop() {
         myDrawDataList = new ArrayList<>();
-        spacePressed = false;
+        myDwarfInteracting = false;
 
         startDB();
         myCave = new Cave();
@@ -66,7 +66,7 @@ public class GameLoop implements Drawable, Serializable {
         myDrawDataList.clear();
         myPlayer.setInputData(theInput);
 
-        handleRoomTransition(theInput);
+        handleDwarfInteraction(theInput);
 
         myActiveRoom.update();
         myDrawDataList.addAll(Arrays.asList(myActiveRoom.getDrawData()));
@@ -77,14 +77,19 @@ public class GameLoop implements Drawable, Serializable {
         return !theInput.getEscape();
     }
 
-    private void handleRoomTransition(final InputData theInput) {
+    // Todo method for external classes to detect if Dwarf etc is interacting with Door/Egg
+    public boolean isDwarfInteracting() {
+        return myDwarfInteracting;
+    }
+
+    private void handleDwarfInteraction(final InputData theInput) {
         if (theInput.getInteract()) {
-            if (!spacePressed) {
+            if (!isDwarfInteracting()) {
                 moveToNextRoom();
-                spacePressed = true;
+                myDwarfInteracting = true;
             }
         } else {
-            spacePressed = false;
+            myDwarfInteracting = false;
         }
     }
 

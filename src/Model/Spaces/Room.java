@@ -191,6 +191,15 @@ public class Room implements Drawable, Serializable {
                 a.collided();
             }
         }
+
+        // Todo Way to detect if player is colliding with egg, and then collect it;
+        Dwarf player = GameLoop.getInstance().getPlayer();
+        if (myEgg != null && player.colliding(myEgg) && GameLoop.getInstance().isDwarfInteracting()) {
+            myGlyphids.remove(myEgg);
+            // Todo temporary sound for egg
+            GameLoop.getInstance().addDrawData("sound:PickupEgg");
+            System.out.println("Egg picked up by the dwarf.");
+        }
     }
 
     @Override
