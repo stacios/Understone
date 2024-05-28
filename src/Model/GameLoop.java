@@ -39,6 +39,12 @@ public class GameLoop implements Drawable, Serializable {
         //myPlayer = CharacterFactory.createDwarf("Engineer");
     }
 
+    public void startDB() {
+        SQLiteConnection.getDataSource();
+        DwarfDB.initializeDB();
+        GlyphidDB.initializeDB();
+    }
+
     public void setDwarf(String theDwarfType) {
         myPlayer = CharacterFactory.createDwarf(theDwarfType);
         //myPlayer = CharacterFactory.createDwarf("Scout");
@@ -72,7 +78,7 @@ public class GameLoop implements Drawable, Serializable {
     }
 
     private void handleRoomTransition(final InputData theInput) {
-        if (theInput.getInteract()) { // Space key is used for interaction
+        if (theInput.getInteract()) {
             if (!spacePressed) {
                 moveToNextRoom();
                 spacePressed = true;
@@ -118,12 +124,6 @@ public class GameLoop implements Drawable, Serializable {
 
     public String[] getDrawData() {
         return myDrawDataList.toArray(new String[0]);
-    }
-
-    public void startDB() {
-        SQLiteConnection.getDataSource();
-        DwarfDB.initializeDB();
-        GlyphidDB.initializeDB();
     }
 
     public Room getActiveRoom() {

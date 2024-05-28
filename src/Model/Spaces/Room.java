@@ -41,13 +41,19 @@ public class Room implements Drawable, Serializable {
         return myRock != null;
     }
 
+    public boolean hasEgg() {
+        return myEgg != null;
+    }
+
     public int getIdentifier() {
         return myIdentifier;
     }
 
     public void spawnEnemies() {
         Random random = new Random();
-        int difficultyFactor = myIdentifier + 1; // Increase the difficulty factor based on room identifier
+
+        // Increase the difficulty factor based on room identifier
+        int difficultyFactor = myIdentifier + 1;
 
         int numberOfP = 0;
         for (int i = 0; i < numberOfP; i++) {
@@ -83,6 +89,7 @@ public class Room implements Drawable, Serializable {
         System.out.println("Spawned " + (numberOfGrunts + numberOfP + numberOfAS) + " enemies in the room.");
     }
 
+    // Todo public for now depending on if we want spawning logic to be handled in Cave
     public void spawnRock() {
         myRock = CharacterFactory.createObject(ROCK);
         myRock.setX(960);
@@ -91,7 +98,8 @@ public class Room implements Drawable, Serializable {
         System.out.println("Spawned rock in the last room.");
     }
 
-    private void spawnEgg() {
+    // Todo public for now depending on if we want spawning logic to be handled in Cave
+    public void spawnEgg() {
         myEgg = CharacterFactory.createObject(EGG);
         myEgg.setX(960);
         myEgg.setY(540);
@@ -103,6 +111,16 @@ public class Room implements Drawable, Serializable {
         return myGlyphids.isEmpty() && !hasRock();
     }
 
+    /**
+     * Gets number of glyphids in current room.
+     *
+     * @return number of glyphids in current room.
+     */
+    public int getGlyphids() {
+        return myGlyphids.size();
+    }
+
+    // TODO magic numbers for now
     public boolean isDwarfInArea(Dwarf dwarf) {
         return dwarf.getY() > 100 && dwarf.getX() > 850 && dwarf.getX() < 1100;
     }
@@ -119,7 +137,7 @@ public class Room implements Drawable, Serializable {
                 myGlyphids.remove(i);
                 if (glyphid == myRock) {
                     spawnEgg();
-                    // TODO refactor this later, just a temp way to play sound
+                    // TODO might refactor later, just a temp way to play sound
                     GameLoop.getInstance().addDrawData("sound:RockBroken");
                 } else if (glyphid == myEgg) {
                     GameLoop.getInstance().addDrawData("sound:AlienEggGrabRoars");
