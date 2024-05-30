@@ -14,6 +14,7 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferStrategy;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -56,8 +57,17 @@ public class Display {
     private JDialog myMenuDialog;
     private boolean isRunning;
     private String myDwarfType;
+    private boolean myIsShaking;
+    private int myShakeDuration;
+    private int myShakeMagnitude;
+    private Random myRandom;
+    private boolean myIsFading;
+    private int myFadeDuration;
+    private int myFadeProgress;
+    private boolean myFadeIn;
 
     public Display() {
+        myRandom = new Random();
 
         myDwarfType = askDwarfType();
 
@@ -197,16 +207,16 @@ public class Display {
             @Override
             public void actionPerformed(ActionEvent e) {
                 myMenuDialog.setVisible(false);
+                showLoadGameDialog();
                 myInputManager.resetKeyStates();
                 myJFrame.requestFocus();
-
             }
         });
 
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                final int choice = JOptionPane.showConfirmDialog(myMenuDialog, "QUIT!", "QUIT", JOptionPane.YES_NO_OPTION);
+                final int choice = JOptionPane.showConfirmDialog(myMenuDialog, "Quit?", "Quit", JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
                     isRunning = false;
                     //dispose();
@@ -260,6 +270,7 @@ public class Display {
         loadGameDialog.add(loadButton, BorderLayout.SOUTH);
         loadGameDialog.setVisible(true);
     }
+
     public void showMenuDialog() {
         myInputManager.resetKeyStates();
         myMenuDialog.setVisible(true);
@@ -267,6 +278,51 @@ public class Display {
 
     public static Display getInstance() {
         return myInstance;
+    }
+
+    public void startFadeAnimation(int theDuration) {
+        myIsFading = true;
+        myFadeDuration = theDuration;
+        myFadeProgress = 0;
+        myFadeIn = false;
+    }
+
+    /**
+     * Method for toggling fade animation between rooms
+     * TODO Possible make a better way to display moving. Possibly a slideshow kind of thing where the Room swipes down?
+     * @param theG is the Graphics Object.
+     */
+    private void updateFade(Graphics2D theG) {
+        if (myIsFading) {
+            float alpha = (myFadeIn ? (myFadeDuration - myFadeProgress) : myFadeProgress) / (float) myFadeDuration;
+
+            Composite originalComposite = theG.getComposite();
+            theG.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+            theG.setColor(Color.black);
+            theG.fillRect(0, 0, myRealWidth, myRealHeight);
+            theG.setComposite(originalComposite);
+            myFadeProgress++;
+
+            if (myFadeProgress >= myFadeDuration) {
+                if (myFadeIn) {
+                    myIsFading = false;
+                } else {
+                    myFadeIn = true;
+                    myFadeProgress = 0;
+                }
+            }
+        }
+    }
+
+    /**
+     * Method for shaking screen.
+     * @param theDuration is the duration.
+     * @param theMagnitude is how much the screen should shake.
+     */
+    public void shakeScreen(int theDuration, int theMagnitude) {
+        myIsShaking = true;
+        myShakeDuration = theDuration;
+        myShakeMagnitude = theMagnitude;
     }
 
     public void dispose() {
@@ -281,7 +337,7 @@ public class Display {
             return;
         }
         BufferStrategy bs = myJFrame.getBufferStrategy();
-        if (bs == null){
+        if (bs == null) {
             myJFrame.createBufferStrategy(2);
             return;
         }
@@ -291,14 +347,28 @@ public class Display {
         g.setColor(Color.white);
         g.fillRect(0, 0, myRealWidth, myRealHeight);
 
+        // Apply screen shake if shaking is toggled
+        if (myIsShaking) {
+            int shakeX = myRandom.nextInt(myShakeMagnitude * 2) - myShakeMagnitude;
+            int shakeY = myRandom.nextInt(myShakeMagnitude * 2) - myShakeMagnitude;
+            g.translate(shakeX, shakeY);
+            myShakeDuration--;
+            if (myShakeDuration <= 0) {
+                myIsShaking = false;
+            }
+        }
 
         for (String data : theDrawList) {
             draw(g, data.split(":"));
         }
 
+        // Update fade variables/durations
+        updateFade(g);
+
         g.dispose();
         bs.show();
     }
+
 
     private void draw(final Graphics2D theGraphics, final String[] theData) {
         for (int i = 0; i < theData.length; i++) {

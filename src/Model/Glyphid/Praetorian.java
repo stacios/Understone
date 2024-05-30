@@ -4,14 +4,21 @@ import Model.Force;
 import Model.Glyphid.Grunt;
 import Model.Weapon.Weapon;
 
-public class Praetorian extends Grunt {
-    public Praetorian(String theName, double theX, double theY, int theHealth, int theWidth, int theHeight, double theMoveSpeed, Weapon theWeapon) {
-        super(theName, theX, theY, theHealth, theWidth, theHeight, theMoveSpeed, theWeapon);
+public class Praetorian extends Glyphid {
+    private double myForceResistance;
+
+    public Praetorian(String theName, double theX, double theY, int theHealth,
+                      int theWidth, int theHeight, double theMoveSpeed,
+                      Weapon theWeapon, double theAttackRange, int theAttackPauseDuration, double theForceResistance) {
+        super(theName, theX, theY, theHealth, theWidth, theHeight, theMoveSpeed, theWeapon, theAttackRange, theAttackPauseDuration);
+        myForceResistance = theForceResistance;
     }
 
 
     @Override
     public void addForce(Force theForce) {
-        super.addForce(new Force(theForce.getAngle(), theForce.getStrength() * .25));
+        super.addForce(new Force(theForce.getAngle(), theForce.getStrength() * myForceResistance));
     }
+
+
 }
