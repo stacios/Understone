@@ -29,10 +29,12 @@ public class GameLoop implements Drawable, Serializable {
     private HUD myHUD;
     private transient ArrayList<String> myDrawDataList;
     private transient boolean myDwarfInteracting;
+    private boolean myPaused;
 
     private GameLoop() {
         myDrawDataList = new ArrayList<>();
         myDwarfInteracting = false;
+        myPaused = false;
 
         startDB();
         myCave = new Cave();
@@ -64,6 +66,9 @@ public class GameLoop implements Drawable, Serializable {
     }
 
     public boolean update(final InputData theInput) {
+        if (myPaused) {
+            return !theInput.getEscape();
+        }
         myDrawDataList.clear();
         myPlayer.setInputData(theInput);
 
@@ -144,6 +149,16 @@ public class GameLoop implements Drawable, Serializable {
         myActiveRoom = myCave.getCurrentRoom();
         myPlayer = CharacterFactory.createDwarf("Driller");
         myHUD = new HUD(myPlayer);
+    }
+
+    // Method to pause and resume the game
+    public void pauseGame() {
+        myPaused = !myPaused;
+    }
+
+    // Method to check if the game is paused
+    public boolean isPaused() {
+        return myPaused;
     }
 
     @Override

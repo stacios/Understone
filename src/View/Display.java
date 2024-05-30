@@ -187,6 +187,7 @@ public class Display {
                 myMenuDialog.setVisible(false);
                 myInputManager.resetKeyStates();
                 myJFrame.requestFocus();
+                GameLoop.getInstance().pauseGame();
             }
         });
 
@@ -343,6 +344,7 @@ public class Display {
 
     public void showMenuDialog() {
         myInputManager.resetKeyStates();
+        GameLoop.getInstance().pauseGame();
         myMenuDialog.setVisible(true);
     }
 
