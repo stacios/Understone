@@ -114,14 +114,29 @@ public class Display {
     private void createMenuDialog() {
         myMenuDialog = new JDialog(myJFrame, "Menu", true);
         myMenuDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        myMenuDialog.setSize(300, 200);
+        myMenuDialog.setSize(300, 400);
         myMenuDialog.setLocationRelativeTo(myJFrame);
-        myMenuDialog.setLayout(new GridLayout(4, 1));
+        myMenuDialog.setLayout(new GridLayout(7, 1));
+        myMenuDialog.setResizable(false);
+        myMenuDialog.setUndecorated(true);
 
+        JButton resumeButton = new JButton("Resume");
         JButton newGameButton = new JButton("New Game");
         JButton saveButton = new JButton("Save Game");
         JButton loadGameButton = new JButton("Load Game");
+        JButton instructionsButton = new JButton("Instructions");
+        JButton creditsButton = new JButton("Credits");
         JButton quitButton = new JButton("Quit");
+
+
+        resumeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myMenuDialog.setVisible(false);
+                myInputManager.resetKeyStates();
+                myJFrame.requestFocus();
+            }
+        });
 
         newGameButton.addActionListener(new ActionListener() {
             @Override
@@ -138,27 +153,60 @@ public class Display {
             @Override
             public void actionPerformed(ActionEvent e) {
                 myMenuDialog.setVisible(false);
-                JOptionPane.showMessageDialog(null, "SAVED!");
+                JOptionPane.showMessageDialog(myMenuDialog, "SAVED!");
                 DataManager.saveGame(GameLoop.getInstance());
                 myInputManager.resetKeyStates();
                 myJFrame.requestFocus();
             }
         });
 
-        loadGameButton.addActionListener(new ActionListener() {
+        instructionsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(myMenuDialog,
+                        """
+                        Welcome to Hoxxes IV! Fight your way down the cave to reach the alien egg and bring it back!
+                        Use W A S D to move around. Press shift to do a dash the the direction you are moving. 
+                        Click to shoot your weapon towards the cursor. Use 1, 2, and 3 to switch weapons. 
+                        Once all of the bugs in a room are dead, approach a tunnel and press space to move through it. 
+                        In the final room, break the egg out of the rock and press space to pick it up. 
+                        Then go back the way you came to escape. Good luck miner!
+                        """);
+                myInputManager.resetKeyStates();
+                myJFrame.requestFocus();
+            }
+        });
+
+        creditsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(myMenuDialog,
+                        """
+                        Credits:
+                        Ares Zhang
+                        Staci Laban
+                        Owen Crema
+                        Spring 2024
+                        """);
+                myInputManager.resetKeyStates();
+                myJFrame.requestFocus();
+            }
+        });
+
+        newGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 myMenuDialog.setVisible(false);
-                showLoadGameDialog();
                 myInputManager.resetKeyStates();
                 myJFrame.requestFocus();
+
             }
         });
 
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                final int choice = JOptionPane.showConfirmDialog(null, "QUIT!", "QUIT", JOptionPane.YES_NO_OPTION);
+                final int choice = JOptionPane.showConfirmDialog(myMenuDialog, "QUIT!", "QUIT", JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
                     isRunning = false;
                     //dispose();
@@ -169,9 +217,12 @@ public class Display {
             }
         });
 
+        myMenuDialog.add(resumeButton);
         myMenuDialog.add(newGameButton);
         myMenuDialog.add(saveButton);
         myMenuDialog.add(loadGameButton);
+        myMenuDialog.add(instructionsButton);
+        myMenuDialog.add(creditsButton);
         myMenuDialog.add(quitButton);
     }
 
