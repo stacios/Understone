@@ -37,9 +37,7 @@ public class GameLoop implements Drawable, Serializable {
         myPaused = false;
 
         startDB();
-        myCave = new Cave();
-        myActiveRoom = myCave.getCurrentRoom();
-        //myPlayer = CharacterFactory.createDwarf("Engineer");
+        initializeGame();
     }
 
     public void startDB() {
@@ -144,11 +142,17 @@ public class GameLoop implements Drawable, Serializable {
     }
 
     public void resetGame() {
-        myDrawDataList = new ArrayList<>();
+        myDrawDataList.clear();
+        initializeGame();
+    }
+
+    private void initializeGame() {
         myCave = new Cave();
         myActiveRoom = myCave.getCurrentRoom();
-        myPlayer = CharacterFactory.createDwarf("Driller");
+        String dwarfType = Display.getInstance().getDwarfSelection();
+        myPlayer = CharacterFactory.createDwarf(dwarfType);
         myHUD = new HUD(myPlayer);
+        Display.getInstance().startFadeAnimation(35);
     }
 
     // Method to pause and resume the game

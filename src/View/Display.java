@@ -191,17 +191,6 @@ public class Display {
             }
         });
 
-        newGameButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                myMenuDialog.setVisible(false);
-                myInputManager.resetKeyStates();
-                myJFrame.requestFocus();
-
-                GameLoop.getInstance().resetGame();
-            }
-        });
-
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -278,9 +267,9 @@ public class Display {
             @Override
             public void actionPerformed(ActionEvent e) {
                 myMenuDialog.setVisible(false);
-                showLoadGameDialog();
                 myInputManager.resetKeyStates();
                 myJFrame.requestFocus();
+                GameLoop.getInstance().resetGame();
             }
         });
 
