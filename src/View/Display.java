@@ -68,6 +68,7 @@ public class Display {
 
     public Display() {
         myRandom = new Random();
+        // AudioPlayer is now initialized first because it has to be instantiated to play Dwarf Selection Sounds
         myAudioPlayer = new AudioPlayer();
         myDwarfType = askDwarfType();
 
@@ -79,7 +80,7 @@ public class Display {
         myScaleMult = myRealHeight / 1080.0;
 
         myJFrame = new JFrame("Understone");
-        myJFrame.setLocation(0,0);
+        myJFrame.setLocation(0, 0);
         myJFrame.setUndecorated(true);
         isRunning = true;
         myJFrame.setVisible(true);
@@ -150,8 +151,9 @@ public class Display {
 
         // Play Dwarf Selection Sound
         try {
+            // comment this out if you need because gets annoying for dev
             myAudioPlayer.playSound("CharSel" + theDwarfType);
-        } catch(Exception theEx) {
+        } catch (Exception theEx) {
             System.out.println("Incorrect character sound file specified.");
         }
     }
@@ -213,15 +215,32 @@ public class Display {
         instructionsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(myMenuDialog,
-                        """
-                        Welcome to Hoxxes IV! Fight your way down the cave to reach the alien egg and bring it back!
-                        Use W A S D to move around. Press shift to do a dash the the direction you are moving. 
-                        Click to shoot your weapon towards the cursor. Use 1, 2, and 3 to switch weapons. 
-                        Once all of the bugs in a room are dead, approach a tunnel and press space to move through it. 
-                        In the final room, break the egg out of the rock and press space to pick it up. 
-                        Then go back the way you came to escape. Good luck miner!
-                        """);
+                JPanel panel = new JPanel(new BorderLayout(10, 10));
+                panel.setBackground(Color.WHITE);
+
+                JLabel messageLabel = new JLabel("<html>Welcome to Hoxxes IV!<br>"
+                        + "Fight your way down the cave to reach the alien egg and bring it back!<br><br>"
+                        + "<b>Controls:</b><br>"
+                        + "<div></div>"
+                        + "Use <b>W A S D</b> to move around.<br>"
+                        + "Press <b>Shift</b> to dash in the direction you are moving.<br>"
+                        + "<b>Click</b> to shoot your weapon towards the cursor.<br>"
+                        + "Use <b>1, 2, and 3</b> to switch weapons.<br>"
+                        + "<div></div>"
+                        + "<b>Gameplay:</b>"
+                        + "<div></div>"
+                        + "Once all of the bugs in a room are dead, approach a tunnel and press <b>Space</b> to move through it.<br>"
+                        + "In the final room, break the egg out of the rock and press <b>Space</b> to pick it up.<br>"
+                        + "Then go back the way you came to escape. Good luck miner!</html>");
+                messageLabel.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+                messageLabel.setForeground(Color.BLACK);
+
+                panel.add(messageLabel, BorderLayout.CENTER);
+
+                panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+                JOptionPane.showMessageDialog(myMenuDialog, panel, "Instructions", JOptionPane.PLAIN_MESSAGE);
+
                 myInputManager.resetKeyStates();
                 myJFrame.requestFocus();
             }
@@ -230,14 +249,25 @@ public class Display {
         creditsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(myMenuDialog,
-                        """
-                        Credits:
-                        Ares Zhang
-                        Staci Laban
-                        Owen Crema
-                        Spring 2024
-                        """);
+                JPanel panel = new JPanel(new GridBagLayout());
+                panel.setBackground(Color.WHITE);
+
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+                gbc.insets = new Insets(0, 0, 0, 0);
+                gbc.anchor = GridBagConstraints.CENTER;
+
+                JLabel messageLabel =
+                        new JLabel("<html><div style='text-align: center;'>Developed By:<br>Owen Crema<br>Staci Laban<br>Ares Zhang</div></html>");
+                messageLabel.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+                messageLabel.setForeground(Color.BLACK);
+                messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+                panel.add(messageLabel, gbc);
+
+                JOptionPane.showMessageDialog(myMenuDialog, panel, "Credits", JOptionPane.PLAIN_MESSAGE);
+
                 myInputManager.resetKeyStates();
                 myJFrame.requestFocus();
             }
@@ -330,6 +360,7 @@ public class Display {
     /**
      * Method for toggling fade animation between rooms
      * TODO Possible make a better way to display moving. Possibly a slideshow kind of thing where the Room swipes down?
+     *
      * @param theG is the Graphics Object.
      */
     private void updateFade(Graphics2D theG) {
@@ -356,7 +387,8 @@ public class Display {
 
     /**
      * Method for shaking screen.
-     * @param theDuration is the duration.
+     *
+     * @param theDuration  is the duration.
      * @param theMagnitude is how much the screen should shake.
      */
     public void shakeScreen(int theDuration, int theMagnitude) {
@@ -369,6 +401,7 @@ public class Display {
         isRunning = false;
         myJFrame.dispose();
     }
+
     /**
      * Renders the draw data to the display. Make sure each draw data string is in the correct format, look to Display documentation.
      */
@@ -430,7 +463,7 @@ public class Display {
                 height = (int) (myScaleMult * Integer.parseInt(theData[5]));
 
                 theGraphics.drawImage(myImageLibrary.get(theData[1]),
-                        x - width/2, y - height/2,
+                        x - width / 2, y - height / 2,
                         width, height, null);
                 break;
 
@@ -444,7 +477,7 @@ public class Display {
                 AffineTransform backup = theGraphics.getTransform();
                 theGraphics.rotate(angle, x, y);
                 theGraphics.drawImage(myImageLibrary.get(theData[1]),
-                        x - width/2, y - height/2,
+                        x - width / 2, y - height / 2,
                         width, height, null);
                 theGraphics.setTransform(backup);
                 break;
@@ -456,7 +489,7 @@ public class Display {
                 height = (int) (myScaleMult * Integer.parseInt(theData[4]));
 
                 theGraphics.setColor(Color.RED);
-                theGraphics.fillRect(x - width/2, y - height/2, width, height);
+                theGraphics.fillRect(x - width / 2, y - height / 2, width, height);
                 break;
 
             case "sound":
