@@ -17,7 +17,7 @@ public class Praetorian extends Glyphid {
 
     @Override
     public void addForce(Force theForce) {
-        super.addForce(new Force(theForce.getAngle(), theForce.getStrength() * myForceResistance));
+        super.addForce(new Force(theForce.getAngle(), theForce.getStrength() * myForceResistance, theForce.getDecayRate()));
     }
 
 
