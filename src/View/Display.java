@@ -68,7 +68,7 @@ public class Display {
 
     public Display() {
         myRandom = new Random();
-
+        myAudioPlayer = new AudioPlayer();
         myDwarfType = askDwarfType();
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -96,7 +96,7 @@ public class Display {
 
         myImageLibrary = new ImageLibrary();
         myInputManager = new InputManager();
-        myAudioPlayer = new AudioPlayer();
+
 
         myInputManager.setEscapeKeyListener(new InputManager.EscapeKeyListener() {
             @Override
@@ -114,9 +114,49 @@ public class Display {
     }
 
     private String askDwarfType() {
-        return (String) JOptionPane.showInputDialog(null, "Choose your Dwarf:", "Understone",
-                JOptionPane.QUESTION_MESSAGE, null, new String[]{"Driller", "Engineer", "Gunner", "Scout"}, "Driller");
+        JPanel panel = new JPanel(new FlowLayout());
+        JLabel imageLabel = new JLabel();
+        panel.add(imageLabel);
+        JComboBox<String> dwarfComboBox = new JComboBox<>(new String[]{"Driller", "Engineer", "Gunner", "Scout"});
+        // Default Selected Driller
+        dwarfComboBox.setSelectedIndex(0);
+        updateDwarfSelectionEffect(imageLabel, (String) dwarfComboBox.getSelectedItem());
+        dwarfComboBox.addActionListener(e -> updateDwarfSelectionEffect(imageLabel, (String) dwarfComboBox.getSelectedItem()));
+        panel.add(dwarfComboBox);
+
+        int result = JOptionPane.showConfirmDialog(null, panel, "Choose your Dwarf", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (result == JOptionPane.OK_OPTION) {
+            return (String) dwarfComboBox.getSelectedItem();
+        } else {
+            System.exit(0);
+            return null;
+        }
     }
+
+    private void updateDwarfSelectionEffect(JLabel theImageLabel, String theDwarfType) {
+        // Change Dwarf Selection Image
+
+        // Path to dwarf images based on provided Dwarf Type
+        String imagePath = "images/" + theDwarfType + ".png";
+        ImageIcon dwarfIcon = new ImageIcon(imagePath);
+        if (dwarfIcon.getIconWidth() == -1) {
+            System.out.println("Failed to load image: " + imagePath);
+        } else {
+            // Scales the image so that selection isn't too large
+            Image scaledImage = dwarfIcon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+            theImageLabel.setIcon(new ImageIcon(scaledImage));
+        }
+
+        // Play Dwarf Selection Sound
+        try {
+            myAudioPlayer.playSound("CharSel" + theDwarfType);
+        } catch(Exception theEx) {
+            System.out.println("Incorrect character sound file specified.");
+        }
+    }
+
+
     public String getDwarfSelection() {
         return myDwarfType;
     }
