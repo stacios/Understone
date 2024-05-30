@@ -64,6 +64,10 @@ public class Force implements Serializable {
         return myAngle;
     }
 
+    public double getDecayRate() {
+        return myDecayRate;
+    }
+
     // update the strength of the force based on the decay rate
     public boolean update() {
         myStrength *= (1 - myDecayRate);

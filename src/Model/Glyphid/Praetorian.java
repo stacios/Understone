@@ -1,7 +1,7 @@
 package Model.Glyphid;
 
 import Model.Force;
-import Model.Angle;
+import Model.Glyphid.Grunt;
 import Model.Weapon.Weapon;
 
 public class Praetorian extends Glyphid {
@@ -14,13 +14,11 @@ public class Praetorian extends Glyphid {
         myForceResistance = theForceResistance;
     }
 
+
     @Override
     public void addForce(Force theForce) {
-        double validDecayRate = Math.max(0, Math.min(1, theForce.getStrength() * myForceResistance));
-        Force reducedForce = new Force(theForce.getAngle(), theForce.getStrength() * myForceResistance, validDecayRate);
-        super.addForce(reducedForce);
+        super.addForce(new Force(theForce.getAngle(), theForce.getStrength() * myForceResistance, theForce.getDecayRate()));
     }
+
+
 }
-
-
-

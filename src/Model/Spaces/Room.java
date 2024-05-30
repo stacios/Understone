@@ -157,17 +157,25 @@ public class Room implements Drawable, Serializable {
         }
 
         // character on character collisions
-        List<Character> characters = new ArrayList<>(myGlyphids);
-        characters.add(GameLoop.getInstance().getPlayer());
+
         Character c1, c2;
-        for (int i = 0; i < characters.size(); i++) {
-            for (int j = i + 1; j < characters.size(); j++) {
-                c1 = characters.get(i);
-                c2 = characters.get(j);
+        for (int i = 0; i < myGlyphids.size(); i++) {
+            for (int j = i + 1; j < myGlyphids.size(); j++) {
+                c1 = myGlyphids.get(i);
+                c2 = myGlyphids.get(j);
                 if (c1.colliding(c2)) {
-                    c1.addForce(new Force(new Angle(c2.getX(), c2.getY(), c1.getX(), c1.getY()), 2, .5));
-                    c2.addForce(new Force(new Angle(c1.getX(), c1.getY(), c2.getX(), c2.getY()), 2, .5));
+                    c1.addForce(new Force(new Angle(c2.getX(), c2.getY(), c1.getX(), c1.getY()), 1));
+                    c2.addForce(new Force(new Angle(c1.getX(), c1.getY(), c2.getX(), c2.getY()), 1));
                 }
+            }
+        }
+
+        // player should receive more pushback than glyphids, to prevent the player from running through them
+        Dwarf p = GameLoop.getInstance().getPlayer();
+        for (Glyphid g : myGlyphids) {
+            if (p.colliding(g)) {
+                p.addForce(new Force(new Angle(g.getX(), g.getY(), p.getX(), p.getY()), 10));
+                g.addForce(new Force(new Angle(p.getX(), p.getY(), g.getX(), g.getY()), .2));
             }
         }
 

@@ -102,10 +102,6 @@ public abstract class Character implements Drawable, Collidable, Serializable {
         myWeapon = theWeapon;
     }
 
-    public boolean colliding(Collidable theOther) {
-        return Collidable.super.colliding(theOther);
-    }
-
     /**
      * Update the character every game tick.
      * Includes character AI and recieving forces.

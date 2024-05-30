@@ -83,7 +83,7 @@ public class CharacterFactory {
         }
         //Weapon defaultWeapon = new ShotgunWeapon(60, new ProjectileAttack(10, 20, 20, 10.0, 70, 20), 10, new Angle(Math.toRadians(45)));
         //return new Dwarf(theDwarfType, x, y, health, width, height, moveSpeed, defaultWeapon);
-        return new Dwarf(theDwarfType, 400, 400, 100, 100, 100, 5, weapons);
+        return new Dwarf(theDwarfType, 400, 400, 100, 100, 100, 5, 20, 10, 20, weapons);
     }
 
     /**

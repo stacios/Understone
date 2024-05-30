@@ -3,8 +3,7 @@ package Model;
 import Controller.InputData;
 import Model.Weapon.Weapon;
 
-import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The player of the game. There are 4 types of dwarves: Driller, Engineer, Gunner, and Scout.
@@ -17,9 +16,20 @@ public class Dwarf extends Character {
 
     private int myWeaponIndex = 0;
 
-    public Dwarf(String theName, double theX, double theY, int theHealth, int theWidth, int theHeight, double theMoveSpeed, Weapon[] theWeapons) {
+    private int myDashClock;
+    private Angle myDashAngle;
+    private final double myDashSpeed;
+    private final int myDashTime;
+    private final int myDashCooldown;
+
+    public Dwarf(String theName, double theX, double theY, int theHealth, int theWidth, int theHeight, double theMoveSpeed,
+                 double theDashSpeed, int theDashTime, int theDashCooldown, Weapon[] theWeapons) {
         super(theName, theX, theY, theHealth, theWidth, theHeight, theMoveSpeed, theWeapons[0]);
         myWeapons = theWeapons;
+        myDashSpeed = theDashSpeed;
+        myDashTime = theDashTime;
+        myDashCooldown = theDashCooldown;
+        myDashClock = -myDashCooldown;
     }
 
     public void switchWeapon(int theIndex) {
@@ -41,7 +51,8 @@ public class Dwarf extends Character {
     public boolean update() {
         boolean superCall = super.update();
 
-        walk();
+        move();
+        dash();
         if (myInputData.getM1())
             attemptAttack(myInputData.getMouseX(), myInputData.getMouseY());
         if (myInputData.getWeapon1())
@@ -55,7 +66,7 @@ public class Dwarf extends Character {
 
     }
 
-    private void walk() {
+    private void move() {
 
         //get the number of movement keys pressed
         boolean[] inputs = new boolean[]{myInputData.getDown(), myInputData.getUp(),
@@ -96,8 +107,36 @@ public class Dwarf extends Character {
         if (angle != null) {
             addForce(new Force(angle, getMoveSpeed(), .4));
         }
+        if (myDashClock < 0) {
+            myDashAngle = angle;
+        }
 
     }
+
+    private void dash() {
+        if (myDashClock != -myDashCooldown) {
+            myDashClock--;
+        }
+        if (myDashClock == -myDashCooldown && myDashAngle != null && myInputData.getDash()) {
+            myDashClock = myDashTime;
+        }
+        if (myDashClock >= 0 && myDashAngle != null) {
+            addForce(new Force(myDashAngle, myDashSpeed));
+        }
+    }
+
+    @Override
+    public String[] getDrawData() {
+        if (myDashClock == myDashTime) {
+            List<String> temp = new java.util.ArrayList<>(List.of(super.getDrawData()));
+            temp.add("sound:Dash");
+            return temp.toArray(new String[0]);
+        }
+        else {
+            return super.getDrawData();
+        }
+    }
+
 
     /**
      * Todo Dwarf toString.
