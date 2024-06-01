@@ -128,6 +128,7 @@ public class Display {
         int result = JOptionPane.showConfirmDialog(null, panel, "Choose your Dwarf", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
         if (result == JOptionPane.OK_OPTION) {
+            myDwarfType = (String) dwarfComboBox.getSelectedItem();
             return (String) dwarfComboBox.getSelectedItem();
         } else {
             System.exit(0);
