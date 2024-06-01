@@ -18,9 +18,10 @@ public class HUD implements Drawable, Serializable {
     static {
         dwarfWeapons = new HashMap<>();
         dwarfWeapons.put("Driller", List.of("Flamethrower", "Pistol", "Pickaxe"));
-        dwarfWeapons.put("Scout", List.of("M1000", "Pistol", "Pickaxe"));
+        dwarfWeapons.put("Scout", List.of("M1000", "SawedOff", "Pickaxe"));
         dwarfWeapons.put("Engineer", List.of("Shotgun", "GrenadeLauncher", "Pickaxe"));
         dwarfWeapons.put("Gunner", List.of("Minigun", "Revolver", "Pickaxe"));
+        dwarfWeapons.put("karl", List.of("GrenadeLauncher", "GrenadeLauncher", "Pickaxe"));
     }
 
     public HUD(Dwarf thePlayer) {

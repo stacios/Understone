@@ -39,7 +39,7 @@ public class AudioPlayer {
             //System.out.println("playing sound " +theSound);
         } catch (UnsupportedAudioFileException | LineUnavailableException
                  | IOException | NullPointerException e) {
-            System.err.println("Unable to play audio");
+            System.err.println("Unable to play audio: \n" + e);
         }
     }
 }

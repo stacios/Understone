@@ -21,7 +21,8 @@ public class CharacterFactory {
      */
     public static Dwarf createDwarf(final String theDwarfType) {
         if (!DRILLER.equals(theDwarfType) && !ENGINEER.equals(theDwarfType) &&
-                !SCOUT.equals(theDwarfType) && !GUNNER.equals(theDwarfType)) {
+                !SCOUT.equals(theDwarfType) && !GUNNER.equals(theDwarfType) &&
+                !"karl".equals(theDwarfType)) {
             throw new Error("Passed dwarf type must be of defined dwarf type(Driller, Engineer, Gunner, Scout)");
         }
 
@@ -80,9 +81,20 @@ public class CharacterFactory {
                 weapons[1] = new Weapon(60,
                         new ProjectileAttack(50, 30, 30, 30, 70, 30), "RevolverShot");
                 break;
+
+            case "karl":
+                // destroyer of worlds
+                weapons[0] = new ShotgunWeapon(6,
+                        new ExplosiveAttack(999, 100, 100, 10, 70, 40, 400), "CharSelkarl",
+                        10, new Angle(Math.toRadians(25)));
+                weapons[1] = weapons[0];
+                break;
         }
         //Weapon defaultWeapon = new ShotgunWeapon(60, new ProjectileAttack(10, 20, 20, 10.0, 70, 20), 10, new Angle(Math.toRadians(45)));
         //return new Dwarf(theDwarfType, x, y, health, width, height, moveSpeed, defaultWeapon);
+        if (theDwarfType.equals("karl")) {
+            return new Dwarf(theDwarfType, 400, 400, 999999, 100, 100, 5, 20, 10, 20, weapons);
+        }
         return new Dwarf(theDwarfType, 400, 400, 100, 100, 100, 5, 20, 10, 20, weapons);
     }
 
@@ -139,7 +151,7 @@ public class CharacterFactory {
             case ROCK:
                 return new Rock(theRockType, 600, 500, 100, 200, 200, 0, defaultWeapon, 0, 0);
             case EGG:
-                return new Rock(theRockType, 500, 500, 100, 100, 100, 0, defaultWeapon, 0, 0);
+                return new Rock(theRockType, 500, 500, Integer.MAX_VALUE, 100, 100, 0, defaultWeapon, 0, 0);
             default:
         }
 

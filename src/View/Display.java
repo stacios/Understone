@@ -118,7 +118,7 @@ public class Display {
         JPanel panel = new JPanel(new FlowLayout());
         JLabel imageLabel = new JLabel();
         panel.add(imageLabel);
-        JComboBox<String> dwarfComboBox = new JComboBox<>(new String[]{"Driller", "Engineer", "Gunner", "Scout"});
+        JComboBox<String> dwarfComboBox = new JComboBox<>(new String[]{"Driller", "Engineer", "Gunner", "Scout", "karl"});
         // Default Selected Driller
         dwarfComboBox.setSelectedIndex(0);
         updateDwarfSelectionEffect(imageLabel, (String) dwarfComboBox.getSelectedItem());
