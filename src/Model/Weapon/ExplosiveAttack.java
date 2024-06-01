@@ -56,7 +56,7 @@ public class ExplosiveAttack extends ProjectileAttack {
     public String[] getDrawData() {
         if (myTriggeredTimer == 1) {
             return new String[]{"image:Explosion:" + getX() + ":" + getY() +":" + myArea + ":" + myArea,
-            "sound:GrenadeExplosion"};
+            "sound:GrenadeExplosion", "screenShake:30:4"};
         }
         else if (myTriggeredTimer > 1) {
             return new String[]{"image:Explosion:" + getX() + ":" + getY() +":" + myArea + ":" + myArea};

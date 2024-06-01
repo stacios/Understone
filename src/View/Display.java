@@ -387,12 +387,15 @@ public class Display {
         }
     }
 
+
     /**
+     * DEPRECATED
      * Method for shaking screen.
      *
      * @param theDuration  is the duration.
      * @param theMagnitude is how much the screen should shake.
      */
+
     public void shakeScreen(int theDuration, int theMagnitude) {
         myIsShaking = true;
         myShakeDuration = theDuration;
@@ -419,7 +422,7 @@ public class Display {
 
         Graphics2D g = (Graphics2D) bs.getDrawGraphics();
 
-        g.setColor(Color.white);
+        g.setColor(Color.black);
         g.fillRect(0, 0, myRealWidth, myRealHeight);
 
         // Apply screen shake if shaking is toggled
@@ -506,6 +509,12 @@ public class Display {
                 theGraphics.setColor(Color.RED);
                 theGraphics.setFont(new Font("SansSerif", Font.BOLD, size));
                 theGraphics.drawString(theData[1], x, y);
+                break;
+
+            case "screenShake":
+                myIsShaking = true;
+                myShakeDuration = Integer.parseInt(theData[1]);
+                myShakeMagnitude = Integer.parseInt(theData[2]);
                 break;
 
             default:
