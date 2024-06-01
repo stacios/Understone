@@ -14,13 +14,15 @@ public class Cave implements Serializable {
 
     public void generateCave() {
         Random rand = new Random();
-        int numberOfRooms = rand.nextInt(4) + 5; // Generates a number between 5 and 8
+        int numberOfRooms = 6; // Generates a number between 5 and 8
         myRooms = new Room[numberOfRooms];
 
         for (int i = 0; i < myRooms.length; i++) {
             myRooms[i] = new Room(i, myRooms.length); // Added room identifier
         }
-        myRooms[0].spawnEnemies();
+
+        // TODO add logic for spawning drop pod in final room
+
         currentRoomIndex = 0; // Start in the first room
     }
 

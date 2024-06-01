@@ -216,7 +216,16 @@ public class Room implements Drawable, Serializable {
     @Override
     public String[] getDrawData() {
         List<String> result = new ArrayList<>();
-        result.add("image:Room:" + Display.getInstance().getWidth() / 2 + ":" + Display.getInstance().getHeight() / 2 + ":1920:1080");
+        if (myIdentifier == 0 || myIdentifier == 2) {
+            result.add("image:Room:" + Display.getInstance().getWidth() / 2 + ":" + Display.getInstance().getHeight() / 2 + ":1920:1080");
+        } else if (myIdentifier == 1 || myIdentifier == 4) {
+            result.add("image:RoomR:" + Display.getInstance().getWidth() / 2 + ":" + Display.getInstance().getHeight() / 2 + ":1920:1080");
+        } else if (myIdentifier == 3) {
+            result.add("image:RoomB:" + Display.getInstance().getWidth() / 2 + ":" + Display.getInstance().getHeight() / 2 + ":1920:1080");
+        } else {
+            result.add("image:RoomEgg:" + Display.getInstance().getWidth() / 2 + ":" + Display.getInstance().getHeight() / 2 + ":1920:1080");
+        }
+
         for (Glyphid e : myGlyphids) {
             result.addAll(Arrays.asList(e.getDrawData()));
         }
