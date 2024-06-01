@@ -198,9 +198,12 @@ public class Display {
                 myInputManager.resetKeyStates();
                 myJFrame.requestFocus();
 
-                GameLoop.getInstance().resetGame();
+                // Reset the game with the current dwarf type
+                GameLoop.getInstance().resetGame(myDwarfType);
+                GameLoop.getInstance().pauseGame();
             }
         });
+
 
         saveButton.addActionListener(new ActionListener() {
             @Override
@@ -269,16 +272,6 @@ public class Display {
 
                 JOptionPane.showMessageDialog(myMenuDialog, panel, "Credits", JOptionPane.PLAIN_MESSAGE);
 
-                myInputManager.resetKeyStates();
-                myJFrame.requestFocus();
-            }
-        });
-
-        newGameButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                myMenuDialog.setVisible(false);
-                showLoadGameDialog();
                 myInputManager.resetKeyStates();
                 myJFrame.requestFocus();
             }
