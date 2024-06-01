@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -458,6 +460,7 @@ public class Display {
         int height;
         double angle;
         int size;
+        BufferedImage image;
 
         switch (theData[0]) {
 
@@ -470,6 +473,17 @@ public class Display {
                 theGraphics.drawImage(myImageLibrary.get(theData[1]),
                         x - width / 2, y - height / 2,
                         width, height, null);
+                break;
+
+            case "unboundImage":
+                x = (int) (myScaleMult * Double.parseDouble(theData[2]));
+                y = (int) (myScaleMult * Double.parseDouble(theData[3]));
+                image = myImageLibrary.get(theData[1]);
+                width = (int) (myScaleMult * Double.parseDouble(theData[4]) * image.getWidth());
+                height = (int) (myScaleMult * Double.parseDouble(theData[4]) * image.getHeight());
+
+                theGraphics.drawImage(image,
+                        x, y, width, height,  null);
                 break;
 
             case "rotatedImage":
