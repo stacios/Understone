@@ -28,7 +28,7 @@ public class Room implements Drawable, Serializable {
     private Rock myEgg;
     private int myIdentifier;
     private int myTotalRooms;
-    // We need this for inputting slight delay in enemies spawned to sync up with Room transition animation 
+    // We need this for inputting slight delay in enemies spawned to sync up with Room transition animation
     private transient ScheduledExecutorService myScheduler;
     private boolean eggEnemiesSpawned;
 
