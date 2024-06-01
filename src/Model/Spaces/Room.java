@@ -123,7 +123,8 @@ public class Room implements Drawable, Serializable {
 
     // TODO magic numbers for now
     public boolean isDwarfInArea(Dwarf dwarf) {
-        return dwarf.getY() > 100 && dwarf.getX() > 850 && dwarf.getX() < 1100;
+        //System.out.println(dwarf.getY());
+        return dwarf.getY() > 900 && dwarf.getY() < 950 && dwarf.getX() > 850 && dwarf.getX() < 1100;
     }
 
     public void update() {
