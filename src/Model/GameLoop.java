@@ -66,8 +66,10 @@ public class GameLoop implements Drawable, Serializable {
         myActiveRoom = myCave.getCurrentRoom();
         myHUD = new HUD(myPlayer);
     }
-
     public boolean update(final InputData theInput) {
+        if (!Display.getInstance().isRunning()) {
+            return false;
+        }
         if (myPaused) {
             return !theInput.getEscape();
         }
