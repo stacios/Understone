@@ -11,10 +11,10 @@ import View.Display;
 import static Model.CharacterTypes.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Room implements Drawable, Serializable {
     private static final long serialVersionUID = 3L;
@@ -28,6 +28,9 @@ public class Room implements Drawable, Serializable {
     private Rock myEgg;
     private int myIdentifier;
     private int myTotalRooms;
+    private transient ScheduledExecutorService myScheduler;
+    private boolean eggEnemiesSpawned;
+
 
     public Room(int theIdentifier, int theTotalRooms) {
         myIdentifier = theIdentifier;
@@ -35,14 +38,16 @@ public class Room implements Drawable, Serializable {
         myDwarfAttacks = new ArrayList<>();
         myGlyphidAttacks = new ArrayList<>();
         myTotalRooms = theTotalRooms;
-    }
-
-    public boolean hasRock() {
-        return myRock != null;
+        myScheduler = Executors.newScheduledThreadPool(1);
     }
 
     public boolean hasEgg() {
         return myEgg != null;
+    }
+
+    // We dont want any objects left over from previous
+    public void clearRoom() {
+        myGlyphids.clear();
     }
 
     public int getIdentifier() {
@@ -50,48 +55,59 @@ public class Room implements Drawable, Serializable {
     }
 
     public void spawnEnemies() {
-        Random random = new Random();
+        myScheduler.schedule(() -> {
+            Random random = new Random();
 
-        // Increase the difficulty factor based on room identifier
-        int difficultyFactor = myIdentifier + 1;
+            // Increase the difficulty factor based on room identifier
+            int difficultyFactor = myIdentifier + 1;
 
-        int numberOfP = 0;
-        for (int i = 0; i < numberOfP; i++) {
-            Glyphid praetorian = CharacterFactory.createGlyphid(PRAETORIAN);
-            praetorian.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
-            praetorian.setY(random.nextDouble() * 1080 * (2.0 / 3) + 1080 / 6.0);
-            myGlyphids.add(praetorian);
-        }
+            int numberOfP = 0;
+            for (int i = 0; i < numberOfP; i++) {
+                Glyphid praetorian = CharacterFactory.createGlyphid(PRAETORIAN);
+                praetorian.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
+                praetorian.setY(random.nextDouble() * 1080 * (2.0 / 3) + 1080 / 6.0);
+                myGlyphids.add(praetorian);
+            }
 
-        int numberOfAS = 1;
-        for (int i = 0; i < numberOfAS; i++) {
-            Glyphid acidSpitter = CharacterFactory.createGlyphid(ACID_SPIITER);
-            acidSpitter.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
-            acidSpitter.setY(random.nextDouble() * 1080 * (2.0 / 3) + 1080 / 6.0);
-            myGlyphids.add(acidSpitter);
-        }
+            int numberOfAS = 0;
+            for (int i = 0; i < numberOfAS; i++) {
+                Glyphid acidSpitter = CharacterFactory.createGlyphid(ACID_SPIITER);
+                acidSpitter.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
+                acidSpitter.setY(random.nextDouble() * 1080 * (2.0 / 3) + 1080 / 6.0);
+                myGlyphids.add(acidSpitter);
+            }
 
-        // Add random number of Grunts, increased by difficulty factor
-        //int numberOfGrunts = (random.nextInt(3) + 5) + difficultyFactor;
-        // Temp number of grunts to reduce nuymber of grunts spawned, use for dev testing
-        int numberOfGrunts = 0;
-        for (int i = 0; i < numberOfGrunts; i++) {
-            Glyphid grunt = CharacterFactory.createGlyphid(GRUNT);
-            grunt.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
-            grunt.setY(random.nextDouble() * 1080 * (2.0 / 3) + 1080 / 6.0);
-            myGlyphids.add(grunt);
-        }
+            // Add random number of Grunts, increased by difficulty factor
+            //int numberOfGrunts = (random.nextInt(3) + 5) + difficultyFactor;
+            // Temp number of grunts to reduce nuymber of grunts spawned, use for dev testing
+            int numberOfGrunts = 1;
+            for (int i = 0; i < numberOfGrunts; i++) {
+                Glyphid grunt = CharacterFactory.createGlyphid(GRUNT);
+                grunt.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
+                grunt.setY(random.nextDouble() * 1080 * (2.0 / 3) + 1080 / 6.0);
+                myGlyphids.add(grunt);
+            }
+
+            int numberOfHeals = 2;
+
+            for (int i = 0; i < numberOfHeals; i++) {
+                Rock heal = CharacterFactory.createObject(HEAL);
+                heal.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
+                heal.setY(random.nextDouble() * 1080 * (2.0 / 3) + 1080 / 6.0);
+                myGlyphids.add(heal);
+            }
+            System.out.println("Spawned " + (numberOfGrunts + numberOfP + numberOfAS) + " enemies in the room.");
+        }, 75, TimeUnit.MILLISECONDS);
+
 
         if (myIdentifier >= myTotalRooms - 1) {
-            spawnRock();
+            spawnEgg();
         }
-
-        System.out.println("Spawned " + (numberOfGrunts + numberOfP + numberOfAS) + " enemies in the room.");
     }
 
     // Todo public for now depending on if we want spawning logic to be handled in Cave
     public void spawnRock() {
-        myRock = CharacterFactory.createObject(ROCK);
+        myRock = CharacterFactory.createObject(HEAL);
         myRock.setX(960);
         myRock.setY(540);
         myGlyphids.add(myRock);
@@ -107,9 +123,32 @@ public class Room implements Drawable, Serializable {
         System.out.println("Spawned egg after the rock was broken.");
     }
 
-    // Returns if all glyphids are dead, and if there is no rock as rock must not be present for Dwarf to leave rooms
+    // TODO Comment empty glyphid list for dev purposes
+    // Returns if all glyphids are dead. Ignores rock(as crystals do not have to be destroyed).
     public boolean canExit() {
-        return myGlyphids.isEmpty() && !hasRock();
+        //return myGlyphids.stream().noneMatch(g -> !(g instanceof Rock));
+        return true;
+    }
+
+    /**
+     * Specialized version of spawning version because we need a delay after egg is grabbed, as well as stronger enemies.
+     */
+    public void spawnEggEnemies() {
+        // Since spawnEggEnemies is called in the update loop, put this in or it's going to spawn egg enemies multiple times
+        if (eggEnemiesSpawned) return;
+
+        eggEnemiesSpawned = true;
+        myScheduler.schedule(() -> {
+            Random random = new Random();
+
+            for (int i = 0; i < 1; i++) {
+
+                Glyphid p = CharacterFactory.createGlyphid(PRAETORIAN);
+                p.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
+                p.setY(random.nextDouble() * 1080 * (2.0 / 3) + 1080 / 6.0);
+                myGlyphids.add(p);
+            }
+        }, 2, TimeUnit.SECONDS);
     }
 
     /**
@@ -123,8 +162,15 @@ public class Room implements Drawable, Serializable {
 
     // TODO magic numbers for now
     public boolean isDwarfInArea(Dwarf dwarf) {
-        //System.out.println(dwarf.getY());
-        return dwarf.getY() > 900 && dwarf.getY() < 950 && dwarf.getX() > 850 && dwarf.getX() < 1100;
+        // If Dwarf has Egg, they can move upward but not downwards
+        if (dwarf.hasEgg()) {
+            return dwarf.getX() > 800 && dwarf.getX() < 1120 && dwarf.getY() > 145 && dwarf.getY() < 160;
+        }
+
+        // If Dwarf does not have Egg, they can only move downwards
+        else {
+            return dwarf.getY() > 900 && dwarf.getY() < 950 && dwarf.getX() > 850 && dwarf.getX() < 1100;
+        }
     }
 
     public void update() {
@@ -137,15 +183,15 @@ public class Room implements Drawable, Serializable {
             myGlyphidAttacks.addAll(List.of(glyphid.getPendingAttacks()));
             if (flag) {
                 myGlyphids.remove(i);
-                // TODO might refactor later, just a temp way to detect Rock/Egg break, and play sound
-                if (glyphid == myRock) {
-                    spawnEgg();
-                    GameLoop.getInstance().addDrawData("sound:RockBroken");
-                } else if (glyphid == myEgg) {
-                    GameLoop.getInstance().addDrawData("sound:AlienEggGrabRoars");
+                if (glyphid instanceof Rock) {
+                    Dwarf player = GameLoop.getInstance().getPlayer();
+                    // Magic heal value for now
+                    player.addHealth(20);
+                    GameLoop.getInstance().addDrawData("sound:Heal");
                 }
             }
         }
+
         for (int i = myDwarfAttacks.size() - 1; i >= 0; i--) {
             if (myDwarfAttacks.get(i).update()) {
                 myDwarfAttacks.remove(i);
@@ -205,10 +251,13 @@ public class Room implements Drawable, Serializable {
         Dwarf player = GameLoop.getInstance().getPlayer();
         if (myEgg != null && player.colliding(myEgg) && GameLoop.getInstance().isDwarfInteracting()) {
             myGlyphids.remove(myEgg);
+            player.setEgg(true);
+
             // Todo temporary sound for egg and roars
             GameLoop.getInstance().addDrawData("sound:PickupEgg");
             GameLoop.getInstance().addDrawData("sound:EggGrabRoars");
             Display.getInstance().shakeScreen(200, 9);
+            spawnEggEnemies();
             System.out.println("Egg picked up by the dwarf.");
         }
     }
@@ -216,15 +265,18 @@ public class Room implements Drawable, Serializable {
     @Override
     public String[] getDrawData() {
         List<String> result = new ArrayList<>();
-        if (myIdentifier == 0 || myIdentifier == 2) {
-            result.add("image:Room:" + Display.getInstance().getWidth() / 2 + ":" + Display.getInstance().getHeight() / 2 + ":1920:1080");
-        } else if (myIdentifier == 1 || myIdentifier == 4) {
-            result.add("image:RoomR:" + Display.getInstance().getWidth() / 2 + ":" + Display.getInstance().getHeight() / 2 + ":1920:1080");
-        } else if (myIdentifier == 3) {
-            result.add("image:RoomB:" + Display.getInstance().getWidth() / 2 + ":" + Display.getInstance().getHeight() / 2 + ":1920:1080");
-        } else {
-            result.add("image:RoomEgg:" + Display.getInstance().getWidth() / 2 + ":" + Display.getInstance().getHeight() / 2 + ":1920:1080");
-        }
+
+        String roomImage = switch (myIdentifier) {
+            case 0 -> "RoomPod";
+            case 1 -> "Room";
+            case 2, 4 -> "RoomR";
+            case 3 -> "RoomB";
+            // In last case, ternary conditional for room should never trigger
+            default -> myIdentifier == myTotalRooms - 1 ? "RoomEgg" : "Room";
+        };
+
+        result.add("image:" + roomImage + ":" + Display.getInstance().getWidth() / 2 + ":" + Display.getInstance().getHeight() / 2 + ":1920:1080");
+
 
         for (Glyphid e : myGlyphids) {
             result.addAll(Arrays.asList(e.getDrawData()));
