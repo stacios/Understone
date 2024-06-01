@@ -28,6 +28,7 @@ public class Room implements Drawable, Serializable {
     private Rock myEgg;
     private int myIdentifier;
     private int myTotalRooms;
+    // We need this for inputting slight delay in enemies spawned to sync up with Room transition animation 
     private transient ScheduledExecutorService myScheduler;
     private boolean eggEnemiesSpawned;
 
@@ -61,7 +62,7 @@ public class Room implements Drawable, Serializable {
             // Increase the difficulty factor based on room identifier
             int difficultyFactor = myIdentifier + 1;
 
-            int numberOfP = 0;
+            int numberOfP = 1;
             for (int i = 0; i < numberOfP; i++) {
                 Glyphid praetorian = CharacterFactory.createGlyphid(PRAETORIAN);
                 praetorian.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
@@ -69,7 +70,7 @@ public class Room implements Drawable, Serializable {
                 myGlyphids.add(praetorian);
             }
 
-            int numberOfAS = 0;
+            int numberOfAS = 2;
             for (int i = 0; i < numberOfAS; i++) {
                 Glyphid acidSpitter = CharacterFactory.createGlyphid(ACID_SPIITER);
                 acidSpitter.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
@@ -80,7 +81,7 @@ public class Room implements Drawable, Serializable {
             // Add random number of Grunts, increased by difficulty factor
             //int numberOfGrunts = (random.nextInt(3) + 5) + difficultyFactor;
             // Temp number of grunts to reduce nuymber of grunts spawned, use for dev testing
-            int numberOfGrunts = 1;
+            int numberOfGrunts = 3;
             for (int i = 0; i < numberOfGrunts; i++) {
                 Glyphid grunt = CharacterFactory.createGlyphid(GRUNT);
                 grunt.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
@@ -124,10 +125,11 @@ public class Room implements Drawable, Serializable {
     }
 
     // TODO Comment empty glyphid list for dev purposes
+    // TODO Find some better way of doing this
     // Returns if all glyphids are dead. Ignores rock(as crystals do not have to be destroyed).
     public boolean canExit() {
-        //return myGlyphids.stream().noneMatch(g -> !(g instanceof Rock));
-        return true;
+        return myGlyphids.stream().noneMatch(g -> !(g instanceof Rock));
+        //return true;
     }
 
     /**
