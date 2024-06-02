@@ -38,7 +38,7 @@ public class CharacterFactory {
 
         Weapon[] weapons = new Weapon[3];
         // pickaxe
-        weapons[2] = new Weapon(30, new MeleeAttack(10, 200, 200, 10, 100), "Swing");
+        weapons[2] = new Weapon(30, new MeleeAttack(10, 275, 275, 15, 100), "Swing");
 
         switch (theDwarfType) {
 
@@ -151,7 +151,7 @@ public class CharacterFactory {
             case ROCK:
                 return new Rock(theRockType, 600, 500, 100, 200, 200, 0, defaultWeapon, 0, 0);
             case HEAL:
-                return new Rock(theRockType, 600, 500, 50, 75, 75, 0, defaultWeapon, 0, 0);
+                return new Rock(theRockType, 600, 500, 40, 75, 75, 0, defaultWeapon, 0, 0);
             case EGG:
                 return new Rock(theRockType, 500, 500, Integer.MAX_VALUE, 100, 100, 0, defaultWeapon, 0, 0);
             default:
