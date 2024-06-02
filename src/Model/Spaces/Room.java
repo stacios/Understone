@@ -23,6 +23,7 @@ public class Room implements Drawable, Serializable {
     private List<Glyphid> myGlyphids;
     private List<Attack> myDwarfAttacks;
     private List<Attack> myGlyphidAttacks;
+    private List<Rock> myRocks;
     private boolean myHasDropPod;
     private Rock myRock;
     private Rock myEgg;
@@ -38,6 +39,7 @@ public class Room implements Drawable, Serializable {
         myGlyphids = new ArrayList<>();
         myDwarfAttacks = new ArrayList<>();
         myGlyphidAttacks = new ArrayList<>();
+        myRocks = new ArrayList<>();
         myTotalRooms = theTotalRooms;
         myScheduler = Executors.newScheduledThreadPool(1);
     }
@@ -46,9 +48,10 @@ public class Room implements Drawable, Serializable {
         return myEgg != null;
     }
 
-    // We dont want any objects left over from previous
+    // We dont want any glyphids/rocks left over from previous
     public void clearRoom() {
         myGlyphids.clear();
+        myRocks.clear();
     }
 
     public int getIdentifier() {
@@ -70,7 +73,7 @@ public class Room implements Drawable, Serializable {
                 myGlyphids.add(praetorian);
             }
 
-            int numberOfAS = 2;
+            int numberOfAS = 1;
             for (int i = 0; i < numberOfAS; i++) {
                 Glyphid acidSpitter = CharacterFactory.createGlyphid(ACID_SPIITER);
                 acidSpitter.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
@@ -81,7 +84,7 @@ public class Room implements Drawable, Serializable {
             // Add random number of Grunts, increased by difficulty factor
             //int numberOfGrunts = (random.nextInt(3) + 5) + difficultyFactor;
             // Temp number of grunts to reduce nuymber of grunts spawned, use for dev testing
-            int numberOfGrunts = 3;
+            int numberOfGrunts = 1;
             for (int i = 0; i < numberOfGrunts; i++) {
                 Glyphid grunt = CharacterFactory.createGlyphid(GRUNT);
                 grunt.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
@@ -95,7 +98,8 @@ public class Room implements Drawable, Serializable {
                 Rock heal = CharacterFactory.createObject(HEAL);
                 heal.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
                 heal.setY(random.nextDouble() * 1080 * (2.0 / 3) + 1080 / 6.0);
-                myGlyphids.add(heal);
+                //myGlyphids.add(heal);
+                myRocks.add(heal);
             }
             System.out.println("Spawned " + (numberOfGrunts + numberOfP + numberOfAS) + " enemies in the room.");
         }, 75, TimeUnit.MILLISECONDS);
@@ -120,7 +124,8 @@ public class Room implements Drawable, Serializable {
         myEgg = CharacterFactory.createObject(EGG);
         myEgg.setX(960);
         myEgg.setY(540);
-        myGlyphids.add(myEgg);
+        //myGlyphids.add(myEgg);
+        myRocks.add(myEgg);
         System.out.println("Spawned egg after the rock was broken.");
     }
 
@@ -128,7 +133,8 @@ public class Room implements Drawable, Serializable {
     // TODO Find some better way of doing this
     // Returns if all glyphids are dead. Ignores rock(as crystals do not have to be destroyed).
     public boolean canExit() {
-        return myGlyphids.stream().noneMatch(g -> !(g instanceof Rock));
+        //return myGlyphids.stream().noneMatch(g -> !(g instanceof Rock));
+        return myGlyphids.isEmpty();
         //return true;
     }
 
@@ -185,12 +191,25 @@ public class Room implements Drawable, Serializable {
             myGlyphidAttacks.addAll(List.of(glyphid.getPendingAttacks()));
             if (flag) {
                 myGlyphids.remove(i);
-                if (glyphid instanceof Rock) {
-                    Dwarf player = GameLoop.getInstance().getPlayer();
-                    // Magic heal value for now
-                    player.addHealth(20);
-                    GameLoop.getInstance().addDrawData("sound:Heal");
-                }
+//                if (glyphid instanceof Rock) {
+//                    Dwarf player = GameLoop.getInstance().getPlayer();
+//                    // Magic heal value for now
+//                    player.addHealth(20);
+//                    GameLoop.getInstance().addDrawData("sound:Heal");
+//                }
+            }
+        }
+
+        for (int i = myRocks.size() - 1; i >= 0; i--) {
+            Rock heal = myRocks.get(i);
+            boolean flag = heal.update();
+            //myGlyphidAttacks.addAll(List.of(heal.getPendingAttacks()));
+            if (flag) {
+                myRocks.remove(i);
+                Dwarf player = GameLoop.getInstance().getPlayer();
+                // Magic heal value for now
+                player.addHealth(20);
+                GameLoop.getInstance().addDrawData("sound:Heal");
             }
         }
 
@@ -244,6 +263,14 @@ public class Room implements Drawable, Serializable {
                     flag = true;
                 }
             }
+
+            for (Rock r : myRocks) {
+                if (r.colliding(a)) {
+                    r.receiveAttack(a);
+                    flag = true;
+                }
+            }
+
             if (flag) {
                 a.collided();
             }
@@ -252,7 +279,7 @@ public class Room implements Drawable, Serializable {
         // Todo Way to detect if player is colliding with egg, and then collect it with space;
         Dwarf player = GameLoop.getInstance().getPlayer();
         if (myEgg != null && player.colliding(myEgg) && GameLoop.getInstance().isDwarfInteracting()) {
-            myGlyphids.remove(myEgg);
+            myRocks.remove(myEgg);
             player.setEgg(true);
 
             // Todo temporary sound for egg and roars
@@ -282,6 +309,10 @@ public class Room implements Drawable, Serializable {
 
         for (Glyphid e : myGlyphids) {
             result.addAll(Arrays.asList(e.getDrawData()));
+        }
+
+        for (Rock r : myRocks) {
+            result.addAll(Arrays.asList(r.getDrawData()));
         }
         result.addAll(Arrays.asList(GameLoop.getInstance().getPlayer().getDrawData()));
         for (Attack e : myGlyphidAttacks) {
