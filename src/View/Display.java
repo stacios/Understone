@@ -199,6 +199,7 @@ public class Display {
                 myJFrame.requestFocus();
 
                 GameLoop.getInstance().resetGame();
+                GameLoop.getInstance().pauseGame();
             }
         });
 
@@ -206,10 +207,21 @@ public class Display {
             @Override
             public void actionPerformed(ActionEvent e) {
                 myMenuDialog.setVisible(false);
-                JOptionPane.showMessageDialog(myMenuDialog, "SAVED!");
+               // JOptionPane.showMessageDialog(myMenuDialog, "SAVED!");
                 DataManager.saveGame(GameLoop.getInstance());
                 myInputManager.resetKeyStates();
                 myJFrame.requestFocus();
+                GameLoop.getInstance().pauseGame();
+            }
+        });
+
+        loadGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showLoadGameDialog();
+                myInputManager.resetKeyStates();
+                myJFrame.requestFocus();
+                //GameLoop.getInstance().pauseGame();
             }
         });
 
@@ -269,16 +281,6 @@ public class Display {
 
                 JOptionPane.showMessageDialog(myMenuDialog, panel, "Credits", JOptionPane.PLAIN_MESSAGE);
 
-                myInputManager.resetKeyStates();
-                myJFrame.requestFocus();
-            }
-        });
-
-        newGameButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                myMenuDialog.setVisible(false);
-                showLoadGameDialog();
                 myInputManager.resetKeyStates();
                 myJFrame.requestFocus();
             }
