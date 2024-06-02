@@ -110,15 +110,6 @@ public class Room implements Drawable, Serializable {
     }
 
     // Todo public for now depending on if we want spawning logic to be handled in Cave
-    public void spawnRock() {
-        myRock = CharacterFactory.createObject(HEAL);
-        myRock.setX(960);
-        myRock.setY(540);
-        myGlyphids.add(myRock);
-        System.out.println("Spawned rock in the last room.");
-    }
-
-    // Todo public for now depending on if we want spawning logic to be handled in Cave
     public void spawnEgg() {
         myEgg = CharacterFactory.createObject(EGG);
         myEgg.setX(960);
@@ -132,8 +123,8 @@ public class Room implements Drawable, Serializable {
     // TODO Find some better way of doing this
     // Returns if all glyphids are dead. Ignores rock(as crystals do not have to be destroyed).
     public boolean canExit() {
-        return myGlyphids.isEmpty();
-        // return true;
+        //return myGlyphids.isEmpty();
+         return true;
     }
 
     /**
@@ -157,25 +148,26 @@ public class Room implements Drawable, Serializable {
         }, 2, TimeUnit.SECONDS);
     }
 
-    /**
-     * Gets number of glyphids in current room.
-     *
-     * @return number of glyphids in current room.
-     */
-    public int getGlyphids() {
-        return myGlyphids.size();
+    public void positionDwarf(Dwarf thePlayer) {
+        if (thePlayer.hasEgg()) {
+            thePlayer.setX(950);
+            thePlayer.setY(925);
+        } else {
+            thePlayer.setX(950);
+            thePlayer.setY(155);
+        }
     }
 
     // TODO magic numbers for now
-    public boolean isDwarfInArea(Dwarf dwarf) {
+    public boolean isDwarfInArea(Dwarf thePlayer) {
         // If Dwarf has Egg, they can move upward but not downwards
-        if (dwarf.hasEgg()) {
-            return dwarf.getX() > 800 && dwarf.getX() < 1120 && dwarf.getY() > 145 && dwarf.getY() < 160;
+        if (thePlayer.hasEgg()) {
+            return thePlayer.getX() > 800 && thePlayer.getX() < 1100 && thePlayer.getY() > 145 && thePlayer.getY() < 160;
         }
 
         // If Dwarf does not have Egg, they can only move downwards
         else {
-            return dwarf.getY() > 900 && dwarf.getY() < 950 && dwarf.getX() > 850 && dwarf.getX() < 1100;
+            return thePlayer.getY() > 900 && thePlayer.getY() < 950 && thePlayer.getX() > 800 && thePlayer.getX() < 1100;
         }
     }
 
@@ -242,6 +234,19 @@ public class Room implements Drawable, Serializable {
             if (p.colliding(g)) {
                 p.addForce(new Force(new Angle(g.getX(), g.getY(), p.getX(), p.getY()), 10));
                 g.addForce(new Force(new Angle(p.getX(), p.getY(), g.getX(), g.getY()), .2));
+            }
+        }
+
+        for (Rock r : myRocks) {
+            for (Glyphid g : myGlyphids) {
+                if (r.colliding(g)) {
+                    g.addForce(new Force(new Angle(r.getX(), r.getY(), g.getX(), g.getY()), 1));
+                }
+            }
+
+            if (p.colliding(r)) {
+                p.addForce(new Force(new Angle(r.getX(), r.getY(), p.getX(), p.getY()), 10));
+                r.addForce(new Force(new Angle(p.getX(), p.getY(), r.getX(), r.getY()), .2));
             }
         }
 

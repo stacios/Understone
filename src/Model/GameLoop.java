@@ -118,6 +118,9 @@ public class GameLoop implements Drawable, Serializable {
                 if (currentRoom.isDwarfInArea(myPlayer)) {
                     currentRoom.clearRoom();
                     myCave.moveToPreviousRoom();
+                    // Positions dwarf better relative to the door they're exiting from in the next room
+                    myActiveRoom.positionDwarf(myPlayer);
+                    // Animation transition sfx
                     myDrawDataList.add("sound:Transition");
                     Display.getInstance().startFadeAnimation(20);
                     myActiveRoom = myCave.getCurrentRoom();
@@ -136,6 +139,7 @@ public class GameLoop implements Drawable, Serializable {
                 if (currentRoom.isDwarfInArea(myPlayer)) {
                     currentRoom.clearRoom();
                     myCave.moveToNextRoom();
+                    myActiveRoom.positionDwarf(myPlayer);
                     myDrawDataList.add("sound:Transition");
                     Display.getInstance().startFadeAnimation(20);
                     myActiveRoom = myCave.getCurrentRoom();
