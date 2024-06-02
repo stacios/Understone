@@ -2,6 +2,8 @@ package Model.Glyphid;
 
 import Model.Force;
 import Model.Glyphid.Glyphid;
+import Model.Weapon.Attack;
+import Model.Weapon.MeleeAttack;
 import Model.Weapon.Weapon;
 
 public class Rock extends Glyphid {
@@ -16,6 +18,14 @@ public class Rock extends Glyphid {
     @Override
     public void addForce(Force theForce) {
         theForce.setStrength(0);
+    }
+
+
+    @Override
+    public void receiveAttack(Attack theAttack) {
+        if (theAttack instanceof MeleeAttack) {
+            super.receiveAttack(theAttack);
+        }
     }
 }
 

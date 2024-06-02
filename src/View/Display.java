@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -118,7 +120,7 @@ public class Display {
         JPanel panel = new JPanel(new FlowLayout());
         JLabel imageLabel = new JLabel();
         panel.add(imageLabel);
-        JComboBox<String> dwarfComboBox = new JComboBox<>(new String[]{"Driller", "Engineer", "Gunner", "Scout"});
+        JComboBox<String> dwarfComboBox = new JComboBox<>(new String[]{"Driller", "Engineer", "Gunner", "Scout", "karl"});
         // Default Selected Driller
         dwarfComboBox.setSelectedIndex(0);
         updateDwarfSelectionEffect(imageLabel, (String) dwarfComboBox.getSelectedItem());
@@ -210,10 +212,21 @@ public class Display {
             @Override
             public void actionPerformed(ActionEvent e) {
                 myMenuDialog.setVisible(false);
-                JOptionPane.showMessageDialog(myMenuDialog, "SAVED!");
+               // JOptionPane.showMessageDialog(myMenuDialog, "SAVED!");
                 DataManager.saveGame(GameLoop.getInstance());
                 myInputManager.resetKeyStates();
                 myJFrame.requestFocus();
+                GameLoop.getInstance().pauseGame();
+            }
+        });
+
+        loadGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showLoadGameDialog();
+                myInputManager.resetKeyStates();
+                myJFrame.requestFocus();
+                //GameLoop.getInstance().pauseGame();
             }
         });
 
@@ -381,12 +394,15 @@ public class Display {
         }
     }
 
+
     /**
+     * DEPRECATED
      * Method for shaking screen.
      *
      * @param theDuration  is the duration.
      * @param theMagnitude is how much the screen should shake.
      */
+
     public void shakeScreen(int theDuration, int theMagnitude) {
         myIsShaking = true;
         myShakeDuration = theDuration;
@@ -413,7 +429,7 @@ public class Display {
 
         Graphics2D g = (Graphics2D) bs.getDrawGraphics();
 
-        g.setColor(Color.white);
+        g.setColor(Color.black);
         g.fillRect(0, 0, myRealWidth, myRealHeight);
 
         // Apply screen shake if shaking is toggled
@@ -449,6 +465,7 @@ public class Display {
         int height;
         double angle;
         int size;
+        BufferedImage image;
 
         switch (theData[0]) {
 
@@ -461,6 +478,17 @@ public class Display {
                 theGraphics.drawImage(myImageLibrary.get(theData[1]),
                         x - width / 2, y - height / 2,
                         width, height, null);
+                break;
+
+            case "unboundImage":
+                x = (int) (myScaleMult * Double.parseDouble(theData[2]));
+                y = (int) (myScaleMult * Double.parseDouble(theData[3]));
+                image = myImageLibrary.get(theData[1]);
+                width = (int) (myScaleMult * Double.parseDouble(theData[4]) * image.getWidth());
+                height = (int) (myScaleMult * Double.parseDouble(theData[4]) * image.getHeight());
+
+                theGraphics.drawImage(image,
+                        x, y, width, height,  null);
                 break;
 
             case "rotatedImage":
@@ -500,6 +528,12 @@ public class Display {
                 theGraphics.setColor(Color.RED);
                 theGraphics.setFont(new Font("SansSerif", Font.BOLD, size));
                 theGraphics.drawString(theData[1], x, y);
+                break;
+
+            case "screenShake":
+                myIsShaking = true;
+                myShakeDuration = Integer.parseInt(theData[1]);
+                myShakeMagnitude = Integer.parseInt(theData[2]);
                 break;
 
             default:
