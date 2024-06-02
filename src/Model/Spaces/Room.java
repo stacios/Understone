@@ -32,6 +32,7 @@ public class Room implements Drawable, Serializable {
     // We need this for inputting slight delay in enemies spawned to sync up with Room transition animation
     private transient ScheduledExecutorService myScheduler;
     private boolean eggEnemiesSpawned;
+    private boolean myCollectedEgg;
 
 
     public Room(int theIdentifier, int theTotalRooms) {
@@ -42,6 +43,7 @@ public class Room implements Drawable, Serializable {
         myRocks = new ArrayList<>();
         myTotalRooms = theTotalRooms;
         myScheduler = Executors.newScheduledThreadPool(1);
+        myCollectedEgg = false;
     }
 
     public boolean hasEgg() {
@@ -61,10 +63,7 @@ public class Room implements Drawable, Serializable {
     public void spawnEnemies() {
         myScheduler.schedule(() -> {
             Random random = new Random();
-
-            // Increase the difficulty factor based on room identifier
-            int difficultyFactor = myIdentifier + 1;
-
+            
             int numberOfP = 1;
             for (int i = 0; i < numberOfP; i++) {
                 Glyphid praetorian = CharacterFactory.createGlyphid(PRAETORIAN);
@@ -133,7 +132,6 @@ public class Room implements Drawable, Serializable {
     // TODO Find some better way of doing this
     // Returns if all glyphids are dead. Ignores rock(as crystals do not have to be destroyed).
     public boolean canExit() {
-        //return myGlyphids.stream().noneMatch(g -> !(g instanceof Rock));
         return myGlyphids.isEmpty();
         //return true;
     }
@@ -278,7 +276,9 @@ public class Room implements Drawable, Serializable {
 
         // Todo Way to detect if player is colliding with egg, and then collect it with space;
         Dwarf player = GameLoop.getInstance().getPlayer();
-        if (myEgg != null && player.colliding(myEgg) && GameLoop.getInstance().isDwarfInteracting()) {
+        if (myEgg != null && player.colliding(myEgg) && GameLoop.getInstance().isDwarfInteracting() && !myCollectedEgg) {
+            // This is so when collecting the egg, itll only trigger this once
+            myCollectedEgg = true;
             myRocks.remove(myEgg);
             player.setEgg(true);
 
