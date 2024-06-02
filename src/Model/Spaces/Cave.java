@@ -1,6 +1,7 @@
 package Model.Spaces;
 
 import Model.Dwarf;
+import Model.GameLoop;
 
 import java.io.Serializable;
 

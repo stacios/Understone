@@ -59,6 +59,7 @@ public abstract class Glyphid extends Character {
             GameLoop.getInstance().addDrawData("sound:PickaxeImpact");
         }
 
+        // TODO sometimes death sound plays twice, probably due to update loop
         if (super.getHealth() - theAttack.getDamage() < 0) {
             GameLoop.getInstance().addDrawData("sound:GlyphidDeath");
         }

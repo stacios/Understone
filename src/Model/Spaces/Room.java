@@ -29,7 +29,7 @@ public class Room implements Drawable, Serializable {
     private Rock myEgg;
     private int myIdentifier;
     private int myTotalRooms;
-    // We need this for inputting slight delay in enemies spawned to sync up with Room transition animation
+    // We need this for the slight delay in enemies spawned to sync up with Room transition animation
     private transient ScheduledExecutorService myScheduler;
     private boolean eggEnemiesSpawned;
     private boolean myCollectedEgg;
@@ -50,7 +50,9 @@ public class Room implements Drawable, Serializable {
         return myEgg != null;
     }
 
-    // We dont want any glyphids/rocks left over from previous
+    /**
+     * Resets room to remove any leftover objects
+     */
     public void clearRoom() {
         myGlyphids.clear();
         myRocks.clear();
@@ -114,7 +116,6 @@ public class Room implements Drawable, Serializable {
         myEgg = CharacterFactory.createObject(EGG);
         myEgg.setX(960);
         myEgg.setY(540);
-        //myGlyphids.add(myEgg);
         myRocks.add(myEgg);
         System.out.println("Spawned egg after the rock was broken.");
     }
@@ -123,8 +124,8 @@ public class Room implements Drawable, Serializable {
     // TODO Find some better way of doing this
     // Returns if all glyphids are dead. Ignores rock(as crystals do not have to be destroyed).
     public boolean canExit() {
-        //return myGlyphids.isEmpty();
-         return true;
+        return myGlyphids.isEmpty();
+        //return true;
     }
 
     /**
@@ -148,6 +149,11 @@ public class Room implements Drawable, Serializable {
         }, 2, TimeUnit.SECONDS);
     }
 
+    /**
+     * Positions dwarf relative to the door they enter/exit in
+     *
+     * @param thePlayer is the passed player dwarf.
+     */
     public void positionDwarf(Dwarf thePlayer) {
         if (thePlayer.hasEgg()) {
             thePlayer.setX(950);
@@ -181,19 +187,12 @@ public class Room implements Drawable, Serializable {
             myGlyphidAttacks.addAll(List.of(glyphid.getPendingAttacks()));
             if (flag) {
                 myGlyphids.remove(i);
-//                if (glyphid instanceof Rock) {
-//                    Dwarf player = GameLoop.getInstance().getPlayer();
-//                    // Magic heal value for now
-//                    player.addHealth(20);
-//                    GameLoop.getInstance().addDrawData("sound:Heal");
-//                }
             }
         }
 
         for (int i = myRocks.size() - 1; i >= 0; i--) {
             Rock heal = myRocks.get(i);
             boolean flag = heal.update();
-            //myGlyphidAttacks.addAll(List.of(heal.getPendingAttacks()));
             if (flag) {
                 myRocks.remove(i);
                 Dwarf player = GameLoop.getInstance().getPlayer();

@@ -41,7 +41,6 @@ public class GameLoop implements Drawable, Serializable {
         startDB();
         myCave = new Cave();
         myActiveRoom = myCave.getCurrentRoom();
-        //myPlayer = CharacterFactory.createDwarf("Engineer");
     }
 
     public void startDB() {
@@ -52,8 +51,8 @@ public class GameLoop implements Drawable, Serializable {
 
     public void setDwarf(String theDwarfType) {
         myPlayer = CharacterFactory.createDwarf(theDwarfType);
-        //myPlayer = CharacterFactory.createDwarf("Scout");
         myHUD = new HUD(myPlayer);
+        myActiveRoom.positionDwarf(myPlayer);
     }
 
     public static GameLoop getInstance() {
@@ -124,6 +123,7 @@ public class GameLoop implements Drawable, Serializable {
                     myDrawDataList.add("sound:Transition");
                     Display.getInstance().startFadeAnimation(20);
                     myActiveRoom = myCave.getCurrentRoom();
+
                 } else {
                     System.out.println("Cannot move to the previous room.");
                 }
