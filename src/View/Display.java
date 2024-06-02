@@ -212,10 +212,21 @@ public class Display {
             @Override
             public void actionPerformed(ActionEvent e) {
                 myMenuDialog.setVisible(false);
-                JOptionPane.showMessageDialog(myMenuDialog, "SAVED!");
+               // JOptionPane.showMessageDialog(myMenuDialog, "SAVED!");
                 DataManager.saveGame(GameLoop.getInstance());
                 myInputManager.resetKeyStates();
                 myJFrame.requestFocus();
+                GameLoop.getInstance().pauseGame();
+            }
+        });
+
+        loadGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showLoadGameDialog();
+                myInputManager.resetKeyStates();
+                myJFrame.requestFocus();
+                //GameLoop.getInstance().pauseGame();
             }
         });
 
