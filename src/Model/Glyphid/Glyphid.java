@@ -4,6 +4,8 @@ import Model.Dwarf;
 import Model.Force;
 import Model.Angle;
 import Model.GameLoop;
+import Model.Weapon.Attack;
+import Model.Weapon.MeleeAttack;
 import Model.Weapon.Weapon;
 import Model.Character;
 
@@ -46,6 +48,19 @@ public abstract class Glyphid extends Character {
         if (distance > myAttackRange) {
             Angle angleToPlayer = new Angle(getX(), getY(), thePlayer.getX(), thePlayer.getY());
             addForce(new Force(angleToPlayer, getMoveSpeed(), 0.4));
+        }
+    }
+
+    @Override
+    public void receiveAttack(Attack theAttack) {
+        super.receiveAttack(theAttack);
+
+        if (theAttack instanceof MeleeAttack) {
+            GameLoop.getInstance().addDrawData("sound:PickaxeImpact");
+        }
+
+        if (super.getHealth() - theAttack.getDamage() < 0) {
+            GameLoop.getInstance().addDrawData("sound:GlyphidDeath");
         }
     }
 

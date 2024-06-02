@@ -1,6 +1,7 @@
 package Model.Glyphid;
 
 import Model.Force;
+import Model.GameLoop;
 import Model.Glyphid.Glyphid;
 import Model.Weapon.Attack;
 import Model.Weapon.MeleeAttack;
@@ -24,7 +25,15 @@ public class Rock extends Glyphid {
     @Override
     public void receiveAttack(Attack theAttack) {
         if (theAttack instanceof MeleeAttack) {
-            super.receiveAttack(theAttack);
+            GameLoop.getInstance().addDrawData("sound:Heal");
+
+            // TODO Have to do in this way because if you call super.recieveForces, then itll play the glyphid death sound on destroyed rock
+            int newHealth = super.getHealth() - theAttack.getDamage();
+            super.setHealth(newHealth);
+
+            if (newHealth <= 0) {
+                GameLoop.getInstance().addDrawData("sound:Heal");
+            }
         }
     }
 }
