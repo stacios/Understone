@@ -63,7 +63,7 @@ public class Room implements Drawable, Serializable {
     public void spawnEnemies() {
         myScheduler.schedule(() -> {
             Random random = new Random();
-            
+
             int numberOfP = 1;
             for (int i = 0; i < numberOfP; i++) {
                 Glyphid praetorian = CharacterFactory.createGlyphid(PRAETORIAN);
@@ -133,7 +133,7 @@ public class Room implements Drawable, Serializable {
     // Returns if all glyphids are dead. Ignores rock(as crystals do not have to be destroyed).
     public boolean canExit() {
         return myGlyphids.isEmpty();
-        //return true;
+        // return true;
     }
 
     /**

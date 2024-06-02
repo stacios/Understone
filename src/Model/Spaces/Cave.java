@@ -3,7 +3,6 @@ package Model.Spaces;
 import Model.Dwarf;
 
 import java.io.Serializable;
-import java.util.Random;
 
 public class Cave implements Serializable {
     private static final long serialVersionUID = 2L;
@@ -19,12 +18,12 @@ public class Cave implements Serializable {
         myRooms = new Room[numberOfRooms];
 
         for (int i = 0; i < myRooms.length; i++) {
-            myRooms[i] = new Room(i, myRooms.length); // Added room identifier
+            myRooms[i] = new Room(i, myRooms.length);
         }
 
-        // TODO add logic for spawning drop pod in final room
+        // TODO add logic for final win condition in final room
 
-        currentRoomIndex = 1; // Start in the first room
+        currentRoomIndex = 0; // Start in the first room
     }
 
     public Room getCurrentRoom() {
