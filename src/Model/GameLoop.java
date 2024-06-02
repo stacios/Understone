@@ -65,6 +65,7 @@ public class GameLoop implements Drawable, Serializable {
         myActiveRoom = myCave.getCurrentRoom();
         myHUD = new HUD(myPlayer);
     }
+
     public boolean update(final InputData theInput) {
         if (!Display.getInstance().isRunning()) {
             return false;
@@ -95,7 +96,6 @@ public class GameLoop implements Drawable, Serializable {
         if (theInput.getInteract()) {
             if (!isDwarfInteracting()) {
                 moveToNextRoom();
-                System.out.println(myPlayer.getX() + " " + myPlayer.getY());
                 myDwarfInteracting = true;
             }
         } else {
@@ -123,7 +123,6 @@ public class GameLoop implements Drawable, Serializable {
                     myDrawDataList.add("sound:Transition");
                     Display.getInstance().startFadeAnimation(20);
                     myActiveRoom = myCave.getCurrentRoom();
-
                 } else {
                     System.out.println("Cannot move to the previous room.");
                 }
@@ -156,10 +155,6 @@ public class GameLoop implements Drawable, Serializable {
         myDrawDataList.add(drawData);
     }
 
-    public void setActiveRoom(Room room) {
-        myActiveRoom = room;
-    }
-
     public Dwarf getPlayer() {
         return myPlayer;
     }
@@ -168,26 +163,17 @@ public class GameLoop implements Drawable, Serializable {
         return myDrawDataList.toArray(new String[0]);
     }
 
-    public Room getActiveRoom() {
-        return myActiveRoom;
-    }
-
-    public void resetGame(String dwarfType) {
+    public void resetGame(String theDwarfType) {
         myDrawDataList = new ArrayList<>();
         myCave = new Cave();
         myActiveRoom = myCave.getCurrentRoom();
-        myPlayer = CharacterFactory.createDwarf(dwarfType);
+        myPlayer = CharacterFactory.createDwarf(theDwarfType);
         myHUD = new HUD(myPlayer);
     }
 
     // Method to pause and resume the game
     public void pauseGame() {
         myPaused = !myPaused;
-    }
-
-    // Method to check if the game is paused
-    public boolean isPaused() {
-        return myPaused;
     }
 
     @Override

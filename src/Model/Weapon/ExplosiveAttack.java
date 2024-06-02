@@ -10,11 +10,11 @@ public class ExplosiveAttack extends ProjectileAttack {
         myTriggeredTimer = 0;
     }
 
-    public void setArea(int area) {
-        if (area < 0) {
+    public void setArea(int theArea) {
+        if (theArea < 0) {
             throw new IllegalArgumentException("Area cannot be negative");
         }
-        myArea = area;
+        myArea = theArea;
     }
 
     public double getArea() {

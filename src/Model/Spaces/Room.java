@@ -20,17 +20,17 @@ public class Room implements Drawable, Serializable {
     private static final long serialVersionUID = 3L;
 
     public static final int WALL_THICKNESS = 100;
-    private List<Glyphid> myGlyphids;
-    private List<Attack> myDwarfAttacks;
-    private List<Attack> myGlyphidAttacks;
-    private List<Rock> myRocks;
+    private final List<Glyphid> myGlyphids;
+    private final List<Attack> myDwarfAttacks;
+    private final List<Attack> myGlyphidAttacks;
+    private final List<Rock> myRocks;
     private boolean myHasDropPod;
     private Rock myRock;
     private Rock myEgg;
     private int myIdentifier;
     private int myTotalRooms;
     // We need this for the slight delay in enemies spawned to sync up with Room transition animation
-    private transient ScheduledExecutorService myScheduler;
+    private final transient ScheduledExecutorService myScheduler;
     private boolean eggEnemiesSpawned;
     private boolean myCollectedEgg;
 

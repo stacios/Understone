@@ -54,8 +54,8 @@ public abstract class Attack implements Collidable, Cloneable, Drawable, Seriali
     }
 
     @Override
-    public boolean colliding(Collidable other) {
-        return colliding(other);
+    public boolean colliding(Collidable theOther) {
+        return colliding(theOther);
     }
 
     public boolean update() {

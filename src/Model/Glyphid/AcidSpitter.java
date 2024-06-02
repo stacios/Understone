@@ -38,8 +38,8 @@ public class AcidSpitter extends Glyphid {
         }
 
         // Strafe logic
-        double strafeAngle = Math.random() < 0.5 ? Math.PI / 2 : -Math.PI / 2;
-        Angle strafeDirection = new Angle(angleToPlayer.getRadians() + strafeAngle);
+        final double strafeAngle = Math.random() < 0.5 ? Math.PI / 2 : -Math.PI / 2;
+        final Angle strafeDirection = new Angle(angleToPlayer.getRadians() + strafeAngle);
         addForce(new Force(strafeDirection, getMoveSpeed(), 0.4));
 
         return super.update();

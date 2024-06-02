@@ -32,7 +32,7 @@ public class GlyphidDB {
      * @param theGlyphidType is the specified Glyphid Type to be created.
      */
     private static void initializeGlyphidTables(String theGlyphidType) {
-        String createTable = String.format(
+        final String createTable = String.format(
                 "CREATE TABLE IF NOT EXISTS %sDefaults (" +
                         "setting TEXT PRIMARY KEY, " +
                         "value REAL);", theGlyphidType);
@@ -50,7 +50,7 @@ public class GlyphidDB {
      * Inserts default values for Acid Spitter.
      */
     public static void insertAcidSpitterDefaults() {
-        String sql = "INSERT OR REPLACE INTO AcidSpitterDefaults (setting, value) VALUES " +
+        final String sql = "INSERT OR REPLACE INTO AcidSpitterDefaults (setting, value) VALUES " +
                 "('health', 80), " +
                 "('maxhealth', 100), " +
                 "('width', 1), " +
@@ -66,7 +66,7 @@ public class GlyphidDB {
      * Inserts default values for Glyphid.
      */
     public static void insertGlyphidDefaults() {
-        String sql = "INSERT OR REPLACE INTO GlyphidDefaults (setting, value) VALUES " +
+        final String sql = "INSERT OR REPLACE INTO GlyphidDefaults (setting, value) VALUES " +
                 "('health', 100), " +
                 "('maxhealth', 120), " +
                 "('width', 1), " +
@@ -82,7 +82,7 @@ public class GlyphidDB {
      * Inserts default values for Grunt.
      */
     public static void insertGruntDefaults() {
-        String sql = "INSERT OR REPLACE INTO GruntDefaults (setting, value) VALUES " +
+        final String sql = "INSERT OR REPLACE INTO GruntDefaults (setting, value) VALUES " +
                 "('health', 90), " +
                 "('maxhealth', 110), " +
                 "('width', 1), " +
@@ -98,7 +98,7 @@ public class GlyphidDB {
      * Inserts default values for Mactera.
      */
     public static void insertMacteraDefaults() {
-        String sql = "INSERT OR REPLACE INTO MacteraDefaults (setting, value) VALUES " +
+        final String sql = "INSERT OR REPLACE INTO MacteraDefaults (setting, value) VALUES " +
                 "('health', 85), " +
                 "('maxhealth', 105), " +
                 "('width', 1), " +
@@ -114,7 +114,7 @@ public class GlyphidDB {
      * Inserts default values for Praetorian.
      */
     public static void insertPraetorianDefaults() {
-        String sql = "INSERT OR REPLACE INTO PraetorianDefaults (setting, value) VALUES " +
+        final String sql = "INSERT OR REPLACE INTO PraetorianDefaults (setting, value) VALUES " +
                 "('health', 150), " +
                 "('maxhealth', 170), " +
                 "('width', 1), " +
@@ -130,7 +130,7 @@ public class GlyphidDB {
      * Inserts default values for Rock.
      */
     public static void insertRockDefaults() {
-        String sql = "INSERT OR REPLACE INTO RockDefaults (setting, value) VALUES " +
+        final String sql = "INSERT OR REPLACE INTO RockDefaults (setting, value) VALUES " +
                 "('health', 200), " +
                 "('maxhealth', 220), " +
                 "('width', 1), " +
@@ -146,7 +146,7 @@ public class GlyphidDB {
      * Inserts default values for Swarmer.
      */
     public static void insertSwarmerDefaults() {
-        String sql = "INSERT OR REPLACE INTO SwarmerDefaults (setting, value) VALUES " +
+        final String sql = "INSERT OR REPLACE INTO SwarmerDefaults (setting, value) VALUES " +
                 "('health', 50), " +
                 "('maxhealth', 70), " +
                 "('width', 1), " +
@@ -182,7 +182,7 @@ public class GlyphidDB {
      * @return value of selected column.
      */
     public static int getDefaultValue(String theGlyphidType, String theSetting) {
-        String query = String.format(
+        final String query = String.format(
                 "SELECT value FROM %sDefaults WHERE setting = ?", theGlyphidType);
 
         try (Connection conn = SQLiteConnection.getDataSource().getConnection();
@@ -195,9 +195,9 @@ public class GlyphidDB {
                 //System.out.println("Retrieved value for " + setting + " in " + glyphidType + ": " + test);
                 return rs.getInt("value");
             }
-        } catch (SQLException e) {
+        } catch (SQLException theEx) {
             System.err.println("Error getting value for column " +
-                    theSetting + " in " + theGlyphidType + "Defaults: " + e.getMessage());
+                    theSetting + " in " + theGlyphidType + "Defaults: " + theEx.getMessage());
         }
 
         System.err.println("Warning! Default value not found for column: "

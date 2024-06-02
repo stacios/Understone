@@ -40,11 +40,11 @@ public class Swarmer extends Glyphid {
         return super.update();
     }
 
-    private void moveToPlayer(Dwarf thePlayer, double speedMultiplier) {
+    private void moveToPlayer(Dwarf thePlayer, double theSpeedMultiplier) {
         double distance = Math.sqrt(Math.pow(thePlayer.getX() - getX(), 2) + Math.pow(thePlayer.getY() - getY(), 2));
         if (distance > getAttackRange()) {
             Angle angleToPlayer = new Angle(getX(), getY(), thePlayer.getX(), thePlayer.getY());
-            addForce(new Force(angleToPlayer, getMoveSpeed() * speedMultiplier, 0.4));
+            addForce(new Force(angleToPlayer, getMoveSpeed() * theSpeedMultiplier, 0.4));
         }
     }
 }
