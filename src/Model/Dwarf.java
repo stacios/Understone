@@ -15,7 +15,7 @@ public class Dwarf extends Character {
     private Weapon[] myWeapons;
 
     private int myWeaponIndex = 0;
-
+    private boolean myHasEgg;
     private int myDashClock;
     private Angle myDashAngle;
     private final double myDashSpeed;
@@ -30,6 +30,7 @@ public class Dwarf extends Character {
         myDashTime = theDashTime;
         myDashCooldown = theDashCooldown;
         myDashClock = -myDashCooldown;
+        myHasEgg = false;
     }
 
     public void switchWeapon(int theIndex) {
@@ -41,6 +42,22 @@ public class Dwarf extends Character {
 
     public int getWeaponIndex() {
         return myWeaponIndex;
+    }
+
+    /**
+     * Sets whether Dwarf picked up the egg.
+     * @param theHasEgg is the passed boolean conditional if Dwarf picked up.
+     */
+    public void setEgg(boolean theHasEgg) {
+        myHasEgg = theHasEgg;
+    }
+
+    /**
+     * Gets whether Dwarf has picked up Egg.
+     * @return if Dwarf has picked up Egg.
+     */
+    public boolean hasEgg() {
+        return myHasEgg;
     }
 
     public void setInputData(final InputData theInputData) {

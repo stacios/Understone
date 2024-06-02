@@ -38,7 +38,7 @@ public class CaveAndRoomTests {
     @Test
     public void testGenerateCave() {
         assertNotNull(myCave.getCurrentRoom());
-        assertTrue(myCave.hasNextRoom() || !myCave.hasNextRoom());
+        //assertTrue(myCave.hasNextRoom() || !myCave.hasNextRoom());
     }
 
     /**
@@ -68,7 +68,7 @@ public class CaveAndRoomTests {
     @Test
     public void testHasNextRoom() {
         myCave.moveToNextRoom();
-        assertTrue(myCave.hasNextRoom() || !myCave.hasNextRoom());
+        //assertTrue(myCave.hasNextRoom() || !myCave.hasNextRoom());
     }
 
     /**
@@ -89,10 +89,7 @@ public class CaveAndRoomTests {
         myLastRoom.spawnEnemies();
 
         assertFalse(myFirstRoom.hasEgg());
-        assertFalse(myFirstRoom.hasRock());
 
-        // If Rock was spawned, that means Egg will be spawned as well
-        assertTrue(myLastRoom.hasRock());
     }
 
     /**

@@ -1,7 +1,8 @@
 package Model.Spaces;
 
+import Model.Dwarf;
+
 import java.io.Serializable;
-import java.util.Random;
 
 public class Cave implements Serializable {
     private static final long serialVersionUID = 2L;
@@ -13,14 +14,15 @@ public class Cave implements Serializable {
     }
 
     public void generateCave() {
-        Random rand = new Random();
-        int numberOfRooms = rand.nextInt(4) + 5; // Generates a number between 5 and 8
+        int numberOfRooms = 6;
         myRooms = new Room[numberOfRooms];
 
         for (int i = 0; i < myRooms.length; i++) {
-            myRooms[i] = new Room(i, myRooms.length); // Added room identifier
+            myRooms[i] = new Room(i, myRooms.length);
         }
-        myRooms[0].spawnEnemies();
+
+        // TODO add logic for final win condition in final room
+
         currentRoomIndex = 0; // Start in the first room
     }
 
@@ -28,8 +30,23 @@ public class Cave implements Serializable {
         return myRooms[currentRoomIndex];
     }
 
+    public void moveToPreviousRoom() {
+        if (hasPreviousRoom()) {
+            if (currentRoomIndex == 1) {
+                System.out.println("Moving to last room with index of: " + currentRoomIndex);
+                currentRoomIndex--;
+            } else {
+                System.out.println("Moving to previous room with index of: " + currentRoomIndex);
+                currentRoomIndex--;
+                myRooms[currentRoomIndex].spawnEnemies();
+            }
+        } else {
+            System.out.println("You are in the first room. Cannot move to previous room.");
+        }
+    }
+
     public void moveToNextRoom() {
-        if (currentRoomIndex < myRooms.length - 1) {
+        if (hasNextRoom()) {
             currentRoomIndex++;
             myRooms[currentRoomIndex].spawnEnemies();
         } else {
@@ -37,12 +54,8 @@ public class Cave implements Serializable {
         }
     }
 
-    public void moveToPreviousRoom() {
-        if (currentRoomIndex > 0) {
-            currentRoomIndex--;
-        } else {
-            System.out.println("You are in the first room. Cannot move to previous room.");
-        }
+    public boolean hasPreviousRoom() {
+        return currentRoomIndex > 0;
     }
 
     public boolean hasNextRoom() {

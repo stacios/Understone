@@ -297,10 +297,10 @@ public class Display {
                 final int choice = JOptionPane.showConfirmDialog(myMenuDialog, "Quit?", "Quit", JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
                     isRunning = false;
-                    //dispose();
+                    myJFrame.dispose();
+                    System.exit(0);
                 }
                 myMenuDialog.setVisible(false);
-                //myInputManager.resetKeyStates();
                 myJFrame.requestFocus();
             }
         });

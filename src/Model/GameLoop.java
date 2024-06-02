@@ -16,7 +16,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+
 import static Model.CharacterTypes.*;
+
 /**
  * The main game loop. Controls the player, cave, and active room.
  */
@@ -64,8 +66,10 @@ public class GameLoop implements Drawable, Serializable {
         myActiveRoom = myCave.getCurrentRoom();
         myHUD = new HUD(myPlayer);
     }
-
     public boolean update(final InputData theInput) {
+        if (!Display.getInstance().isRunning()) {
+            return false;
+        }
         if (myPaused) {
             return !theInput.getEscape();
         }
@@ -92,6 +96,7 @@ public class GameLoop implements Drawable, Serializable {
         if (theInput.getInteract()) {
             if (!isDwarfInteracting()) {
                 moveToNextRoom();
+                System.out.println(myPlayer.getX() + " " + myPlayer.getY());
                 myDwarfInteracting = true;
             }
         } else {
@@ -102,24 +107,44 @@ public class GameLoop implements Drawable, Serializable {
     public void moveToNextRoom() {
         Room currentRoom = myCave.getCurrentRoom();
 
-        if (myCave.hasNextRoom()) {
-            // Todo add additional condition that all enemies must be dead
-            if (currentRoom.isDwarfInArea(myPlayer)) {
-                myCave.moveToNextRoom();
-                // Initiate fade animation in Display
-                Display.getInstance().startFadeAnimation(35);
-                myActiveRoom = myCave.getCurrentRoom();
-                //System.out.println("Moved to room " + myActiveRoom.getIdentifier());
+        // TODO ADD CANEXIT CONDITION IF ALL GLYPHIDS ARE DEAD TO BE ABLE TO PROGRESS TO NEXT ROOM
+
+        // If player has egg
+        if (myPlayer.hasEgg() && currentRoom.canExit()) {
+
+            // If cave has previous rooms
+            if (myCave.hasPreviousRoom()) {
+                // Is dwarf in area, passes dwarf because it will modify Dwarf X + Y
+                if (currentRoom.isDwarfInArea(myPlayer)) {
+                    currentRoom.clearRoom();
+                    myCave.moveToPreviousRoom();
+                    myDrawDataList.add("sound:Transition");
+                    Display.getInstance().startFadeAnimation(20);
+                    myActiveRoom = myCave.getCurrentRoom();
+                } else {
+                    System.out.println("Cannot move to the previous room.");
+                }
             } else {
-                if (!currentRoom.isDwarfInArea(myPlayer)) {
-                    //System.out.println("Dwarf is not in the top area.");
-                }
-                if (!currentRoom.canExit()) {
-                    //System.out.println("Not all enemies are dead.");
-                }
+                System.out.println("You are in the first room. Cannot move to previous room.");
             }
-        } else {
-            System.out.println("You are in the last room. Cannot move to next room.");
+        }
+        // If player does not have egg
+        else if (currentRoom.canExit()) {
+            // If cave has next room
+            if (myCave.hasNextRoom()) {
+                // Is dwarf in area, passes dwarf because it will modify Dwarf X + Y
+                if (currentRoom.isDwarfInArea(myPlayer)) {
+                    currentRoom.clearRoom();
+                    myCave.moveToNextRoom();
+                    myDrawDataList.add("sound:Transition");
+                    Display.getInstance().startFadeAnimation(20);
+                    myActiveRoom = myCave.getCurrentRoom();
+                } else {
+                    System.out.println("Cannot move to the next room.");
+                }
+            } else {
+                System.out.println("You are in the last room. Cannot move to next room.");
+            }
         }
     }
 

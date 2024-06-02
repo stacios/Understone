@@ -56,10 +56,19 @@ public abstract class Character implements Drawable, Collidable, Serializable {
         myY = theY;
     }
 
+    public void addHealth(int theHealth) {
+        if (myHealth + theHealth < myMaxHealth) {
+            myHealth += theHealth;
+        } else {
+            myHealth = myMaxHealth;
+        }
+    }
+
     public void setHealth(int theHealth) {
         if (theHealth < 0) {
             throw new IllegalArgumentException("Health cannot be negative");
         }
+
         myHealth = theHealth;
     }
 

@@ -141,7 +141,7 @@ public class CharacterFactory {
     }
 
     public static Rock createObject(final String theRockType) {
-        if (!theRockType.equals(ROCK) && !theRockType.equals(EGG)) {
+        if (!theRockType.equals(HEAL) && !theRockType.equals(EGG) && !theRockType.equals(ROCK)) {
             throw new Error("Must be of type Egg or Rock");
         }
 
@@ -150,6 +150,8 @@ public class CharacterFactory {
         switch (theRockType) {
             case ROCK:
                 return new Rock(theRockType, 600, 500, 100, 200, 200, 0, defaultWeapon, 0, 0);
+            case HEAL:
+                return new Rock(theRockType, 600, 500, 50, 75, 75, 0, defaultWeapon, 0, 0);
             case EGG:
                 return new Rock(theRockType, 500, 500, Integer.MAX_VALUE, 100, 100, 0, defaultWeapon, 0, 0);
             default:
