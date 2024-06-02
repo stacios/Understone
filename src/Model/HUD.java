@@ -12,15 +12,16 @@ import java.util.Map;
 public class HUD implements Drawable, Serializable {
     private static final long serialVersionUID = 1L;
     private final Dwarf myPlayer;
-    private static final Map<String, List<String>> dwarfWeapons;
+    private static final Map<String, List<String>> myDwarfWeapons;
     private static final int TEXT_HEIGHT = 30;
 
     static {
-        dwarfWeapons = new HashMap<>();
-        dwarfWeapons.put("Driller", List.of("Flamethrower", "Pistol", "Pickaxe"));
-        dwarfWeapons.put("Scout", List.of("M1000", "Pistol", "Pickaxe"));
-        dwarfWeapons.put("Engineer", List.of("Shotgun", "GrenadeLauncher", "Pickaxe"));
-        dwarfWeapons.put("Gunner", List.of("Minigun", "Revolver", "Pickaxe"));
+        myDwarfWeapons = new HashMap<>();
+        myDwarfWeapons.put("Driller", List.of("Flamethrower", "Pistol", "Pickaxe"));
+        myDwarfWeapons.put("Scout", List.of("M1000", "SawedOff", "Pickaxe"));
+        myDwarfWeapons.put("Engineer", List.of("Shotgun", "GrenadeLauncher", "Pickaxe"));
+        myDwarfWeapons.put("Gunner", List.of("Minigun", "Revolver", "Pickaxe"));
+        myDwarfWeapons.put("karl", List.of("GrenadeLauncher", "GrenadeLauncher", "Pickaxe"));
     }
 
     public HUD(Dwarf thePlayer) {
@@ -48,24 +49,24 @@ public class HUD implements Drawable, Serializable {
         drawData.add(getTextDrawData("Weapon " + myWeapon, dwarfTextX, weaponTextY));
 
         // Display weapon image below the weapon text
-        int weaponImageX = dwarfTextX + 100;
-        int weaponImageY = weaponTextY + 45;
-        drawData.add(getImageDrawData(myWeapon, weaponImageX, weaponImageY, 80, 80));
+        int weaponImageX = dwarfTextX;
+        int weaponImageY = weaponTextY + 20;
+        drawData.add(getImageDrawData(myWeapon, weaponImageX, weaponImageY, .5));
 
         return drawData.toArray(new String[0]);
     }
 
-    private String getTextDrawData(String text, int x, int y) {
-        return "text:" + text + ":" + x + ":" + y + ":30:30";
+    private String getTextDrawData(String theText, int theX, int theY) {
+        return "text:" + theText + ":" + theX + ":" + theY + ":30:30";
     }
 
-    private String getImageDrawData(String imageName, int x, int y, int width, int height) {
-        return "image:" + imageName + ":" + x + ":" + y + ":" + width + ":" + height;
+    private String getImageDrawData(String theImageName, int theX, int theY, double theScale) {
+        return "unboundImage:" + theImageName + ":" + theX + ":" + theY + ":" + theScale;
     }
 
-    private String getCurrentWeapon(String dwarfType, int weaponIndex) {
-        List<String> weapons = dwarfWeapons.get(dwarfType);
-        return weapons != null && weaponIndex < weapons.size() ? weapons.get(weaponIndex) : "Unknown";
+    private String getCurrentWeapon(String theDwarfType, int theWeaponIndex) {
+        List<String> weapons = myDwarfWeapons.get(theDwarfType);
+        return weapons != null && theWeaponIndex < weapons.size() ? weapons.get(theWeaponIndex) : "Unknown";
     }
 }
 

@@ -140,9 +140,7 @@ public class Room implements Drawable, Serializable {
                 if (glyphid == myRock) {
                     spawnEgg();
                     GameLoop.getInstance().addDrawData("sound:RockBroken");
-                } else if (glyphid == myEgg) {
-                    GameLoop.getInstance().addDrawData("sound:AlienEggGrabRoars");
-                }
+                } 
             }
         }
         for (int i = myDwarfAttacks.size() - 1; i >= 0; i--) {
@@ -207,7 +205,7 @@ public class Room implements Drawable, Serializable {
             // Todo temporary sound for egg and roars
             GameLoop.getInstance().addDrawData("sound:PickupEgg");
             GameLoop.getInstance().addDrawData("sound:EggGrabRoars");
-            Display.getInstance().shakeScreen(200, 9);
+            GameLoop.getInstance().addDrawData("screenShake:200:9");
             System.out.println("Egg picked up by the dwarf.");
         }
     }
