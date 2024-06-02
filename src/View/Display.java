@@ -130,6 +130,7 @@ public class Display {
         int result = JOptionPane.showConfirmDialog(null, panel, "Choose your Dwarf", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
         if (result == JOptionPane.OK_OPTION) {
+            myDwarfType = (String) dwarfComboBox.getSelectedItem();
             return (String) dwarfComboBox.getSelectedItem();
         } else {
             System.exit(0);
@@ -200,9 +201,12 @@ public class Display {
                 myInputManager.resetKeyStates();
                 myJFrame.requestFocus();
 
-                GameLoop.getInstance().resetGame();
+                // Reset the game with the current dwarf type
+                GameLoop.getInstance().resetGame(myDwarfType);
+                GameLoop.getInstance().pauseGame();
             }
         });
+
 
         saveButton.addActionListener(new ActionListener() {
             @Override
@@ -271,16 +275,6 @@ public class Display {
 
                 JOptionPane.showMessageDialog(myMenuDialog, panel, "Credits", JOptionPane.PLAIN_MESSAGE);
 
-                myInputManager.resetKeyStates();
-                myJFrame.requestFocus();
-            }
-        });
-
-        newGameButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                myMenuDialog.setVisible(false);
-                showLoadGameDialog();
                 myInputManager.resetKeyStates();
                 myJFrame.requestFocus();
             }
