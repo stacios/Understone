@@ -359,6 +359,9 @@ public class Display {
         return myInstance;
     }
 
+    /*
+    TO BE DELETED
+     */
     public void startFadeAnimation(int theDuration) {
         myIsFading = true;
         myFadeDuration = theDuration;
@@ -534,6 +537,14 @@ public class Display {
                 myIsShaking = true;
                 myShakeDuration = Integer.parseInt(theData[1]);
                 myShakeMagnitude = Integer.parseInt(theData[2]);
+                break;
+
+            case "fade":
+                myIsFading = true;
+                myFadeDuration = Integer.parseInt(theData[1]);
+                myFadeProgress = 0;
+                //myFadeIn = false;
+                myFadeIn = true;
                 break;
 
             default:

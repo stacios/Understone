@@ -121,7 +121,8 @@ public class GameLoop implements Drawable, Serializable {
                     myActiveRoom.positionDwarf(myPlayer);
                     // Animation transition sfx
                     myDrawDataList.add("sound:Transition");
-                    Display.getInstance().startFadeAnimation(20);
+                    GameLoop.getInstance().addDrawData("fade:20");
+                    //Display.getInstance().startFadeAnimation(20);
                     myActiveRoom = myCave.getCurrentRoom();
                 } else {
                     System.out.println("Cannot move to the previous room.");
@@ -140,7 +141,8 @@ public class GameLoop implements Drawable, Serializable {
                     myCave.moveToNextRoom();
                     myActiveRoom.positionDwarf(myPlayer);
                     myDrawDataList.add("sound:Transition");
-                    Display.getInstance().startFadeAnimation(20);
+                    GameLoop.getInstance().addDrawData("fade:20");
+                    //Display.getInstance().startFadeAnimation(20);
                     myActiveRoom = myCave.getCurrentRoom();
                 } else {
                     System.out.println("Cannot move to the next room.");

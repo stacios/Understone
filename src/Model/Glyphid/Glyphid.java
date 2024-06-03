@@ -53,14 +53,15 @@ public abstract class Glyphid extends Character {
 
     @Override
     public void receiveAttack(Attack theAttack) {
+        int oldHealth = super.getHealth();
         super.receiveAttack(theAttack);
 
         if (theAttack instanceof MeleeAttack) {
             GameLoop.getInstance().addDrawData("sound:PickaxeImpact");
         }
 
-        // TODO sometimes death sound plays twice, probably due to update loop
-        if (super.getHealth() - theAttack.getDamage() < 0) {
+        // oldHealth used so shotguns do not cause multiple death sounds
+        if (super.getHealth() <= 0 && oldHealth > 0) {
             GameLoop.getInstance().addDrawData("sound:GlyphidDeath");
         }
     }

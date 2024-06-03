@@ -289,7 +289,8 @@ public class Room implements Drawable, Serializable {
             // Todo temporary sound for egg and roars
             GameLoop.getInstance().addDrawData("sound:PickupEgg");
             GameLoop.getInstance().addDrawData("sound:EggGrabRoars");
-            Display.getInstance().shakeScreen(200, 9);
+            //Display.getInstance().shakeScreen(200, 9);
+            GameLoop.getInstance().addDrawData("screenShake:200:9");
             spawnEggEnemies();
             System.out.println("Egg picked up by the dwarf.");
         }
