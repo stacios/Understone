@@ -28,8 +28,8 @@ public class SQLiteConnection {
                 myDataSourceInstance = new SQLiteDataSource();
                 myDataSourceInstance.setUrl("jdbc:sqlite:UDB.db");
                 System.out.println("Successfully set up SQLite Data Source.");
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception theEx) {
+                theEx.printStackTrace();
                 throw new RuntimeException("Failed to set up the data source instance.");
             }
         }

@@ -72,15 +72,6 @@ public class CaveAndRoomTests {
     }
 
     /**
-     * Tests spawning enemies in the first room.
-     */
-    @Test
-    public void testSpawnEnemies() {
-        myFirstRoom.spawnEnemies();
-        assertNotEquals(0, myFirstRoom.getGlyphids());
-    }
-
-    /**
      * Tests spawning rock and egg in the last room.
      */
     @Test

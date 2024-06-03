@@ -20,17 +20,17 @@ public class Room implements Drawable, Serializable {
     private static final long serialVersionUID = 3L;
 
     public static final int WALL_THICKNESS = 100;
-    private List<Glyphid> myGlyphids;
-    private List<Attack> myDwarfAttacks;
-    private List<Attack> myGlyphidAttacks;
-    private List<Rock> myRocks;
+    private final List<Glyphid> myGlyphids;
+    private final List<Attack> myDwarfAttacks;
+    private final List<Attack> myGlyphidAttacks;
+    private final List<Rock> myRocks;
     private boolean myHasDropPod;
     private Rock myRock;
     private Rock myEgg;
     private int myIdentifier;
     private int myTotalRooms;
-    // We need this for inputting slight delay in enemies spawned to sync up with Room transition animation
-    private transient ScheduledExecutorService myScheduler;
+    // We need this for the slight delay in enemies spawned to sync up with Room transition animation
+    private final transient ScheduledExecutorService myScheduler;
     private boolean eggEnemiesSpawned;
     private boolean myCollectedEgg;
 
@@ -50,7 +50,9 @@ public class Room implements Drawable, Serializable {
         return myEgg != null;
     }
 
-    // We dont want any glyphids/rocks left over from previous
+    /**
+     * Resets room to remove any leftover objects
+     */
     public void clearRoom() {
         myGlyphids.clear();
         myRocks.clear();
@@ -110,20 +112,10 @@ public class Room implements Drawable, Serializable {
     }
 
     // Todo public for now depending on if we want spawning logic to be handled in Cave
-    public void spawnRock() {
-        myRock = CharacterFactory.createObject(HEAL);
-        myRock.setX(960);
-        myRock.setY(540);
-        myGlyphids.add(myRock);
-        System.out.println("Spawned rock in the last room.");
-    }
-
-    // Todo public for now depending on if we want spawning logic to be handled in Cave
     public void spawnEgg() {
         myEgg = CharacterFactory.createObject(EGG);
         myEgg.setX(960);
         myEgg.setY(540);
-        //myGlyphids.add(myEgg);
         myRocks.add(myEgg);
         System.out.println("Spawned egg after the rock was broken.");
     }
@@ -133,7 +125,7 @@ public class Room implements Drawable, Serializable {
     // Returns if all glyphids are dead. Ignores rock(as crystals do not have to be destroyed).
     public boolean canExit() {
         return myGlyphids.isEmpty();
-        // return true;
+        //return true;
     }
 
     /**
@@ -158,24 +150,30 @@ public class Room implements Drawable, Serializable {
     }
 
     /**
-     * Gets number of glyphids in current room.
+     * Positions dwarf relative to the door they enter/exit in
      *
-     * @return number of glyphids in current room.
+     * @param thePlayer is the passed player dwarf.
      */
-    public int getGlyphids() {
-        return myGlyphids.size();
+    public void positionDwarf(Dwarf thePlayer) {
+        if (thePlayer.hasEgg()) {
+            thePlayer.setX(950);
+            thePlayer.setY(925);
+        } else {
+            thePlayer.setX(950);
+            thePlayer.setY(155);
+        }
     }
 
     // TODO magic numbers for now
-    public boolean isDwarfInArea(Dwarf dwarf) {
+    public boolean isDwarfInArea(Dwarf thePlayer) {
         // If Dwarf has Egg, they can move upward but not downwards
-        if (dwarf.hasEgg()) {
-            return dwarf.getX() > 800 && dwarf.getX() < 1120 && dwarf.getY() > 145 && dwarf.getY() < 160;
+        if (thePlayer.hasEgg()) {
+            return thePlayer.getX() > 800 && thePlayer.getX() < 1100 && thePlayer.getY() > 145 && thePlayer.getY() < 160;
         }
 
         // If Dwarf does not have Egg, they can only move downwards
         else {
-            return dwarf.getY() > 900 && dwarf.getY() < 950 && dwarf.getX() > 850 && dwarf.getX() < 1100;
+            return thePlayer.getY() > 900 && thePlayer.getY() < 950 && thePlayer.getX() > 800 && thePlayer.getX() < 1100;
         }
     }
 
@@ -189,19 +187,12 @@ public class Room implements Drawable, Serializable {
             myGlyphidAttacks.addAll(List.of(glyphid.getPendingAttacks()));
             if (flag) {
                 myGlyphids.remove(i);
-//                if (glyphid instanceof Rock) {
-//                    Dwarf player = GameLoop.getInstance().getPlayer();
-//                    // Magic heal value for now
-//                    player.addHealth(20);
-//                    GameLoop.getInstance().addDrawData("sound:Heal");
-//                }
             }
         }
 
         for (int i = myRocks.size() - 1; i >= 0; i--) {
             Rock heal = myRocks.get(i);
             boolean flag = heal.update();
-            //myGlyphidAttacks.addAll(List.of(heal.getPendingAttacks()));
             if (flag) {
                 myRocks.remove(i);
                 Dwarf player = GameLoop.getInstance().getPlayer();
@@ -242,6 +233,19 @@ public class Room implements Drawable, Serializable {
             if (p.colliding(g)) {
                 p.addForce(new Force(new Angle(g.getX(), g.getY(), p.getX(), p.getY()), 10));
                 g.addForce(new Force(new Angle(p.getX(), p.getY(), g.getX(), g.getY()), .2));
+            }
+        }
+
+        for (Rock r : myRocks) {
+            for (Glyphid g : myGlyphids) {
+                if (r.colliding(g)) {
+                    g.addForce(new Force(new Angle(r.getX(), r.getY(), g.getX(), g.getY()), 1));
+                }
+            }
+
+            if (p.colliding(r)) {
+                p.addForce(new Force(new Angle(r.getX(), r.getY(), p.getX(), p.getY()), 10));
+                r.addForce(new Force(new Angle(p.getX(), p.getY(), r.getX(), r.getY()), .2));
             }
         }
 
