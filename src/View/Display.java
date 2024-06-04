@@ -300,6 +300,7 @@ public class Display {
                     myJFrame.dispose();
                     System.exit(0);
                 }
+                GameLoop.getInstance().pauseGame();
                 myMenuDialog.setVisible(false);
                 myJFrame.requestFocus();
             }

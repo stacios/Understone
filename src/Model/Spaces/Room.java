@@ -280,7 +280,8 @@ public class Room implements Drawable, Serializable {
 
         // Todo Way to detect if player is colliding with egg, and then collect it with space;
         Dwarf player = GameLoop.getInstance().getPlayer();
-        if (myEgg != null && player.colliding(myEgg) && GameLoop.getInstance().isDwarfInteracting() && !myCollectedEgg) {
+        if (myEgg != null && GameLoop.getInstance().isDwarfInteracting() && !myCollectedEgg
+        && player.getX() < 1920/2 + 200 && player.getX() > 1920/2 - 200 && player.getY() < 1080/2 + 200 && player.getY() > 1080/2 - 200) {
             // This is so when collecting the egg, itll only trigger this once
             myCollectedEgg = true;
             myRocks.remove(myEgg);
