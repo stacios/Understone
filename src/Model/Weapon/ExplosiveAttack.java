@@ -44,7 +44,7 @@ public class ExplosiveAttack extends ProjectileAttack {
         if (myTriggeredTimer == 0) {
             return super.getHitbox();
         }
-        else if (myTriggeredTimer == 1) {
+        else if (myTriggeredTimer == 2) {
             return new int[]{(int)getX(), (int)getY(), myArea, myArea};
         }
         else {

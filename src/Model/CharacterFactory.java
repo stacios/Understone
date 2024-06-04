@@ -68,8 +68,8 @@ public class CharacterFactory {
                         new ProjectileAttack(8, 30, 30, 7, 70, 30), "WarthogShot",
                         8, new Angle(Math.toRadians(20)));
                 // grenade launcher
-                weapons[1] = new Weapon(200,
-                        new ExplosiveAttack(150, 30, 30, 100, 70, 20, 400), "GrenadeLauncherShot");
+                weapons[1] = new Weapon(250,
+                        new ExplosiveAttack(100, 30, 30, 100, 70, 20, 500), "GrenadeLauncherShot");
                 break;
 
             case "Gunner":
@@ -127,15 +127,15 @@ public class CharacterFactory {
         //return new Grunt(theGlyphidType, x, y, health, width, height, moveSpeed, defaultWeapon, fireTimer);
         switch (theGlyphidType) {
             case PRAETORIAN:
-                return new Praetorian(theGlyphidType, 800, 800, 400, 200, 200, 2.6,
+                return new Praetorian(theGlyphidType, 800, 800, 400, 200, 200, 4,
                         new Weapon(40, new MeleeAttack(20, 250, 250, 30, 150), "Swing"),
                         200, 40, 0.25, "PraetorianRoar1");
             case ACID_SPIITER:
                 return new AcidSpitter(theGlyphidType, 600, 600, 150, 100, 100, 0.8,
-                        new Weapon(60, new ProjectileAttack(10, 80, 80, 10, 100, 10, "AcidSpit"), "AcidSpit"),
-                        550, 60, null);
+                        new Weapon(60, new ProjectileAttack(10, 80, 80, 10, 100, 7, "AcidSpit"), "AcidSpit"),
+                        400, 60, null);
             case GRUNT:
-                return new Grunt(theGlyphidType, 800, 800, 100, 100, 100, 0.8,
+                return new Grunt(theGlyphidType, 800, 800, 100, 100, 100, 1.2,
                         new Weapon(40, new MeleeAttack(10, 150, 150, 10, 70), "Swing"),
                         150, 40, "GruntRoar1");
             default:
