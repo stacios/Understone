@@ -85,7 +85,7 @@ public class Room implements Drawable, Serializable {
             // Add random number of Grunts, increased by difficulty factor
             //int numberOfGrunts = (random.nextInt(3) + 5) + difficultyFactor;
             // Temp number of grunts to reduce nuymber of grunts spawned, use for dev testing
-            int numberOfGrunts = 1;
+            int numberOfGrunts = 3;
             for (int i = 0; i < numberOfGrunts; i++) {
                 Glyphid grunt = CharacterFactory.createGlyphid(GRUNT);
                 grunt.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);

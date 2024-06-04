@@ -571,6 +571,7 @@ public class Display {
     }
 
     public void showLoseScreen() {
+        myAudioPlayer.playSound("Lose");
         JOptionPane.showMessageDialog(myMenuDialog, "You Died!");
         myMenuDialog.setVisible(false);
         myInputManager.resetKeyStates();
@@ -582,6 +583,7 @@ public class Display {
     }
 
     public void showWinScreen() {
+        myAudioPlayer.playSound("Win");
         JOptionPane.showMessageDialog(myMenuDialog, "You Win!");
         myMenuDialog.setVisible(false);
         myInputManager.resetKeyStates();

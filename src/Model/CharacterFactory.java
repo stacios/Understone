@@ -75,7 +75,7 @@ public class CharacterFactory {
             case "Gunner":
                 // minigun
                 weapons[0] = new MinigunWeapon(6,
-                        new ProjectileAttack(9, 30, 30, 5, 70, 30), "MinigunShot",
+                        new ProjectileAttack(9, 30, 30, 7, 70, 30), "MinigunShot",
                         40, 2, new Angle(Math.toRadians(20)));
                 // revolver
                 weapons[1] = new Weapon(60,
@@ -127,15 +127,15 @@ public class CharacterFactory {
         //return new Grunt(theGlyphidType, x, y, health, width, height, moveSpeed, defaultWeapon, fireTimer);
         switch (theGlyphidType) {
             case PRAETORIAN:
-                return new Praetorian(theGlyphidType, 800, 800, 400, 200, 200, 1.6,
+                return new Praetorian(theGlyphidType, 800, 800, 400, 200, 200, 2.6,
                         new Weapon(40, new MeleeAttack(20, 250, 250, 30, 150), "Swing"),
                         200, 40, 0.25, "PraetorianRoar1");
             case ACID_SPIITER:
-                return new AcidSpitter(theGlyphidType, 600, 600, 150, 100, 100, 0.4,
-                        new Weapon(60, new ProjectileAttack(10, 80, 80, 10, 100, 6, "AcidSpit"), "AcidSpit"),
+                return new AcidSpitter(theGlyphidType, 600, 600, 150, 100, 100, 0.8,
+                        new Weapon(60, new ProjectileAttack(10, 80, 80, 10, 100, 10, "AcidSpit"), "AcidSpit"),
                         550, 60, null);
             case GRUNT:
-                return new Grunt(theGlyphidType, 800, 800, 100, 100, 100, 0.4,
+                return new Grunt(theGlyphidType, 800, 800, 100, 100, 100, 0.8,
                         new Weapon(40, new MeleeAttack(10, 150, 150, 10, 70), "Swing"),
                         150, 40, "GruntRoar1");
             default:
