@@ -69,16 +69,16 @@ public class Room implements Drawable, Serializable {
             int numberOfP = 1;
             for (int i = 0; i < numberOfP; i++) {
                 Glyphid praetorian = CharacterFactory.createGlyphid(PRAETORIAN);
-                praetorian.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
-                praetorian.setY(random.nextDouble() * 1080 * (2.0 / 3) + 1080 / 6.0);
+                praetorian.setX(random.nextDouble() * 1920 * (.5) + 1920 / 4.0);
+                praetorian.setY(random.nextDouble() * 1080 * (.5) + 1080 / 4.0);
                 myGlyphids.add(praetorian);
             }
 
             int numberOfAS = 1;
             for (int i = 0; i < numberOfAS; i++) {
                 Glyphid acidSpitter = CharacterFactory.createGlyphid(ACID_SPIITER);
-                acidSpitter.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
-                acidSpitter.setY(random.nextDouble() * 1080 * (2.0 / 3) + 1080 / 6.0);
+                acidSpitter.setX(random.nextDouble() * 1920 * (.5) + 1920 / 4.0);
+                acidSpitter.setY(random.nextDouble() * 1080 * (.5) + 1080 / 4.0);
                 myGlyphids.add(acidSpitter);
             }
 
@@ -88,8 +88,8 @@ public class Room implements Drawable, Serializable {
             int numberOfGrunts = 3;
             for (int i = 0; i < numberOfGrunts; i++) {
                 Glyphid grunt = CharacterFactory.createGlyphid(GRUNT);
-                grunt.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
-                grunt.setY(random.nextDouble() * 1080 * (2.0 / 3) + 1080 / 6.0);
+                grunt.setX(random.nextDouble() * 1920 * (.5) + 1920 / 4.0);
+                grunt.setY(random.nextDouble() * 1080 * (.5) + 1080 / 4.0);
                 myGlyphids.add(grunt);
             }
 
@@ -97,8 +97,8 @@ public class Room implements Drawable, Serializable {
 
             for (int i = 0; i < numberOfHeals; i++) {
                 Rock heal = CharacterFactory.createObject(HEAL);
-                heal.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
-                heal.setY(random.nextDouble() * 1080 * (2.0 / 3) + 1080 / 6.0);
+                heal.setX(random.nextDouble() * 1920 * (.5) + 1920 / 4.0);
+                heal.setY(random.nextDouble() * 1080 * (.5) + 1080 / 4.0);
                 //myGlyphids.add(heal);
                 myRocks.add(heal);
             }
@@ -142,8 +142,8 @@ public class Room implements Drawable, Serializable {
             for (int i = 0; i < 1; i++) {
 
                 Glyphid p = CharacterFactory.createGlyphid(PRAETORIAN);
-                p.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
-                p.setY(random.nextDouble() * 1080 * (2.0 / 3) + 1080 / 6.0);
+                p.setX(random.nextDouble() * 1920 * (.5) + 1920 / 4.0);
+                p.setY(random.nextDouble() * 1080 * (.5) + 1080 / 4.0);
                 myGlyphids.add(p);
             }
         }, 2, TimeUnit.SECONDS);
