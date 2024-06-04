@@ -95,7 +95,7 @@ public class GameLoop implements Drawable, Serializable {
 
         myActiveRoom.update();
         myDrawDataList.addAll(Arrays.asList(myActiveRoom.getDrawData()));
-        myDrawDataList.add("text:Room ID " + myActiveRoom.getIdentifier() + ": 0" + ":100:100:40");
+        //myDrawDataList.add("text:Room ID " + myActiveRoom.getIdentifier() + ": 0" + ":100:100:40");
 
         myDrawDataList.addAll(Arrays.asList(myHUD.getDrawData()));
 

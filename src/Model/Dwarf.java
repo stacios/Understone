@@ -67,6 +67,11 @@ public class Dwarf extends Character {
     @Override
     public boolean update() {
         boolean superCall = super.update();
+        for (Weapon weapon : myWeapons) {
+            if (weapon != super.getWeapon()) {
+                weapon.update();
+            }
+        }
 
         move();
         dash();

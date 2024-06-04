@@ -36,17 +36,17 @@ public class HUD implements Drawable, Serializable {
         int dwarfTextX = 20;
         int dwarfTextY = Display.getInstance().getHeight() - 250;
         String dwarfType = myPlayer.getName();
-        drawData.add(getTextDrawData("Dwarf " + dwarfType, dwarfTextX, dwarfTextY));
+        drawData.add(getTextDrawData(dwarfType, dwarfTextX, dwarfTextY));
 
         // Display health
         int healthTextY = dwarfTextY + 45;
         int health = myPlayer.getHealth();
-        drawData.add(getTextDrawData("Health " + health, dwarfTextX, healthTextY));
+        drawData.add(getTextDrawData("Health- " + health, dwarfTextX, healthTextY));
 
         // Display weapon
         int weaponTextY = healthTextY + 45;
         String myWeapon = getCurrentWeapon(dwarfType, myPlayer.getWeaponIndex());
-        drawData.add(getTextDrawData("Weapon " + myWeapon, dwarfTextX, weaponTextY));
+        drawData.add(getTextDrawData("Weapon- " + myWeapon, dwarfTextX, weaponTextY));
 
         // Display weapon image below the weapon text
         int weaponImageX = dwarfTextX;

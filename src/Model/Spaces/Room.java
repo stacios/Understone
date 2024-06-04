@@ -66,7 +66,7 @@ public class Room implements Drawable, Serializable {
         myScheduler.schedule(() -> {
             Random random = new Random();
 
-            int numberOfP = 1;
+            int numberOfP = (int)(Math.random() * 3);
             for (int i = 0; i < numberOfP; i++) {
                 Glyphid praetorian = CharacterFactory.createGlyphid(PRAETORIAN);
                 praetorian.setX(random.nextDouble() * 1920 * (.5) + 1920 / 4.0);
@@ -74,7 +74,7 @@ public class Room implements Drawable, Serializable {
                 myGlyphids.add(praetorian);
             }
 
-            int numberOfAS = 1;
+            int numberOfAS = (int)(Math.random() * 3);
             for (int i = 0; i < numberOfAS; i++) {
                 Glyphid acidSpitter = CharacterFactory.createGlyphid(ACID_SPIITER);
                 acidSpitter.setX(random.nextDouble() * 1920 * (.5) + 1920 / 4.0);
@@ -85,7 +85,7 @@ public class Room implements Drawable, Serializable {
             // Add random number of Grunts, increased by difficulty factor
             //int numberOfGrunts = (random.nextInt(3) + 5) + difficultyFactor;
             // Temp number of grunts to reduce nuymber of grunts spawned, use for dev testing
-            int numberOfGrunts = 3;
+            int numberOfGrunts = 3 + (int)(Math.random() * 3);
             for (int i = 0; i < numberOfGrunts; i++) {
                 Glyphid grunt = CharacterFactory.createGlyphid(GRUNT);
                 grunt.setX(random.nextDouble() * 1920 * (.5) + 1920 / 4.0);
@@ -93,7 +93,7 @@ public class Room implements Drawable, Serializable {
                 myGlyphids.add(grunt);
             }
 
-            int numberOfHeals = 2;
+            int numberOfHeals = (int) (Math.random() * 2);
 
             for (int i = 0; i < numberOfHeals; i++) {
                 Rock heal = CharacterFactory.createObject(HEAL);
