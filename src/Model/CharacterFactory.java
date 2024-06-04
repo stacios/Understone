@@ -57,7 +57,7 @@ public class CharacterFactory {
                 weapons[0] = new Weapon(20,
                         new ProjectileAttack(35, 30, 30, 15, 70, 30), "M1000Shot");
                 // sawedoff
-                weapons[1] = new ShotgunWeapon(60,
+                weapons[1] = new ShotgunWeapon(90,
                         new ProjectileAttack(8, 30, 30, 10, 70, 30), "DoubleBarrelShot",
                         16, new Angle(Math.toRadians(45)));
                 break;
@@ -65,17 +65,17 @@ public class CharacterFactory {
             case "Engineer":
                 // shotgun
                 weapons[0] = new ShotgunWeapon(40,
-                        new ProjectileAttack(8, 30, 30, 10, 70, 30), "WarthogShot",
+                        new ProjectileAttack(8, 30, 30, 7, 70, 30), "WarthogShot",
                         8, new Angle(Math.toRadians(20)));
                 // grenade launcher
                 weapons[1] = new Weapon(200,
-                        new ExplosiveAttack(100, 30, 30, 100, 70, 20, 400), "GrenadeLauncherShot");
+                        new ExplosiveAttack(150, 30, 30, 100, 70, 20, 400), "GrenadeLauncherShot");
                 break;
 
             case "Gunner":
                 // minigun
                 weapons[0] = new MinigunWeapon(6,
-                        new ProjectileAttack(7, 30, 30, 5, 70, 30), "MinigunShot",
+                        new ProjectileAttack(9, 30, 30, 7, 70, 30), "MinigunShot",
                         40, 2, new Angle(Math.toRadians(20)));
                 // revolver
                 weapons[1] = new Weapon(60,
@@ -93,9 +93,9 @@ public class CharacterFactory {
         //Weapon defaultWeapon = new ShotgunWeapon(60, new ProjectileAttack(10, 20, 20, 10.0, 70, 20), 10, new Angle(Math.toRadians(45)));
         //return new Dwarf(theDwarfType, x, y, health, width, height, moveSpeed, defaultWeapon);
         if (theDwarfType.equals("karl")) {
-            return new Dwarf(theDwarfType, 400, 400, 999999, 100, 100, 5, 20, 10, 20, weapons);
+            return new Dwarf(theDwarfType, 400, 400, 999999, 100, 100, 4, 20, 10, 20, weapons);
         }
-        return new Dwarf(theDwarfType, 400, 400, 100, 100, 100, 5, 20, 10, 20, weapons);
+        return new Dwarf(theDwarfType, 400, 400, 100, 100, 100, 4, 20, 10, 20, weapons);
     }
 
     /**
@@ -122,17 +122,22 @@ public class CharacterFactory {
         double moveSpeed = GlyphidDB.getDefaultValue(theGlyphidType, "movespeed"); // Default speed
         int fireTimer = GlyphidDB.getDefaultValue(theGlyphidType, "firetimer"); // Default cooldown timer
         int damage = GlyphidDB.getDefaultValue(theGlyphidType, "damage"); // Default damage
-        Weapon defaultWeapon = new Weapon(60, new MeleeAttack(10, 100, 100, 10.0, 100), "Swing");
+
 
         //return new Grunt(theGlyphidType, x, y, health, width, height, moveSpeed, defaultWeapon, fireTimer);
         switch (theGlyphidType) {
             case PRAETORIAN:
-                return new Praetorian(theGlyphidType, 800, 800, 200, 150, 150, 0.3, defaultWeapon, 200, 150, 0.5);
+                return new Praetorian(theGlyphidType, 800, 800, 400, 200, 200, 2.6,
+                        new Weapon(40, new MeleeAttack(20, 250, 250, 30, 150), "Swing"),
+                        200, 40, 0.25, "PraetorianRoar1");
             case ACID_SPIITER:
-                return new AcidSpitter(theGlyphidType, 600, 600, 80, 100, 100, 0.3,
-                        new Weapon(60, new ProjectileAttack(10, 80, 80, 10, 100, 10, "AcidSpit"), null), 550, 60);
+                return new AcidSpitter(theGlyphidType, 600, 600, 150, 100, 100, 0.8,
+                        new Weapon(60, new ProjectileAttack(10, 80, 80, 10, 100, 10, "AcidSpit"), "AcidSpit"),
+                        550, 60, null);
             case GRUNT:
-                return new Grunt(theGlyphidType, 800, 800, 100, 100, 100, 0.3, defaultWeapon, 200, 60);
+                return new Grunt(theGlyphidType, 800, 800, 100, 100, 100, 0.8,
+                        new Weapon(40, new MeleeAttack(10, 150, 150, 10, 70), "Swing"),
+                        150, 40, "GruntRoar1");
             default:
 
         }
@@ -149,11 +154,11 @@ public class CharacterFactory {
 
         switch (theRockType) {
             case ROCK:
-                return new Rock(theRockType, 600, 500, 100, 200, 200, 0, defaultWeapon, 0, 0);
+                return new Rock(theRockType, 600, 500, 100, 200, 200, 0, defaultWeapon);
             case HEAL:
-                return new Rock(theRockType, 600, 500, 40, 75, 75, 0, defaultWeapon, 0, 0);
+                return new Rock(theRockType, 600, 500, 40, 75, 75, 0, defaultWeapon);
             case EGG:
-                return new Rock(theRockType, 500, 500, Integer.MAX_VALUE, 100, 100, 0, defaultWeapon, 0, 0);
+                return new Rock(theRockType, 500, 500, Integer.MAX_VALUE, 100, 100, 0, defaultWeapon);
             default:
         }
 

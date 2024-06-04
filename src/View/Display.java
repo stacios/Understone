@@ -300,6 +300,7 @@ public class Display {
                     myJFrame.dispose();
                     System.exit(0);
                 }
+                GameLoop.getInstance().pauseGame();
                 myMenuDialog.setVisible(false);
                 myJFrame.requestFocus();
             }
@@ -359,6 +360,9 @@ public class Display {
         return myInstance;
     }
 
+    /*
+    TO BE DELETED
+     */
     public void startFadeAnimation(int theDuration) {
         myIsFading = true;
         myFadeDuration = theDuration;
@@ -536,6 +540,14 @@ public class Display {
                 myShakeMagnitude = Integer.parseInt(theData[2]);
                 break;
 
+            case "fade":
+                myIsFading = true;
+                myFadeDuration = Integer.parseInt(theData[1]);
+                myFadeProgress = 0;
+                //myFadeIn = false;
+                myFadeIn = true;
+                break;
+
             default:
                 throw new IllegalArgumentException(theData[0] + " not valid input");
         }
@@ -556,5 +568,29 @@ public class Display {
 
     public int getHeight() {
         return myHeight;
+    }
+
+    public void showLoseScreen() {
+        myAudioPlayer.playSound("Lose");
+        JOptionPane.showMessageDialog(myMenuDialog, "You Died!");
+        myMenuDialog.setVisible(false);
+        myInputManager.resetKeyStates();
+        myJFrame.requestFocus();
+
+        // Reset the game with the current dwarf type
+        GameLoop.getInstance().resetGame(myDwarfType);
+        GameLoop.getInstance().pauseGame();
+    }
+
+    public void showWinScreen() {
+        myAudioPlayer.playSound("Win");
+        JOptionPane.showMessageDialog(myMenuDialog, "You Win!");
+        myMenuDialog.setVisible(false);
+        myInputManager.resetKeyStates();
+        myJFrame.requestFocus();
+
+        // Reset the game with the current dwarf type
+        GameLoop.getInstance().resetGame(myDwarfType);
+        GameLoop.getInstance().pauseGame();
     }
 }

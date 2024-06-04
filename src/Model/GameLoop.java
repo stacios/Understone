@@ -66,12 +66,27 @@ public class GameLoop implements Drawable, Serializable {
         myHUD = new HUD(myPlayer);
     }
 
-    public boolean update(final InputData theInput) {
+    /**
+     * Run every tick to update the game. Returns int
+     * 0 - nothing
+     * 1 - close game
+     * 2 - player is dead
+     * 3 - player has won
+     * @param theInput
+     * @return
+     */
+    public int update(final InputData theInput) {
         if (!Display.getInstance().isRunning()) {
-            return false;
+            return 1;
+        }
+        if (myPlayer.getHealth() <= 0) {
+            return 2;
+        }
+        if (myPlayer.hasEgg() && myActiveRoom.getIdentifier() == 0) {
+            return 3;
         }
         if (myPaused) {
-            return !theInput.getEscape();
+            return 0;
         }
         myDrawDataList.clear();
         myPlayer.setInputData(theInput);
@@ -84,7 +99,7 @@ public class GameLoop implements Drawable, Serializable {
 
         myDrawDataList.addAll(Arrays.asList(myHUD.getDrawData()));
 
-        return !theInput.getEscape();
+        return 0;
     }
 
     // Todo method for external classes to detect if Dwarf etc is interacting with Door/Egg
@@ -121,7 +136,8 @@ public class GameLoop implements Drawable, Serializable {
                     myActiveRoom.positionDwarf(myPlayer);
                     // Animation transition sfx
                     myDrawDataList.add("sound:Transition");
-                    Display.getInstance().startFadeAnimation(20);
+                    GameLoop.getInstance().addDrawData("fade:20");
+                    //Display.getInstance().startFadeAnimation(20);
                     myActiveRoom = myCave.getCurrentRoom();
                 } else {
                     System.out.println("Cannot move to the previous room.");
@@ -140,7 +156,8 @@ public class GameLoop implements Drawable, Serializable {
                     myCave.moveToNextRoom();
                     myActiveRoom.positionDwarf(myPlayer);
                     myDrawDataList.add("sound:Transition");
-                    Display.getInstance().startFadeAnimation(20);
+                    GameLoop.getInstance().addDrawData("fade:20");
+                    //Display.getInstance().startFadeAnimation(20);
                     myActiveRoom = myCave.getCurrentRoom();
                 } else {
                     System.out.println("Cannot move to the next room.");

@@ -85,7 +85,7 @@ public class Room implements Drawable, Serializable {
             // Add random number of Grunts, increased by difficulty factor
             //int numberOfGrunts = (random.nextInt(3) + 5) + difficultyFactor;
             // Temp number of grunts to reduce nuymber of grunts spawned, use for dev testing
-            int numberOfGrunts = 1;
+            int numberOfGrunts = 3;
             for (int i = 0; i < numberOfGrunts; i++) {
                 Glyphid grunt = CharacterFactory.createGlyphid(GRUNT);
                 grunt.setX(random.nextDouble() * 1920 * (2.0 / 3) + 1920 / 6.0);
@@ -198,7 +198,7 @@ public class Room implements Drawable, Serializable {
                 Dwarf player = GameLoop.getInstance().getPlayer();
                 // Magic heal value for now
                 player.addHealth(20);
-                GameLoop.getInstance().addDrawData("sound:Heal");
+                //GameLoop.getInstance().addDrawData("sound:Heal");
             }
         }
 
@@ -280,7 +280,8 @@ public class Room implements Drawable, Serializable {
 
         // Todo Way to detect if player is colliding with egg, and then collect it with space;
         Dwarf player = GameLoop.getInstance().getPlayer();
-        if (myEgg != null && player.colliding(myEgg) && GameLoop.getInstance().isDwarfInteracting() && !myCollectedEgg) {
+        if (myEgg != null && GameLoop.getInstance().isDwarfInteracting() && !myCollectedEgg
+        && player.getX() < 1920/2 + 200 && player.getX() > 1920/2 - 200 && player.getY() < 1080/2 + 200 && player.getY() > 1080/2 - 200) {
             // This is so when collecting the egg, itll only trigger this once
             myCollectedEgg = true;
             myRocks.remove(myEgg);
@@ -289,7 +290,8 @@ public class Room implements Drawable, Serializable {
             // Todo temporary sound for egg and roars
             GameLoop.getInstance().addDrawData("sound:PickupEgg");
             GameLoop.getInstance().addDrawData("sound:EggGrabRoars");
-            Display.getInstance().shakeScreen(200, 9);
+            //Display.getInstance().shakeScreen(200, 9);
+            GameLoop.getInstance().addDrawData("screenShake:200:9");
             spawnEggEnemies();
             System.out.println("Egg picked up by the dwarf.");
         }
@@ -335,4 +337,5 @@ public class Room implements Drawable, Serializable {
                 "myIdentifier=" + myIdentifier +
                 '}';
     }
+
 }

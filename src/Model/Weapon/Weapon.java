@@ -5,6 +5,8 @@ import Model.Angle;
 import Model.Character;
 import Model.GameLoop;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.io.Serializable;
@@ -78,6 +80,7 @@ public class Weapon implements Serializable, Drawable {
 
     @Override
     public String[] getDrawData() {
+
         if (mySound != null && myCooldown == myMaxCooldown) {
             return new String[]{"sound:" + mySound};
         }
