@@ -313,18 +313,18 @@ public class Room implements Drawable, Serializable {
         result.add("image:" + roomImage + ":" + Display.getInstance().getWidth() / 2 + ":" + Display.getInstance().getHeight() / 2 + ":1920:1080");
 
 
-        for (Glyphid e : myGlyphids) {
+        for (Glyphid e : myGlyphids.toArray(new Glyphid[0])) {
             result.addAll(Arrays.asList(e.getDrawData()));
         }
 
-        for (Rock r : myRocks) {
+        for (Rock r : myRocks.toArray(new Rock[0])) {
             result.addAll(Arrays.asList(r.getDrawData()));
         }
         result.addAll(Arrays.asList(GameLoop.getInstance().getPlayer().getDrawData()));
-        for (Attack e : myGlyphidAttacks) {
+        for (Attack e : myGlyphidAttacks.toArray(new Attack[0])) {
             result.addAll(Arrays.asList(e.getDrawData()));
         }
-        for (Attack e : myDwarfAttacks) {
+        for (Attack e : myDwarfAttacks.toArray(new Attack[0])) {
             result.addAll(Arrays.asList(e.getDrawData()));
         }
 
