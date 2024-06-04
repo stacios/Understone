@@ -198,7 +198,7 @@ public class Room implements Drawable, Serializable {
                 Dwarf player = GameLoop.getInstance().getPlayer();
                 // Magic heal value for now
                 player.addHealth(20);
-                GameLoop.getInstance().addDrawData("sound:Heal");
+                //GameLoop.getInstance().addDrawData("sound:Heal");
             }
         }
 

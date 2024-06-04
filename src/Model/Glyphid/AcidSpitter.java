@@ -10,8 +10,8 @@ public class AcidSpitter extends Glyphid {
 
     public AcidSpitter(String theName, double theX, double theY, int theHealth,
                        int theWidth, int theHeight, double theMoveSpeed,
-                       Weapon theWeapon, double theAttackRange, int attackPauseDuration) {
-        super(theName, theX, theY, theHealth, theWidth, theHeight, theMoveSpeed, theWeapon, theAttackRange, attackPauseDuration);
+                       Weapon theWeapon, double theAttackRange, int attackPauseDuration, String theRoar) {
+        super(theName, theX, theY, theHealth, theWidth, theHeight, theMoveSpeed, theWeapon, theAttackRange, attackPauseDuration, theRoar);
     }
 
     @Override

@@ -12,7 +12,7 @@ public class Rock extends Character {
 
     public Rock(String theName, double theX, double theY, int theHealth,
                 int theWidth, int theHeight, double theMoveSpeed,
-                Weapon theWeapon, double theAttackRange, int theAttackPauseDuration) {
+                Weapon theWeapon) {
         super(theName, theX, theY, theHealth, theWidth, theHeight, theMoveSpeed, theWeapon);
     }
 
