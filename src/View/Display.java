@@ -568,4 +568,26 @@ public class Display {
     public int getHeight() {
         return myHeight;
     }
+
+    public void showLoseScreen() {
+        JOptionPane.showMessageDialog(myMenuDialog, "You Died!");
+        myMenuDialog.setVisible(false);
+        myInputManager.resetKeyStates();
+        myJFrame.requestFocus();
+
+        // Reset the game with the current dwarf type
+        GameLoop.getInstance().resetGame(myDwarfType);
+        GameLoop.getInstance().pauseGame();
+    }
+
+    public void showWinScreen() {
+        JOptionPane.showMessageDialog(myMenuDialog, "You Win!");
+        myMenuDialog.setVisible(false);
+        myInputManager.resetKeyStates();
+        myJFrame.requestFocus();
+
+        // Reset the game with the current dwarf type
+        GameLoop.getInstance().resetGame(myDwarfType);
+        GameLoop.getInstance().pauseGame();
+    }
 }

@@ -19,12 +19,20 @@ public class Main {
         Display display = Display.getInstance();
         gameLoop.setDwarf(display.getDwarfSelection());
 
-        boolean running = true;
+
 
         while (display.isRunning()) {
 
-            running = gameLoop.update(display.getInputData());
+            int gameState = gameLoop.update(display.getInputData());
             display.render(gameLoop.getDrawData());
+            if (gameState == 2) {
+                gameLoop.pauseGame();
+                display.showLoseScreen();
+            }
+            if (gameState == 3) {
+                gameLoop.pauseGame();
+                display.showWinScreen();
+            }
 
             try {
                 Thread.sleep((long)((1.0 / 60.0) * 1000));

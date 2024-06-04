@@ -336,4 +336,5 @@ public class Room implements Drawable, Serializable {
                 "myIdentifier=" + myIdentifier +
                 '}';
     }
+
 }
