@@ -12,9 +12,6 @@ import static Model.CharacterTypes.*;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class Room implements Drawable, Serializable {
     private static final long serialVersionUID = 3L;
@@ -40,7 +37,6 @@ public class Room implements Drawable, Serializable {
         myGlyphidAttacks = new ArrayList<>();
         myRocks = new ArrayList<>();
         myTotalRooms = theTotalRooms;
-        myScheduler = Executors.newScheduledThreadPool(1);
         myCollectedEgg = false;
     }
 
