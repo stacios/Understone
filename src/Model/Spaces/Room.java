@@ -175,6 +175,16 @@ public class Room implements Drawable, Serializable {
             myGlyphidAttacks.addAll(List.of(glyphid.getPendingAttacks()));
             if (flag) {
                 myGlyphids.remove(i);
+
+                // play voiceline
+                if (myGlyphids.isEmpty()) {
+                    int rand = (int)(Math.random() * 12);
+                    if (rand < 6) {
+                        String name = GameLoop.getInstance().getPlayer().getName();
+                        if (name.equals("Driller") || name.equals("Engineer") || name.equals("Gunner") || name.equals("Scout"))
+                            GameLoop.getInstance().addDrawData("sound:Response" + rand + name);
+                    }
+                }
             }
         }
 
