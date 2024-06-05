@@ -129,8 +129,7 @@ public class Room implements Drawable, Serializable {
         eggEnemiesSpawned = true;
             Random random = new Random();
 
-            for (int i = 0; i < 1; i++) {
-
+            for (int i = 0; i < 3; i++) {
                 Glyphid p = CharacterFactory.createGlyphid(PRAETORIAN);
                 p.setX(random.nextDouble() * 1920 * (.30) + 1920 / 3.0);
                 p.setY(random.nextDouble() * 1080 * (.30) + 1080 / 3.0);
@@ -185,9 +184,7 @@ public class Room implements Drawable, Serializable {
             if (flag) {
                 myRocks.remove(i);
                 Dwarf player = GameLoop.getInstance().getPlayer();
-                // Magic heal value for now
                 player.addHealth(20);
-                //GameLoop.getInstance().addDrawData("sound:Heal");
             }
         }
 

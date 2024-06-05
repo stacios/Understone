@@ -124,6 +124,7 @@ public class DwarfDB {
      * @return value of selected column.
      */
     public static int getDefaultValue(String theDwarfType, String theSetting) {
+        if (theDwarfType == "karl") return 0;
         final String query = String.format(
                 "SELECT value FROM %sDefaults WHERE setting = ?", theDwarfType);
 
