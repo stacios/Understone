@@ -16,22 +16,63 @@ import java.util.*;
 public class Room implements Drawable, Serializable {
     private static final long serialVersionUID = 3L;
 
+    /**
+     * Wall Thickness Integer.
+     */
     public static final int WALL_THICKNESS = 100;
+
+    /**
+     * List of Glyphids.
+     */
     private final List<Glyphid> myGlyphids;
+
+    /**
+     * List of Dwarf Attacks. 
+     */
     private final List<Attack> myDwarfAttacks;
+
+    /**
+     * List of Glyphid Attacks. 
+     */
     private final List<Attack> myGlyphidAttacks;
+
+    /**
+     * List of Rocks/Crystals. 
+     */
     private final List<Rock> myRocks;
-    private boolean myHasDropPod;
-    private Rock myRock;
+
+    /**
+     * Glyphid Egg. 
+     */
     private Rock myEgg;
-    private int myIdentifier;
-    private int myTotalRooms;
+
+    /**
+     * Room identifier index. 
+     */
+    private int myRoomIdentifier;
+
+    /**
+     * Total number of rooms.
+     */
+    private final int myTotalRooms;
+
+    /**
+     * Boolean if post egg enemies have been spawned.
+     */
     private boolean eggEnemiesSpawned;
+
+    /**
+     * Boolean if egg has been collected.
+     */
     private boolean myCollectedEgg;
 
-
-    public Room(int theIdentifier, int theTotalRooms) {
-        myIdentifier = theIdentifier;
+    /**
+     * Room constructor that intializes values of what it will contain.
+     * @param theIdentifier is the room identifier index.
+     * @param theTotalRooms is the total number of rooms.
+     */
+    public Room(final int theIdentifier, final int theTotalRooms) {
+        myRoomIdentifier = theIdentifier;
         myGlyphids = new ArrayList<>();
         myDwarfAttacks = new ArrayList<>();
         myGlyphidAttacks = new ArrayList<>();
@@ -40,6 +81,10 @@ public class Room implements Drawable, Serializable {
         myCollectedEgg = false;
     }
 
+    /**
+     * Boolean if Room contains Egg.
+     * @return if Egg is null.
+     */
     public boolean hasEgg() {
         return myEgg != null;
     }
@@ -52,10 +97,18 @@ public class Room implements Drawable, Serializable {
         myRocks.clear();
     }
 
+    /**
+     * Gets room identifier.
+     * @return room identifier.
+     */
     public int getIdentifier() {
-        return myIdentifier;
+        return myRoomIdentifier;
     }
 
+    /**
+     * Spawns enemies.
+     */
+    // TODO maybe fix magic numbers
     public void spawnEnemies() {
             Random random = new Random();
 
@@ -76,9 +129,6 @@ public class Room implements Drawable, Serializable {
                 myGlyphids.add(acidSpitter);
             }
 
-            // Add random number of Grunts, increased by difficulty factor
-            //int numberOfGrunts = (random.nextInt(3) + 5) + difficultyFactor;
-            // Temp number of grunts to reduce nuymber of grunts spawned, use for dev testing
             int numberOfGrunts = 3 + (int)(Math.random() * 3);
             for (int i = 0; i < numberOfGrunts; i++) {
                 Glyphid grunt = CharacterFactory.createGlyphid(GRUNT);
@@ -97,26 +147,27 @@ public class Room implements Drawable, Serializable {
             }
             System.out.println("Spawned " + (numberOfGrunts + numberOfP + numberOfAS) + " enemies in the room.");
 
-        if (myIdentifier >= myTotalRooms - 1) {
+        if (myRoomIdentifier >= myTotalRooms - 1) {
             spawnEgg();
         }
     }
 
-    // Todo public for now depending on if we want spawning logic to be handled in Cave
+    /**
+     * Spawns egg in center of room.
+     */
     public void spawnEgg() {
         myEgg = CharacterFactory.createObject(EGG);
         myEgg.setX(960);
         myEgg.setY(540);
         myRocks.add(myEgg);
-        System.out.println("Spawned egg after the rock was broken.");
     }
 
-    // TODO Comment empty glyphid list for dev purposes
-    // TODO Find some better way of doing this
-    // Returns if all glyphids are dead. Ignores rock(as crystals do not have to be destroyed).
+    /**
+     * Returns if myGlyphids list is empty so dwarf can move to next room.
+     * @return if myGlyphids is empty.
+     */
     public boolean canExit() {
         return myGlyphids.isEmpty();
-        //return true;
     }
 
     /**
@@ -152,8 +203,13 @@ public class Room implements Drawable, Serializable {
         }
     }
 
+    /**
+     * Checks if Dwarf is in movable area to go through door.
+     * @param thePlayer is the player.
+     * @return if player is in area.
+     */
     // TODO magic numbers for now
-    public boolean isDwarfInArea(Dwarf thePlayer) {
+    public boolean isDwarfInArea(final Dwarf thePlayer) {
         // If Dwarf has Egg, they can move upward but not downwards
         if (thePlayer.hasEgg()) {
             return thePlayer.getX() > 800 && thePlayer.getX() < 1100 && thePlayer.getY() > 145 && thePlayer.getY() < 160;
@@ -165,6 +221,9 @@ public class Room implements Drawable, Serializable {
         }
     }
 
+    /**
+     * Update method
+     */
     public void update() {
         // update, remove, receive attacks
         GameLoop.getInstance().getPlayer().update();
@@ -264,36 +323,37 @@ public class Room implements Drawable, Serializable {
             }
         }
 
-        // Todo Way to detect if player is colliding with egg, and then collect it with space;
         Dwarf player = GameLoop.getInstance().getPlayer();
         if (myEgg != null && GameLoop.getInstance().isDwarfInteracting() && !myCollectedEgg
         && player.getX() < 1920/2 + 200 && player.getX() > 1920/2 - 200 && player.getY() < 1080/2 + 200 && player.getY() > 1080/2 - 200) {
-            // This is so when collecting the egg, itll only trigger this once
+            // This is so when collecting the egg, it will only trigger this once
             myCollectedEgg = true;
             myRocks.remove(myEgg);
             player.setEgg(true);
 
-            // Todo temporary sound for egg and roars
             GameLoop.getInstance().addDrawData("sound:PickupEgg");
             GameLoop.getInstance().addDrawData("sound:EggGrabRoars");
-            //Display.getInstance().shakeScreen(200, 9);
             GameLoop.getInstance().addDrawData("screenShake:200:9");
             spawnEggEnemies();
             System.out.println("Egg picked up by the dwarf.");
         }
     }
 
+    /**
+     * Gets draw data for rendering.
+     * @return draw data.
+     */
     @Override
     public String[] getDrawData() {
         List<String> result = new ArrayList<>();
 
-        String roomImage = switch (myIdentifier) {
+        String roomImage = switch (myRoomIdentifier) {
             case 0 -> "RoomPod";
             case 1 -> "Room";
             case 2, 4 -> "RoomR";
             case 3 -> "RoomB";
             // In last case, ternary conditional for room should never trigger
-            default -> myIdentifier == myTotalRooms - 1 ? "RoomEgg" : "Room";
+            default -> myRoomIdentifier == myTotalRooms - 1 ? "RoomEgg" : "Room";
         };
 
         result.add("image:" + roomImage + ":" + Display.getInstance().getWidth() / 2 + ":" + Display.getInstance().getHeight() / 2 + ":1920:1080");
@@ -317,10 +377,14 @@ public class Room implements Drawable, Serializable {
         return result.toArray(new String[0]);
     }
 
+    /**
+     * String representation of Room.
+     * @return string representation of Room.
+     */
     @Override
     public String toString() {
         return "Room{" +
-                "myIdentifier=" + myIdentifier +
+                "myRoomIdentifier=" + myRoomIdentifier +
                 '}';
     }
 
