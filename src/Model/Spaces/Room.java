@@ -29,8 +29,6 @@ public class Room implements Drawable, Serializable {
     private Rock myEgg;
     private int myIdentifier;
     private int myTotalRooms;
-    // We need this for the slight delay in enemies spawned to sync up with Room transition animation
-    private final transient ScheduledExecutorService myScheduler;
     private boolean eggEnemiesSpawned;
     private boolean myCollectedEgg;
 
@@ -63,22 +61,22 @@ public class Room implements Drawable, Serializable {
     }
 
     public void spawnEnemies() {
-        myScheduler.schedule(() -> {
             Random random = new Random();
 
             int numberOfP = (int)(Math.random() * 3);
             for (int i = 0; i < numberOfP; i++) {
                 Glyphid praetorian = CharacterFactory.createGlyphid(PRAETORIAN);
-                praetorian.setX(random.nextDouble() * 1920 * (.5) + 1920 / 4.0);
-                praetorian.setY(random.nextDouble() * 1080 * (.5) + 1080 / 4.0);
+                praetorian.setX(random.nextDouble() * 1920 * (.20) + 1920 / 3.0);
+                praetorian.setY(random.nextDouble() * 1080 * (.20) + 1080 / 3.0);
+                praetorian.setY(random.nextDouble() * 1080 * (.20) + 1080 / 3.0);
                 myGlyphids.add(praetorian);
             }
 
             int numberOfAS = (int)(Math.random() * 3);
             for (int i = 0; i < numberOfAS; i++) {
                 Glyphid acidSpitter = CharacterFactory.createGlyphid(ACID_SPIITER);
-                acidSpitter.setX(random.nextDouble() * 1920 * (.5) + 1920 / 4.0);
-                acidSpitter.setY(random.nextDouble() * 1080 * (.5) + 1080 / 4.0);
+                acidSpitter.setX(random.nextDouble() * 1920 * (.2) + 1920 / 3.0);
+                acidSpitter.setY(random.nextDouble() * 1080 * (.2) + 1080 / 3.0);
                 myGlyphids.add(acidSpitter);
             }
 
@@ -88,23 +86,20 @@ public class Room implements Drawable, Serializable {
             int numberOfGrunts = 3 + (int)(Math.random() * 3);
             for (int i = 0; i < numberOfGrunts; i++) {
                 Glyphid grunt = CharacterFactory.createGlyphid(GRUNT);
-                grunt.setX(random.nextDouble() * 1920 * (.5) + 1920 / 4.0);
-                grunt.setY(random.nextDouble() * 1080 * (.5) + 1080 / 4.0);
+                grunt.setX(random.nextDouble() * 1920 * (.2) + 1920 / 3.0);
+                grunt.setY(random.nextDouble() * 1080 * (.2) + 1080 / 3.0);
                 myGlyphids.add(grunt);
             }
 
-            int numberOfHeals = (int) (Math.random() * 2);
+            int numberOfHeals = 1 + (int) (Math.random() * 2);
 
             for (int i = 0; i < numberOfHeals; i++) {
                 Rock heal = CharacterFactory.createObject(HEAL);
-                heal.setX(random.nextDouble() * 1920 * (.5) + 1920 / 4.0);
-                heal.setY(random.nextDouble() * 1080 * (.5) + 1080 / 4.0);
-                //myGlyphids.add(heal);
+                heal.setX(random.nextDouble() * 1920 * (.3) + 1920 / 3.0);
+                heal.setY(random.nextDouble() * 1080 * (.3) + 1080 / 3.0);
                 myRocks.add(heal);
             }
             System.out.println("Spawned " + (numberOfGrunts + numberOfP + numberOfAS) + " enemies in the room.");
-        }, 75, TimeUnit.MILLISECONDS);
-
 
         if (myIdentifier >= myTotalRooms - 1) {
             spawnEgg();
@@ -136,17 +131,15 @@ public class Room implements Drawable, Serializable {
         if (eggEnemiesSpawned) return;
 
         eggEnemiesSpawned = true;
-        myScheduler.schedule(() -> {
             Random random = new Random();
 
             for (int i = 0; i < 1; i++) {
 
                 Glyphid p = CharacterFactory.createGlyphid(PRAETORIAN);
-                p.setX(random.nextDouble() * 1920 * (.5) + 1920 / 4.0);
-                p.setY(random.nextDouble() * 1080 * (.5) + 1080 / 4.0);
+                p.setX(random.nextDouble() * 1920 * (.30) + 1920 / 3.0);
+                p.setY(random.nextDouble() * 1080 * (.30) + 1080 / 3.0);
                 myGlyphids.add(p);
             }
-        }, 2, TimeUnit.SECONDS);
     }
 
     /**
