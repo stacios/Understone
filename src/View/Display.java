@@ -585,7 +585,7 @@ public class Display {
 
     public void showWinScreen() {
         myAudioPlayer.playSound("Win");
-        JOptionPane.showMessageDialog(myMenuDialog, "You Collected the Egg! Restarting...");
+        JOptionPane.showMessageDialog(myMenuDialog, "You Collected the Egg! Restarting Game.");
         myMenuDialog.setVisible(false);
         myInputManager.resetKeyStates();
         myJFrame.requestFocus();
