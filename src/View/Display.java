@@ -585,6 +585,7 @@ public class Display {
 
     public void showWinScreen() {
         myAudioPlayer.playSound("Win");
+        myAudioPlayer.playSound("RockAndStone" + myDwarfType);
         JOptionPane.showMessageDialog(myMenuDialog, "You Collected the Egg! Restarting Game.");
         myMenuDialog.setVisible(false);
         myInputManager.resetKeyStates();
