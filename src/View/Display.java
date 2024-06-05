@@ -79,7 +79,8 @@ public class Display {
         myHeight = 1080;
         myRealWidth = (int) screenSize.getWidth();
         myRealHeight = (int) screenSize.getHeight();
-        myScaleMult = myRealHeight / 1080.0;
+        //myScaleMult = myRealHeight / 1080.0;
+        myScaleMult = myRealWidth / 1920.0; // for mac  
 
         myJFrame = new JFrame("Understone");
         myJFrame.setLocation(0, 0);
