@@ -15,9 +15,6 @@ import View.Display;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-
-import static Model.CharacterTypes.*;
 
 /**
  * The main game loop. Controls the player, cave, and active room.
