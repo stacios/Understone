@@ -70,7 +70,7 @@ public class Display {
 
     public Display() {
         myRandom = new Random();
-        // AudioPlayer is now initialized first because it has to be instantiated to play Dwarf Selection Sounds
+        myImageLibrary = new ImageLibrary();
         myAudioPlayer = new AudioPlayer();
         myDwarfType = askDwarfType();
 
@@ -98,7 +98,6 @@ public class Display {
         myJFrame.setContentPane(myJPanel);
         myJFrame.pack();
 
-        myImageLibrary = new ImageLibrary();
         myInputManager = new InputManager();
 
 
@@ -142,16 +141,9 @@ public class Display {
     private void updateDwarfSelectionEffect(JLabel theImageLabel, String theDwarfType) {
         // Change Dwarf Selection Image
 
-        // Path to dwarf images based on provided Dwarf Type
-        String imagePath = "images/" + theDwarfType + ".png";
-        ImageIcon dwarfIcon = new ImageIcon(imagePath);
-        if (dwarfIcon.getIconWidth() == -1) {
-            System.out.println("Failed to load image: " + imagePath);
-        } else {
-            // Scales the image so that selection isn't too large
-            Image scaledImage = dwarfIcon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
-            theImageLabel.setIcon(new ImageIcon(scaledImage));
-        }
+        Image scaledImage = myImageLibrary.get(theDwarfType).getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+        theImageLabel.setIcon(new ImageIcon(scaledImage));
+
 
         // Play Dwarf Selection Sound
         try {
