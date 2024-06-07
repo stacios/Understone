@@ -2,7 +2,7 @@
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-
+idea/workspace.xml
 
 ### Eclipse ###
 .apt_generated
@@ -31,4 +31,4 @@ bin/
 
 ### Save Games ###
 save_games
-
+Understone.iml
