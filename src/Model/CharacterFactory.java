@@ -38,48 +38,48 @@ public class CharacterFactory {
 
         Weapon[] weapons = new Weapon[3];
         // pickaxe
-        weapons[2] = new Weapon(30, new MeleeAttack(10, 275, 275, 15, 100), "Swing");
+        weapons[2] = new Weapon(30, new MeleeAttack(10, 275, 275, 40, 100), "Swing");
 
         switch (theDwarfType) {
 
             case "Driller":
                 // flamethrower
                 weapons[0] = new MinigunWeapon(6,
-                        new ProjectileAttack(7, 100, 100, 15, 100, 7, "Fire"), "FlamethrowerShot",
+                        new ProjectileAttack(7, 100, 100, 30, 100, 7, "Fire"), "FlamethrowerShot",
                 0, 0, new Angle(Math.toRadians(10)));
                 // pistol
                 weapons[1] = new Weapon(15,
-                        new ProjectileAttack(30, 30, 30, 10, 70, 30), "SubataShot");
+                        new ProjectileAttack(30, 30, 30, 1, 70, 30), "SubataShot");
                 break;
 
             case "Scout":
                 // m1000
                 weapons[0] = new Weapon(20,
-                        new ProjectileAttack(35, 30, 30, 15, 70, 30), "M1000Shot");
+                        new ProjectileAttack(35, 30, 30, 30, 70, 30), "M1000Shot");
                 // sawedoff
                 weapons[1] = new ShotgunWeapon(90,
-                        new ProjectileAttack(8, 30, 30, 10, 70, 30), "DoubleBarrelShot",
+                        new ProjectileAttack(8, 30, 30, 15, 70, 30), "DoubleBarrelShot",
                         16, new Angle(Math.toRadians(45)));
                 break;
 
             case "Engineer":
                 // shotgun
                 weapons[0] = new ShotgunWeapon(40,
-                        new ProjectileAttack(8, 30, 30, 7, 70, 30), "WarthogShot",
+                        new ProjectileAttack(8, 30, 30, 10, 70, 30), "WarthogShot",
                         8, new Angle(Math.toRadians(20)));
                 // grenade launcher
                 weapons[1] = new Weapon(250,
-                        new ExplosiveAttack(100, 30, 30, 100, 70, 20, 500), "GrenadeLauncherShot");
+                        new ExplosiveAttack(100, 30, 30, 100, 70, 20, 400), "GrenadeLauncherShot");
                 break;
 
             case "Gunner":
                 // minigun
                 weapons[0] = new MinigunWeapon(6,
-                        new ProjectileAttack(9, 30, 30, 7, 70, 30), "MinigunShot",
+                        new ProjectileAttack(9, 30, 30, 12, 70, 30), "MinigunShot",
                         40, 2, new Angle(Math.toRadians(20)));
                 // revolver
                 weapons[1] = new Weapon(60,
-                        new ProjectileAttack(50, 30, 30, 30, 70, 30), "RevolverShot");
+                        new ProjectileAttack(50, 30, 30, 70, 70, 30), "RevolverShot");
                 break;
 
             case "karl":
@@ -93,9 +93,9 @@ public class CharacterFactory {
         //Weapon defaultWeapon = new ShotgunWeapon(60, new ProjectileAttack(10, 20, 20, 10.0, 70, 20), 10, new Angle(Math.toRadians(45)));
         //return new Dwarf(theDwarfType, x, y, health, width, height, moveSpeed, defaultWeapon);
         if (theDwarfType.equals("karl")) {
-            return new Dwarf(theDwarfType, 400, 400, 999999, 100, 100, 4, 20, 10, 20, weapons);
+            return new Dwarf(theDwarfType, 400, 400, 999999, 100, 100, 3, 20, 10, 20, weapons);
         }
-        return new Dwarf(theDwarfType, 400, 400, 100, 100, 100, 4, 20, 10, 20, weapons);
+        return new Dwarf(theDwarfType, 400, 400, 100, 100, 100, 2.5, 20, 10, 20, weapons);
     }
 
     /**
@@ -127,16 +127,16 @@ public class CharacterFactory {
         //return new Grunt(theGlyphidType, x, y, health, width, height, moveSpeed, defaultWeapon, fireTimer);
         switch (theGlyphidType) {
             case PRAETORIAN:
-                return new Praetorian(theGlyphidType, 800, 800, 400, 200, 200, 4,
-                        new Weapon(40, new MeleeAttack(20, 250, 250, 30, 150), "Swing"),
+                return new Praetorian(theGlyphidType, 800, 800, 400, 200, 200, 5,
+                        new Weapon(40, new MeleeAttack(20, 350, 350, 30, 120), "Swing"),
                         200, 40, 0.25, "PraetorianRoar1");
             case ACID_SPIITER:
                 return new AcidSpitter(theGlyphidType, 600, 600, 150, 100, 100, 0.8,
-                        new Weapon(60, new ProjectileAttack(10, 80, 80, 10, 100, 7, "AcidSpit"), "AcidSpit"),
+                        new Weapon(60, new ProjectileAttack(10, 80, 80, 10, 100, 6, "AcidSpit"), "AcidSpit"),
                         400, 60, null);
             case GRUNT:
-                return new Grunt(theGlyphidType, 800, 800, 100, 100, 100, 1.2,
-                        new Weapon(40, new MeleeAttack(10, 150, 150, 10, 70), "Swing"),
+                return new Grunt(theGlyphidType, 800, 800, 100, 100, 100, 1.5,
+                        new Weapon(40, new MeleeAttack(10, 250, 250, 10, 70), "Swing"),
                         150, 40, "GruntRoar1");
             default:
 
