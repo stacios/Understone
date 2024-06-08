@@ -16,7 +16,14 @@ import static org.junit.Assert.*;
  */
 public class CharacterTests {
 
+    /**
+     * Character for testing.
+     */
     private Character myCharacter;
+
+    /**
+     * Weapon for testing.
+     */
     private Weapon myWeapon;
 
     /**
