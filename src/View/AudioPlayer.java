@@ -20,13 +20,18 @@ public class AudioPlayer {
      */
     public final Map<String, URL> mySounds;
 
+    /**
+     * Constructs an AudioPlayer instance and initializes the sound map.
+     */
     public AudioPlayer() {
         mySounds = new HashMap<>();
     }
 
     /**
-     * Plays the sound file {theSound}.wav
-     * @param theSound
+     * Plays the sound file specified by {theSound}.wav.
+     *
+     * @param theSound the name of the sound file to play, without the .wav extension
+     * @throws IllegalArgumentException if the sound file is not found
      */
     public void playSound(final String theSound) {
         URL url = mySounds.get(theSound);

@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Used to contain image data from resource files
+ * Used to contain image data from resource files.
  */
 public class ImageLibrary {
 
@@ -21,15 +21,21 @@ public class ImageLibrary {
      */
     private final Map<String, BufferedImage> myImages;
 
+    /**
+     * Constructs an ImageLibrary instance and initializes the image map.
+     */
     public ImageLibrary() {
 
         myImages = new HashMap<>();
     }
 
     /**
-     * Returns a BufferedImage of the file {theName}.png
-     * @param theName
-     * @return
+     * Returns a BufferedImage of the file specified by {theName}.png.
+     *
+     * @param theName the name of the image file to retrieve, without the .png extension
+     * @return the BufferedImage of the specified file
+     * @throws IllegalArgumentException if the image file is not found
+     * @throws RuntimeException if there is an error reading the image file
      */
     public BufferedImage get(final String theName) {
         BufferedImage temp = myImages.get(theName);

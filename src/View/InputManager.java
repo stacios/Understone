@@ -14,22 +14,44 @@ public class InputManager implements MouseListener, KeyListener, MouseMotionList
      * Bitset with boolean representing each control
      */
     private final BitSet myKeysPressed;
+
+    /**
+     * The x-coordinate of the mouse pointer.
+     */
     private int myMouseX;
+
+    /**
+     * The y-coordinate of the mouse pointer.
+     */
     private int myMouseY;
+
+    /**
+     * Listener for the escape key.
+     */
     private EscapeKeyListener myEscapeKeyListener;
 
+    /**
+     * Constructs an InputManager and initializes the key state BitSet.
+     */
     public InputManager() {
         myKeysPressed = new BitSet(13);
     }
 
     /**
-     * Returns InputData based on current detected inputs
-     * @return
+     * Returns InputData based on current detected inputs.
+     *
+     * @return the InputData representing the current state of inputs
      */
     public InputData getInputData() {
         return new InputData(myKeysPressed, myMouseX, myMouseY);
     }
 
+    /**
+     * Sets the state of a key based on its key code.
+     *
+     * @param theCode  the key code
+     * @param theValue the state of the key (true if pressed, false if released)
+     */
     private void setKeyCode(final int theCode, final boolean theValue) {
         switch (theCode) {
             case 1:
@@ -77,66 +99,107 @@ public class InputManager implements MouseListener, KeyListener, MouseMotionList
         }
     }
 
+    /**
+     * Sets the escape key listener.
+     *
+     * @param listener the listener to set
+     */
     public void setEscapeKeyListener(EscapeKeyListener listener) {
         this.myEscapeKeyListener = listener;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void keyTyped(KeyEvent e) {
         //nothing
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         setKeyCode(e.getKeyCode(), true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         setKeyCode(e.getKeyCode(), false);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         //nothing
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void mousePressed(MouseEvent e) {
         setKeyCode(e.getButton(), true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
         setKeyCode(e.getButton(), false);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void mouseEntered(MouseEvent e) {
         //nothing
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void mouseExited(MouseEvent e) {
         //nothing
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void mouseDragged(MouseEvent e) {
         myMouseX = e.getX();
         myMouseY = e.getY();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void mouseMoved(MouseEvent e) {
         myMouseX = e.getX();
         myMouseY = e.getY();
     }
 
+    /**
+     * Interface for handling escape key press events.
+     */
     public interface EscapeKeyListener {
         void onEscapePressed();
     }
-
+    
+    /**
+     * Resets the state of all keys to not pressed.
+     */
     public void resetKeyStates() {
         myKeysPressed.clear();
     }

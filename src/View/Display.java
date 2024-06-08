@@ -47,23 +47,90 @@ public class Display {
      * The actual height of the display on the user's screen
      */
     private final int myRealHeight;
+
+    /**
+     * The main JFrame for displaying the game.
+     */
     private final JFrame myJFrame;
+
+    /**
+     * The main JPanel for holding the game content.
+     */
     private final JPanel myJPanel;
+
+    /**
+     * Library for managing game images.
+     */
     private final ImageLibrary myImageLibrary;
+
+    /**
+     * Manager for handling user input.
+     */
     private final InputManager myInputManager;
+
+    /**
+     * Player for handling game audio.
+     */
     private final AudioPlayer myAudioPlayer;
+
+    /**
+     * Dialog for displaying the game menu.
+     */
     private JDialog myMenuDialog;
+
+    /**
+     * Flag indicating whether the game is currently running.
+     */
     private boolean isRunning;
+
+    /**
+     * The type of dwarf selected by the user.
+     */
     private String myDwarfType;
+
+    /**
+     * Flag indicating whether the screen is currently shaking.
+     */
     private boolean myIsShaking;
+
+    /**
+     * Duration of the screen shake effect.
+     */
     private int myShakeDuration;
+
+    /**
+     * Magnitude of the screen shake effect.
+     */
     private int myShakeMagnitude;
+
+    /**
+     * Random number generator for screen shake effect.
+     */
     private Random myRandom;
+
+    /**
+     * Flag indicating whether the screen is currently fading.
+     */
     private boolean myIsFading;
+
+    /**
+     * Duration of the fade effect.
+     */
     private int myFadeDuration;
+
+    /**
+     * Progress of the fade effect.
+     */
     private int myFadeProgress;
+
+    /**
+     * Flag indicating whether the fade effect is fading in.
+     */
     private boolean myFadeIn;
 
+    /**
+     * Constructor for the Display class. Initializes the display components and settings.
+     */
     public Display() {
         myRandom = new Random();
         myImageLibrary = new ImageLibrary();
@@ -75,8 +142,7 @@ public class Display {
         myHeight = 1080;
         myRealWidth = (int) screenSize.getWidth();
         myRealHeight = (int) screenSize.getHeight();
-        //myScaleMult = myRealHeight / 1080.0;
-        myScaleMult = myRealWidth / 1920.0; // for mac  
+        myScaleMult = myRealWidth / 1920.0;
 
         myJFrame = new JFrame("Understone");
         myJFrame.setLocation(0, 0);
@@ -112,6 +178,10 @@ public class Display {
         createMenuDialog();
     }
 
+    /**
+     * Prompts the user to select a dwarf type.
+     * @return The selected dwarf type.
+     */
     private String askDwarfType() {
         JPanel panel = new JPanel(new FlowLayout());
         JLabel imageLabel = new JLabel();
@@ -134,12 +204,15 @@ public class Display {
         }
     }
 
-    private void updateDwarfSelectionEffect(JLabel theImageLabel, String theDwarfType) {
+    /**
+     * Updates the visual and audio effects based on the selected dwarf type.
+     * @param theImageLabel The JLabel to update with the dwarf image.
+     * @param theDwarfType The selected dwarf type.
+     */
+    private void updateDwarfSelectionEffect(final JLabel theImageLabel, final String theDwarfType) {
         // Change Dwarf Selection Image
-
         Image scaledImage = myImageLibrary.get(theDwarfType).getScaledInstance(150, 150, Image.SCALE_SMOOTH);
         theImageLabel.setIcon(new ImageIcon(scaledImage));
-
 
         // Play Dwarf Selection Sound
         try {
@@ -150,11 +223,17 @@ public class Display {
         }
     }
 
-
+    /**
+     * Gets the selected dwarf type.
+     * @return The selected dwarf type.
+     */
     public String getDwarfSelection() {
         return myDwarfType;
     }
 
+    /**
+     * Creates the menu dialog for the game.
+     */
     private void createMenuDialog() {
         myMenuDialog = new JDialog(myJFrame, "Menu", true);
         myMenuDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -304,6 +383,9 @@ public class Display {
         myMenuDialog.add(quitButton);
     }
 
+    /**
+     * Shows the load game dialog, allowing the user to select a saved game to load.
+     */
     private void showLoadGameDialog() {
         JDialog loadGameDialog = new JDialog(myJFrame, "Load Game", true);
         loadGameDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -339,18 +421,26 @@ public class Display {
         loadGameDialog.setVisible(true);
     }
 
+    /**
+     * Shows the game menu dialog.
+     */
     public void showMenuDialog() {
         myInputManager.resetKeyStates();
         GameLoop.getInstance().pauseGame();
         myMenuDialog.setVisible(true);
     }
 
+    /**
+     * Gets the singleton instance of the Display class.
+     * @return The singleton instance of the Display class.
+     */
     public static Display getInstance() {
         return myInstance;
     }
 
-    /*
-    TO BE DELETED
+    /**
+     * Starts the fade animation for room transitions.
+     * @param theDuration The duration of the fade animation.
      */
     public void startFadeAnimation(int theDuration) {
         myIsFading = true;
@@ -360,12 +450,10 @@ public class Display {
     }
 
     /**
-     * Method for toggling fade animation between rooms
-     * TODO Possible make a better way to display moving. Possibly a slideshow kind of thing where the Room swipes down?
-     *
-     * @param theG is the Graphics Object.
+     * Updates the fade effect for the display.
+     * @param theG The Graphics2D object used for drawing.
      */
-    private void updateFade(Graphics2D theG) {
+    private void updateFade(final Graphics2D theG) {
         if (myIsFading) {
             float alpha = (myFadeIn ? (myFadeDuration - myFadeProgress) : myFadeProgress) / (float) myFadeDuration;
 
@@ -389,26 +477,27 @@ public class Display {
 
 
     /**
-     * DEPRECATED
-     * Method for shaking screen.
-     *
-     * @param theDuration  is the duration.
-     * @param theMagnitude is how much the screen should shake.
+     * Shakes the screen for a specified duration and magnitude.
+     * @param theDuration The duration of the screen shake effect.
+     * @param theMagnitude The magnitude of the screen shake effect.
      */
-
-    public void shakeScreen(int theDuration, int theMagnitude) {
+    public void shakeScreen(final int theDuration, final int theMagnitude) {
         myIsShaking = true;
         myShakeDuration = theDuration;
         myShakeMagnitude = theMagnitude;
     }
 
+    /**
+     * Disposes of the display and stops the game.
+     */
     public void dispose() {
         isRunning = false;
         myJFrame.dispose();
     }
 
     /**
-     * Renders the draw data to the display. Make sure each draw data string is in the correct format, look to Display documentation.
+     * Renders the draw data to the display. Ensure each draw data string is in the correct format, as documented.
+     * @param theDrawList The list of draw data strings.
      */
     public void render(final String[] theDrawList) {
         if (!isRunning) {
@@ -447,7 +536,11 @@ public class Display {
         bs.show();
     }
 
-
+    /**
+     * Draws the specified data onto the graphics context.
+     * @param theGraphics The Graphics2D object used for drawing.
+     * @param theData The draw data to be processed.
+     */
     private void draw(final Graphics2D theGraphics, final String[] theData) {
         for (int i = 0; i < theData.length; i++) {
             theData[0] = theData[0].strip();
@@ -543,22 +636,41 @@ public class Display {
 
     }
 
+    /**
+     * Checks if the display is currently running.
+     * @return true if the display is running, false otherwise.
+     */
     public boolean isRunning() {
         return isRunning;
     }
 
+    /**
+     * Gets the input data from the input manager.
+     * @return The input data from the input manager.
+     */
     public InputData getInputData() {
         return myInputManager.getInputData();
     }
 
+    /**
+     * Gets the in-game width of the display.
+     * @return The in-game width of the display.
+     */
     public int getWidth() {
         return myWidth;
     }
 
+    /**
+     * Gets the in-game height of the display.
+     * @return The in-game height of the display.
+     */
     public int getHeight() {
         return myHeight;
     }
 
+    /**
+     * Shows the lose screen and resets the game.
+     */
     public void showLoseScreen() {
         myAudioPlayer.playSound("Lose");
         JOptionPane.showMessageDialog(myMenuDialog, "You Died!");
@@ -571,6 +683,9 @@ public class Display {
         GameLoop.getInstance().pauseGame();
     }
 
+    /**
+     * Shows the win screen and resets the game.
+     */
     public void showWinScreen() {
         myAudioPlayer.playSound("Win");
         myAudioPlayer.playSound("RockAndStone" + myDwarfType);
