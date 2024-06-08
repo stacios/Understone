@@ -31,7 +31,7 @@ public class GlyphidDB {
      *
      * @param theGlyphidType is the specified Glyphid Type to be created.
      */
-    private static void initializeGlyphidTables(String theGlyphidType) {
+    private static void initializeGlyphidTables(final String theGlyphidType) {
         final String createTable = String.format(
                 "CREATE TABLE IF NOT EXISTS %sDefaults (" +
                         "setting TEXT PRIMARY KEY, " +
@@ -164,7 +164,7 @@ public class GlyphidDB {
      * @param theSQL is the passed SQL statement.
      * @param theGlyphidType is the specified Glyphid type to be inserted.
      */
-    private static void makeSQLConnection(String theSQL, String theGlyphidType) {
+    private static void makeSQLConnection(final String theSQL, final String theGlyphidType) {
         try (Connection conn = SQLiteConnection.getDataSource().getConnection();
              Statement stmt = conn.createStatement()) {
             stmt.executeUpdate(theSQL);
@@ -181,7 +181,7 @@ public class GlyphidDB {
      * @param theSetting is the value from the table.
      * @return value of selected column.
      */
-    public static int getDefaultValue(String theGlyphidType, String theSetting) {
+    public static int getDefaultValue(final String theGlyphidType, final String theSetting) {
         final String query = String.format(
                 "SELECT value FROM %sDefaults WHERE setting = ?", theGlyphidType);
 

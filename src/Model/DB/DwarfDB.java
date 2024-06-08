@@ -25,7 +25,7 @@ public class DwarfDB {
      *
      * @param theDwarfType is the specfiied Dwarf Type to be created.
      */
-    private static void initializeDwarfTables(String theDwarfType) {
+    private static void initializeDwarfTables(final String theDwarfType) {
         final String createTable = String.format(
                 "CREATE TABLE IF NOT EXISTS %sDefaults (" +
                         "setting TEXT PRIMARY KEY, " +
@@ -106,7 +106,7 @@ public class DwarfDB {
      * @param theSQL is the passed SQL statement.
      * @param theDwarfType is the specified Dwarf type to be inserted.
      */
-    private static void makeSQLConnection(String theSQL, String theDwarfType) {
+    private static void makeSQLConnection(final String theSQL, final String theDwarfType) {
         try (Connection conn = SQLiteConnection.getDataSource().getConnection();
              Statement stmt = conn.createStatement()) {
             stmt.executeUpdate(theSQL);
@@ -123,7 +123,7 @@ public class DwarfDB {
      * @param theSetting is the value from the table.
      * @return value of selected column.
      */
-    public static int getDefaultValue(String theDwarfType, String theSetting) {
+    public static int getDefaultValue(final String theDwarfType, final String theSetting) {
         if (theDwarfType == "karl") return 0;
         final String query = String.format(
                 "SELECT value FROM %sDefaults WHERE setting = ?", theDwarfType);

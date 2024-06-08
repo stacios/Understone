@@ -6,14 +6,39 @@ import Model.Angle;
 import Model.GameLoop;
 import Model.Weapon.Weapon;
 
+/**
+ * Represents an AcidSpitter enemy in the game.
+ * AcidSpitters are ranged enemies that periodically shoot acid ball projectiles at the player.
+ */
 public class AcidSpitter extends Glyphid {
 
-    public AcidSpitter(String theName, double theX, double theY, int theHealth,
-                       int theWidth, int theHeight, double theMoveSpeed,
-                       Weapon theWeapon, double theAttackRange, int attackPauseDuration, String theRoar) {
-        super(theName, theX, theY, theHealth, theWidth, theHeight, theMoveSpeed, theWeapon, theAttackRange, attackPauseDuration, theRoar);
+    /**
+     * Constructs a new AcidSpitter with the specified parameters.
+     *
+     * @param theName the name of the AcidSpitter
+     * @param theX the initial x-coordinate of the AcidSpitter
+     * @param theY the initial y-coordinate of the AcidSpitter
+     * @param theHealth the health points of the AcidSpitter
+     * @param theWidth the width of the AcidSpitter
+     * @param theHeight the height of the AcidSpitter
+     * @param theMoveSpeed the movement speed of the AcidSpitter
+     * @param theWeapon the weapon the AcidSpitter uses
+     * @param theAttackRange the range within which the AcidSpitter can attack
+     * @param theAttackPauseDuration the duration the AcidSpitter pauses before attacking
+     * @param theRoar the roar sound of the AcidSpitter
+     */
+    public AcidSpitter(final String theName, final double theX, final double theY, final int theHealth,
+                       final int theWidth, final int theHeight, final double theMoveSpeed,
+                       final Weapon theWeapon, final double theAttackRange, final int theAttackPauseDuration, final String theRoar) {
+        super(theName, theX, theY, theHealth, theWidth, theHeight, theMoveSpeed, theWeapon, theAttackRange, theAttackPauseDuration, theRoar);
     }
 
+    /**
+     * Updates the state of the AcidSpitter. The AcidSpitter will move towards the player if they are out of attack range,
+     * or away from the player if they are within attack range. Additionally, it will strafe left or right.
+     *
+     * @return true if the update was successful, false otherwise
+     */
     @Override
     public boolean update() {
         Dwarf player = GameLoop.getInstance().getPlayer();

@@ -14,17 +14,48 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represents a Glyphid, an abstract class for different types of Glyphid enemies in the game.
+ * Glyphids have specific behaviors like moving towards the player and attacking.
+ */
 public abstract class Glyphid extends Character {
+
+    /** The roar sound of the Glyphid. */
     private final String myRoar;
+
+    /** The cooldown period for the Glyphid's roar sound. */
     private int myRoarCooldown;
+
+    /** The attack range of the Glyphid. */
     private double myAttackRange;
+
+    /** The duration for which the Glyphid pauses before attacking. */
     private int myAttackPauseDuration;
+
+    /** The counter for the attack pause duration. */
     private int myAttackPauseCounter = 0;
+
+    /** Indicates if the Glyphid is paused before attacking. */
     private boolean isPausedBeforeAttack = false;
 
-    public Glyphid(String theName, double theX, double theY, int theHealth,
-                   int theWidth, int theHeight, double theMoveSpeed,
-                   Weapon theWeapon, double theAttackRange, int theAttackPauseDuration, String theRoar) {
+    /**
+     * Constructs a new Glyphid with the specified parameters.
+     *
+     * @param theName the name of the Glyphid
+     * @param theX the initial x-coordinate of the Glyphid
+     * @param theY the initial y-coordinate of the Glyphid
+     * @param theHealth the health points of the Glyphid
+     * @param theWidth the width of the Glyphid
+     * @param theHeight the height of the Glyphid
+     * @param theMoveSpeed the movement speed of the Glyphid
+     * @param theWeapon the weapon the Glyphid uses
+     * @param theAttackRange the range within which the Glyphid can attack
+     * @param theAttackPauseDuration the duration the Glyphid pauses before attacking
+     * @param theRoar the roar sound of the Glyphid
+     */
+    public Glyphid(final String theName, final double theX, final double theY, final int theHealth,
+                   final int theWidth, final int theHeight, final double theMoveSpeed,
+                   final Weapon theWeapon, final double theAttackRange, final int theAttackPauseDuration, final String theRoar) {
         super(theName, theX, theY, theHealth, theWidth, theHeight, theMoveSpeed, theWeapon);
         myAttackRange = theAttackRange;
         myAttackPauseDuration = theAttackPauseDuration;
@@ -32,14 +63,27 @@ public abstract class Glyphid extends Character {
         myRoarCooldown = -1;
     }
 
+    /**
+     * Gets the attack range of the Glyphid.
+     *
+     * @return the attack range of the Glyphid
+     */
     public double getAttackRange() {
         return myAttackRange;
     }
 
-    public void setPausedBeforeAttack(boolean thePaused) {
+    /**
+     * Sets whether the Glyphid is paused before attacking.
+     *
+     * @param thePaused true if the Glyphid is paused before attacking, false otherwise
+     */
+    public void setPausedBeforeAttack(final boolean thePaused) {
         isPausedBeforeAttack = thePaused;
     }
 
+    /**
+     * Increments the attack pause counter and resets it if it reaches the attack pause duration.
+     */
     public void incrementAttackPauseCounter() {
         myAttackPauseCounter++;
         if (myAttackPauseCounter >= myAttackPauseDuration) {
@@ -48,11 +92,21 @@ public abstract class Glyphid extends Character {
         }
     }
 
+    /**
+     * Checks if the Glyphid is paused before attacking.
+     *
+     * @return true if the Glyphid is paused before attacking, false otherwise
+     */
     public boolean isPausedBeforeAttack() {
         return isPausedBeforeAttack;
     }
 
-    public void moveToPlayer(Dwarf thePlayer) {
+    /**
+     * Moves the Glyphid towards the player if they are out of attack range.
+     *
+     * @param thePlayer the player character to move towards
+     */
+    public void moveToPlayer(final Dwarf thePlayer) {
         double distance = Math.sqrt(Math.pow(thePlayer.getX() - getX(), 2) + Math.pow(thePlayer.getY() - getY(), 2));
         if (distance > myAttackRange) {
             Angle angleToPlayer = new Angle(getX(), getY(), thePlayer.getX(), thePlayer.getY());
@@ -60,8 +114,13 @@ public abstract class Glyphid extends Character {
         }
     }
 
+    /**
+     * Receives an attack and processes it. Plays appropriate sounds based on the type of attack.
+     *
+     * @param theAttack the attack received by the Glyphid
+     */
     @Override
-    public void receiveAttack(Attack theAttack) {
+    public void receiveAttack(final Attack theAttack) {
         int oldHealth = super.getHealth();
         super.receiveAttack(theAttack);
 
@@ -75,6 +134,11 @@ public abstract class Glyphid extends Character {
         }
     }
 
+    /**
+     * Updates the state of the Glyphid. Handles movement towards the player, pausing before attacking, and playing sounds.
+     *
+     * @return true if the update was successful, false otherwise
+     */
     @Override
     public boolean update() {
         boolean flag = super.update();
@@ -105,7 +169,11 @@ public abstract class Glyphid extends Character {
         return flag;
     }
 
-
+    /**
+     * Gets the draw data for the Glyphid, including the roar sound if applicable.
+     *
+     * @return an array of strings representing the draw data
+     */
     @Override
     public String[] getDrawData() {
         if (myRoar != null && myRoarCooldown == 0) {
