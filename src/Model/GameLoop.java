@@ -224,7 +224,7 @@ public class GameLoop implements Drawable, Serializable {
      *
      * @param drawData the draw data to add
      */
-    public void addDrawData(String drawData) {
+    public void addDrawData(final String drawData) {
         myDrawDataList.add(drawData);
     }
 
@@ -251,7 +251,7 @@ public class GameLoop implements Drawable, Serializable {
      *
      * @param theDwarfType the type of dwarf to create
      */
-    public void resetGame(String theDwarfType) {
+    public void resetGame(final String theDwarfType) {
         myDrawDataList = new ArrayList<>();
         myCave = new Cave();
         myActiveRoom = myCave.getCurrentRoom();
