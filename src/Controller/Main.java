@@ -14,7 +14,9 @@ import java.sql.SQLException;
 public class Main {
 
     /**
-     * Runs the game, controls the loop and tick rate
+     * Runs the game, controls the loop and tick rate.
+     *
+     * @param theArgs the command-line arguments (not used)
      */
     public static void main(final String[] theArgs) {
 

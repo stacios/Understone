@@ -10,7 +10,13 @@ import static Model.CharacterTypes.*;
  * Runnable main DB class for making database changes.
  */
 public class DBMain {
-    public static void main(String[] theArgs) {
+
+    /**
+     * Main method to run the database initialization and test character creation.
+     *
+     * @param theArgs the command-line arguments (not used)
+     */
+    public static void main(final String[] theArgs) {
 
         // Initializes Database
         SQLiteConnection.getDataSource();

@@ -196,7 +196,7 @@ public class InputManager implements MouseListener, KeyListener, MouseMotionList
     public interface EscapeKeyListener {
         void onEscapePressed();
     }
-    
+
     /**
      * Resets the state of all keys to not pressed.
      */

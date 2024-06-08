@@ -108,7 +108,6 @@ public class Room implements Drawable, Serializable {
     /**
      * Spawns enemies.
      */
-    // TODO maybe fix magic numbers
     public void spawnEnemies() {
             Random random = new Random();
 
@@ -207,7 +206,6 @@ public class Room implements Drawable, Serializable {
      * @param thePlayer is the player.
      * @return if player is in area.
      */
-    // TODO magic numbers for now
     public boolean isDwarfInArea(final Dwarf thePlayer) {
         // If Dwarf has Egg, they can move upward but not downwards
         if (thePlayer.hasEgg()) {
@@ -396,5 +394,4 @@ public class Room implements Drawable, Serializable {
                 "myRoomIdentifier=" + myRoomIdentifier +
                 '}';
     }
-
 }
