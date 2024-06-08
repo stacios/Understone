@@ -6,13 +6,28 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Manages the saving and loading of game data.
+ */
 public class DataManager {
+
+    /**
+     * Prefix for save game files.
+     */
     private static final String FILE_PREFIX = "save_game_";
+
+    /**
+     * Extension for save game files.
+     */
     private static final String FILE_EXTENSION = ".txt";
+
+    /**
+     * Directory for save game files.
+     */
     private static final String SAVE_DIR = "save_games";
 
     /**
-     * Static instance to create the save_games directory.
+     * Static block to create the save_games directory if it does not exist.
      */
     static {
         File dir = new File(SAVE_DIR);
@@ -44,11 +59,11 @@ public class DataManager {
      * Loads game from specified filename. Processes through reading object and casting
      * to a GameLoop Type. Returns complete Gameloop Object to be played.
      *
-     * @param fileName is the specified file String to be read.
+     * @param theFileName is the specified file String to be read.
      * @return new GameLoop to be played.
      */
-    public static GameLoop loadGame(final String fileName) {
-        final String filePath = SAVE_DIR + File.separator + fileName;
+    public static GameLoop loadGame(final String theFileName) {
+        final String filePath = SAVE_DIR + File.separator + theFileName;
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))) {
             GameLoop gl = (GameLoop) in.readObject();
             System.out.println("Loaded game: " + gl);
@@ -83,11 +98,11 @@ public class DataManager {
     /**
      * Gets display name of save game.
      *
-     * @param fileName is the specified file name.
+     * @param theFileName is the specified file name.
      * @return timestamp of the time the file was saved.
      */
-    public static String getDisplayName(final String fileName) {
-        String timeStamp = fileName.substring(FILE_PREFIX.length(), fileName.length() - FILE_EXTENSION.length());
+    public static String getDisplayName(final String theFileName) {
+        String timeStamp = theFileName.substring(FILE_PREFIX.length(), theFileName.length() - FILE_EXTENSION.length());
         return "Saved game " + timeStamp;
     }
 }

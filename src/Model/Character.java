@@ -15,6 +15,7 @@ import java.util.List;
  * Represents a character in the game. Parent class for Dwarf and Glyphids.
  */
 public abstract class Character implements Drawable, Collidable, Serializable {
+
     /**
      * Serial version UID for serialization.
      */
@@ -84,7 +85,7 @@ public abstract class Character implements Drawable, Collidable, Serializable {
      */
     public Character(final String theName, final double theX, final double theY,
                      final int theHealth,final int theWidth,final int theHeight,
-                     final double theMoveSpeed, Weapon theWeapon) {
+                     final double theMoveSpeed, final Weapon theWeapon) {
         setName(theName);
         setX(theX);
         setY(theY);
@@ -241,7 +242,7 @@ public abstract class Character implements Drawable, Collidable, Serializable {
      *
      * @param theForce the force to add
      */
-    public void addForce(Force theForce) {
+    public void addForce(final Force theForce) {
         myForces.add(theForce);
     }
 
@@ -252,7 +253,7 @@ public abstract class Character implements Drawable, Collidable, Serializable {
      * @param theTargetY the y-coordinate of the target
      * @return true if the attack was successful, false otherwise
      */
-    public boolean attemptAttack(double theTargetX, double theTargetY) {
+    public boolean attemptAttack(final double theTargetX, final double theTargetY) {
         if (myWeapon != null) {
             Angle attackAngle = new Angle(myX, myY, theTargetX, theTargetY);
             return myWeapon.attemptAttack(this, attackAngle);
@@ -265,7 +266,7 @@ public abstract class Character implements Drawable, Collidable, Serializable {
      *
      * @param theAttack the attack to receive
      */
-    public void receiveAttack(Attack theAttack) {
+    public void receiveAttack(final Attack theAttack) {
         myHealth -= theAttack.getDamage();
         addForce(theAttack.getKnockBack());
     }

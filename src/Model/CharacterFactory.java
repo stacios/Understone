@@ -34,9 +34,8 @@ public class CharacterFactory {
         int width = DwarfDB.getDefaultValue(theDwarfType, "width"); // Default width
         int height = DwarfDB.getDefaultValue(theDwarfType, "height"); // Default height
         double moveSpeed = DwarfDB.getDefaultValue(theDwarfType, "movespeed"); // Default speed
-        //int damage = DwarfDB.getDefaultValue(theDwarfType, "damage");
-
         Weapon[] weapons = new Weapon[3];
+
         // pickaxe
         weapons[2] = new Weapon(30, new MeleeAttack(10, 275, 275, 40, 100), "Swing");
 
@@ -90,8 +89,6 @@ public class CharacterFactory {
                 weapons[1] = weapons[0];
                 break;
         }
-        //Weapon defaultWeapon = new ShotgunWeapon(60, new ProjectileAttack(10, 20, 20, 10.0, 70, 20), 10, new Angle(Math.toRadians(45)));
-        //return new Dwarf(theDwarfType, x, y, health, width, height, moveSpeed, defaultWeapon);
         if (theDwarfType.equals("karl")) {
             return new Dwarf(theDwarfType, 400, 400, 999999, 100, 100, 3, 20, 10, 20, weapons);
         }
@@ -123,7 +120,6 @@ public class CharacterFactory {
         int fireTimer = GlyphidDB.getDefaultValue(theGlyphidType, "firetimer"); // Default cooldown timer
         int damage = GlyphidDB.getDefaultValue(theGlyphidType, "damage"); // Default damage
 
-
         //return new Grunt(theGlyphidType, x, y, health, width, height, moveSpeed, defaultWeapon, fireTimer);
         switch (theGlyphidType) {
             case PRAETORIAN:
@@ -139,9 +135,7 @@ public class CharacterFactory {
                         new Weapon(40, new MeleeAttack(10, 250, 250, 10, 70), "Swing"),
                         150, 40, "GruntRoar1");
             default:
-
         }
-
         return null;
     }
 
@@ -163,7 +157,6 @@ public class CharacterFactory {
             case EGG -> new Rock(theRockType, 500, 500, Integer.MAX_VALUE, 100, 100, 0, defaultWeapon);
             default -> null;
         };
-
     }
 }
 
