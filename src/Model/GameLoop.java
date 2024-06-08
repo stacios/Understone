@@ -89,7 +89,7 @@ public class GameLoop implements Drawable, Serializable {
      *
      * @param theDwarfType the type of dwarf to create
      */
-    public void setDwarf(String theDwarfType) {
+    public void setDwarf(final String theDwarfType) {
         myPlayer = CharacterFactory.createDwarf(theDwarfType);
         myHUD = new HUD(myPlayer);
         myActiveRoom.positionDwarf(myPlayer);
@@ -109,7 +109,7 @@ public class GameLoop implements Drawable, Serializable {
      *
      * @param theSavedGame the saved game to load
      */
-    public void setDataLoading(GameLoop theSavedGame) {
+    public void setDataLoading(final GameLoop theSavedGame) {
         myPlayer = theSavedGame.myPlayer;
         myCave = theSavedGame.myCave;
         myActiveRoom = myCave.getCurrentRoom();
