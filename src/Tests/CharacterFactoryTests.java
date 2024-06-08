@@ -17,21 +17,44 @@ public class CharacterFactoryTests {
     private Glyphid myTestingGlyphid;
 
     /**
-     * Tests the creation of a Dwarf of type DRILLER.
+     * Tests the creation of a Dwarf.
      */
     @Test
     public void testCreateDwarf() {
         myTestingDwarf = CharacterFactory.createDwarf(DRILLER);
         assertNotNull(myTestingDwarf);
+        assertEquals(myTestingDwarf.getName(), "Driller");
+
+        myTestingDwarf = CharacterFactory.createDwarf(GUNNER);
+        assertNotNull(myTestingDwarf);
+        assertEquals(myTestingDwarf.getName(), "Gunner");
+
+        myTestingDwarf = CharacterFactory.createDwarf(ENGINEER);
+        assertNotNull(myTestingDwarf);
+        assertEquals(myTestingDwarf.getName(), "Engineer");
+
+        myTestingDwarf = CharacterFactory.createDwarf(SCOUT);
+        assertNotNull(myTestingDwarf);
+        assertEquals(myTestingDwarf.getName(), "Scout");
+
     }
 
     /**
-     * Tests the creation of a Glyphid of type GRUNT.
+     * Tests the creation of a Glyphid.
      */
     @Test
     public void testCreateGlyphid() {
         myTestingGlyphid = CharacterFactory.createGlyphid(GRUNT);
         assertNotNull(myTestingGlyphid);
+        assertEquals(myTestingGlyphid.getName(), "Grunt");
+
+        myTestingGlyphid = CharacterFactory.createGlyphid(ACID_SPITTER);
+        assertNotNull(myTestingGlyphid);
+        assertEquals(myTestingGlyphid.getName(), "AcidSpitter");
+
+        myTestingGlyphid = CharacterFactory.createGlyphid(PRAETORIAN);
+        assertNotNull(myTestingGlyphid);
+        assertEquals(myTestingGlyphid.getName(), "Praetorian");
     }
 
     /**
@@ -39,9 +62,11 @@ public class CharacterFactoryTests {
      */
     @Test
     public void testDwarfValues() {
-        // TODO: We can just test Dwarf values through the toString, but we should wait for values to be finalized before testing.
-        // String expected = "expectedobject";
-        // assertEquals(expected, myTestingDwarf.toString());
+        myTestingDwarf = CharacterFactory.createDwarf(DRILLER);
+        assertEquals(myTestingDwarf.getHealth(), 100);
+        assertEquals(myTestingDwarf.getMaxHealth(), 100);
+        assertEquals(myTestingDwarf.getWeaponIndex(), 0);
+        assertEquals(myTestingDwarf.getMoveSpeed(), 2.5);
     }
 
     /**
@@ -49,9 +74,10 @@ public class CharacterFactoryTests {
      */
     @Test
     public void testGlyphidValues() {
-        // TODO: We can just test Glyphid values through the toString, but we should wait for values to be finalized before testing.
-        // String expected = "expectedobject";
-        // assertEquals(expected, myTestingGlyphid.toString());
+        myTestingGlyphid = CharacterFactory.createGlyphid(GRUNT);
+        assertEquals(myTestingGlyphid.getHealth(), 100);
+        assertEquals(myTestingGlyphid.getMoveSpeed(), 1.5);
+        assertEquals(myTestingGlyphid.getMaxHealth(), 100);
     }
 
     /**
