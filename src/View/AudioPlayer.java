@@ -7,17 +7,28 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Used to play sound clips from the project's resource files
+ */
 public class AudioPlayer {
 
-    public final HashMap<String, URL> mySounds;
+    /**
+     * Map of sound URLs
+     */
+    public final Map<String, URL> mySounds;
 
     public AudioPlayer() {
         mySounds = new HashMap<>();
     }
 
-    public void playSound(String theSound) {
+    /**
+     * Plays the sound file {theSound}.wav
+     * @param theSound
+     */
+    public void playSound(final String theSound) {
         URL url = mySounds.get(theSound);
         if (url == null) {
             url = Main.class.getClassLoader().getResource(theSound + ".wav");

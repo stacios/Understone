@@ -5,8 +5,14 @@ import Controller.InputData;
 import java.awt.event.*;
 import java.util.BitSet;
 
+/**
+ * Detects inputs from the mouse and keyboard
+ */
 public class InputManager implements MouseListener, KeyListener, MouseMotionListener {
 
+    /**
+     * Bitset with boolean representing each control
+     */
     private final BitSet myKeysPressed;
     private int myMouseX;
     private int myMouseY;
@@ -16,6 +22,10 @@ public class InputManager implements MouseListener, KeyListener, MouseMotionList
         myKeysPressed = new BitSet(13);
     }
 
+    /**
+     * Returns InputData based on current detected inputs
+     * @return
+     */
     public InputData getInputData() {
         return new InputData(myKeysPressed, myMouseX, myMouseY);
     }

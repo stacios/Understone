@@ -9,6 +9,13 @@ package Controller;
  * "sound:fileName"
  */
 public interface Drawable {
-
+    /**
+     * Draw data string list is an array that contanins a set of the following formats (whitespace next to the colons is ok):
+     * "image:fileName:x:y:width:height"
+     * "rotatedImage:fileName:x:y:width:height:angle"
+     *  "text:yourText:x:y:fontSize"
+     *  "rectangle:x:y:width:height"
+     *  "sound:fileName"
+     */
     String[] getDrawData();
 }
