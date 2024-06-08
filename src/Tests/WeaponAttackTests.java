@@ -13,7 +13,9 @@ import java.util.BitSet;
 import static org.junit.jupiter.api.Assertions.*;
 public class WeaponAttackTests {
 
-
+    /**
+     * Tests weapon cooldown.
+     */
     @Test
     public void testWeaponCooldown() {
         Dwarf testChar = CharacterFactory.createDwarf("Scout");
@@ -27,6 +29,9 @@ public class WeaponAttackTests {
         assertFalse(testChar.attemptAttack(0,0));
     }
 
+    /**
+     * Tests pending attacks.
+     */
     @Test
     public void testPendingAttacks() {
         Dwarf testChar = CharacterFactory.createDwarf("Scout");
@@ -39,6 +44,9 @@ public class WeaponAttackTests {
         assertEquals(0, testChar.getPendingAttacks().length);
     }
 
+    /**
+     * Tests setting dwarf position.
+     */
     @Test
     public void testSetPosition() {
         Dwarf testChar = CharacterFactory.createDwarf("Scout");

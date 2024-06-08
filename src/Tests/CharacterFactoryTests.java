@@ -13,7 +13,14 @@ import static Model.CharacterTypes.*;
  */
 public class CharacterFactoryTests {
 
+    /**
+     * Testing Dwarf.
+     */
     private Dwarf myTestingDwarf;
+
+    /**
+     * Testing Glyphid.
+     */
     private Glyphid myTestingGlyphid;
 
     /**

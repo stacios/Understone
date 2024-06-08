@@ -14,9 +14,25 @@ import static Model.CharacterTypes.*;
  * Unit tests for Cave and Room classes.
  */
 public class CaveAndRoomTests {
+
+    /**
+     * Cave for testing.
+     */
     private Cave myCave;
+
+    /**
+     * First Room for testing.
+     */
     private Room myFirstRoom;
+
+    /**
+     * Last Room for testing.
+     */
     private Room myLastRoom;
+
+    /**
+     * Dwarf for testing.
+     */
     private Dwarf myDwarf;
 
     /**
@@ -98,8 +114,8 @@ public class CaveAndRoomTests {
     @Test
     public void testIsDwarfInExitableArea() {
         //Dwarf is in exitable area
-        myDwarf.setX(900);
-        myDwarf.setY(110);
+        myDwarf.setX(960);
+        myDwarf.setY(930);
         assertTrue(myFirstRoom.isDwarfInArea(myDwarf));
 
         // Dwarf is not in exitable area

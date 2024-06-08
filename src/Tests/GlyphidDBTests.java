@@ -90,8 +90,6 @@ public class GlyphidDBTests {
     public void testGetDefaultValue() {
         int value = GlyphidDB.getDefaultValue(GLYPHID, "health");
         assertEquals(100, value);
-        // Todo: Mock and Test all Glyphid values
-        // (alternatively this doesn't really need to be tested since there's no way another value can be inserted)
     }
 
     /**
