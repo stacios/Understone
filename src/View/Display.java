@@ -270,7 +270,7 @@ public class Display {
                 gbc.anchor = GridBagConstraints.CENTER;
 
                 JLabel messageLabel =
-                        new JLabel("<html><div style='text-align: center;'>Developed By:<br>Owen Crema<br>Staci Laban<br>Ares Zhang</div></html>");
+                        new JLabel("<html><div style='text-align: center;'>Developed By:<br>Owen Crema<br>Staci Laban<br>Ares Zhang<br>Spring 2024</div></html>");
                 messageLabel.setFont(new Font("Times New Roman", Font.PLAIN, 14));
                 messageLabel.setForeground(Color.BLACK);
                 messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
