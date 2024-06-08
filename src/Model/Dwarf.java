@@ -243,7 +243,7 @@ public class Dwarf extends Character {
             return super.getDrawData();
         }
     }
-    
+
     /**
      * Provides a string representation of the Dwarf.
      *
