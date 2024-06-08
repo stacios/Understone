@@ -10,7 +10,7 @@ public class GlyphidDB {
      * Initializes Glyphid Tables. Then, inserts default values for each Glyphid.
      */
     public static void initializeDB() {
-        initializeGlyphidTables(ACID_SPIITER);
+        initializeGlyphidTables(ACID_SPITTER);
         initializeGlyphidTables(GLYPHID);
         initializeGlyphidTables(GRUNT);
         initializeGlyphidTables(MACTERA);
@@ -59,7 +59,7 @@ public class GlyphidDB {
                 "('damage', 12), " +
                 "('firetimer', 5);";
 
-        makeSQLConnection(sql, ACID_SPIITER);
+        makeSQLConnection(sql, ACID_SPITTER);
     }
 
     /**

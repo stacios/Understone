@@ -38,6 +38,9 @@ public class Dwarf extends Character {
             setWeapon(myWeapons[theIndex]);
             myWeaponIndex = theIndex;
         }
+        else {
+            throw new IndexOutOfBoundsException("Cannot switch to weapon " + theIndex);
+        }
     }
 
     public int getWeaponIndex() {

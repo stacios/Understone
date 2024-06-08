@@ -105,7 +105,7 @@ public class CharacterFactory {
      * @return new Glyphid.
      */
     public static Glyphid createGlyphid(final String theGlyphidType) {
-        if (!ACID_SPIITER.equals(theGlyphidType) && !GLYPHID.equals(theGlyphidType) &&
+        if (!ACID_SPITTER.equals(theGlyphidType) && !GLYPHID.equals(theGlyphidType) &&
                 !GRUNT.equals(theGlyphidType) && !MACTERA.equals(theGlyphidType) &&
                 !PRAETORIAN.equals(theGlyphidType) && !SWARMER.equals(theGlyphidType)) {
             throw new Error("Passed glyphid type must be of defined glyphid type: " +
@@ -130,7 +130,7 @@ public class CharacterFactory {
                 return new Praetorian(theGlyphidType, 800, 800, 400, 200, 200, 5,
                         new Weapon(40, new MeleeAttack(20, 350, 350, 30, 120), "Swing"),
                         200, 40, 0.25, "PraetorianRoar1");
-            case ACID_SPIITER:
+            case ACID_SPITTER:
                 return new AcidSpitter(theGlyphidType, 600, 600, 150, 100, 100, 0.8,
                         new Weapon(60, new ProjectileAttack(10, 80, 80, 10, 100, 6, "AcidSpit"), "AcidSpit"),
                         400, 60, null);

@@ -122,7 +122,7 @@ public class Room implements Drawable, Serializable {
 
             int numberOfAS = 1 + (int)(Math.random() * 3);
             for (int i = 0; i < numberOfAS; i++) {
-                Glyphid acidSpitter = CharacterFactory.createGlyphid(ACID_SPIITER);
+                Glyphid acidSpitter = CharacterFactory.createGlyphid(ACID_SPITTER);
                 acidSpitter.setX(random.nextDouble() * 1920 * (.5) + 1920 / 4.0);
                 acidSpitter.setY(random.nextDouble() * 1080 * (1/3.0) + 1080 / 3.0);
                 myGlyphids.add(acidSpitter);

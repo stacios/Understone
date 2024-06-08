@@ -9,7 +9,7 @@ public class CharacterTypes {
     public static final String ENGINEER = "Engineer";
     public static final String GUNNER = "Gunner";
     public static final String SCOUT = "Scout";
-    public static final String ACID_SPIITER = "AcidSpitter";
+    public static final String ACID_SPITTER = "AcidSpitter";
     public static final String GLYPHID = "Glyphid";
     public static final String GRUNT = "Grunt";
     public static final String MACTERA = "Mactera";
