@@ -112,28 +112,27 @@ public class Room implements Drawable, Serializable {
     public void spawnEnemies() {
             Random random = new Random();
 
-            int numberOfP = (int)(Math.random() * 3);
+            int numberOfP = 1 + (int)(Math.random() * 3);
             for (int i = 0; i < numberOfP; i++) {
                 Glyphid praetorian = CharacterFactory.createGlyphid(PRAETORIAN);
-                praetorian.setX(random.nextDouble() * 1920 * (.20) + 1920 / 3.0);
-                praetorian.setY(random.nextDouble() * 1080 * (.20) + 1080 / 3.0);
-                praetorian.setY(random.nextDouble() * 1080 * (.20) + 1080 / 3.0);
+                praetorian.setX(random.nextDouble() * 1920 * (.5) + 1920 / 4.0);
+                praetorian.setY(random.nextDouble() * 1080 * (1/3.0) + 1080 / 3.0);
                 myGlyphids.add(praetorian);
             }
 
-            int numberOfAS = (int)(Math.random() * 3);
+            int numberOfAS = 1 + (int)(Math.random() * 3);
             for (int i = 0; i < numberOfAS; i++) {
                 Glyphid acidSpitter = CharacterFactory.createGlyphid(ACID_SPIITER);
-                acidSpitter.setX(random.nextDouble() * 1920 * (.2) + 1920 / 3.0);
-                acidSpitter.setY(random.nextDouble() * 1080 * (.2) + 1080 / 3.0);
+                acidSpitter.setX(random.nextDouble() * 1920 * (.5) + 1920 / 4.0);
+                acidSpitter.setY(random.nextDouble() * 1080 * (1/3.0) + 1080 / 3.0);
                 myGlyphids.add(acidSpitter);
             }
 
-            int numberOfGrunts = 3 + (int)(Math.random() * 3);
+            int numberOfGrunts = 5 + (int)(Math.random() * (4 - myGlyphids.size()));
             for (int i = 0; i < numberOfGrunts; i++) {
                 Glyphid grunt = CharacterFactory.createGlyphid(GRUNT);
-                grunt.setX(random.nextDouble() * 1920 * (.2) + 1920 / 3.0);
-                grunt.setY(random.nextDouble() * 1080 * (.2) + 1080 / 3.0);
+                grunt.setX(random.nextDouble() * 1920 * (.5) + 1920 / 4.0);
+                grunt.setY(random.nextDouble() * 1080 * (1/3.0) + 1080 / 3.0);
                 myGlyphids.add(grunt);
             }
 
@@ -141,8 +140,8 @@ public class Room implements Drawable, Serializable {
 
             for (int i = 0; i < numberOfHeals; i++) {
                 Rock heal = CharacterFactory.createObject(HEAL);
-                heal.setX(random.nextDouble() * 1920 * (.3) + 1920 / 3.0);
-                heal.setY(random.nextDouble() * 1080 * (.3) + 1080 / 3.0);
+                heal.setX(random.nextDouble() * 1920 * (.5) + 1920 / 4.0);
+                heal.setY(random.nextDouble() * 1080 * (1/3.0) + 1080 / 3.0);
                 myRocks.add(heal);
             }
             System.out.println("Spawned " + (numberOfGrunts + numberOfP + numberOfAS) + " enemies in the room.");
