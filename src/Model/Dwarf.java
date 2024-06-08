@@ -11,19 +11,69 @@ import java.util.List;
  */
 public class Dwarf extends Character {
 
+    /**
+     * The input data for controlling the Dwarf.
+     */
     private transient InputData myInputData;
+
+    /**
+     * The array of weapons the Dwarf can use.
+     */
     private Weapon[] myWeapons;
 
+    /**
+     * The index of the currently equipped weapon.
+     */
     private int myWeaponIndex = 0;
+
+    /**
+     * Indicates whether the Dwarf has picked up the egg.
+     */
     private boolean myHasEgg;
+
+    /**
+     * The clock for managing the dash cooldown and duration.
+     */
     private int myDashClock;
+
+    /**
+     * The angle at which the Dwarf dashes.
+     */
     private Angle myDashAngle;
+
+    /**
+     * The speed at which the Dwarf dashes.
+     */
     private final double myDashSpeed;
+
+    /**
+     * The duration of the Dwarf's dash.
+     */
     private final int myDashTime;
+
+    /**
+     * The cooldown time for the Dwarf's dash.
+     */
     private final int myDashCooldown;
 
-    public Dwarf(String theName, double theX, double theY, int theHealth, int theWidth, int theHeight, double theMoveSpeed,
-                 double theDashSpeed, int theDashTime, int theDashCooldown, Weapon[] theWeapons) {
+    /**
+     * Constructs a Dwarf with the specified parameters.
+     *
+     * @param theName the name of the Dwarf
+     * @param theX the initial x-coordinate of the Dwarf
+     * @param theY the initial y-coordinate of the Dwarf
+     * @param theHealth the health points of the Dwarf
+     * @param theWidth the width of the Dwarf
+     * @param theHeight the height of the Dwarf
+     * @param theMoveSpeed the movement speed of the Dwarf
+     * @param theDashSpeed the speed of the Dwarf's dash
+     * @param theDashTime the duration of the Dwarf's dash
+     * @param theDashCooldown the cooldown time for the Dwarf's dash
+     * @param theWeapons the array of weapons the Dwarf can use
+     */
+    public Dwarf(final String theName, final double theX, final double theY, final int theHealth, final int theWidth,
+                 final int theHeight, final double theMoveSpeed, final double theDashSpeed, final int theDashTime,
+                 final int theDashCooldown, final Weapon[] theWeapons) {
         super(theName, theX, theY, theHealth, theWidth, theHeight, theMoveSpeed, theWeapons[0]);
         myWeapons = theWeapons;
         myDashSpeed = theDashSpeed;
@@ -33,7 +83,13 @@ public class Dwarf extends Character {
         myHasEgg = false;
     }
 
-    public void switchWeapon(int theIndex) {
+    /**
+     * Switches the current weapon to the specified index.
+     *
+     * @param theIndex the index of the weapon to switch to
+     * @throws IndexOutOfBoundsException if the index is out of bounds
+     */
+    public void switchWeapon(final int theIndex) {
         if (theIndex >= 0 && theIndex < myWeapons.length) {
             setWeapon(myWeapons[theIndex]);
             myWeaponIndex = theIndex;
@@ -43,6 +99,11 @@ public class Dwarf extends Character {
         }
     }
 
+    /**
+     * Gets the index of the currently equipped weapon.
+     *
+     * @return the index of the currently equipped weapon
+     */
     public int getWeaponIndex() {
         return myWeaponIndex;
     }
@@ -51,7 +112,7 @@ public class Dwarf extends Character {
      * Sets whether Dwarf picked up the egg.
      * @param theHasEgg is the passed boolean conditional if Dwarf picked up.
      */
-    public void setEgg(boolean theHasEgg) {
+    public void setEgg(final boolean theHasEgg) {
         myHasEgg = theHasEgg;
     }
 
@@ -63,10 +124,20 @@ public class Dwarf extends Character {
         return myHasEgg;
     }
 
+    /**
+     * Sets the input data for controlling the Dwarf.
+     *
+     * @param theInputData the input data to set
+     */
     public void setInputData(final InputData theInputData) {
         myInputData = theInputData;
     }
 
+    /**
+     * Updates the state of the Dwarf, including movement, dashing, and weapon switching.
+     *
+     * @return true if the update was successful, false otherwise
+     */
     @Override
     public boolean update() {
         boolean superCall = super.update();
@@ -91,6 +162,9 @@ public class Dwarf extends Character {
 
     }
 
+    /**
+     * Handles the movement of the Dwarf based on input data.
+     */
     private void move() {
 
         //get the number of movement keys pressed
@@ -138,6 +212,9 @@ public class Dwarf extends Character {
 
     }
 
+    /**
+     * Handles the dashing movement of the Dwarf based on input data.
+     */
     private void dash() {
         if (myDashClock != -myDashCooldown) {
             myDashClock--;
@@ -150,6 +227,11 @@ public class Dwarf extends Character {
         }
     }
 
+    /**
+     * Gets the draw data for the Dwarf, including sound effects for dashing.
+     *
+     * @return an array of strings representing the draw data
+     */
     @Override
     public String[] getDrawData() {
         if (myDashClock == myDashTime) {
@@ -161,12 +243,11 @@ public class Dwarf extends Character {
             return super.getDrawData();
         }
     }
-
-
+    
     /**
-     * Todo Dwarf toString.
+     * Provides a string representation of the Dwarf.
      *
-     * @return String representation of Dwarf.
+     * @return a string representation of the Dwarf
      */
     @Override
     public String toString() {
